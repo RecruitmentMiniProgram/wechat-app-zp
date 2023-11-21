@@ -5,3 +5,30 @@
   width: 100%;
   height: 100%;
 }
+
+.login{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.unLogin{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.img{
+  vertical-align: middle;
+}
+.btn{
+  margin: auto;
+  padding: 0;
+  width: 70%;
+  font-size: 13px; 
+  border-radius: 0;
+  background-color:#4a90e2;
+  color:#ffff;
+}
