@@ -4,7 +4,7 @@
     "pages/search/search",
     "pages/detail/detail",
     "pages/today/today",
-    "pages/award/award",
+    "pages/message/message",
     "pages/servicephone/servicephone",
     "pages/personal/personal",
     "pages/register/register",
@@ -15,7 +15,7 @@
     "pages/myaward/myaward"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#fc3",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "濮阳打工信息网",
     "backgroundTextStyle": "light",
@@ -39,10 +39,10 @@
         "text": "今日招聘"
       },
       {
-        "selectedIconPath": "images/money_p.png",
-        "iconPath": "images/money.png",
-        "pagePath": "pages/award/award",
-        "text": "推荐奖励"
+        "selectedIconPath": "images/message_p.png",
+        "iconPath": "images/message.png",
+        "pagePath": "pages/message/message",
+        "text": "消息"
       },
       {
         "selectedIconPath": "images/me_p.png",
