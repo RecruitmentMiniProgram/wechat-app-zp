@@ -226,4 +226,3 @@ background-color:#fff;
 button::after{
 border: none;
 }
-

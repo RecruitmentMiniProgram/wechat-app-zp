@@ -1,9 +1,21 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/category_job/index",
     "pages/search/search",
-    "pages/detail/detail",
+    "pages/company_home/index",
+    "pages/community/index",
+    "pages/expect_jobs/index",
+    "pages/expect_cities/index",
+    "pages/setting/index",
+    "pages/jobs_list/index",
+    "pages/index/index",
     "pages/today/today",
+    "pages/job_publish/index",
+    "pages/job_details/index",
+    "pages/detail/detail",
+
+
+    
     "pages/award/award",
     "pages/servicephone/servicephone",
     "pages/personal/personal",
@@ -12,12 +24,41 @@
     "pages/map/map",
     "pages/setinfor/setinfor",
     "pages/myjoin/myjoin",
-    "pages/myaward/myaward"
+    "pages/myaward/myaward",
+
+    "pages/analysis/index",
+    
+    "pages/school_details/index",
+    "pages/cart/index",
+    "pages/collect/index",
+    "pages/order/index",
+    "pages/search/index",
+    "pages/user/index",
+    "pages/feedback/index",
+    "pages/feedback_job/index",
+    "pages/login/index",
+    "pages/auth/index",
+    "pages/pay/index",
+
+    "pages/resume/index",
+    "pages/school_recruit/index",
+    "pages/school_recruit2/index",
+    "pages/message/index",
+    "pages/article_details/index",
+    "pages/question_details/index",
+    "pages/dialog/index",
+    "pages/customized/index",
+    "pages/customized_res/index",
+    "pages/recruit/index",
+    "pages/recruit_detail/index",
+    "pages/recruit_old/index"
+    
+    
   ],
   "window": {
     "navigationBarBackgroundColor": "#fc3",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "濮阳打工信息网",
+    "navigationBarTitleText": "招聘网",
     "backgroundTextStyle": "light",
     "onReachBottom": true
   },
@@ -36,19 +77,19 @@
         "selectedIconPath": "images/today_p.png",
         "iconPath": "images/today.png",
         "pagePath": "pages/today/today",
-        "text": "今日招聘"
+        "text": "职位"
       },
       {
         "selectedIconPath": "images/money_p.png",
         "iconPath": "images/money.png",
         "pagePath": "pages/award/award",
-        "text": "推荐奖励"
+        "text": "消息"
       },
       {
         "selectedIconPath": "images/me_p.png",
         "iconPath": "images/me.png",
         "pagePath": "pages/personal/personal",
-        "text": "个人中心"
+        "text": "我的"
       }
     ]
   }

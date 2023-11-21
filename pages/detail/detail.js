@@ -1,8 +1,9 @@
 // pages/index/detail.js
 
 //引入SDK
-var Bmob = require('../../utils/bmob.js');
+// var Bmob = require('../../utils/bmob.js');
 var app = getApp();
+const db = wx.cloud.database();
 Page({
 
   /**

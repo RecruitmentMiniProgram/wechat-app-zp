@@ -1,6 +1,7 @@
 //引入SDK
-var Bmob = require('../../utils/bmob.js');
+// var Bmob = require('../../utils/bmob.js');
 var app = getApp();
+const db = wx.cloud.database();
 Page({
   /**
    * 页面的初始数据
@@ -229,6 +230,9 @@ Page({
     var that = this;
     //清空列表数据
     this.cleardata();
+
+    
+
     var DetailInfo = Bmob.Object.extend("DetailInfo");
     var query = new Bmob.Query(DetailInfo);
     var e=e+''
@@ -283,6 +287,15 @@ Page({
   qbzwLoad: function () {
     var that = this;
     // 动态添加列表详情
+    // db.collection('img').get({
+    //   success: function(res) {
+    //     that.setData({
+    //       imgUrls: res.data
+    //     });
+    //     console.log(res.data);
+    //   }
+    // });
+    
     var DetailInfo = Bmob.Object.extend("DetailInfo");
     var query = new Bmob.Query(DetailInfo);
     query.descending('updatedAt');
