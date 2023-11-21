@@ -1,0 +1,21 @@
+<view class="message">
+  <view wx:if="{{login}}" class = "login">
+    <block wx:for="{{chatList}}" wx:for-item="chat" wx:for-index="index">
+    <view bindtap="goToChat" data-index="{{index}}" class="chat-item">
+      <view class="info">
+        <view class="left">
+          <text>{{chat.nickname}}</text>
+        </view>
+        <view class="right">
+          <text>{{chat.lastMessageTime}}</text>
+        </view>
+      </view>
+      <view class="lmsg">{{chat.lastMessage}}</view>
+    </view>
+  </block>
+  </view>
+  <view wx:else="" class="unLogin">
+      <image style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%)" src="../../images/msg_unLogin.png"/>
+      <button  bindtap="onLoginButtonClick" style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="btn">立即登录</button>
+  </view>
+</view>

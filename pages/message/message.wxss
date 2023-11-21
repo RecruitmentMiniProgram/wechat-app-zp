@@ -1,0 +1,59 @@
+/* pages/award/award.wxss */
+.message{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.login{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.unLogin{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.img{
+  vertical-align: middle;
+}
+.btn{
+  margin: auto;
+  padding: 0;
+  width: 70%;
+  font-size: 13px; 
+  border-radius: 0;
+  background-color:#4a90e2;
+  color:#ffff;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.right {
+  color: #999; /* 根据实际需求调整最近消息的样式 */
+  font-size: 30rpx; /* 设置时间的字体大小，根据实际需求调整 */
+}
+
+.lmsg {
+  color: #999; /* 根据实际需求调整最近消息的样式 */
+  font-size: 30rpx; /* 设置时间的字体大小，根据实际需求调整 */
+}
+
+.chat-item {
+  border-bottom: 1rpx solid #ddd; /* 添加边框样式，可以根据实际需求调整颜色和样式 */
+  padding: 20rpx; /* 可以根据实际需求调整边框周围的间距 */
+}

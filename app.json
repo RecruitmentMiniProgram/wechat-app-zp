@@ -13,9 +13,8 @@
     "pages/job_publish/index",
     "pages/job_details/index",
     "pages/detail/detail",
-
-
     
+    "pages/message/message",
     "pages/award/award",
     "pages/servicephone/servicephone",
     "pages/personal/personal",
@@ -56,7 +55,7 @@
     
   ],
   "window": {
-    "navigationBarBackgroundColor": "#fc3",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "招聘网",
     "backgroundTextStyle": "light",
@@ -80,9 +79,10 @@
         "text": "职位"
       },
       {
-        "selectedIconPath": "images/money_p.png",
-        "iconPath": "images/money.png",
-        "pagePath": "pages/award/award",
+
+        "selectedIconPath": "images/message_p.png",
+        "iconPath": "images/message.png",
+        "pagePath": "pages/message/message",
         "text": "消息"
       },
       {
