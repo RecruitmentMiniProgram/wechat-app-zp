@@ -1,6 +1,8 @@
 
- function ChatData(nickname, lastMessage, lastMessageTime)
+ function ChatData(id,type,nickname, lastMessage, lastMessageTime)
  {
+   this.id = id;
+   this.type = type;
    this.nickname = nickname;
    this.lastMessage = lastMessage;
    this.lastMessageTime = lastMessageTime;
@@ -48,7 +50,7 @@ Page({
     const chat = this.data.chatList[index];
     // 根据聊天信息跳转到相应的聊天页面，你需要传递聊天相关的参数
     wx.navigateTo({
-      url: '/pages/chat/chat?targetUserId=' + chat.targetUserId,
+      url: '/pages/chat/chat?type=' + chat.type + '&id=' + chat.id,
     });
   },
 
@@ -104,7 +106,7 @@ Page({
               //读取岗位细节
               let postResult = await db.collection('post').doc(postId).get()
               var entername = postResult.data.name
-              var chatData = new ChatData(nickname, entername, convertUnixTimestampToString(updateTime))
+              var chatData = new ChatData(id, type,nickname, entername, convertUnixTimestampToString(updateTime))
               chatList[index] = chatData
               index = index + 1;
           } else {
@@ -113,12 +115,12 @@ Page({
             var chatDetail = chatResult.data
             var time = chatDetail.data[chatDetail.data.length - 1].time
 
-            var chatData = new ChatData(chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time))
+            var chatData = new ChatData(id, type,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time))
             chatList[index] = chatData
             index = index + 1;
           }
       }
-      console.log(chatList)
+
       this.setData({
         chatList: chatList
       })

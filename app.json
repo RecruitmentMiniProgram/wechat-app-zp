@@ -17,7 +17,6 @@
     "pages/job_publish/index",
     "pages/job_details/index",
     "pages/detail/detail",
-    
     "pages/award/award",
     "pages/servicephone/servicephone",
     "pages/map/map",
@@ -27,9 +26,7 @@
     "pages/setinfor/setinfor",
     "pages/myjoin/myjoin",
     "pages/myaward/myaward",
-
     "pages/analysis/index",
-    
     "pages/school_details/index",
     "pages/cart/index",
     "pages/collect/index",
@@ -39,7 +36,6 @@
     "pages/feedback_job/index",
     "pages/auth/index",
     "pages/pay/index",
-
     "pages/resume/index",
     "pages/school_recruit/index",
     "pages/school_recruit2/index",
@@ -51,7 +47,8 @@
     "pages/customized_res/index",
     "pages/recruit/index",
     "pages/recruit_detail/index",
-    "pages/recruit_old/index"
+    "pages/recruit_old/index",
+    "pages/chat/chat"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
@@ -77,7 +74,6 @@
         "text": "职位"
       },
       {
-
         "selectedIconPath": "images/message_p.png",
         "iconPath": "images/message.png",
         "pagePath": "pages/message/message",
