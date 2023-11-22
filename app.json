@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/message/message",
     "pages/category_job/index",
     "pages/search/search",
     "pages/company_home/index",
@@ -14,7 +15,7 @@
     "pages/job_details/index",
     "pages/detail/detail",
     
-    "pages/message/message",
+    
     "pages/award/award",
     "pages/servicephone/servicephone",
     "pages/personal/personal",
@@ -51,8 +52,6 @@
     "pages/recruit/index",
     "pages/recruit_detail/index",
     "pages/recruit_old/index"
-    
-    
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
