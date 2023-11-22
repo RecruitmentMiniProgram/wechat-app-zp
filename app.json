@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/jobs_list/index",
+    "pages/message/message",
+    "pages/index/index",
     "pages/category_job/index",
     "pages/search/search",
     "pages/company_home/index",
@@ -7,20 +10,17 @@
     "pages/expect_jobs/index",
     "pages/expect_cities/index",
     "pages/setting/index",
-    "pages/jobs_list/index",
-    "pages/index/index",
     "pages/today/today",
     "pages/job_publish/index",
     "pages/job_details/index",
     "pages/detail/detail",
     
-    "pages/message/message",
     "pages/award/award",
     "pages/servicephone/servicephone",
+    "pages/map/map",
     "pages/personal/personal",
     "pages/register/register",
     "pages/searchresult/searchresult",
-    "pages/map/map",
     "pages/setinfor/setinfor",
     "pages/myjoin/myjoin",
     "pages/myaward/myaward",
@@ -58,8 +58,7 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "招聘网",
-    "backgroundTextStyle": "light",
-    "onReachBottom": true
+    "backgroundTextStyle": "light"
   },
   "tabBar": {
     "color": "#959595",
