@@ -108,7 +108,7 @@ input {
   height:0;
   border-top:15rpx solid transparent;
   border-bottom:15rpx solid transparent;
-  border-left:15rpx solid #FFFFFF;
+  border-left:15rpx solid #4a90e2;
   position: absolute;
   right: 0;
   top: 20rpx;
@@ -118,7 +118,7 @@ input {
   height:0;
   border-top:15rpx solid transparent;
   border-bottom:15rpx solid transparent;
-  border-right:15rpx solid #95EB69;
+  border-right:15rpx solid #fff;
   position: absolute;
   left: 0;
   top: 20rpx;
@@ -359,10 +359,10 @@ input {
   font-size: 22rpx;
 }
 .background_left{
-  background-color: #95EB69;
+  background-color: #fff;
 }
 .background_right{
-  background-color: #FFFFFF;
+  background-color: #4a90e2;
 }
 
 
