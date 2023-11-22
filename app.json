@@ -1,11 +1,13 @@
 {
   "pages": [
     "pages/login/login",
+    "pages/message/message",
+    "pages/chat/chat",
     "pages/company/index",
     "pages/company_home/index",
     "pages/user/index",
     "pages/jobs_list/index",
-    "pages/message/message",
+    
     "pages/index/index",
     "pages/category_job/index",
     "pages/search/search",
@@ -47,13 +49,11 @@
     "pages/customized_res/index",
     "pages/recruit/index",
     "pages/recruit_detail/index",
-    "pages/recruit_old/index",
-    "pages/chat/chat"
+    "pages/recruit_old/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "招聘网",
     "backgroundTextStyle": "light"
   },
   "tabBar": {
