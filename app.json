@@ -1,8 +1,11 @@
 {
   "pages": [
+    "pages/login/login",
+    "pages/company/index",
+    "pages/company_home/index",
+    "pages/user/index",
     "pages/category_job/index",
     "pages/search/search",
-    "pages/company_home/index",
     "pages/community/index",
     "pages/expect_jobs/index",
     "pages/expect_cities/index",
@@ -32,10 +35,8 @@
     "pages/collect/index",
     "pages/order/index",
     "pages/search/index",
-    "pages/user/index",
     "pages/feedback/index",
     "pages/feedback_job/index",
-    "pages/login/index",
     "pages/auth/index",
     "pages/pay/index",
 

@@ -11,7 +11,6 @@
 2 点击不同数据 重新发送请求获取和渲染数据
 
 */
-import { request } from "../../requests/index.js";
 Page({
 
     /**
@@ -75,7 +74,6 @@ Page({
     },
     // 获取订单列表的方法
     async getOrders(type) {
-        const res = await request({ url: "/own/my/orders/all", data: { type } })
         this.setData({
             // orders: res.orders
         })
@@ -99,7 +97,6 @@ Page({
     },
     // 获取公司主页数据
     async getComDetail(comId) {
-        const result = await request({ url: "/own/home/comdata", data: { comId } });
         if (result.length != 1) {
             console.log("公司主页获取异常，公司数量不等于1")
         }
