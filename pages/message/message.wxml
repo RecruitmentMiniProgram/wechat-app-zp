@@ -1,11 +1,14 @@
 <view class="message">
   <view wx:if="{{login}}" class = "login">
     <block wx:for="{{chatList}}" wx:for-item="chat" wx:for-index="index">
-    <view bindtap="goToChat" data-index="{{index}}" class="chat-item">
+    <view bindtap="goToChat" bindlongpress="showDeleteConfirm" data-index="{{index}}" class="chat-item">
       <view class="info">
         <view class="left">
           <text>{{chat.nickname}}</text>
+          <text wx:if="{{chat.red}}" class="red-dot"></text>
         </view>
+        
+
         <view class="right">
           <text>{{chat.lastMessageTime}}</text>
         </view>
