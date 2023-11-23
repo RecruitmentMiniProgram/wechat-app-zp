@@ -2,7 +2,7 @@
   <view wx:if="{{type != 0}}">
         <scroll-view bindtouchstart="scrollstart" scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
 
-        <view wx:for="{{msgList}}" wx:key="index" class="'news' {{item.role == 1? 'contrary' : ''}}" id="msg-{{index}}">
+        <view wx:for="{{msgList}}" wx:key="index" class="news {{item.role == 1? 'contrary' : ''}}" id="msg-{{index}}">
 
         <view wx:if="{{item.role != 2}}">
           <view class = "news-centent {{item.role == 1?'centent-right' : 'centent-left'}}">
