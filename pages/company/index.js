@@ -1,4 +1,4 @@
-// pages/message/index.js
+// pages/company/index.js
 Page({
 
   /**
