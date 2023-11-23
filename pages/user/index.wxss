@@ -1,5 +1,5 @@
 page {
-  background-color: #edece9;
+  background-color: #f1f1f1;
 }
 .user_info{
   height: 350rpx;
@@ -72,7 +72,7 @@ page {
   padding-bottom: 50rpx;
   color: #666;
   position: absolute;
-  width: 90%;
+  width: 100%;
   left: 50%;
   transform: translateX(-50%);
   top: -40rpx;
@@ -80,7 +80,7 @@ page {
 .user_content .user_main .history_wrap {
   background-color: #fff;
   display: flex;
-  border-radius: 20rpx;
+  border-radius: 0rpx;
 }
 .user_content .user_main .history_wrap navigator {
   flex: 1;
@@ -101,8 +101,8 @@ page {
 .user_content .user_main .orders_wrap .order_content {
   background-color: #fff;
   display: flex;
-  border-bottom-left-radius: 20rpx;
-  border-bottom-right-radius: 20rpx;
+  border-bottom-left-radius: 0rpx;
+  border-bottom-right-radius: 0rpx;
 }
 .user_content .user_main .orders_wrap .order_content navigator {
   padding: 15rpx 0;
@@ -116,12 +116,12 @@ page {
 .user_content .user_main .pre_address {
   margin-top: 30rpx;
   border-bottom: 1rpx solid #ccc;
-  border-top-left-radius: 20rpx;
-  border-top-right-radius: 20rpx;
+  border-top-left-radius: 0rpx;
+  border-top-right-radius: 0rpx;
 }
 .user_content .user_main .post_address {
-  border-bottom-left-radius: 20rpx;
-  border-bottom-right-radius: 20rpx;
+  border-bottom-left-radius: 0rpx;
+  border-bottom-right-radius: 0rpx;
 }
 .user_content .user_main .address_wrap {
   background-color: #fff;
@@ -130,7 +130,7 @@ page {
 .user_content .user_main .app_info_wrap {
   margin-top: 30rpx;
   background-color: #fff;
-  border-radius: 20rpx;
+  border-radius: 0rpx;
 }
 .user_content .user_main .app_info_wrap .tool_item {
   padding: 20rpx;
@@ -159,8 +159,11 @@ page {
   justify-content: space-between;
 }
 .user_content .user_main .recommend_wrap {
-  border-radius: 20rpx;
+  border-radius: 0rpx;
   margin-top: 30rpx;
   background-color: #fff;
   padding: 20rpx;
 }
+
+
+

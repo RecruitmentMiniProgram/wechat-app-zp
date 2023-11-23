@@ -33,6 +33,22 @@ Page({
             }
         ],
     },
+
+        userRegister: function() {
+          wx.navigateTo({
+            url: '/pages/userRegister/userRegister', // 请根据实际路径修改
+          });
+        },
+      
+        companyRegister: function() {
+          wx.navigateTo({
+            url: '/pages/companyRegister/companyRegister', // 请根据实际路径修改
+          });
+        },
+      
+
+
+
     // 公司信息全局对象
     comInfoStorage: {},
     // 点击收藏图标
