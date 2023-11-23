@@ -1,0 +1,79 @@
+<!-- 数据内容 -->
+<form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">基本信息</view>
+    </view>
+    <view class="row">
+      <view>公司名称<text class="required">*</text></view>
+      <view class="right">
+        <input bindchange="companyChange" name="mail" placeholder="请输入公司名字" maxlength="30" />
+      </view>
+    </view>
+    <view class="row">
+      <view>联系人<text class="required">*</text></view>
+      <view class="right">
+        <input bindchange="bossChange" name="mail" placeholder="请输入联系人" maxlength="20" />
+      </view>
+    </view>
+    <view class="row">
+      <view>联系方式<text class="required">*</text></view>
+      <view class="right">
+        <input bindchange="phoneChange" name="mail" placeholder="请输入联系方式" maxlength="20" />
+      </view>
+    </view>
+    <view class="row end">
+      <view>公司地址<text class="required">*</text></view>
+    </view>
+    <view class="row">
+      <textarea name="skill" bindinput="addressChange" auto-height="true" class="address_text-area" maxlength="50" placeholder="填写公司地址，具体到门牌号（50字）"></textarea>
+      <view class="word-count {{addressLength >= 300 ? 'red' : ''}}">
+        {{addressLength}}/50</view>
+    </view>
+    <view class="row end">
+      <view>公司规模<text class="required">*</text></view>
+      <picker class="right" value="{{scale}}" bindchange="bindScaleChange" range="{{arrayScale}}">
+        <text>{{arrayScale[scale]}}</text>
+        <text class="triangle">▼</text>
+      </picker>
+    </view>
+  </view>
+
+
+  <!-- 获奖证书 -->
+  <view class="box">
+    <view class="level nav-flex">
+      <view class="level">
+        <view class="dot"></view>
+        <view class="title">营业执照<text class="required">*</text></view>
+      </view>
+      <view class="add-img" bindtap="selectImage" data-tag="1">+</view>
+    </view>
+    <view class="row">
+      <textarea name="certificate" auto-height="true"  maxlength="300" disabled="true" placeholder="点击右上角加号可添加证书图片，长按图片删除"></textarea>
+    </view>
+    <view class="attr-img">
+      <block wx:for="{{attrImg}}" wx:for-index="index" wx:for-item="item" wx:key="item">
+        <image bindlongpress="longtapDeleteImg" data-index="{{index}}" bindtap="previewClick" data-url="{{item}}" class="img" src="{{item}}" mode="widthFix"></image>
+      </block>
+    </view>
+  </view>
+
+  
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">公司简介<text class="required">*</text></view>
+    </view>
+    <view class="row">
+      <textarea name="skill" bindinput="introductionChange" auto-height="true" class="text-area" maxlength="800" placeholder="公司简介（800字以内）"></textarea>
+      <view class="word-count {{introductionLength >= 300 ? 'red' : ''}}">
+        {{introductionLength}}/800</view>
+    </view>
+  </view>
+  <view class="btn_container">
+    <button formType="submit" class="btn">提交</button>
+  </view>
+</form>
+

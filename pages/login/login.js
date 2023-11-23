@@ -119,7 +119,8 @@ Page({
           //账号已经存在,直接跳转到个人信息页面
           //TODO
           console.log("跳转页面")
-          if(res.result.data.data[0].type==0){
+          console.log(res)
+          if(res.result.data.data[0].userType==0){
             console.log("个人用户")
             // 在页面A的js文件中
             wx.redirectTo({
@@ -140,6 +141,9 @@ Page({
           //账号不存在跳转到注册页面
           //TODO
           console.log("账号不存在请进行注册")
+          wx.navigateTo({
+            url: '../register/register',
+          })
         }
       }).catch(err => {
         wx.showModal({  
