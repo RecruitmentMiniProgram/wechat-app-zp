@@ -1,4 +1,5 @@
 import { request } from "../../requests/index.js";
+const db = wx.cloud.database();
 Page({
 
     /**
@@ -10,12 +11,12 @@ Page({
         tabs: [{
                 id: 0,
                 value: "校招",
-                isActive: false
+                isActive: true
             },
             {
                 id: 1,
                 value: "实习",
-                isActive: true
+                isActive: false
             },
             {
                 id: 2,
@@ -49,10 +50,29 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log(options)
-        this.QueryParams.cid = options.cid
-        this.getJobList(this.QueryParams);
+        // console.log(options);
+        // this.QueryParams.cid = options.cid
+        // this.addNewData();
+        this.getJobList();
     },
+
+
+    addNewData:function(){
+      db.collection('post').add({
+        // data 字段表示需新增的 JSON 数据
+        data: {
+          enter_id:"11",
+          name: "测试",
+          min_salary: 1
+      },
+        success: function(res) {
+          // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+          console.log(res)
+        }
+      })
+  
+    },
+
     handleTabsItemChange(e) {
         // 1 获取被点击的标题索引
         const { index } = e.detail;
@@ -120,17 +140,34 @@ Page({
         }
     },
     //获取职位信息列表数据
-    async getJobList(QueryParams) {
-        const result = await request({ url: "/own/home/jobdata2", data: QueryParams, method: 'POST', header: { "Content-Type": "application/x-www-form-urlencoded" } });
-        // console.log(result)
-        const total = result.total;
-        // 计算总页数
-        this.totalPages = Math.ceil(total / this.QueryParams.pagesize);
-        this.setData({
-            // jobList: result.data.message
-            // 拼接数组
-            jobList: [...this.data.jobList, ...result.list]
-        });
+    getJobList: function() {
+      // console.log("what?");
+      var that = this;
+      db.collection('post').get({
+        success: function(res) {
+          console.log(res.data);
+          var total = res.data.length;
+          var totalPages = Math.ceil(total / that.QueryParams.pagesize);
+          that.setData({
+            jobList: res.data,
+            totalPages: totalPages
+          });
+          // console.log(res.data);
+        },
+        fail: function(err) {
+          // 查询失败
+          console.error('查询失败：', err);
+        }
+      });
+
+        // const total = result.total;
+        // // 计算总页数
+        // this.totalPages = 
+        // this.setData({
+        //     // jobList: result.data.message
+        //     // 拼接数组
+        //     jobList: [...this.data.jobList, ...result.list]
+        // });
         wx.stopPullDownRefresh();
     }
 });
