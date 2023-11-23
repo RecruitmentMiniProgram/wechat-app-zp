@@ -2,13 +2,13 @@
 <view class="com_wrap" url="/pages/company_home/index?comId={{jobObj.jobComId}}">
     <view class="com">
         <view class="content_btm_lft">
-            <image class="" src="{{comObj.comLogo}}" mode="aspectFill" />
+            <image class="" src="{{comObj.img}}" mode="aspectFit" />
         </view>
         <view class="content_btm_rgt">
-            <view class="cbr_top">{{comObj.comMinName}}</view>
+            <view class="cbr_top">{{comObj.name}}</view>
             <view class="cbr_btm">
                 <view class="cbr_btm_lft">
-                    <view class="l1"><text decode="{{true}}">{{comObj.comIndustry}}&nbsp;|&nbsp;{{comObj.comScale}}</text></view>
+                    <view class="l1"><text decode="{{true}}">{{comObj.comIndustry}}&nbsp;|&nbsp;{{comObj.scale}}</text></view>
                 </view>
             </view>
         </view>

@@ -11,6 +11,7 @@
 2 点击不同数据 重新发送请求获取和渲染数据
 
 */
+const db = wx.cloud.database();
 Page({
 
     /**
@@ -113,28 +114,40 @@ Page({
     },
     // 获取公司主页数据
     async getComDetail(comId) {
-        if (result.length != 1) {
-            console.log("公司主页获取异常，公司数量不等于1")
+      var that = this;
+      console.log("comId",comId);
+
+      db.collection('company').doc(comId).get({
+        success:function(result){
+          console.log(result.data);
+          // if (result.data.length != 1) {
+          //   console.log("公司主页获取异常，公司数量不等于1")
+          // }
+          that.setData({
+              comObj: result.data
+                  // desc: result.data.message[0].jobDesc1,
+                  // // g表示全局查找
+                  // mystr2: result.data.message[0].jobDesc1.replace(/\\n/g, '\n')
+          })
+          that.comInfoStorage = result.data
+              // 1 先获取缓存中的购物车数组
+          let collects_com = wx.getStorageSync("collects_com") || [];
+          // 2 判断商品对象是否存在于购物车的数组中
+          let index = collects_com.findIndex(v => v.comId === that.comInfoStorage.comId);
+          if (index != -1) {
+              // 说明被收藏了
+              console.log("已被收藏")
+              that.setData({
+                  isCollect_com: true,
+                  submit_stat: "已被收藏"
+              })
+          }
+
         }
-        this.setData({
-            comObj: result[0]
-                // desc: result.data.message[0].jobDesc1,
-                // // g表示全局查找
-                // mystr2: result.data.message[0].jobDesc1.replace(/\\n/g, '\n')
-        })
-        this.comInfoStorage = result[0]
-            // 1 先获取缓存中的购物车数组
-        let collects_com = wx.getStorageSync("collects_com") || [];
-        // 2 判断商品对象是否存在于购物车的数组中
-        let index = collects_com.findIndex(v => v.comId === this.comInfoStorage.comId);
-        if (index != -1) {
-            // 说明被收藏了
-            console.log("已被收藏")
-            this.setData({
-                isCollect_com: true,
-                submit_stat: "已被收藏"
-            })
-        }
+        
+
+      })
+        
     },
     /**
      * 生命周期函数--监听页面加载

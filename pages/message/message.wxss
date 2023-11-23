@@ -57,3 +57,12 @@
   border-bottom: 1rpx solid #ddd; /* 添加边框样式，可以根据实际需求调整颜色和样式 */
   padding: 20rpx; /* 可以根据实际需求调整边框周围的间距 */
 }
+
+.red-dot {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  margin-left: 5px; /* 为了让红点与名字之间有一些间隔，你可以调整这个值 */
+  display: inline-block;
+}

@@ -1,8 +1,5 @@
 //app.js
-//引入SDK
-var Bmob = require('utils/bmob.js');
-//初始化Bmobkey
-Bmob.initialize("", "");
+
 
 App({
   globalData:{
@@ -24,7 +21,6 @@ App({
     } else {
       wx.cloud.init({
         env: 'cloud1-1gqwq0cu50854c5d',
-        //我刚刚从云开发控制台里复制过来的自己的环境ID，
         traceUser: true,
       })
     }

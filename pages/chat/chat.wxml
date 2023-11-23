@@ -1,0 +1,51 @@
+<view class="chat">
+  <view wx:if="{{type != 0}}">
+        <scroll-view wx:if="{{status == 1}}" bindtouchstart="scrollstart" scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
+
+        <view wx:for="{{msgList}}" wx:key="index" class="news {{item.role == 1? 'contrary' : ''}}" id="msg-{{index}}">
+
+          <view wx:if="{{item.role != 3}}" class = "news-centent {{item.role == 1?'centent-right' : 'centent-left'}}">
+            <view class="{{item.role == 1?'trianright':'trianleft'}}"></view>
+
+            <text style="color: {{item.role == 1? '#FFF':'#000'}}" selectable="{{true}}" class="{{item.role == 1?'background_right':'background_left'}}" >{{item.msg}}</text>
+          </view>
+          <view wx:else="">
+            <button style="width: 90%; height: 130px;" class="chatPost" bindtap="onButtonClick" data-index="{{index}}">查看岗位</button>
+          </view>
+
+        </view>
+      </scroll-view>
+
+      <scroll-view wx:else="{{status == 2}}" bindtouchstart="scrollstart" scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
+
+      <view wx:for="{{msgList}}" wx:key="index" class="news {{item.role == 2? 'contrary' : ''}}" id="msg-{{index}}">
+
+        <view wx:if="{{item.role != 3}}" class = "news-centent {{item.role == 2?'centent-right' : 'centent-left'}}">
+          <view class="{{item.role == 2?'trianright':'trianleft'}}"></view>
+
+          <text style="color: {{item.role == 2? '#FFF':'#000'}}" selectable="{{true}}" class="{{item.role == 2?'background_right':'background_left'}}" >{{item.msg}}</text>
+        </view>
+
+        <view wx:else="">
+          <button style="width: 90%; height: 130px;" class="chatPost" bindtap="onButtonClick" data-index="{{index}}">查看他（她）的简历</button>
+        </view>
+
+      </view>
+      </scroll-view>
+
+        <!-- 底部功能栏 -->
+        <view class='inputRoom' style='bottom: {{inputBottom}}'>
+          <input bindconfirm='sendClick' adjust-position='{{false}}' value='{{inputVal}}' confirm-type='send' bindfocus='focus' bindblur='blur' type="text"></input>
+      </view>
+</view>
+
+<view wx:else="">
+  <scroll-view scroll-y="{{true}}" scroll-into-view='{{toBView}}'>
+    <view class="mylist-item" wx:for="{{postList}}" wx:key="index" id="msg-{{index}}" >
+      <text class="mytime">{{item.time}}</text>
+      <button style="width: 90%; height: 130px;" class="mybutton" bindtap="onButtonClick" data-index="{{index}}">{{item.name}}</button>
+    </view>
+</scroll-view>
+</view>
+
+</view>

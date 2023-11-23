@@ -1,33 +1,35 @@
 <view class="head">
     <view class="job_up">
-        <view class="job_name">{{jobObj.jobName}}</view>
-        <view class="job_salary">{{jobObj.jobSalary}}</view>
+        <view class="job_name">{{jobObj.name}}</view>
+        <view class="job_salary">{{jobObj.min_salary}}-{{jobObj.max_salary}}</view>
     </view>
     <view class="job_down">
         <view class="job_place">
-            <text decode="{{true}}">广州&nbsp;|&nbsp;</text>
+            <text decode="{{true}}">{{jobObj.position}}&nbsp;|&nbsp;</text>
         </view>
         <view class="job_year padr">
-            <text decode="{{true}}">实习要求：{{jobObj.jobDayPerWeek}}&nbsp;{{jobObj.jobTimeSpan}}</text>
+            <!-- <text decode="{{true}}">实习要求：{{jobObj.jobDayPerWeek}}&nbsp;{{jobObj.jobTimeSpan}}</text> -->
+            <text decode="{{true}}">实习要求：{{jobObj.description}}&nbsp;|&nbsp;</text>
+            
         </view>
         <view class="job_edu padr">
-            <text decode="{{true}}">&nbsp;|&nbsp;{{jobObj.jobEdu}}</text>
+            <text decode="{{true}}">&nbsp;|&nbsp;{{jobObj.education}}</text>
         </view>
     </view>
 </view>
 <!-- 公司介绍 -->
-<navigator url="/pages/company_home/index?comId={{jobObj.jobComId}}" class="com_wrap">
+<navigator url="/pages/company_home/index?comId={{jobObj.company._id}}" class="com_wrap">
     <view class="com">
         <view class="content_btm_lft">
-            <image class="" src="{{jobObj.jobImg}}" mode="aspectFill" />
+            <image class="" src="{{jobObj.img}}" mode="aspectFit" />
         </view>
         <view class="content_btm_rgt">
-            <view class="cbr_top">{{jobObj.company.comMinName}}</view>
+            <view class="cbr_top">{{jobObj.company.name}}</view>
             <view class="cbr_btm">
                 <view class="cbr_btm_lft">
                     <view class="l1">
                         <text decode="{{true}}">
-                            {{jobObj.company.comIndustry}}&nbsp;|&nbsp;{{jobObj.company.comScale}}
+                            {{jobObj.company.comIndustry}}&nbsp;|&nbsp;{{jobObj.company.scale}}
                         </text>
                     </view>
                 </view>
@@ -44,19 +46,19 @@
     <view class="desc_title">岗位描述</view>
     <view class="desc_details">
         <!-- <rich-text nodes="{{jobObj.jobDesc1}}"></rich-text> -->
-        <text>{{jobObj.jobDetails}}</text>
+        <text>{{jobObj.description}}</text>
     </view>
 </view>
 <view class="job_desc">
     <view class="desc_title">岗位职责</view>
     <view class="desc_details">
-        <rich-text nodes="{{jobObj.jobDetails}}"></rich-text>
+        <rich-text nodes="{{jobObj.description}}"></rich-text>
         <!-- <text>{{jobObj.jobDetails}}</text> -->
     </view>
 </view>
 <view class="Interview_loca">
     <view class="loca_title">工作城市</view>
-    <view class="loca_details">{{jobObj.jobPlace}}</view>
+    <view class="loca_details">{{jobObj.position}}</view>
 </view>
 <!-- <view class="sim">推荐职位</view> -->
 <!-- 职位列表 -->

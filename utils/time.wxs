@@ -1,0 +1,17 @@
+// utils/time.wxs
+var formatTime = function(date) {
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+  var hour = date.getHours()
+  var minute = date.getMinutes()
+  var second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+module.exports = {
+  formatTime: formatTime
+}
+
+// 还有问题，因为字段里的好像不是一个正常的时间对象，getFullYear()之类的函数没法用
