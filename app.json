@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/user/index",
     "pages/resume/index",
     "pages/message/message",
     "pages/resume/work/index",
     "pages/resume/intention/index",
     "pages/company/edit/index",
-    "pages/login/login",
+
     "pages/register/register",
 
 

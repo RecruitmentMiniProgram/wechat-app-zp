@@ -1,4 +1,7 @@
 /* pages/login/login.wxss *//* 最大的父元素 */
+page {
+  background-color: #f1f1f1;
+}
 .text{
   margin-top: 130rpx;
   text-align: center;
