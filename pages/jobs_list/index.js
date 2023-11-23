@@ -1,4 +1,4 @@
-import { request } from "../../requests/index.js";
+// import { request } from "../../requests/index.js";
 const db = wx.cloud.database();
 Page({
 
@@ -8,6 +8,8 @@ Page({
     data: {
         //职位数组
         jobList: [],
+        // 分页需要的参数
+        
         tabs: [{
                 id: 0,
                 value: "校招",
@@ -30,6 +32,13 @@ Page({
             }
         ],
     },
+    QueryParams: {
+      query: "",
+      cid: "",
+      jobType:'1',
+      pagenum: 1,
+      pagesize: 10,
+    },
 
     bindscrolltoupper() {
         // console.log("top..")
@@ -38,14 +47,7 @@ Page({
     scrollTop() {
         // console.log("scroll..");
     },
-    // 分页需要的参数
-    QueryParams: {
-        query: "",
-        cid: "",
-        jobType:'1',
-        pagenum: 1,
-        pagesize: 10,
-    },
+    
     /**
      * 生命周期函数--监听页面加载
      */
@@ -141,33 +143,47 @@ Page({
     },
     //获取职位信息列表数据
     getJobList: function() {
-      // console.log("what?");
       var that = this;
       db.collection('post').get({
         success: function(res) {
-          console.log(res.data);
-          var total = res.data.length;
-          var totalPages = Math.ceil(total / that.QueryParams.pagesize);
-          that.setData({
-            jobList: res.data,
-            totalPages: totalPages
+          const jobList = res.data;
+          
+          // 用于存放所有的 Promise 对象
+          const promiseList = [];
+      
+          jobList.forEach(job => {
+            const companyId = job.companyId;
+            const companyPromise = db.collection('company').where({companyId: companyId}).get();
+      
+            // 将每个异步操作的 Promise 对象存入数组
+            promiseList.push(companyPromise.then(res => {
+              const companyRes = res.data;
+              job.company = companyRes[0]; // 返回的是一个数组列表，本质上只返回一个公司
+              // console.log("company", companyRes);
+            }).catch(err => {
+              // 处理错误情况
+              console.error(err);
+            }));
           });
-          // console.log(res.data);
+      
+          // 使用 Promise.all 等待所有异步操作完成
+          Promise.all(promiseList).then(() => {
+            // 在这里进行 setData 操作，确保在所有异步操作完成后更新数据
+            var total = jobList.length;
+            var totalPages = Math.ceil(total / that.QueryParams.pagesize);
+            that.setData({
+              jobList: jobList,
+              totalPages: totalPages
+            });
+            // console.log("joblist", jobList);
+      
+            // 停止下拉刷新
+            wx.stopPullDownRefresh();
+          });
         },
         fail: function(err) {
-          // 查询失败
           console.error('查询失败：', err);
         }
       });
-
-        // const total = result.total;
-        // // 计算总页数
-        // this.totalPages = 
-        // this.setData({
-        //     // jobList: result.data.message
-        //     // 拼接数组
-        //     jobList: [...this.data.jobList, ...result.list]
-        // });
-        wx.stopPullDownRefresh();
     }
 });

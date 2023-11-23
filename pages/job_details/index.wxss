@@ -440,7 +440,7 @@ page {
   background-color: var(--themeColor);
   border: 1rpx var(--themeColor) solid;
   border-radius: 20rpx;
-  color: #fff;
+  color: rgb(241, 9, 9);
   font-size: 30rpx;
   font-weight: 600;
 }

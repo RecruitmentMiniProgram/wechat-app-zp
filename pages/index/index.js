@@ -1,7 +1,5 @@
 // pages/index/FirstIndex.js
 
-//引入SDK
-var Bmob = require('../../utils/bmob.js');
 var app=getApp();
 const db = wx.cloud.database();
 
@@ -91,23 +89,13 @@ Page({
   // 云开发手动写入记录无法生成_openid，会出现无法读取的情况（因为权限的问题）
   // 改成编程写入就可以生成了
   addNewData:function(){
-
     db.collection('img').add({
       // data 字段表示需新增的 JSON 数据
       data: {
         // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
-        swiperImgSrc: "https://www.bing.com/images/search?view=detailV2&ccid=Md86Wi2E&id=94E5B2B0F268680EDC09B59CFF9383E54D3A41EC&thid=OIP.Md86Wi2EYiKHNPldRZiD4gHaEo&mediaurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.31df3a5a2d8462228734f95d459883e2%3frik%3d7EE6TeWDk%252f%252bctQ%26riu%3dhttp%253a%252f%252fwww.quazero.com%252fuploads%252fallimg%252f140303%252f1-140303214331.jpg%26ehk%3dSpI7mz%252byLqOkT8BL79jcd3iCtQYNFlBHQzbtF1p0vuQ%253d%26risl%3d%26pid%3dImgRaw%26r%3d0&exph=1050&expw=1680&q=%e5%9b%be%e7%89%87&simid=608003267605717483&FORM=IRPRST&ck=05FC30022211F46A8B3E3FE8E8D3E082&selectedIndex=4",
-        // due: new Date("2018-09-01"),
-        // tags: [
-        //   "cloud",
-        //   "database"
-        // ],
-        // // 为待办事项添加一个地理位置（113°E，23°N）
-        // location: new db.Geo.Point(113, 23),
-        // done: false
+        swiperImgSrc: ""
       },
       success: function(res) {
-        // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
         console.log(res)
       }
     })
@@ -122,7 +110,7 @@ Page({
         that.setData({
           imgUrls: res.data
         });
-        console.log(res.data);
+        // console.log(res.data);
       }
     });
   },
@@ -250,7 +238,7 @@ Page({
   bindViewToday: function () {
     app.globalData.tabid = 0;
     wx.switchTab({
-      url: '../today/today',
+      url: '../jobs_list/index',
     })
   },  
   /**
@@ -259,7 +247,7 @@ Page({
   bindViewTodayGxz: function () {
     app.globalData.tabid=1;
     wx.switchTab({
-      url: '../today/today',
+      url: '../jobs_list/index',
       success: function (e) {
         var page = getCurrentPages().pop();
         if (page == undefined || page == null) return;
@@ -273,7 +261,7 @@ Page({
   bindViewTodayLsg: function () {
     app.globalData.tabid = 2;
     wx.switchTab({
-      url: '../today/today',
+      url: '../jobs_list/index',
       success: function (e) {
         var page = getCurrentPages().pop();
         if (page == undefined || page == null) return;
@@ -287,7 +275,7 @@ Page({
   bindViewTodayTj: function () {
     app.globalData.tabid = 3;
     wx.switchTab({
-      url: '../today/today',
+      url: '../jobs_list/index',
       success: function (e) { 
       var page = getCurrentPages().pop(); 
       if (page == undefined || page == null) return; 
@@ -430,28 +418,35 @@ Page({
   qbzwLoad:function(){
     var that = this;
     // 动态添加列表详情
-    var DetailInfo = Bmob.Object.extend("DetailInfo");
-    var query = new Bmob.Query(DetailInfo);
-    query.descending('updatedAt');
-    query.limit(10);
-    wx.showToast({
-      title: "正在加载",
-      icon: 'loading',
-      duration: 1000
-    });
-    // 查询所有数据
-    query.find({
-      success: function (results) {
-        //console.log("第一次加载 " + results.length + "条记录");
-        //请求将数据存入detailInfo
+    db.collection('post').get({
+      success:function(res){
         that.setData({
-          detailInfo: results
-        });
-      },
-      error: function (error) {
-        //console.log("查询失败: " + error.code + " " + error.message);
+          detailInfo: res.data
+        })
       }
-    });
+    })
+    // var DetailInfo = Bmob.Object.extend("DetailInfo");
+    // var query = new Bmob.Query(DetailInfo);
+    // query.descending('updatedAt');
+    // query.limit(10);
+    // wx.showToast({
+    //   title: "正在加载",
+    //   icon: 'loading',
+    //   duration: 1000
+    // });
+    // 查询所有数据
+    // query.find({
+    //   success: function (results) {
+    //     //console.log("第一次加载 " + results.length + "条记录");
+    //     //请求将数据存入detailInfo
+    //     that.setData({
+    //       detailInfo: results
+    //     });
+    //   },
+    //   error: function (error) {
+    //     //console.log("查询失败: " + error.code + " " + error.message);
+    //   }
+    // });
   },
   //清空招聘列表
   cleardata: function(){

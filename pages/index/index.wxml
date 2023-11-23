@@ -101,21 +101,21 @@
         <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">推荐</view>
     </scroll-view>
     <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
-        <swiper-item wx:for="{{[0,1,2,3]}}"wx:key="1*this"  >
+        <swiper-item wx:for="{{[0,1,2,3]}}"wx:key="id"  >
             <scroll-view bindscrolltolower="scrolltolower" scroll-y="true" class="scoll-h" >
-                <block wx:for="{{detailInfo}}" wx:key="2*this">
+                <block wx:for="{{detailInfo}}" wx:key="id">
                   <view class="detail-list" bindtap="showDetail" data-index="{{index}}">
                     <view class="list-image">
-                      <image src="{{item.detSrc}}"/>
+                      <image src="{{item.img}}"/>
                     </view>
                     <view class="list-text">
                       <view class='list-text-name'>
-                        <text class='list-text-name-one'>{{item.detName}}</text>
-                        <text class='list-text-entnum'>已报名{{item.entNum}}人</text>
+                        <text class='list-text-name-one'>{{item.name}}</text>
+                        <!-- <text class='list-text-entnum'>已报名{{item.time}}人</text> -->
                       </view>
                       <view  class='list-text-detpay' wx:if="{{item.payType==0}}"> 
-                         <view class='list-text-adder' >{{item.detAddr}}</view> 
-                         <view class='list-text-detpay-one'>{{item.detPayMin}}-{{item.detPayMax}}元/月</view> 
+                         <view class='list-text-adder' >{{item.description}}</view> 
+                         <view class='list-text-detpay-one'>{{item.min_salary}}-{{item.max_salary}}</view> 
                       </view> 
                       <view class='list-text-detpay' wx:else>
                          

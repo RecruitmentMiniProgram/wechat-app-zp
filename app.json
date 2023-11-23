@@ -1,23 +1,22 @@
 {
   "pages": [
-    "pages/login/login",
+    "pages/job_details/index",
+    "pages/company_home/index",
+    "pages/jobs_list/index",
+    "pages/index/index",
     "pages/message/message",
+    "pages/login/login",
     "pages/chat/chat",
     "pages/company/index",
-    "pages/company_home/index",
     "pages/user/index",
-    "pages/jobs_list/index",
     
-    "pages/index/index",
     "pages/category_job/index",
     "pages/search/search",
     "pages/community/index",
     "pages/expect_jobs/index",
     "pages/expect_cities/index",
     "pages/setting/index",
-    "pages/today/today",
     "pages/job_publish/index",
-    "pages/job_details/index",
     "pages/detail/detail",
     "pages/award/award",
     "pages/servicephone/servicephone",
@@ -69,7 +68,7 @@
       {
         "selectedIconPath": "images/today_p.png",
         "iconPath": "images/today.png",
-        "pagePath": "pages/today/today",
+        "pagePath": "pages/jobs_list/index",
         "text": "职位"
       },
       {

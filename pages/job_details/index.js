@@ -1,18 +1,18 @@
 import { request } from "../../requests/index.js";
 const httputil = require("../../utils/httputil.js") //一定要引入，根据你自己写的上传文件路径
 var out_photo = "";
+const db = wx.cloud.database();
 Page({
 
-    /**
-     * 页面的初始数据
-     */
     data: {
         submit_stat: "立即投递",
         photo: "",
         goodsObj: {},
         jobObj: {},
         similarJobs: [],
-        jobId: {},
+        // jobId: 'a72823ff655d6d7f0034c3f07e2d18c8',
+        // 先在这个页面单独测试
+        jobId: {}, 
         jobType:'',
         // 商品是否被收藏过
         isCollect: false,
@@ -33,18 +33,19 @@ Page({
     // 工作信息全局对象
     jobInfoStorage: {},
     onLoad: function (options) {
-        this.setData({
-            jobId: options.jobId,
-            jobType:options.jobType
-        });
-        this.getJobDetail(this.data.jobId);
-        this.incrementScore(this.data.jobId);
-        // this.getSimilarJobDetail(this.data.jobId,this.data.jobType);
+      // console.log(options)
+      this.setData({
+          // jobId: options.jobId,
+          // jobType:options.jobType
+      });
+      this.getJobDetail(this.data.jobId);
+      // this.incrementScore(this.data.jobId);
+      // this.getSimilarJobDetail(this.data.jobId,this.data.jobType);
     },
 
-    // 职位被浏览，发送增浏览权值
+    // 职位被浏览，发送增浏览权值 TODO
     async incrementScore(jobId){
-        const result = await request({ url: "/own/home/addJobScore", data: {jobId} });
+        // const result = await request({ url: "/own/home/addJobScore", data: {jobId} });
         console.log("增加了职位权重")
     },
 
@@ -167,32 +168,43 @@ Page({
     // 发送消息
     async sendMessage(fromOpenId, toOpenId, news) {
         // const result = await request({ url: "/upload/saveMessage", data: {fromOpenId,toOpenId,news} });
-        const result = await request({ url: "/own/user/saveMessage2", data: {fromOpenId,toOpenId,news},method: 'POST', header: { "Content-Type": "application/json" } });
+        // const result = await request({ url: "/own/user/saveMessage2", data: {fromOpenId,toOpenId,news},method: 'POST', header: { "Content-Type": "application/json" } });
         console.log("发送消息了")
         console.log(result)
     },
     // 获取职位详情数据
     async getJobDetail(jobId) {
-        const result = await request({ url: "/own/home/job", data: { jobId } });
-        console.log(result)
-        this.jobInfoStorage = result;
-        // 判断是否都投递过该职位
-        this.hasSendJob()
-        // 1 获取缓存中的商品收藏的数组
-        let collects = wx.getStorageSync("collects") || [];
-        // 判断当前商品是否被收藏
-        let isCollect = collects.some(v => v.jobId === this.jobInfoStorage.jobId);
-        this.setData({
-            jobObj: result,
-            isCollect
-        })
+      var that = this;
+      // console.log(jobId);
+
+      db.collection('post').doc(jobId).get({
+        success:function(res){
+          that.jobInfoStorage = res.data;
+          const company_id = res.data.companyId;
+          const companyPromise = db.collection('company').where({companyId:company_id}).get();
+          companyPromise.then(companyRes=>{
+            res.data.company = companyRes.data[0]; 
+            // 判断是否都投递过该职位
+            that.hasSendJob();
+            // 1 获取缓存中的商品收藏的数组
+            let collects = wx.getStorageSync("collects") || [];
+            // 判断当前商品是否被收藏
+            let isCollect = collects.some(v => v.jobId === that.jobInfoStorage.jobId);
+            that.setData({
+                jobObj: res.data,
+                isCollect
+            });
+            // console.log(res.data);
+          })
+        }
+      });
     },
     // 判断该职位是否在缓存数组中
     hasSendJob() {
         // 1 获取缓存中的发送简历的数组
         let hasSendJobs = wx.getStorageSync("hasSendJobs") || [];
         // 判断当前职位是否已发送过
-        // console.log(hasSendJobs)
+        // console.log("w",hasSendJobs)
         console.log(this.jobInfoStorage.jobId)
         let isSubmit = hasSendJobs.some(v => v.jobId === this.jobInfoStorage.jobId);
         console.log("是否已投递")
