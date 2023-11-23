@@ -1,4 +1,6 @@
-
+page{
+  letter-spacing: 2rpx;
+}
 /**index.wxss**/
 @import "../../wxSearchView/wxSearchView.wxss";
 .container{
@@ -216,7 +218,7 @@ swiper-item image {
     height: 80rpx;width: 100%; box-sizing: border-box;margin-left: auto;margin-right: auto;margin-top: 0;
     line-height: 80rpx;background: #fff; font-size: 16px; white-space: nowrap;top:0; left: 0; z-index: 99;}
 .tab-item{margin:0;display: inline-block;width: 25%;text-align: center;}
-.tab-item.active{position: relative;background: #fc3;}
+.tab-item.active{position: relative;background: rgb(74, 144, 2263)}
 .tab-content{margin-top: 3rpx;height:1000rpx;}
 .scoll-h{height: 100%;margin: 0;}
 

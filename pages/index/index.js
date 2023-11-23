@@ -365,53 +365,53 @@ Page({
   },
   //tab分类加载
   switchTabLoad: function(e){
-    var that = this;
-    this.cleardata();
-    var DetailInfo = Bmob.Object.extend("DetailInfo");
-    var query = new Bmob.Query(DetailInfo);
-    switch (e) {
-      case '0':
-        //console.log('全部职位');
-        //this.qbzwLoad();
-        query.descending('updatedAt');
-        break;
-      case '1':
-        //console.log('高薪资');
-        query.equalTo("payType", 0);
-        query.descending('detPayMax');
-        break;
-      case '2':
-        //console.log('临时工');
-        query.equalTo("payType", 1);
-        query.descending('detPayMax');
+    // var that = this;
+    // this.cleardata();
+    // var DetailInfo = Bmob.Object.extend("DetailInfo");
+    // var query = new Bmob.Query(DetailInfo);
+    // switch (e) {
+    //   case '0':
+    //     //console.log('全部职位');
+    //     //this.qbzwLoad();
+    //     query.descending('updatedAt');
+    //     break;
+    //   case '1':
+    //     //console.log('高薪资');
+    //     query.equalTo("payType", 0);
+    //     query.descending('detPayMax');
+    //     break;
+    //   case '2':
+    //     //console.log('临时工');
+    //     query.equalTo("payType", 1);
+    //     query.descending('detPayMax');
 
-        break;
-      case '3':
-        //console.log('推荐');
-        query.descending('entNum');
-        break;
-    }
-    query.limit(10);
-    wx.showToast({
-      title: "正在加载",
-      icon: 'loading',
-      duration: 1000
-    });
-    // 查询数据
-    query.find({
-      success: function (results) {
-        //console.log("第一次加载 " + results.length + "条记录");
-        //请求将数据存入detailInfo
-        that.setData({
-          detailInfo: results,
-          page_index:0,
-          loadingTip:"上拉加载更多"
-        });
-      },
-      error: function (error) {
-        //console.log("查询失败: " + error.code + " " + error.message);
-      }
-    });
+    //     break;
+    //   case '3':
+    //     //console.log('推荐');
+    //     query.descending('entNum');
+    //     break;
+    // }
+    // query.limit(10);
+    // wx.showToast({
+    //   title: "正在加载",
+    //   icon: 'loading',
+    //   duration: 1000
+    // });
+    // // 查询数据
+    // query.find({
+    //   success: function (results) {
+    //     //console.log("第一次加载 " + results.length + "条记录");
+    //     //请求将数据存入detailInfo
+    //     that.setData({
+    //       detailInfo: results,
+    //       page_index:0,
+    //       loadingTip:"上拉加载更多"
+    //     });
+    //   },
+    //   error: function (error) {
+    //     //console.log("查询失败: " + error.code + " " + error.message);
+    //   }
+    // });
 
   },
   //全部职位加载

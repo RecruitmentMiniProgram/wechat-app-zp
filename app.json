@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/jobs_list/index",
     "pages/job_details/index",
     "pages/company_home/index",
-    "pages/jobs_list/index",
-    "pages/index/index",
     "pages/message/message",
     "pages/login/login",
     "pages/chat/chat",
@@ -60,14 +60,14 @@
     "borderStyle": "white",
     "list": [
       {
-        "selectedIconPath": "images/index_p.png",
-        "iconPath": "images/index.png",
+        "selectedIconPath": "images/home_p.png",
+        "iconPath": "images/home.png",
         "pagePath": "pages/index/index",
         "text": "首页"
       },
       {
-        "selectedIconPath": "images/today_p.png",
-        "iconPath": "images/today.png",
+        "selectedIconPath": "images/list_p.png",
+        "iconPath": "images/list.png",
         "pagePath": "pages/jobs_list/index",
         "text": "职位"
       },
