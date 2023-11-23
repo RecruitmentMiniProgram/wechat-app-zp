@@ -360,9 +360,11 @@ input {
 }
 .background_left{
   background-color: #fff;
+  white-space: normal;
 }
 .background_right{
   background-color: #4a90e2;
+  white-space: normal;
 }
 
 
