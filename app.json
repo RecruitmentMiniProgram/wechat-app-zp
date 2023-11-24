@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/job_details/index",
     "pages/show_resume/show_resume",
     "pages/message/message",
     
@@ -14,7 +15,7 @@
 
     "pages/index/index",
     "pages/jobs_list/index",
-    "pages/job_details/index",
+   
     "pages/company_home/index",
     "pages/login/login",
     "pages/chat/chat",
