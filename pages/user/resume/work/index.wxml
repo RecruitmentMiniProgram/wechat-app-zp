@@ -1,0 +1,49 @@
+<!-- 数据内容 -->
+<form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">工作经历<text class="required">*</text></view>
+    </view>
+   
+    <view class="row">
+      <view>公司名称</view>
+      <view class="right">
+        <input bindchange="companyChange" placeholder="请输入公司名称" maxlength="30" />
+      </view>
+    </view>
+    <view class="row">
+        <view>入职时间</view>
+        <picker class="right" mode="date" value="{{beginDate}}" start="1900-01-01" end="2100-01-01" bindchange="bindBeginDateChange">
+        <text>{{beginDate}}</text>
+        <text class="triangle">▼</text>
+        </picker>
+    </view>
+    <view class="row">
+        <view>离职时间</view>
+        <picker class="right" mode="date" value="{{endDate}}" start="1900-01-01" end="2100-01-01" bindchange="bindEndDateChange">
+        <text>{{endDate}}</text>
+        <text class="triangle">▼</text>
+        </picker>
+    </view>
+    <view class="row">
+      <view>工作岗位</view>
+      <view class="right">
+        <input bindchange="workChange" placeholder="请输入工作岗位" maxlength="10" />
+      </view>
+    </view>
+    <view class="row end">
+      <textarea name="skill" bindinput="inputExperienceChange" auto-height="true" class="text-area" maxlength="300" placeholder="填写个人工作内容（300字以内）"></textarea>
+      <view class="word-count {{experienceLength >= 300 ? 'red' : ''}}">
+        {{experienceLength}}/300</view>
+    </view>
+  </view>
+
+  <!-- <view class="level btn-area"> -->
+    <!-- <button formType="reset">重置</button> -->
+  <!-- </view> -->
+
+  <view class="btn_container">
+    <button formType="submit" class="btn">提交</button>
+  </view>
+</form>

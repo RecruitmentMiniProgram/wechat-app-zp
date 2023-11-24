@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/user/index",
+    "pages/user/resume/index",
+    "pages/user/resume/work/index",
+    "pages/user/resume/intention/index",
     "pages/login/login",
     "pages/show_resume/show_resume",
     "pages/message/message",
