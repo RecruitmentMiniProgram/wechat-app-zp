@@ -1,15 +1,15 @@
 {
   "pages": [
+    "pages/show_resume/show_resume",
+    "pages/message/message",
     "pages/job_details/index",
     "pages/company_home/index",
     "pages/jobs_list/index",
     "pages/index/index",
-    "pages/message/message",
     "pages/login/login",
     "pages/chat/chat",
     "pages/company/index",
     "pages/user/index",
-    
     "pages/category_job/index",
     "pages/search/search",
     "pages/community/index",

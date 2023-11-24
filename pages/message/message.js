@@ -136,7 +136,7 @@ Page({
     if(isLogin) {
         if(status == 1) {
             var userId = wx.getStorageSync('userId')
-            userId = 'BeJson'
+            userId = 'a5782af7655ca0cd0345893506161cf3'
 
             const db = wx.cloud.database()
             let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
