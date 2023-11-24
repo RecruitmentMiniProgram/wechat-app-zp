@@ -3,14 +3,13 @@ var app = getApp()
 发送简历和发送消息时建立消息
 
 用户:
-出现红点
 岗位推荐跳转
 岗位介绍跳转
 
 企业:
-出现红点
 用户简历跳转
 
+没有消息时图片
 
 *//
 function addLeadingZero(number) {
@@ -77,7 +76,18 @@ Page({
   onShow:function(e){
   },
 
-  
+  onButtonClick: function(e) {
+    var status = this.data.status
+    if(status == 1) {
+      //用户点击，跳转到岗位介绍页面
+    } else {
+       //企业点击，跳转到用户简历界面
+       var userId = this.data.userId
+       wx.navigateTo({
+        url: '/pages/show_resume/show_resume?userId=' + userId,
+      });
+    }
+  },
 
   /**
    * 生命周期加载页面
