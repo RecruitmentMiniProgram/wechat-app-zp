@@ -165,7 +165,7 @@ Page({
           communication:0,
           collection:[],
           interview:0,
-          headUrl:this.data.avatar==defaultUrl?"":this.data.avatar,
+          headUrl:this.data.avatar==this.data.defaultUrl?"":this.data.avatar,
           self:this.data.self,
           email:this.data.email
         }
@@ -190,8 +190,8 @@ Page({
               "companyId",''
             )
             // 跳转到个人页面
-            wx.redirectTo({
-              url: '../user/index',
+            wx.switchTab({
+              url: '../user/index'
             })
           }).catch(err=>{
             console.log("用户注册失败")

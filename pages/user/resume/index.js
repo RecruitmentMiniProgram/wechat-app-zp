@@ -78,7 +78,7 @@ Page({
             phoneTemp:result.data.phone
           },
           self:result.data.self,
-          email:this.data.email
+          email:result.data.email
         })
       }).catch((err) => {
         console.log("加载信息失败",err)
@@ -218,15 +218,14 @@ Page({
         
           //使用云函数直接插入数据库中
           // TODO
+          console.log(this.data.userId)
           db.collection("user").doc(this.data.userId).update({
-            data: {
-              data:userData
-            }
+            data:userData
           }).then(res=>{
             console.log("在线简历更新成功")
             console.log(res)
             // 跳转到个人页面
-            wx.redirectTo({
+            wx.switchTab({
               url: '../index',
             })
           }).catch(err=>{
