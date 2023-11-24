@@ -1,103 +1,226 @@
-// import {
-//     request
-// } from "../../requests/index.js";
-// Pages/user/index.js
-var app=getApp()
+// pages/mine/mine.js
+const db=wx.cloud.database()
+const _=db.command
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
-        userInfo: {},
-        sendJobsNums: "99+",
-        collectNums: 0,
-        expectCities: 0,
-        expectJobs: 0,
-        // 用户登录凭证
-        loginCode: {}
+      login:true,
+      //已经沟通
+      communication:0,
+      //已经投递
+      deliver:0,
+      headUrl:null,
+      name:"用户名",
+      userId:null,
+      pdfFile:null
     },
-    // code和iv可解密用户信息encryptedData
-    LoginInfo: {
-        code: '',
-        encryptedData: '',
-        iv: ''
-    },
-    Authorization: {
-        token: 'asda'
-    },
-    
     /**
-     * 生命周期函数--监听页面显示
+     * 点击进入登入页面
+     * @param {*} e 
      */
-    onShow: function () {
-        // 1.获取缓存数据，初始化页面,包括userInfo，hasSendJobs，collect，expectCities，expectJobs
-        const userInfo = wx.getStorageSync("userInfo");
-        const collect = wx.getStorageSync("collects") || [];
-        const expectCities = wx.getStorageSync("expectCities") || [];
-        const expectJobs = wx.getStorageSync("expectJobs") || [];
-        this.setData({
-            userInfo,
-            collectNums: collect.length,
-            expectCities: expectCities.length,
-            expectJobs: expectJobs.length
-        })
-        // 2.wx.login获取code
-        var that = this;
-        wx.login({ //login流程
-            success: function (res) { //登录成功
-                console.log(res);
-                if (res.code) {
-                    console.log("成功==>wx.login==>获取登录凭证code")
-                    that.setData({
-                        loginCode: res.code
-                    })
-                } else {
-                    console.log('失败==>wx.login==>获取登录凭证code' + res.errMsg)
-                }
-            }
-        });
-        this.Authorization.token = app.globalData.token
+    onLoginButtonClick(e){
+      wx.navigateTo({
+        url: '../login/login',
+      })
     },
-    // 1.点击登录
-    getUserProfile(e) {
-        console.log("获取用户信息")
+      /**
+   * 生命周期函数--监听页面加载
+   */
+    onLoad(options) {
+      this.checkLogin()
     },
-    // 3.设置resumeUrl
-    async setUserResume() {
-        const resumeUrl=this.data.userInfo.resume
-        this.setData({
-            resumeUrl,
-            resumeTime: resumeUrl.substring(resumeUrl.lastIndexOf('_') + 1, resumeUrl.lastIndexOf('-')),
-            resumeName: resumeUrl.substring(resumeUrl.lastIndexOf('-') + 1)
-        })
-        wx.setStorageSync('resumeUrl', resumeUrl)
+    /**
+     * 页面显示时才加载
+     */
+    onShow(){
+      this.getUser()
     },
-    // 2.根据code和iv解密用户信息encryptedData
-    async getMegFromServer() {
-        console.log("loginInof==>")
-        console.log(this.LoginInfo)
-        var that=this
-        const result = await request({
-            url: "/user/wx/handleWXMsg",
-            data: this.LoginInfo,
-            method: 'POST',
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "token":that.Authorization.token
-            }
-        });
-        console.log("handleWXMsg==>结果")
-        console.log(result)
-        this.setData({
-            userInfo: result.data
+    /**
+     * 加载用户信息
+     */
+    getUser(){
+      var id=wx.getStorageSync("userId")
+      let that=this
+      that.data.userId=id
+      db.collection("user").doc(id).get()
+      .then((result) => {
+        console.log("个人用户信息:",result)
+        that.data.userData=result.data
+        that.setData({
+          headUrl:result.data.headUrl,
+          name:result.data.name,
+          deliver:result.data.deliver,
+          communication:result.data.communication,
+          pdfFile:(result.data.resume.length==0||result.data.resume==null)?null:result.data.resume
         })
+      }).catch((err) => {
+        console.log("加载信息失败",err)
+      });
+    },
 
-        // 设置用户简历
-        this.setUserResume(this.data.userInfo.myEncrypt)
-        // 将用户信息放入缓存
-        wx.setStorageSync("userInfo", this.data.userInfo);
+    /**
+     * 判断是否登入成功
+     */
+    checkLogin(){
+      //判断是否登入成功
+      var status = wx.getStorageSync('status')    
+      try{
+        if(status == 0 || status == null) {        
+          //未登录
+          this.setData({
+            login: false,
+          });
+        } else {
+         //登录
+          this.setData({
+            login: true,
+          });
+        }
+      }catch (e) {
+        console.log('读取session发生错误' + e)
+      }
+    },
+    /**
+     * 检查文件是否为PDF
+     */
+    isValidPDF(filePath){    
+        console.log(filePath)    
+        // 获取文件后缀名
+        const fileExtension = filePath.split('.').pop().toLowerCase();
 
-        app.globalData.uri= app.globalData.uri+this.data.userInfo.openId
+        // 判断文件是否为 PDF
+        if (fileExtension === 'pdf') {
+          return true
+        } else {
+          return false
+        }
+    },
+    //查看简历
+    showPdf(e){
+      if(this.data.pdfFile!=null){
+        wx.cloud.downloadFile({
+          fileID: this.data.pdfFile,
+          success: res => {
+            // 2. 下载成功后，可以通过 res.tempFilePath 获取文件的临时路径
+            const tempFilePath = res.tempFilePath;
+        
+            // 3. 使用 wx.saveFile 将文件保存到本地
+            wx.saveFile({
+              tempFilePath: tempFilePath,
+              success: saveRes => {
+                // 4. 文件保存成功后，可以通过 saveRes.savedFilePath 获取保存在本地的文件路径
+                const savedFilePath = saveRes.savedFilePath;
+        
+                // 5. 使用 wx.openDocument 打开保存在本地的文件
+                wx.openDocument({
+                  filePath: savedFilePath,
+                  success: openRes => {
+                    console.log('打开文档成功');
+                  },
+                  fail: openErr => {
+                    console.error('打开文档失败', openErr);
+                  }
+                });
+              },
+              fail: saveErr => {
+                console.error('保存文件失败', saveErr);
+              }
+            });
+          },
+          fail: err => {
+            console.error('下载文件失败', err);
+          }
+        });
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '请先上传PDF简历',
+        })
+      }
+
+    },
+    //提交简历附件
+    submitResume() {
+      console.log("上传简历附件只能是PDF")
+      // 在小程序中选择文件
+      let that=this
+      wx.chooseMessageFile({
+        count: 1,
+        type: 'file',
+        success(res) {
+          var tempFilePath=res.tempFiles[0].path
+          console.log(res)
+          if(that.isValidPDF(tempFilePath)){
+            wx.showLoading({
+              title: '上传中...',
+            });
+            // 上传文件到服务器
+            wx.cloud.uploadFile({
+              cloudPath: "resume/" + new Date().getTime() + '.pdf',
+              filePath: tempFilePath,
+              success(uploadRes) {
+                console.log('上传成功', uploadRes);
+                // 在这里可以处理上传成功后的逻辑
+                var filePath=uploadRes.fileID
+                that.setData({
+                  pdfFile:filePath
+                })
+                //将数据更新到user表中
+                db.collection("user").doc(that.data.userId).update(
+                  { data:{
+                    resume:filePath
+                    }
+                  }
+                ).then((dataRes)=>{
+                  console.log("更新user表简历成功")
+                  // 隐藏加载提示
+                  wx.hideLoading();
+                }).catch(dataErr=>{
+                  console.log("更新user表失败")
+                  wx.hideLoading();
+                })
+
+              },
+              fail(error) {
+                console.error('上传失败', error);
+                // 处理上传失败的逻辑
+                // 隐藏加载提示
+                wx.hideLoading();
+              },
+            });
+          }else{
+            wx.showModal({
+              title: '提示',
+              content: '请上传PDF简历',
+            })
+          }
+
+        },
+      });
+    },
+    //个人中心的我的余额,点击跳转到我的余额
+    resumeChange() {
+      console.log("编辑在线简历")
+      wx.navigateTo({
+        url: './resume/index',
+      })
+    },
+    //个人中心的意见反馈,点击跳转到意见反馈
+    view() {
+      console.log("意见反馈")
+      // wx.navigateTo({
+      //   url: '../view/view',
+      // })
+    },
+    //我的地址
+    addr(){
+      wx.navigateTo({
+        url: '../myAddr/myAddr',
+      })
+    },
+    //退出登录
+    signOut(){
+      wx.navigateTo({
+        url: '../logs/log',
+      })
     }
-})
+  })

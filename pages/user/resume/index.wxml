@@ -1,0 +1,277 @@
+<view class="level top-box">
+  <view class="avatar">
+    <image src="{{avatar}}" mode="widthFix"></image>
+  </view>
+  <view class="level info">
+    <view>
+      <view class="name">{{nickName}}</view>
+      <view class="tel">{{phone}}</view>
+    </view>
+    <view bindtap="editClick">🖊</view>
+  </view>
+</view>
+<!-- 数据内容 -->
+<form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">基本信息</view>
+    </view>
+    <view class="row">
+      <view>性别<text class="required">*</text></view>
+      <picker class="right" value="{{sex}}" bindchange="bindSexChange" range="{{arraySex}}">
+        <text>{{arraySex[sex]}}</text>
+        <text class="triangle">▼</text>
+      </picker>
+    </view>
+    <view class="row">
+      <view>出生日期<text class="required">*</text></view>
+        <picker class="right" mode="date" value="{{date}}" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
+        <text>{{date}}</text>
+        <text class="triangle">▼</text>
+        </picker>
+    </view>
+    <view class="row">
+      <view>邮箱</view>
+      <view class="right">
+        <input value="{{email}}" bindchange="emailChange" name="mail" placeholder="请输入邮箱信息" maxlength="20" />
+      </view>
+    </view>
+    <view class="row">
+      <view>地址</view>
+        <picker class="right"  mode="region" bindchange="bindRegionChange" value="{{region}}">
+            <text>{{region}}</text>
+            <text class="triangle">▼</text>
+        </picker>
+    </view>
+    <view class="row end">
+      <view>最高学历<text class="required">*</text></view>
+      <picker class="right" value="{{education}}" bindchange="bindEducationChange" range="{{arrayEducation}}">
+        <text>{{arrayEducation[education]}}</text>
+        <text class="triangle">▼</text>
+      </picker>
+    </view>
+  </view>
+
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">教育背景</view>
+    </view>
+    <view class="row">
+      <view>学校</view>
+      <view class="right">
+        <input value="{{school}}" bindchange="schoolChange" name="school" placeholder="请输入就读学校" maxlength="30" />
+      </view>
+    </view>
+      <view class="row">
+        <view>入学时间</view>
+        <picker class="right" mode="date" value="{{beginDate}}" start="1900-01-01" end="2100-01-01" bindchange="bindBeginDateChange">
+        <text>{{beginDate}}</text>
+        <text class="triangle">▼</text>
+        </picker>
+      </view>
+      <view class="row">
+      <view>毕业时间</view>
+        <picker class="right" mode="date" value="{{endDate}}" start="1900-01-01" end="2100-01-01" bindchange="bindEndDateChange">
+        <text>{{endDate}}</text>
+        <text class="triangle">▼</text>
+        </picker>
+    </view>
+    <view class="row end">
+      <view>专业</view>
+      <view class="right">
+        <input value="{{major}}" bindchange="majorChange" name="major" placeholder="请输入所学专业" type="number" maxlength="50" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 求职意向 -->
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">求职意向<text class="required">*</text></view>
+    </view>
+    <!-- 修改求职意向 -->
+    <view class="row" bindtap="intentionChange">
+      <input name="major" placeholder="编辑求职意向" type="number" maxlength="50" disabled="true" />
+    </view>
+
+    <!-- 显示求职意向 -->
+    <view wx:if="{{intentionData!=null}}">
+    <!-- 显示职业 -->
+    <view class="row wrap-box" >
+    <block wx:for="{{intentionData.workList}}" wx:for-index="index" wx:for-item="item" wx:key="item">
+      <view data-index="{{index}}"  class="add-btn data-btn">{{item}}</view>
+    </block>
+    </view>
+    <!-- 显示薪酬 -->
+    <view class="row">
+      <view>薪资</view>
+      <input name="major" placeholder="{{intentionData.salary}}" type="number" maxlength="50" disabled="true" />
+    </view>
+    <view class="row end">
+      <view>工作类型</view>
+      <input name="major" placeholder="{{intentionData.type}}" type="number" maxlength="50" disabled="true" />
+    </view>
+    </view>
+  </view>
+
+  <!-- 工作经历 -->
+    <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">工作经历</view>
+    </view>
+    <!-- 修改求职意向 -->
+    <view class="row" bindtap="workChange">
+      <input name="major" placeholder="编辑工作经历" type="number" maxlength="50" disabled="true" />
+    </view>
+    <!-- 显示工作经历 -->
+    <view wx:if="{{workList.length!=0}}">
+        <view   wx:for="{{workList}}" wx:for-item="item" wx:for-index="index"  >
+          <view class="companyCard" bindlongpress="longtapDeleteWork" data-index="{{index}}">
+              <view class="row">
+                <view>公司名称</view>
+                <view class="right">
+                  <input placeholder="{{item.company}}" maxlength="30" />
+                </view>
+              </view>
+              <view class="row">
+                  <view>任职时间</view>
+                  <view class="right">
+                    <input placeholder="{{item.beginDate}}-{{item.endDate}}" maxlength="30" />
+                  </view>
+              </view>
+              <view class="row">
+                  <view>工作岗位</view>
+                  <view class="right">
+                    <input placeholder="{{item.work}}" maxlength="30" />
+                  </view>
+              </view>
+              <view class="row">
+                  <view>工作内容</view>
+              </view>
+              <view class="row">
+                <textarea name="skill" auto-height="true" class="text-area" maxlength="300" placeholder="{{item.experience}}" disabled="true"></textarea>
+              </view>
+              <view class="row">
+                  <input class="delete_btn" placeholder="长按删除" maxlength="30" />
+                  <!-- <view class="delete_btn">长 按 删 除</view> -->
+              </view>
+          </view>
+
+        </view>
+    </view>
+  </view>
+
+  <!-- 获奖证书 -->
+  <!-- <view class="box">
+    <view class="level nav-flex">
+      <view class="level">
+        <view class="dot"></view>
+        <view class="title">获奖证书</view>
+      </view>
+      <view class="add-img" bindtap="selectImage" data-tag="1">+</view>
+    </view>
+    <view class="row">
+      <textarea name="certificate" auto-height="true" class="text-area" maxlength="300" placeholder="点击右上角加号可添加证书图片哦~"></textarea>
+    </view>
+    <view class="attr-img">
+      <block wx:for="{{attrImg}}" wx:for-index="index" wx:for-item="item" wx:key="item">
+        <image bindlongpress="longtapDeleteImg" data-index="{{index}}" bindtap="previewClick" data-url="{{item}}" class="img" src="{{item}}" mode="widthFix"></image>
+      </block>
+    </view>
+  </view> -->
+  <!-- 经验方向 -->
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">经验方向<text class="required">*</text></view>
+    </view>
+    <view class="row">
+      <textarea value="{{experience}}" name="skill" bindinput="inputExperienceChange" auto-height="true" class="text-area" maxlength="300" placeholder="填写个人工作经验（300字以内）"></textarea>
+      <view class="word-count {{experienceLength >= 300 ? 'red' : ''}}">
+        {{experienceLength}}/300</view>
+    </view>
+  </view>
+  
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">自我描述</view>
+    </view>
+    <view class="row">
+      <textarea value="{{self}}" name="skill" bindinput="inputSelfChange" auto-height="true" class="text-area" maxlength="300" placeholder="自我描述（300字以内）"></textarea>
+      <view class="word-count {{selfLength >= 300 ? 'red' : ''}}">
+        {{selfLength}}/300</view>
+    </view>
+  </view>
+
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">个人技能</view>
+    </view>
+    <view class="row">
+      <textarea value="{{skill}}" name="skill" bindinput="inputSkillChange" auto-height="true" class="text-area" maxlength="300" placeholder="个人技能描述（300字以内）"></textarea>
+      <view class="word-count {{skillLength >= 300 ? 'red' : ''}}">
+        {{skillLength}}/300</view>
+    </view>
+  </view>
+
+  <!-- 兴趣爱好 -->
+  <!-- <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">兴趣爱好</view>
+    </view>
+    <view class="row wrap-box">
+      <block wx:for="{{labelList}}" wx:for-index="index" wx:for-item="item" wx:key="item">
+        <view bindlongpress="longtapDeleteLabel" data-index="{{index}}"  class="add-btn data-btn">{{item}}</view>
+      </block>
+      <view class="add-btn" bindtap="addHobbyClick">+添加</view>
+    </view>
+  </view> -->
+
+  <!-- <view class="level btn-area">
+    <button formType="reset">重置</button>
+    <button type="primary" formType="submit">提交</button>
+  </view> -->
+  <view class="btn_container">
+    <button formType="submit" class="btn">提交</button>
+  </view>
+</form>
+<!-- 弹出层 -->
+<view class="mask-all" wx:if="{{show}}" bindtap="cancelMask"></view>
+<view class="mask-box" wx:if="{{show}}">
+  <block wx:if="{{hobby}}">
+    <view class="center">
+      <input bindinput="inputHobbyClick" value="{{hobbyVal}}" placeholder="请输入兴趣爱好（5字以内哦~）" maxlength="5" />
+    </view>
+  </block>
+  <block wx:else>
+    <view class="row level">
+      <view>头像</view>
+      <view class="right" bindtap="selectImage" data-tag="0">
+        <image class="head-img" src="{{tempList.avatarTemp}}"></image>
+      </view>
+    </view>
+    <view class="row">
+      <view>姓名<text class="required">*</text></view>
+      <view class="right">
+        <input value="{{nickName}}"placeholder="请输入姓名" bindinput="inputNick" value="{{tempList.nameTemp}}" maxlength="20" />
+      </view>
+    </view>
+    <view class="row">
+      <view>电话<text class="required">*</text></view>
+      <view class="right">
+        <input value="{{phone}}" placeholder="请输入联系电话" bindinput="inputPhone" value="{{tempList.phoneTemp}}"  maxlength="11" />
+      </view>
+    </view>
+  </block>
+  <view class="level mask-btn">
+    <view bindtap="cancelMask">取消</view>
+    <view bindtap="defineMask">确定</view>
+  </view>
+</view>

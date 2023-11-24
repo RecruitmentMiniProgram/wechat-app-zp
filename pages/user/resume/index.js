@@ -1,4 +1,6 @@
 // index.js
+const db=wx.cloud.database()
+const _=db.command
 Page({
   data: {
     show: false,
@@ -36,13 +38,58 @@ Page({
     region:'',
     workList:[],
     intentionData:null,
-    itemStyle: []// 用于存储每个 item 的样式
+    itemStyle: [],// 用于存储每个 item 的样式
   },
+
+        /**
+     * 加载用户信息
+     */
+    getUser(){
+      var id=wx.getStorageSync("userId")
+      let that=this
+      that.data.userId=id
+      db.collection("user").doc(id).get()
+      .then((result) => {
+        console.log("个人用户信息:",result)
+        that.data.userData=result.data
+        that.setData({
+          avatar:result.data.headUrl,
+          interview:result.data.interview,
+          collection:result.data.collection,
+          communication:result.data.communication,
+          region:result.data.address,
+          phone:result.data.phone,
+          skill:result.data.skill,
+          workList:result.data.work,
+          intentionData:result.data.intention,
+          experience:result.data.experience,
+          date:result.data.age,
+          nickName:result.data.name,
+          deliver:result.data.deliver,
+          school:result.data.education.school,
+          major:result.data.education.major,
+          beginDate:result.data.education.beginDate,
+          endDate:result.data.education.endDate,
+          sex:that.data.arraySex.indexOf(result.data.sex)==-1?0:that.data.arraySex.indexOf(result.data.sex),
+          education:that.data.arrayEducation.indexOf(result.data.degree)==-1?0:that.data.arrayEducation.indexOf(result.data.degree),
+          tempList: {
+            avatarTemp: result.data.headUrl,
+            nameTemp:result.data.name ,
+            phoneTemp:result.data.phone
+          },
+          self:result.data.self,
+          email:this.data.email
+        })
+      }).catch((err) => {
+        console.log("加载信息失败",err)
+      });
+    },
     /**
    * 生命周期函数--监听页面加载
    */
     onLoad(options) {
       console.log("onLoad")
+      this.getUser()
     },
   
     /**
@@ -159,42 +206,31 @@ Page({
           },
           skill:this.data.skill,
           phone:this.data.phone,
-          resume:'',
           address:this.data.region,
-          deliver:0,
-          communication:0,
-          collection:[],
-          interview:0,
-          headUrl:this.data.avatar==defaultUrl?"":this.data.avatar,
+          deliver:this.data.deliver,
+          communication:this.data.communication,
+          collection:this.data.collection,
+          interview:this.data.interview,
+          headUrl:this.data.avatar==this.data.defaultUrl?"":this.data.avatar,
           self:this.data.self,
           email:this.data.email
         }
         
           //使用云函数直接插入数据库中
           // TODO
-          wx.cloud.callFunction({
-            name: 'userlogin',
+          db.collection("user").doc(this.data.userId).update({
             data: {
               data:userData
             }
           }).then(res=>{
-            console.log("用户注册成功")
+            console.log("在线简历更新成功")
             console.log(res)
-            wx.setStorageSync(
-              "userId",res.result.data.user._id
-            )
-            wx.setStorageSync(
-              "status",1
-            )
-            wx.setStorageSync(
-              "companyId",''
-            )
             // 跳转到个人页面
             wx.redirectTo({
-              url: '../user/index',
+              url: '../index',
             })
           }).catch(err=>{
-            console.log("用户注册失败")
+            console.log("在线简历更新失败")
           })
         }
       }
