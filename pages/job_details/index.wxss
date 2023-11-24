@@ -455,3 +455,39 @@ page {
   color: var(--themeColor);
   background-color: #fff;
 }
+
+
+.bottom-bar {
+  border-top: 1px solid #ddd; /* 灰色边框 */
+  position: fixed;
+  width: 100%;
+  display: flex;
+  bottom: 30rpx;
+  background-color: #fff; /* 底部栏背景色 */
+  align-items: center; /* 垂直居中 */
+}
+
+.chat-icon {
+  margin-top: 10rpx;
+  width: 50px; 
+  height: 50px; 
+  margin-left: auto;
+}
+
+.submit-resume {
+  margin-top: 10rpx;
+  margin-right: auto;
+  line-height: 40px; /* 设置行高等于按钮的高度，实现垂直居中 */
+  width: 80%; /* 右边4/5的宽度 */
+  height: 40px;
+
+  padding: 0;
+  font-size: 13px; 
+  border-radius: 70;
+  background-color:#4a90e2;
+  color:#ffff;
+}
+
+.btn-hover {
+  background-color: #007acc; /* 触摸时的背景色，可以根据需要调整 */
+}
