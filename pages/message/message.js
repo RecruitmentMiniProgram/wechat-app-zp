@@ -112,9 +112,9 @@ Page({
   },
 
   async onLoad() {
+    var that = this
     var isLogin = false
     var status = wx.getStorageSync('status')
-    status = 1
     this.setData({status: status})
 
     try{
@@ -139,7 +139,6 @@ Page({
     if(isLogin) {
         if(status == 1) {
             var userId = wx.getStorageSync('userId')
-            userId = 'a5782af7655ca0cd0345893506161cf3'
             this.setData({userId: userId})
 
             const db = wx.cloud.database()
@@ -195,7 +194,6 @@ Page({
         } else {
           //企业用户
           var userId = wx.getStorageSync('companyId')
-          userId = 'a5782af7655ca0cd0345893506161cf3'
           this.setData({userId: userId})
           
             //可见的聊天列表
@@ -241,7 +239,7 @@ Page({
         var that = this
         //用户启动监听，如果消息列表发生变化则刷新
         intervalId = setInterval(async function() {
-            var userId = this.data.userId
+            var userId = that.data.userId
           
             //可见的聊天列表
             const db = wx.cloud.database()
@@ -340,7 +338,7 @@ Page({
  
   onLoginButtonClick: function () {
     wx.navigateTo({
-      url: '/pages/second/second'
+      url: '/pages/login/login'
     });
   },
 

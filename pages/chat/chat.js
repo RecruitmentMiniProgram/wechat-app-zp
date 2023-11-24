@@ -90,7 +90,7 @@ Page({
   async onLoad(options) {
     //1-用户 2-企业 3-特殊
     var status = wx.getStorageSync('status')
-    status = 1
+  //  status = 1
 
     var that = this
     var type = options.type;

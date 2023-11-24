@@ -46,9 +46,9 @@ Page({
     jobInfoStorage: {},
     onLoad: function (options) {
       var status = wx.getStorageSync('status')
-      status = 1
+     // status = 1
       var userId = wx.getStorageSync('userId')
-      userId = 'a72823ff655c97f60024736e3cc48fed'
+     // userId = 'a72823ff655c97f60024736e3cc48fed'
       this.setData({
         status: status,
         userId: userId
@@ -59,7 +59,7 @@ Page({
           jobId: options.jobId,
           // jobType:options.jobType
       });
-      this.setData({jobId: "a72823ff655d6d7f0034c3f07e2d18c8"})
+     // this.setData({jobId: "a72823ff655d6d7f0034c3f07e2d18c8"})
       this.getJobDetail(this.data.jobId);
       // this.incrementScore(this.data.jobId);
       // this.getSimilarJobDetail(this.data.jobId,this.data.jobType);
