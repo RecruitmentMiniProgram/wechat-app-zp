@@ -1,5 +1,11 @@
 // utils/time.wxs
-var formatTime = function(date) {
+function formatNumber(n) {
+  n = n.toString();
+  return n[1] ? n : '0' + n;
+}
+
+var formatTime = function(time) {
+  var date = getDate(time)
   var year = date.getFullYear()
   var month = date.getMonth() + 1
   var day = date.getDate()
@@ -10,8 +16,42 @@ var formatTime = function(date) {
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
+var parseTime=function (time, type) {
+  if (time == null || type == '') {
+    return ''
+  }
+  if (arguments.length === 0) {
+    return null
+  }
+  var date = getDate(time);//在wxs中不能使用new Date()来处理日期
+  // var date = new Date(time);//在wxs中不能使用new Date()来处理日期
+  var y = date.getFullYear();
+  var m = formatNumber(date.getMonth() + 1);
+  var d = formatNumber(date.getDate());
+  var h = formatNumber(date.getHours());
+  var i = formatNumber(date.getMinutes());
+  var s = formatNumber(date.getSeconds());
+  var a = formatNumber(date.getDay());
+  var time_str = "";
+  if (type == 'month') {
+    time_str = y + '-' + m;
+  } else if (type == 'date') {
+    time_str = y + '-' + m + '-' + d;
+  } else if (type == 'datetime') {
+    time_str = y + '-' + m + '-' + d + ' ' + h + ':' + i + ':' + s;
+  } else if (type == 'onlyMonth') {
+    time_str = m;
+  } else if (type == 'onlyYear') {
+    time_str = y;
+  }
+  // return "2012-12-12"
+  return time_str
+}
+
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  parseTime: parseTime
 }
 
 // 还有问题，因为字段里的好像不是一个正常的时间对象，getFullYear()之类的函数没法用

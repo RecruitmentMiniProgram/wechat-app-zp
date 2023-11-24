@@ -86,21 +86,7 @@ Page({
     this.getswitchimg();
     this.qbzwLoad();
   },
-  // 云开发手动写入记录无法生成_openid，会出现无法读取的情况（因为权限的问题）
-  // 改成编程写入就可以生成了
-  addNewData:function(){
-    db.collection('img').add({
-      // data 字段表示需新增的 JSON 数据
-      data: {
-        // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
-        swiperImgSrc: ""
-      },
-      success: function(res) {
-        console.log(res)
-      }
-    })
 
-  },
   //加载轮播图
   getswitchimg:function(){
     var that=this;
@@ -318,15 +304,12 @@ Page({
 
   },
 
-
-
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
 
   },
-  //滚动tab
   
   // 滚动切换标签样式
   switchTab: function (e) {
@@ -363,90 +346,48 @@ Page({
       })
     }
   },
-  //tab分类加载
-  switchTabLoad: function(e){
-    // var that = this;
-    // this.cleardata();
-    // var DetailInfo = Bmob.Object.extend("DetailInfo");
-    // var query = new Bmob.Query(DetailInfo);
-    // switch (e) {
-    //   case '0':
-    //     //console.log('全部职位');
-    //     //this.qbzwLoad();
-    //     query.descending('updatedAt');
-    //     break;
-    //   case '1':
-    //     //console.log('高薪资');
-    //     query.equalTo("payType", 0);
-    //     query.descending('detPayMax');
-    //     break;
-    //   case '2':
-    //     //console.log('临时工');
-    //     query.equalTo("payType", 1);
-    //     query.descending('detPayMax');
-
-    //     break;
-    //   case '3':
-    //     //console.log('推荐');
-    //     query.descending('entNum');
-    //     break;
-    // }
-    // query.limit(10);
-    // wx.showToast({
-    //   title: "正在加载",
-    //   icon: 'loading',
-    //   duration: 1000
-    // });
-    // // 查询数据
-    // query.find({
-    //   success: function (results) {
-    //     //console.log("第一次加载 " + results.length + "条记录");
-    //     //请求将数据存入detailInfo
-    //     that.setData({
-    //       detailInfo: results,
-    //       page_index:0,
-    //       loadingTip:"上拉加载更多"
-    //     });
-    //   },
-    //   error: function (error) {
-    //     //console.log("查询失败: " + error.code + " " + error.message);
-    //   }
-    // });
-
-  },
   //全部职位加载
   qbzwLoad:function(){
     var that = this;
     // 动态添加列表详情
+  
     db.collection('post').get({
-      success:function(res){
-        that.setData({
-          detailInfo: res.data
-        })
+      success: function(res) {
+        const jobList = res.data;
+        
+        // 用于存放所有的 Promise 对象
+        const promiseList = [];
+    
+        jobList.forEach(job => {
+          const companyId = job.companyId;
+          const companyPromise = db.collection('company').where({_id: companyId}).get();
+    
+          // 将每个异步操作的 Promise 对象存入数组
+          promiseList.push(companyPromise.then(res => {
+            const companyRes = res.data;
+            job.company = companyRes[0]; // 返回的是一个数组列表，本质上只返回一个公司
+            // var timestamp = that.formatTime(job.time);
+            // console.log("time", job.time.getFullYear());
+          }).catch(err => {
+            // 处理错误情况
+            console.error(err);
+          }));
+        });
+    
+        // 使用 Promise.all 等待所有异步操作完成
+        Promise.all(promiseList).then(() => {
+          // 在这里进行 setData 操作，确保在所有异步操作完成后更新数据
+          that.setData({
+            jobList: jobList,
+          });
+          // console.log("joblist", jobList);
+    
+        });
+      },
+      fail: function(err) {
+        console.error('查询失败：', err);
       }
-    })
-    // var DetailInfo = Bmob.Object.extend("DetailInfo");
-    // var query = new Bmob.Query(DetailInfo);
-    // query.descending('updatedAt');
-    // query.limit(10);
-    // wx.showToast({
-    //   title: "正在加载",
-    //   icon: 'loading',
-    //   duration: 1000
-    // });
-    // 查询所有数据
-    // query.find({
-    //   success: function (results) {
-    //     //console.log("第一次加载 " + results.length + "条记录");
-    //     //请求将数据存入detailInfo
-    //     that.setData({
-    //       detailInfo: results
-    //     });
-    //   },
-    //   error: function (error) {
-    //     //console.log("查询失败: " + error.code + " " + error.message);
-    //   }
-    // });
+    });
   },
   //清空招聘列表
   cleardata: function(){

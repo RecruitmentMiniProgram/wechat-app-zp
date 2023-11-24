@@ -112,9 +112,11 @@ Page({
   },
 
   async onLoad() {
+    var that = this
     var isLogin = false
     var status = wx.getStorageSync('status')
-    status = 2
+    this.setData({status: status})
+
     try{
       if(status == 0 || status == null) {
         isLogin = false;
@@ -132,11 +134,12 @@ Page({
     }catch (e) {
       console.log('读取session发生错误' + e)
     }
+
     //如果登录，则初始化消息列表
     if(isLogin) {
         if(status == 1) {
             var userId = wx.getStorageSync('userId')
-            userId = 'a5782af7655ca0cd0345893506161cf3'
+            this.setData({userId: userId})
 
             const db = wx.cloud.database()
             let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
@@ -191,7 +194,7 @@ Page({
         } else {
           //企业用户
           var userId = wx.getStorageSync('companyId')
-          userId = 'a5782af7655ca0cd0345893506161cf3'
+          this.setData({userId: userId})
           
             //可见的聊天列表
             const db = wx.cloud.database()
@@ -236,8 +239,7 @@ Page({
         var that = this
         //用户启动监听，如果消息列表发生变化则刷新
         intervalId = setInterval(async function() {
-            var userId = wx.getStorageSync('userId')
-            userId = 'a5782af7655ca0cd0345893506161cf3'
+            var userId = that.data.userId
           
             //可见的聊天列表
             const db = wx.cloud.database()
@@ -247,9 +249,6 @@ Page({
             var dbList = chatListResult.data[0].data
             if(that.data.newTime < dbList[0].time) {
               if(status == 1) {
-                var userId = wx.getStorageSync('userId')
-                userId = 'BeJson'
-    
                 const db = wx.cloud.database()
                 var chatList = new Array()
                 var index = 0
@@ -297,9 +296,6 @@ Page({
                 })
                } else {
               //企业用户
-              var userId = wx.getStorageSync('companyId')
-              userId = 'a5782af7655ca0cd0345893506161cf3'
-              
                 //可见的聊天列表
                 var chatList = new Array()
                 var index = 0
@@ -342,7 +338,7 @@ Page({
  
   onLoginButtonClick: function () {
     wx.navigateTo({
-      url: '/pages/second/second'
+      url: '/pages/login/login'
     });
   },
 

@@ -1,16 +1,8 @@
 var app = getApp()
 /**
-发送简历和发送消息时建立消息
-
 用户:
 岗位推荐跳转
-岗位介绍跳转
-
-企业:
-用户简历跳转
-
 没有消息时图片
-
 *//
 function addLeadingZero(number) {
   return number < 10 ? `0${number}` : number;
@@ -80,6 +72,9 @@ Page({
     var status = this.data.status
     if(status == 1) {
       //用户点击，跳转到岗位介绍页面
+      wx.navigateTo({
+        url: '/pages/job_details/index?jobId=' + this.data.postId,
+      });
     } else {
        //企业点击，跳转到用户简历界面
        var userId = this.data.userId
@@ -95,7 +90,7 @@ Page({
   async onLoad(options) {
     //1-用户 2-企业 3-特殊
     var status = wx.getStorageSync('status')
-    status = 2
+  //  status = 1
 
     var that = this
     var type = options.type;
@@ -104,6 +99,7 @@ Page({
     this.setData({type: type})
     this.setData({id: id})
     this.setData({status: status})
+
     const db = wx.cloud.database()
     if(type == 0) {
         wx.setNavigationBarTitle({
@@ -133,9 +129,10 @@ Page({
     } else {
       var chatList = new Array();
       var index = 0;
-
+      
       let chatHistory = await db.collection('chat_history').doc(id).get()
       if(chatHistory.length == 0) return
+
       var chatData = chatHistory.data
       if(status == 1) {
           wx.setNavigationBarTitle({
@@ -151,9 +148,10 @@ Page({
         msgList: chatData.data,
         toView: 'msg-' + (chatData.data.length - 1),
         companyId: chatData.company_id,
-        userId: chatData.user_id
+        userId: chatData.user_id,
+        postId: chatData.post_id
       })
-
+      
       intervalId = setInterval(async function() {
         let chatHistory = await db.collection('chat_history').doc(id).get()
         if(chatHistory.length == 0) return
@@ -204,8 +202,7 @@ Page({
   async onUnload() {
       clearInterval(intervalId);
 
-      var status = wx.getStorageSync('status')
-      status = 2
+      var status = this.data.status
       const db = wx.cloud.database()
       if(status == 1) {
           await db.collection('chat_history').doc(this.data.id).update({
@@ -222,18 +219,38 @@ Page({
       }
   },
 
-
+  async updateChatList(id) {
+       //读取后插入新消息列表
+       var chatListResult = await db.collection('chat_list').where({user_id: id}).get()
+       if(chatListResult.data.length == 0) return
+       var dbList = chatListResult.data[0].data
+       var _id = this.data._id
+       var index = -1
+       for(let i = 0; i < dbList.length; ++ i) {
+         if(dbList[i].id == _id) {
+           index = i
+           break
+         }
+       }
+       if(index != -1) dbList.splice(index, 1)
+       var chatInfo = new ChatInfo(_id, 1, (Date.now()/1000))
+       dbList.unshift(chatInfo)
+ 
+       await db.collection('chat_list').where({user_id: id}).update({
+         data:{
+           data: dbList
+         }
+       })
+  },
   async sendClick(e) {
-     //将对话另一方用户的消息栏插入这个消息
-     var status = wx.getStorageSync('status')
-     status = 2
+     var status = this.data.status
 
     //写消息时将消息栏自动置顶到对应用户列表中
     var msgInfo = new MsgInfo(this.data.status, e.detail.value, (Date.now()/1000))
     //更新数据库
     const db = wx.cloud.database()
     const _ = db.command
-    // 更新文档数据
+    // 更新聊天数据
     if(status == 1) {
         await db.collection('chat_history').doc(this.data.id).update({
           data:{
@@ -250,36 +267,24 @@ Page({
         })
     }
 
-     
+      //更新对方消息栏
       var id = null
       if(status == 1) {
         id = this.data.companyId
       } else {
         id = this.data.userId
       }
+      this.updateChatList(id)
+     
 
-      //读取后插入新消息列表
-      let chatListResult = await db.collection('chat_list').where({user_id: id}).get()
-      if(chatListResult.data.length == 0) return
-      var dbList = chatListResult.data[0].data
-      var _id = this.data._id
-      var index = -1
-      for(let i = 0; i < dbList.length; ++ i) {
-        if(dbList[i].id == _id) {
-          index = i
-          break
-        }
+      //更新自己的消息栏
+      var id = null
+      if(status == 1) {
+        id = this.data.userId
+      } else {
+        id = this.data.companyId
       }
-      if(index != -1) dbList.splice(index, 1)
-      var chatInfo = new ChatInfo(_id, 1, (Date.now()/1000))
-      dbList.unshift(chatInfo)
-
-      //更新对方消息栏
-      await db.collection('chat_list').where({user_id: id}).update({
-        data:{
-          data: dbList
-        }
-      })
+      this.updateChatList(id)
 
     //更新缓存
     var list = this.data.msgList
@@ -291,3 +296,4 @@ Page({
     })
   },
 })
+

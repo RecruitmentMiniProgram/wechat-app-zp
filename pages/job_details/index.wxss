@@ -1,3 +1,7 @@
+:root {
+  --themeColor: #4a90e2; /* 你的主题颜色代码 */
+}
+
 page {
   padding-bottom: 100rpx;
 }
@@ -426,6 +430,9 @@ page {
   align-items: center;
   font-size: 24rpx;
   position: relative;
+  
+
+  
 }
 .btm_tool .tool_item button {
   position: absolute;
@@ -436,15 +443,51 @@ page {
   opacity: 0;
 }
 .btm_tool .btn_buy {
-  flex: 4;
-  background-color: var(--themeColor);
-  border: 1rpx var(--themeColor) solid;
-  border-radius: 20rpx;
-  color: rgb(241, 9, 9);
-  font-size: 30rpx;
-  font-weight: 600;
+  flex: 3;
+  padding: 0;
+  width: 70%;
+  font-size: 13px; 
+  border-radius: 0;
+  background-color:#4a90e2;
+  color:#ffff;
 }
 .btm_tool #isSubmit {
   color: var(--themeColor);
   background-color: #fff;
+}
+
+
+.bottom-bar {
+  border-top: 1px solid #ddd; /* 灰色边框 */
+  position: fixed;
+  width: 100%;
+  display: flex;
+  bottom: 30rpx;
+  background-color: #fff; /* 底部栏背景色 */
+  align-items: center; /* 垂直居中 */
+}
+
+.chat-icon {
+  margin-top: 10rpx;
+  width: 50px; 
+  height: 50px; 
+  margin-left: auto;
+}
+
+.submit-resume {
+  margin-top: 10rpx;
+  margin-right: auto;
+  line-height: 40px; /* 设置行高等于按钮的高度，实现垂直居中 */
+  width: 80%; /* 右边4/5的宽度 */
+  height: 40px;
+
+  padding: 0;
+  font-size: 13px; 
+  border-radius: 70;
+  background-color:#4a90e2;
+  color:#ffff;
+}
+
+.btn-hover {
+  background-color: #007acc; /* 触摸时的背景色，可以根据需要调整 */
 }

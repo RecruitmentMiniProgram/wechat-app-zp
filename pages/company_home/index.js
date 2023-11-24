@@ -115,19 +115,12 @@ Page({
     // 获取公司主页数据
     async getComDetail(comId) {
       var that = this;
-      console.log("comId",comId);
 
       db.collection('company').doc(comId).get({
         success:function(result){
-          console.log(result.data);
-          // if (result.data.length != 1) {
-          //   console.log("公司主页获取异常，公司数量不等于1")
-          // }
+          // console.log(result.data);
           that.setData({
               comObj: result.data
-                  // desc: result.data.message[0].jobDesc1,
-                  // // g表示全局查找
-                  // mystr2: result.data.message[0].jobDesc1.replace(/\\n/g, '\n')
           })
           that.comInfoStorage = result.data
               // 1 先获取缓存中的购物车数组

@@ -1,5 +1,7 @@
 // import { request } from "../../requests/index.js";
 const db = wx.cloud.database();
+const util = require('../../utils/util');
+// import { formatTime } from '../../utils/util';
 Page({
 
     /**
@@ -60,19 +62,31 @@ Page({
 
 
     addNewData:function(){
-      db.collection('post').add({
-        // data 字段表示需新增的 JSON 数据
-        data: {
-          enter_id:"11",
-          name: "测试",
-          min_salary: 1
-      },
-        success: function(res) {
-          // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-          console.log(res)
-        }
-      })
+      // db.collection('post').add({
+      //   // data 字段表示需新增的 JSON 数据
+      //   data: {
+      //     enter_id:"11",
+      //     name: "测试",
+      //     min_salary: 1
+      // },
+      //   success: function(res) {
+      //     // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+      //     console.log(res)
+      //   }
+      // })
+      var time = this.formatTime(new Date());
+      console.log('timewhat',time);
   
+    },
+
+    /**
+   * 页面搜索事件的处理函数
+   */
+    wxSearchTab: function () {
+      //console.log('wxSearchTab');
+      wx.navigateTo  ({
+        url: '../search/search'
+      })
     },
 
     handleTabsItemChange(e) {
@@ -141,6 +155,22 @@ Page({
             b.meth2();
         }
     },
+
+    formatNumber :function (n) {
+      n = n.toString();
+      return n[1] ? n : '0' + n;
+    },
+    
+    formatTime:function (date) {
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      var hour = date.getHours();
+      var minute = date.getMinutes();
+      var second = date.getSeconds();
+    
+      return [year, month, day].map(this.formatNumber).join('/') + ' ' + [hour, minute, second].map(this.formatNumber).join(':');
+    },
     //获取职位信息列表数据
     getJobList: function() {
       var that = this;
@@ -153,13 +183,14 @@ Page({
       
           jobList.forEach(job => {
             const companyId = job.companyId;
-            const companyPromise = db.collection('company').where({companyId: companyId}).get();
+            const companyPromise = db.collection('company').where({_id: companyId}).get();
       
             // 将每个异步操作的 Promise 对象存入数组
             promiseList.push(companyPromise.then(res => {
               const companyRes = res.data;
               job.company = companyRes[0]; // 返回的是一个数组列表，本质上只返回一个公司
-              // console.log("company", companyRes);
+              // var timestamp = that.formatTime(job.time);
+              // console.log("time", job.time.getFullYear());
             }).catch(err => {
               // 处理错误情况
               console.error(err);
