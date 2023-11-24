@@ -11,7 +11,9 @@ Page({
       headUrl:null,
       name:"用户名",
       userId:null,
-      pdfFile:null
+      pdfFile:null,
+      //用于指定用户类型 1:个体 2:企业
+      status:1
     },
     /**
      * 点击进入登入页面
@@ -72,6 +74,7 @@ Page({
         } else {
          //登录
           this.setData({
+            status:status,
             login: true,
           });
         }
@@ -166,8 +169,9 @@ Page({
                 })
                 //将数据更新到user表中
                 db.collection("user").doc(that.data.userId).update(
-                  { data:{
-                    resume:filePath
+                  { 
+                    data:{
+                      resume:filePath
                     }
                   }
                 ).then((dataRes)=>{
@@ -207,9 +211,9 @@ Page({
     //个人中心的意见反馈,点击跳转到意见反馈
     view() {
       console.log("意见反馈")
-      // wx.navigateTo({
-      //   url: '../view/view',
-      // })
+      wx.navigateTo({
+        url: './view/view',
+      })
     },
     //我的地址
     addr(){
@@ -219,8 +223,10 @@ Page({
     },
     //退出登录
     signOut(){
-      wx.navigateTo({
-        url: '../logs/log',
+      wx.setStorageSync('status', 0)
+      wx.setStorageSync('userId','')
+      this.setData({
+        login:false
       })
     }
   })

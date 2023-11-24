@@ -2,7 +2,9 @@
 <!-- 头部 -->
 <!-- 进行登入拦截 -->
 <view wx:if="{{login}}">
-    <view class='mine_info'>
+<!-- 个人 -->
+  <view wx:if="{{status==1}}">
+          <view class='mine_info'>
       <image class='mine_banner' src='../../images/earth.png'></image>
       <view class='mine_info_head'>
         <view class='mine_head_left' bindtap='info'>
@@ -67,11 +69,81 @@
 
       <button class='signOut' bindtap='signOut'>退出登录</button>
     </view>
+  </view>
+  <!-- 企业 -->
+  <view wx:else>
+    <view class='mine_info'>
+      <image class='mine_banner' src='../../images/earth.png'></image>
+      <view class='mine_info_head'>
+        <view class='mine_head_left' bindtap='info'>
+          <view class='mine_head_leftPic'>{{communication}}</view>
+          <view class='mine_head_leftDes'>已沟通</view>
+        </view>
+        <view class='jiange'></view>
+        <view class='mine_head_center'>
+          <view class='headBorder'>
+            <view wx:if="{{headUrl!=null}}">
+                <image  src="{{headUrl}}" class="Head"></image> 
+            </view>
+            <view wx:else>
+                <open-data type="userAvatarUrl" class="Head"></open-data> 
+            </view>
+          </view>
+          <view class='dian'></view>
+          <view class='nameBox'><view class="name">{{name}}</view> </view>
+          <view class='lv'>企业用户</view>
+        </view>
+        <view class='jiange'></view>
+        <view class='mine_head_right' bindtap='addr'>
+          <view class='mine_head_rightPic'>{{deliver}}</view>
+          <view class='mine_head_rightDes'>已发布</view>
+        </view>
+      </view>
+    </view>
+    <!-- 内容 -->
+    <view class='list_content'>
+      <view class='list' bindtap='resumeChange'>
+        <view class='list_left'>
+          <image class='listIcon' src='../../images/info.png'></image>
+          <view class='listName'>企业信息</view>
+        </view>
+        
+        <image src='../../images/jiantou.png' class='jiantou'></image>
+      </view>
+      <view class='list' bindtap='submitResume'>
+        <view class='list_left'>
+          <image class='listIcon' src='../../images/resume.png'></image>
+          <view class='listName'>发布职位</view>
+        </view>
+        <view class='list_right'>
+          <view class='check'>添加</view>
+          <image src='../../images/jiantou.png' class='jiantou'></image>
+        </view>  
+      </view>
+      <view class='list' bindtap="showPdf">
+        <view class='list_left'>
+          <image class='listIcon' src='../../images/aboutme.png'></image>
+          <view class='listName'>招聘管理</view>
+        </view>
+        <image src='../../images/jiantou.png' class='jiantou'></image>
+      </view>
+      <view class='list' bindtap='view'>
+        <view class='list_left'>
+          <image class='listIcon' src='../../images/feedback.png'></image>
+          <view class='listName'>意见反馈</view>
+        </view>
+        <image src='../../images/jiantou.png' class='jiantou'></image>
+      </view>
+
+      <button class='signOut' bindtap='signOut'>退出登录</button>
+    </view>
+  </view>
+
     <!-- 热线 -->
-    <import src="../template/template.wxml"/>
-    <template is="rexian"/>
+    <!-- <import src="../template/template.wxml"/>
+    <template is="rexian"/> -->
 </view>
  <view wx:else class="unLogin">
       <image style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%)" src="../../images/msg_unLogin.png"/>
       <button  bindtap="onLoginButtonClick" style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="btn">立即登录</button>
- </view>
+ </view>

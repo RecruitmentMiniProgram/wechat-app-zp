@@ -121,9 +121,9 @@ Page({
             wx.setStorageSync(
               "status",2
             )
-            // 跳转到个人页面
-            wx.redirectTo({
-              url: '../../company/index',
+            // 跳转到个人中心
+            wx.switchTab({
+              url: '../index',
             })
           }).catch(err=>{
             console.log("企业用户注册失败")
