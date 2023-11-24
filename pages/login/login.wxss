@@ -9,18 +9,18 @@ page {
   font-weight:bold ;
   font-size: 35rpx;
 }
-.img{
-    width: 60px; /* 设置图片的宽度 */  
-    height: 60px; /* 设置图片的高度 */  
-    border-radius: 50%; /* 设置边框半径为50%，使图片变为圆形 */  
-    overflow: hidden; /* 隐藏超出边框的部分 */  
+.img image{
+    width: 80px; 
+    height: 80px;
+    /* border-radius: 50%; 
+    overflow: hidden;  */
 }
 .logo{
   margin-top: 100rpx;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom:-100rpx;
+  margin-bottom:-150rpx;
 }
 .v1{
   display: block;
