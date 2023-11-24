@@ -204,11 +204,10 @@ Page({
         // 1 获取缓存中的发送简历的数组
         let hasSendJobs = wx.getStorageSync("hasSendJobs") || [];
         // 判断当前职位是否已发送过
-        // console.log("w",hasSendJobs)
-        console.log(this.jobInfoStorage.jobId)
+        // console.log(this.jobInfoStorage.jobId)
         let isSubmit = hasSendJobs.some(v => v.jobId === this.jobInfoStorage.jobId);
-        console.log("是否已投递")
-        console.log(isSubmit)
+        // console.log("是否已投递")
+        // console.log(isSubmit)
         if (isSubmit) {
             this.setData({
                 submit_stat: '已投递'

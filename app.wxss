@@ -1,4 +1,7 @@
 /**app.wxss**/
+:root {
+  --themeColor: #4a90e2; /* 你的主题颜色代码 */
+}
 .container {
   height: 100%;
   display: flex;

@@ -1,3 +1,7 @@
+:root {
+  --themeColor: #4a90e2; /* 你的主题颜色代码 */
+}
+
 page {
   padding-bottom: 100rpx;
 }
@@ -426,6 +430,9 @@ page {
   align-items: center;
   font-size: 24rpx;
   position: relative;
+  
+
+  
 }
 .btm_tool .tool_item button {
   position: absolute;
@@ -436,13 +443,13 @@ page {
   opacity: 0;
 }
 .btm_tool .btn_buy {
-  flex: 4;
-  background-color: var(--themeColor);
-  border: 1rpx var(--themeColor) solid;
-  border-radius: 20rpx;
-  color: rgb(241, 9, 9);
-  font-size: 30rpx;
-  font-weight: 600;
+  flex: 3;
+  padding: 0;
+  width: 70%;
+  font-size: 13px; 
+  border-radius: 0;
+  background-color:#4a90e2;
+  color:#ffff;
 }
 .btm_tool #isSubmit {
   color: var(--themeColor);

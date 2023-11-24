@@ -10,6 +10,7 @@
   1 定义全局的定时器id
 */
 import { request } from "../../requests/index.js";
+const db = wx.cloud.database();
 Page({
 
     /**
@@ -34,11 +35,12 @@ Page({
     TimeId: -1,
     // 输入框的值打印就会触发的事件
     handleInput(e) {
+      const that = this;
         // 1 获取输入框的值
         const { value } = e.detail;
         // 2 检测合法性
         if (!value.trim()) {
-            this.setData({
+            that.setData({
                     goods: [],
                     isFocus: false
                 })
@@ -46,21 +48,37 @@ Page({
             return
         }
         // 3 准备发送请求获取数据
-        this.QueryParams.query=value;
-        this.setData({
+        that.QueryParams.query=value;
+        that.setData({
             isFocus: true
         })
-        clearTimeout(this.TimeId);
-        this.TimeId = setTimeout(() => {
-            this.qsearch();
+        clearTimeout(that.TimeId);
+        that.TimeId = setTimeout(() => {
+            that.qsearch();
         }, 1000);
     },
     async qsearch() {
-        const res = await request({ url: "/home/qsearch", data: this.QueryParams });
-        console.log(res);
-        this.setData({
-            goods: res
-        })
+      const that = this;
+        // const res = await request({ url: "/home/qsearch", data: this.QueryParams });
+        // console.log(res);
+        // this.setData({
+        //     goods: res
+        // })
+        try {
+          const res = await wx.cloud.callFunction({
+            name: 'searchpost',
+            data: {
+              keyword: that.QueryParams.query
+            }
+          });
+      
+          console.log(res.result);
+          that.setData({
+            goods: res.result
+          });
+        } catch (err) {
+          console.error(err);
+        }
     },
     // 点击取消
     handelCancel() {
