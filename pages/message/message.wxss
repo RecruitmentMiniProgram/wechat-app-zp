@@ -32,7 +32,9 @@
   background-color:#4a90e2;
   color:#ffff;
 }
-
+.btn-hover {
+  background-color: #007acc; /* 触摸时的背景色，可以根据需要调整 */
+}
 .info {
   display: flex;
   justify-content: space-between;

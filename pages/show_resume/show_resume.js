@@ -51,10 +51,46 @@ Page({
       address: user.address,
       education: user.education,
       work: user.work,
-      self: user.self
+      self: user.self,
+      resume: user.resume
     })
   },
 
+  pdf: function() {
+    wx.cloud.downloadFile({
+      fileID: 'cloud://cloud1-1gqwq0cu50854c5d.636c-cloud1-1gqwq0cu50854c5d-1322572115/resume/网络与系统安全课程实验报告_训练威胁情报LLM模型_200110903李亚轩.pdf',
+      success: res => {
+        // 2. 下载成功后，可以通过 res.tempFilePath 获取文件的临时路径
+        const tempFilePath = res.tempFilePath;
+    
+        // 3. 使用 wx.saveFile 将文件保存到本地
+        wx.saveFile({
+          tempFilePath: tempFilePath,
+          success: saveRes => {
+            // 4. 文件保存成功后，可以通过 saveRes.savedFilePath 获取保存在本地的文件路径
+            const savedFilePath = saveRes.savedFilePath;
+    
+            // 5. 使用 wx.openDocument 打开保存在本地的文件
+            wx.openDocument({
+              filePath: savedFilePath,
+              success: openRes => {
+                console.log('打开文档成功');
+              },
+              fail: openErr => {
+                console.error('打开文档失败', openErr);
+              }
+            });
+          },
+          fail: saveErr => {
+            console.error('保存文件失败', saveErr);
+          }
+        });
+      },
+      fail: err => {
+        console.error('下载文件失败', err);
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

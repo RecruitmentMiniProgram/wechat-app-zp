@@ -1,3 +1,4 @@
+
 <view class="level top-box">
   <view class="level info">
     <view>
@@ -5,6 +6,8 @@
       <view class="tel">{{phone}}</view>
     </view>
   </view>
+
+  <button style="white-space: nowrap;" wx:if="{{resume != null && resume != ''}}" class="btn" bindtap="pdf"  hover-class="btn-hover">附件简历</button>
 </view>
 <!-- 数据内容 -->
 <form catchsubmit="formSubmit" catchreset="formReset">
@@ -157,7 +160,8 @@
       <text>{{skill}}</text>
     </view>
   </view>
-
+  
+  
   <!-- 兴趣爱好 -->
   <!-- <view class="box">
     <view class="level nav">
