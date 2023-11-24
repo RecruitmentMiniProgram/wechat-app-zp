@@ -92,7 +92,7 @@
   display: -webkit-flex;
   display: flex;
   box-sizing: border-box;
-  background-color: #fc3;
+  background-color: rgb(74, 144, 2263);
 }
 
 .weui-icon-search {

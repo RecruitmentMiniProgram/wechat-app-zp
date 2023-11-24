@@ -39,6 +39,7 @@ Page({
 
     var age = calculateAge(user.age)
     this.setData({
+      date: user.age,
       nickName: user.name,
       phone: user.phone,
       sex: user.sex,
@@ -49,7 +50,7 @@ Page({
       skill: user.skill,
       address: user.address,
       education: user.education,
-      work: user.works,
+      work: user.work,
       self: user.self
     })
   },

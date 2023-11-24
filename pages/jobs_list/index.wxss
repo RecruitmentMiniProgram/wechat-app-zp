@@ -1,9 +1,21 @@
 page {
-  height: 100%;
+  /* height: 100%;
   background-color: #fff;
-  font-size: 27rpx;
+  font-size: 27rpx; */
   letter-spacing: 2rpx;
-  font-family: MicroSoft yahei;
+  /* font-family: MicroSoft yahei; */
+}
+@import "../../wxSearchView/wxSearchView.wxss";
+.container{
+  padding:0;
+  margin: 0;
+}
+.weui-search-bar,.weui-search-bar__form,.weui-search-bar__box,.weui-search-bar__input{
+  width:100%;
+}
+.weui-search-bar{
+  border: 0rpx;
+  margin-top: 0rpx;
 }
 .cates {
   height: 100%;

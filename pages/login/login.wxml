@@ -19,11 +19,11 @@
      <view class="passwordCs">
        <!-- <image src="/images/mi.png" class="ps"></image> -->
        <input placeholder="请输入验证码" type="text" bindinput="getCode"/>
-       <button class="btn_code" type="primary" bindtap="sendCode">{{buttonHTML}}</button>
+       <button class="btn_code"  bindtap="sendCode">{{buttonHTML}}</button>
      </view>
      <!-- 登录按钮 -->
      <view class="denglu">
-       <button class="btn-dl" type="primary" bindtap="login">登录</button>
+       <button class="btn"  bindtap="login">登录</button>
      </view>
    </view>
  </view>

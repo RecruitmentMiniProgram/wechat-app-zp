@@ -1,8 +1,17 @@
 <!-- 引入wxs脚本 -->
 <wxs src="../../utils/subutil.wxs" module="tools" />
 <wxs src="../../utils/time.wxs" module="time_tool" />
+<view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="搜索工作：如上海、深圳、昆山" bindtap="wxSearchTab"/>
+        </view>
+      </view>
+    </view>
 <view class="cates">
-    <SearchInput></SearchInput>
+    <!-- <SearchInput></SearchInput> -->
+    
     
   <!-- 职位列表 -->
   <tabs id="mytabs" tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">

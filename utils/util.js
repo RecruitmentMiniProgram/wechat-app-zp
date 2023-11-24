@@ -27,4 +27,23 @@ function json2Form(json) {
 module.exports = {
   json2Form: json2Form,
 }
-
+  // 上传图片到云存储
+  async function uploadToCloud(filePath,mode) {
+    var prefix=mode==0?'resume/':'images/'
+    var cloudRes=null
+    wx.cloud.uploadFile({
+      cloudPath: prefix + new Date().getTime() + '.png',
+      filePath: filePath,
+      success: (res) => {
+        console.log('上传成功', res);
+        cloudRes=res
+        console.log(cloudRes)
+      },
+      fail: (error) => {
+        console.error('上传失败', error);
+      }
+    });
+  }
+  module.exports = {
+    uploadToCloud: uploadToCloud,
+  }

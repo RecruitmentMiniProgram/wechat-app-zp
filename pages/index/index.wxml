@@ -20,7 +20,7 @@
   </swiper>
 </view>
 <!--导航-->
-   <view class="nav">
+  <!-- <view class="nav"> -->
     <view class="nav-up">
       <view class="nav-one-up nav-all" bindtap='bindViewToday'>
         <view class="nav-one-up-img nav-all-img">
@@ -55,7 +55,7 @@
         </view>
       </view>
     </view>
-    <view class="nav-down">
+    <!-- <view class="nav-down">
       <view class="nav-one-down nav-all">
         <button class="nav-one-down nav-all" style="font-weight:600;" class="conbtn" open-type="contact">
           <view class="nav-one-down-img nav-all-img">
@@ -89,13 +89,14 @@
         <view class="nav-text">
           <text style="font-weight:600;">门店导航</text>
         </view>
-      </view>
-    </view>
-  </view>
+      </view> 
+    </view> -->
+
+  <!-- </view> -->
 <!--滚动tab-->
 <view >
     <scroll-view scroll-y="true" scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
-        <view class="tab-item {{currentTab==0?'active':''}}"  data-current="0" bindtap="swichNav">全部职位</view>
+        <view class="tab-item {{currentTab==0?'active':''}}"  data-current="0" bindtap="swichNav">急聘职位</view>
         <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">高薪资</view>
         <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">临时工</view>
         <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">推荐</view>
