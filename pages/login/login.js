@@ -109,6 +109,9 @@ Page({
     //TODO
     //还未实现验证码校验
     if(this.data.phone===this.data.realPhone){
+      wx.showLoading({
+        title: '加载中...',
+      })
       wx.cloud.callFunction({
         // 要调用的云函数名称
         name: 'userTypeSearch',
@@ -136,7 +139,8 @@ Page({
                   url: '../../pages/user/index'
                 });
             }).catch(userErr=>{
-              console.log("用户登入失败:",userErr)
+              wx.hideLoading()
+              console.log("个人用户登入失败:",userErr)
             })
           }else{
             console.log("企业用户")
@@ -151,6 +155,7 @@ Page({
                   url: '../../pages/user/index'
                 });
             }).catch(userErr=>{
+              wx.hideLoading()
               console.log("企业用户登入失败:",userErr)
             })
           }
@@ -163,6 +168,7 @@ Page({
           })
         }
       }).catch(err => {
+        wx.hideLoading()
         wx.showModal({  
           title: '登入失败',  
           content: '请检查验证码和手机号',  

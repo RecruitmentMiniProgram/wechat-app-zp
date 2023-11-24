@@ -1,14 +1,16 @@
 {
   "pages": [
+    "pages/index/index",
+    
     "pages/user/index",
     "pages/user/view/view",
     "pages/register/register",
     "pages/login/login",
     "pages/user/resume/index",
-    "pages/index/index",
+    "pages/company_home/index",
+
     "pages/jobs_list/index",
     "pages/job_details/index",
-    "pages/company_home/index",
     "pages/show_resume/show_resume",
     "pages/message/message",
     "pages/chat/chat",

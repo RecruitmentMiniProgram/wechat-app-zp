@@ -380,7 +380,7 @@ Page({
           that.setData({
             jobList: jobList,
           });
-          // console.log("joblist", jobList);
+          console.log("joblist", jobList);
     
         });
       },

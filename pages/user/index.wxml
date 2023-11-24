@@ -143,7 +143,10 @@
     <!-- <import src="../template/template.wxml"/>
     <template is="rexian"/> -->
 </view>
- <view wx:else class="unLogin">
+<view wx:else style="background-color: #ffff; width: 100%; height: {{windowsHeight}}px;">
+  <view class="unLogin" >
       <image style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%)" src="../../images/msg_unLogin.png"/>
       <button  bindtap="onLoginButtonClick" style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="btn">立即登录</button>
  </view>
+</view>
+

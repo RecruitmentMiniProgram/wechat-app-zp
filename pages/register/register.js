@@ -1,4 +1,7 @@
 Page({
+  onLoad(options) {
+    wx.hideLoading()
+  },
   userRegister: function() {
     console.log("个人用户注册")
     wx.navigateTo({

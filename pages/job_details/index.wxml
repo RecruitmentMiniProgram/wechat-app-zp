@@ -13,7 +13,7 @@
             
         </view>
         <view class="job_edu padr">
-            <text decode="{{true}}">&nbsp;|&nbsp;{{jobObj.education}}</text>
+            <text decode="{{true}}">{{jobObj.education}}</text>
         </view>
     </view>
 </view>
@@ -24,12 +24,12 @@
             <image class="" src="{{jobObj.img}}" mode="aspectFit" />
         </view>
         <view class="content_btm_rgt">
-            <view class="cbr_top">{{jobObj.company.name}}</view>
+            <view class="cbr_top">{{jobObj.company.minName}}</view>
             <view class="cbr_btm">
                 <view class="cbr_btm_lft">
                     <view class="l1">
                         <text decode="{{true}}">
-                            {{jobObj.company.comIndustry}}&nbsp;|&nbsp;{{jobObj.company.scale}}
+                            {{jobObj.company.industry}}&nbsp;|&nbsp;{{jobObj.company.scale}}
                         </text>
                     </view>
                 </view>

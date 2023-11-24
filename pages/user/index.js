@@ -13,7 +13,8 @@ Page({
       userId:null,
       pdfFile:null,
       //用于指定用户类型 1:个体 2:企业
-      status:1
+      status:1,
+      windowsHeight:"100%"
     },
     /**
      * 点击进入登入页面
@@ -28,12 +29,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
     onLoad(options) {
-      this.checkLogin()
+      wx.hideLoading()
     },
     /**
      * 页面显示时才加载
      */
     onShow(){
+      this.checkLogin()
       this.getUser()
     },
     /**
@@ -71,12 +73,19 @@ Page({
           this.setData({
             login: false,
           });
+          var height=wx.getSystemInfoSync().windowHeight;
+          this.setData({
+            windowsHeight:height
+          })
+          console.log(height)
+          console.log("未登入")
         } else {
          //登录
           this.setData({
             status:status,
             login: true,
           });
+          console.log("登入")
         }
       }catch (e) {
         console.log('读取session发生错误' + e)
