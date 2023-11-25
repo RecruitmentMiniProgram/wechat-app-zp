@@ -8,32 +8,32 @@
     <view class="row">
       <view>公司简称</view>
       <view class="right">
-        <input bindchange="companyMinNameChange" name="mail" placeholder="例如：腾讯" maxlength="30" />
+        <input value="{{minName}}" bindchange="companyMinNameChange" name="mail" placeholder="例如：腾讯" maxlength="6" />
       </view>
     </view>
     <view class="row">
       <view>公司全称<text class="required">*</text></view>
-      <view class="right">
-        <input bindchange="companyChange" name="mail" placeholder="例如：腾讯控股有限公司" maxlength="50" />
-      </view>
+    </view>
+    <view class="row end">
+      <textarea value="{{company}}" name="skill" bindinput="companyChange" auto-height="true" class="address_text-area" maxlength="20" placeholder="例如：腾讯控股有限公司"></textarea>
     </view>
     <view class="row">
       <view>联系人<text class="required">*</text></view>
       <view class="right">
-        <input bindchange="bossChange" name="mail" placeholder="请输入联系人" maxlength="20" />
+        <input value="{{boss}}" bindchange="bossChange" name="mail" placeholder="请输入联系人" maxlength="20" />
       </view>
     </view>
     <view class="row">
       <view>联系方式<text class="required">*</text></view>
       <view class="right">
-        <input bindchange="phoneChange" name="mail" placeholder="请输入联系方式" maxlength="20" />
+        <input value="{{tele}}" bindchange="phoneChange" name="mail" placeholder="请输入联系方式" maxlength="11" />
       </view>
     </view>
     <view class="row end">
       <view>公司地址<text class="required">*</text></view>
     </view>
     <view class="row">
-      <textarea name="skill" bindinput="addressChange" auto-height="true" class="address_text-area" maxlength="50" placeholder="填写公司地址，具体到门牌号（50字）"></textarea>
+      <textarea value="{{address}}" name="skill" bindinput="addressChange" auto-height="true" class="address_text-area" maxlength="50" placeholder="填写公司地址，具体到门牌号（50字）"></textarea>
       <view class="word-count {{addressLength >= 300 ? 'red' : ''}}">
         {{addressLength}}/50</view>
     </view>
@@ -69,7 +69,7 @@
       <view>公司官网</view>
     </view>
     <view class="row">
-      <textarea name="skill" bindinput="websiteChange" auto-height="true" class="address_text-area" maxlength="500" placeholder="填写公司官网"></textarea>
+      <textarea value="{{website}}" name="skill" bindinput="websiteChange" auto-height="true" class="address_text-area" maxlength="500" placeholder="填写公司官网"></textarea>
     </view>
   </view>
 
@@ -118,7 +118,7 @@
       <view class="title">公司简介<text class="required">*</text></view>
     </view>
     <view class="row">
-      <textarea name="skill" bindinput="introductionChange" auto-height="true" class="text-area" maxlength="800" placeholder="公司简介（800字以内）"></textarea>
+      <textarea value="{{introduction}}" name="skill" bindinput="introductionChange" auto-height="true" class="text-area" maxlength="800" placeholder="公司简介（800字以内）"></textarea>
       <view class="word-count {{introductionLength >= 800 ? 'red' : ''}}">
         {{introductionLength}}/800</view>
     </view>

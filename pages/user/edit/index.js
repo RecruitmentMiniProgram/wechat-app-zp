@@ -1,6 +1,8 @@
 
 const util = require('../../../utils/util.js');
 // index.js
+const db=wx.cloud.database()
+const _=db.command
 Page({
   data: {
     show: false,
@@ -19,15 +21,21 @@ Page({
     industry:"",
     arrayIndustry:[],
     website:"",
-    miniName:"",
+    minName:"",
     logoUrl:"",
-    beginDate:""
+    beginDate:"",
+    companyId:null,
+    //判断是编辑页面 1 还是注册页面 0
+    edit:0
   },
 
     /**
    * 生命周期函数--监听页面加载
    */
     onLoad(options) {
+      this.setData({
+        edit:options.edit
+      })
       util.readJson()
       .then(res=>{
         console.log("读取成功")
@@ -45,13 +53,48 @@ Page({
       })
       console.log("onLoad")
     },
-  
+    onShow(){
+      if(this.data.edit==1){
+        this.getCompany()
+      }
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady() {
       console.log("onReady")
     },
+    /**
+     * 加载用户信息
+     */
+    getCompany(){
+            var id=wx.getStorageSync("companyId")
+            let that=this
+            that.data.companyId=id
+            db.collection("company").doc(id).get()
+            .then((result) => {
+              console.log("加载企业信息",result)
+              that.setData({
+                logoUrl:result.data.logo,
+                scale:this.data.arrayScale.indexOf(result.data.scale),
+                attrImg: result.data.certification,
+                introductionLength:result.data.introduction.length,
+                addressLength:result.data.address.length,
+                introduction:result.data.introduction,
+                address:result.data.address,
+                company:result.data.fullName,
+                boss:result.data.boss,
+                tele:result.data.tele,
+                industry:this.data.arrayIndustry.indexOf(result.data.industry),
+                website:result.data.website,
+                minName:result.data.minName,
+                attrLogo:[result.data.logo],
+                beginDate:result.data.incorporationDate
+              })
+            }).catch((err) => {
+              console.log("加载信息失败",err)
+            });
+          },
   /**
    * 注册时间
    * @param {*} e 
@@ -68,7 +111,7 @@ Page({
      */
     companyMinNameChange(e){
       this.setData({
-        miniName:e.detail.value
+        minName:e.detail.value
       })
     },
     /**
@@ -143,7 +186,7 @@ Page({
       }else{
         //将企业的数据存到数据库中
         var companyData={
-          miniName:this.data.miniName,
+          minName:this.data.minName,
           fullName:this.data.company,
           scale:this.data.arrayScale[this.data.scale],
           certification:this.data.attrImg,
@@ -152,15 +195,16 @@ Page({
           introduction:this.data.introduction,
           incorporationDate:this.data.beginDate,
           industry:this.data.arrayIndustry[this.data.industry],
-          img:this.data.logoUrl,
+          logo:this.data.logoUrl,
           website:this.data.website,
           boss:this.data.boss
         } 
         wx.showLoading({
-          title: '加载中...',
+          title: '更新中...',
         })
+
+        if(this.data.edit==0){
           //使用云函数直接插入数据库中
-          // TODO
           wx.cloud.callFunction({
             name: 'companylogin',
             data: {
@@ -168,7 +212,6 @@ Page({
             }
           }).then(res=>{
             console.log("企业用户注册成功")
-            console.log(res)
             wx.setStorageSync(
               "companyId",res.result.data.company._id
             )
@@ -186,7 +229,18 @@ Page({
             wx.hideLoading()
             console.log("企业用户注册失败")
           })
-        
+
+        }else{
+          db.collection("company").doc(this.data.companyId)
+          .update({
+            data:companyData
+          }).then(res=>{
+            wx.navigateBack()
+          }).err(res=>{
+            wx.hideLoading()
+            console.log("编辑失败")
+          })
+        }        
       }
     },
 
@@ -389,6 +443,7 @@ Page({
         }
       })
     },
+
     // 长安删除图片
     longtapDeleteLogo(e) {
       let that = this;

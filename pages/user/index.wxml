@@ -73,6 +73,11 @@
   <!-- 企业 -->
   <view wx:else>
     <view class='mine_info'>
+      <view class="title">
+        <view class="company">{{fullName}}</view>
+        <view class="tele">{{phone}}</view> 
+        <!-- <view class="address">{{address}}</view> -->
+      </view>
       <image class='mine_banner' src='../../images/earth.png'></image>
       <view class='mine_info_head'>
         <view class='mine_head_left' bindtap='companyCommunication'>
@@ -82,8 +87,8 @@
         <view class='jiange'></view>
         <view class='mine_head_center'>
           <view class='headBorder'>
-            <view wx:if="{{headUrl!=null}}">
-                <image  src="{{headUrl}}" class="Head"></image> 
+            <view wx:if="{{logoUrl!=null}}">
+                <image  src="{{logoUrl}}" class="Head"></image> 
             </view>
             <view wx:else>
                 <open-data type="userAvatarUrl" class="Head"></open-data> 

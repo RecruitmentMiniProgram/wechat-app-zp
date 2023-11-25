@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/user/index",
+    "pages/user/edit/index",
+
     "pages/jobs_list/index",
     "pages/search/search",
     "pages/searchresult/searchresult",
@@ -15,7 +18,7 @@
     "pages/all_resume/index",
     "pages/all_chat/index",
     "pages/index/index",
-    "pages/user/index",
+
     "pages/job_details/index",
     "pages/show_resume/show_resume",
     "pages/message/message",
@@ -25,7 +28,7 @@
     "pages/resume/index",
     "pages/resume/work/index",
     "pages/resume/intention/index",
-    "pages/user/edit/index",
+
 
     "pages/test/index",
     "pages/category_job/index",

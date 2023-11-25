@@ -142,8 +142,12 @@ Page({
         console.log("企业用户信息:",result)
         that.data.companyData=result.data
         that.setData({
-          logoUrl:result.data.logoUrl,
-          company:result.data.name,
+          logoUrl:result.data.logo,
+          company:result.data.minName.length==0?"企业暂无简称":result.data.minName,
+          fullName:result.data.fullName,
+          phone:"电话："+result.data.tele,
+          // address:result.data.address,
+          address:"地址："+result.data.address+"翻斗大街翻斗花园804B的玩法呼唤动物达瓦"
         })
       }).catch((err) => {
         console.log("加载信息失败",err)
@@ -407,10 +411,11 @@ Page({
      * 企业相关
      *************************/
     /**
-     * 简历管理，用于删除或是编辑职位信息
+     * 招聘管理，用于删除或是编辑职位信息
      */
     recruitChange(){
       //TODO
+      console.log("招聘管理")
     },
 
     /**
@@ -418,6 +423,8 @@ Page({
      */
     postChange(){
       //TODO
+      console.log("发布职位")
+
     },
 
     /**
@@ -425,6 +432,9 @@ Page({
      */
     companyChange(){
       //TODO
+      wx.navigateTo({
+        url:'/pages/user/edit/index?edit=1'
+      })
     },
     /**
      * 查看聊天记录
