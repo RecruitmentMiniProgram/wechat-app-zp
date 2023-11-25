@@ -1,4 +1,7 @@
+
 <!--index.wxml-->
+<wxs src="../../utils/time.wxs" module="time" />
+
 <view class="weui-search-bar">
   <view class="weui-search-bar__form">
     <view class="weui-search-bar__box">
@@ -71,10 +74,9 @@
           <!-- 工资 发布时间 -->
           <view class="content_top_rgt">
             <view class="job-salary">
-              <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view>
+              <view class="job_skill">{{item.salary}}</view>
             </view>
-            <!-- <view class="job_ad">{{item.time}}</view> -->
-            <!-- <view class="job_ad">hi{{time.parseTime(item.time,'date')}}</view> -->
+            <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->
           </view>
         </view>
         <view class="content_btm">
@@ -88,7 +90,7 @@
                 <view class="">{{item.company.industry}}</view>
               </view>
               <view class="cbr_btm_rgt">
-                <view class=""></view>
+                <view class="">{{time.formatDateString(item.time)}}</view>
               </view>
             </view>
           </view>

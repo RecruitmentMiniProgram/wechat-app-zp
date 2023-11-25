@@ -1,5 +1,5 @@
 // pages/searchinfor/searchresult.js
-var Bmob = require('../../utils/bmob.js');
+const db = wx.cloud.database();
 Page({
 
   /**
@@ -7,9 +7,9 @@ Page({
    */
   data: {
     searchValue: '',
-    detailInfo:"",
-    isnull:0,
-    
+    detailInfo: "",
+    isnull: 0,
+
   },
 
   /**
@@ -22,42 +22,87 @@ Page({
       this.setData({
         searchValue: options.searchValue
       });
-     this.loadinfor();
+      this.loadinfor();
     }
-  
-  },
-  //查询搜索结果是否存在
-  loadinfor: function(){
-    var that=this;
-    // 动态添加列表详情
-    var DetailInfo = Bmob.Object.extend("DetailInfo");
-    var query = new Bmob.Query(DetailInfo);
-    ////console.log('aaaa' + this.data.searchValue);
-    query.equalTo("detAddr", that.data.searchValue);
-    query.descending('updatedAt');
-    wx.showToast({
-      title: "正在查询",
-      icon: 'loading',
-      duration: 1500
-    });
-    // 查询所有数据
-    query.find({
-      success: function (results) {
-        //console.log("查询到的信息 " + results.length + "条记录");
-        if (results.length!=0)
-        {
-          //请求将数据存入detailInfo
-          that.setData({
-            detailInfo: results,
-            isnull:1
-          });
-        }
 
-      },
-      error: function (error) {
-        //console.log("查询失败: " + error.code + " " + error.message);
+  },
+  //查询搜索结果是否存在（只能搜索post表的字段）
+  loadinfor: function () {
+    var that = this;
+    const keyword = this.data.searchValue;
+
+    db.collection('post').limit(1).get({
+      success: function (res) {
+        // 获得post表的字段:[_id,age,..]
+        const fields = Object.keys(res.data[0])
+
+        db.collection('post')
+          .where(
+            db.command.or(
+              // 对集合中所有字段应用模糊搜索
+              fields.map(field => ({
+                [field]: db.RegExp({ regexp: '^' + keyword + '^', options: '' })
+              }))
+            )
+          )
+          .get({
+            success: function (res) {
+              var jobList = res.data;
+              // 调用云函数获取jobList
+              wx.cloud.callFunction({
+                name: 'jobListQuery',
+                data: { jobList: jobList }
+              }).then(res => {
+                jobList = res.result;
+                that.setData({
+                  detailInfo: jobList,
+                  isnull: 1
+                });
+
+              }).catch(err => {
+                console.log("failed")
+              })
+            }
+          });
       }
     });
+
+
+
+
+
+
+
+
+    // // 动态添加列表详情
+    // var DetailInfo = Bmob.Object.extend("DetailInfo");
+    // var query = new Bmob.Query(DetailInfo);
+    // ////console.log('aaaa' + this.data.searchValue);
+    // query.equalTo("detAddr", that.data.searchValue);
+    // query.descending('updatedAt');
+    // wx.showToast({
+    //   title: "正在查询",
+    //   icon: 'loading',
+    //   duration: 1500
+    // });
+    // // 查询所有数据
+    // query.find({
+    //   success: function (results) {
+    //     //console.log("查询到的信息 " + results.length + "条记录");
+    //     if (results.length!=0)
+    //     {
+    //       //请求将数据存入detailInfo
+    //       that.setData({
+    //         detailInfo: results,
+    //         isnull:1
+    //       });
+    //     }
+
+    //   },
+    //   error: function (error) {
+    //     //console.log("查询失败: " + error.code + " " + error.message);
+    //   }
+    // });
 
   },
   //点击招聘列表页面跳转，页面传参
@@ -79,48 +124,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

@@ -1,5 +1,5 @@
 /**app.wxss**/
-:root {
+page{
   --themeColor: #4a90e2; /* 你的主题颜色代码 */
 }
 .container {
