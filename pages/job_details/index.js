@@ -10,6 +10,12 @@ function ChatInfo(id, type, time) {
   this.time = parseInt(time, 10)
 }
 
+function Resume(userId, companyId, chatId) {
+  this.userId = userId,
+  this.companyId = companyId;
+  this.chatId = chatId
+}
+
 import { request } from "../../requests/index.js";
 const httputil = require("../../utils/httputil.js") //一定要引入，根据你自己写的上传文件路径
 var out_photo = "";
@@ -184,6 +190,8 @@ Page({
     //企业登录不显示下栏
     //用户未登录，不显示聊天按钮，按钮提示登录
     async submitResume() {
+      const db = wx.cloud.database()
+          const _ = db.command
         var userId = this.data.userId
         var status = this.data.status
         if(status == 0) {
@@ -192,6 +200,18 @@ Page({
             url: '/pages/login/login'
           });
         } else {
+          //判断是否投递过，投递过则直接跳转
+         var resumeResult = await db.collection('resume').where({
+            user_id: userId,
+            post_id: this.data.jobId
+          }).get()
+          if(resumeResult.data.length != 0) {
+            wx.navigateTo({
+              url: '/pages/chat/chat?type=' + 1 + '&id=' + resumeResult.data[0]._id,
+            });
+            return
+          }
+
           //判断是否有消息，没有则创建
           var id = await this.judgeOrEditChatHistory(userId, this.data.jobId)
           //有则发送投递简历消息
@@ -199,8 +219,7 @@ Page({
           //写消息时将消息栏自动置顶到对应用户列表中
           var msgInfo = new MsgInfo(1, msg, (Date.now()/1000))
           //更新数据库
-          const db = wx.cloud.database()
-          const _ = db.command
+          
           // 更新聊天数据
           await db.collection('chat_history').doc(id).update({
                 data:{
@@ -215,6 +234,16 @@ Page({
             //更新自己的消息栏
             var uuid = this.data.userId
             this.updateChatList(uuid, id)
+
+            //更新简历记录
+            await db.collection('resume').add({
+              data: {
+                company_id: uid,
+                post_id: this.data.jobId,
+                user_id: uuid,
+                chat_id: id
+              },
+            })
 
             wx.navigateTo({
               url: '/pages/chat/chat?type=' + 1 + '&id=' + id,
@@ -247,7 +276,13 @@ Page({
               msg:"岗位介绍",
               role: 3,
               time: (Date.now()/1000)
-            }]
+            },
+            {
+              msg:"查看简历",
+              role: 4,
+              time: (Date.now()/1000)
+            }
+          ]
           },
         })
 
