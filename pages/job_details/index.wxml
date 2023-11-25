@@ -1,7 +1,9 @@
+<wxs src="../../utils/time.wxs" module="time" />
+
 <view class="head">
     <view class="job_up">
         <view class="job_name">{{jobObj.name}}</view>
-        <view class="job_salary">{{jobObj.min_salary}}-{{jobObj.max_salary}}</view>
+        <view class="job_salary">{{jobObj.salary}}</view>
     </view>
     <view class="job_down">
         <view class="job_place">

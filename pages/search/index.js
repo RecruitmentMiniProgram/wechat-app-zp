@@ -13,79 +13,115 @@ import { request } from "../../requests/index.js";
 const db = wx.cloud.database();
 Page({
 
-    /**
-     * 页面的初始数据
-     */
-    data: {
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    jobList: [],
+    // 取消 按钮 是否显示
+    isFocus: false,
+    // 输入框的值
+    inValue: ""
+  },
+  // 分页需要的参数
+  QueryParams: {
+    query: "广州",
+    cid: "",
+    pageNo: 1,
+    pageSize: 100,
+    // 职位类型
+    jobType: "1"
+  },
+  TimeId: -1,
+
+  onLoad(){
+    this.qsearch();
+  },
+  // 输入框的值打印就会触发的事件
+  handleInput(e) {
+    // const that = this;
+    // 1 获取输入框的值
+    const { value } = e.detail;
+    // 2 检测合法性
+    if (!value.trim()) {
+      this.setData({
         goods: [],
-        // 取消 按钮 是否显示
-        isFocus: false,
-        // 输入框的值
-        inValue: ""
-    },
-        // 分页需要的参数
-        QueryParams: {
-            query: "",
-            cid: "",
-            pageNo: 1,
-            pageSize: 100,
-            // 职位类型
-            jobType: "1"
-        },
-    TimeId: -1,
-    // 输入框的值打印就会触发的事件
-    handleInput(e) {
-      const that = this;
-        // 1 获取输入框的值
-        const { value } = e.detail;
-        // 2 检测合法性
-        if (!value.trim()) {
-            that.setData({
-                    goods: [],
-                    isFocus: false
-                })
-                // 不合法
-            return
-        }
-        // 3 准备发送请求获取数据
-        that.QueryParams.query=value;
-        that.setData({
-            isFocus: true
-        })
-        clearTimeout(that.TimeId);
-        that.TimeId = setTimeout(() => {
-            that.qsearch();
-        }, 1000);
-    },
-    async qsearch() {
-      const that = this;
-        // const res = await request({ url: "/home/qsearch", data: this.QueryParams });
-        // console.log(res);
-        // this.setData({
-        //     goods: res
-        // })
-        try {
-          const res = await wx.cloud.callFunction({
-            name: 'searchpost',
-            data: {
-              keyword: that.QueryParams.query
-            }
-          });
-      
-          console.log(res.result);
-          that.setData({
-            goods: res.result
-          });
-        } catch (err) {
-          console.error(err);
-        }
-    },
-    // 点击取消
-    handelCancel() {
-        this.setData({
-            inpValue: "",
-            isFocus: false,
-            goods: []
-        })
+        isFocus: false
+      })
+      return
     }
+    // 3 准备发送请求获取数据
+    this.QueryParams.query = value;
+
+    this.setData({
+      isFocus: true
+    })
+    clearTimeout(this.TimeId);
+    this.TimeId = setTimeout(() => {
+      this.qsearch();
+    }, 1000);
+  },
+  async qsearch() {
+    const that = this;
+
+    const keyword = this.QueryParams.query;
+    const collectionInfo = await db.collection('post').limit(1).get();
+    const fields = Object.keys(collectionInfo.data[0]);
+
+    db.collection('post')
+      .where(
+        db.command.or(
+          // 对集合中所有字段应用模糊搜索
+          fields.map(field => ({
+            [field]: db.RegExp({ regexp: '^' + keyword, options: '' })
+          }))
+        )
+      )
+      .get({
+        success:function(res){
+          console.log("res",res.data);
+          this.setData({
+            jobList: res.data
+          });
+        }
+      });
+    
+
+
+    // wx.cloud.callFunction({
+    //   name: 'searchPost',
+    //   data: {
+    //     keyword: this.QueryParams.query
+    //   }
+    // }).then(res =>{
+    //   console.log(res)
+    // }).catch(err=>{
+    //   console.log("failed")
+    // })
+
+    // try {
+    //   const res = await wx.cloud.callFunction({
+    //     name: 'searchPost',
+    //     data: {
+    //       keyword: this.QueryParams.query
+    //     }
+    //   });
+    //   // console.log(that.QueryParams.query)
+
+    //   console.log(res.result);
+    //   this.setData({
+    //     jobList: res.result
+    //   });
+    // } catch (err) {
+    //   console.error(err);
+    // }
+  },
+  // 点击取消
+  handelCancel() {
+    this.setData({
+      inpValue: "",
+      isFocus: false,
+      goods: []
+    })
+  }
 })
