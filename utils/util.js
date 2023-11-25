@@ -66,3 +66,14 @@ module.exports = {
   module.exports = {
     uploadToCloud: uploadToCloud,
   }
+    /**
+     * 读取json文件
+     * @param {*} filePath 
+     */
+async function readJson(filePath){
+    const db=wx.cloud.database()
+    return await db.collection("jsonData").doc("80e3bed06561baff00eab60d28775799").get()
+}
+module.exports = {
+  readJson: readJson,
+}

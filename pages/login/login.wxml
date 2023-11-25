@@ -23,7 +23,7 @@
      </view>
      <!-- 登录按钮 -->
      <view class="denglu">
-       <button class="btn"  bindtap="login">登录</button>
+       <button  hover-class="btn-hover" class="btn"  bindtap="login">登录</button>
      </view>
    </view>
  </view>
