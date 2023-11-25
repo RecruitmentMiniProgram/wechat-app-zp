@@ -33,7 +33,6 @@ Page({
   async onLoad(options) {
     const db = wx.cloud.database()
     var userId = options.userId
-    userId = '887cf2b5655f14c8001dc8ee7649816a'
     var userInfo = await db.collection('user').doc(userId).get()
     var user = userInfo.data
 
@@ -58,7 +57,7 @@ Page({
 
   pdf: function() {
     wx.cloud.downloadFile({
-      fileID: 'cloud://cloud1-1gqwq0cu50854c5d.636c-cloud1-1gqwq0cu50854c5d-1322572115/resume/网络与系统安全课程实验报告_训练威胁情报LLM模型_200110903李亚轩.pdf',
+      fileID: this.data.resume,
       success: res => {
         // 2. 下载成功后，可以通过 res.tempFilePath 获取文件的临时路径
         const tempFilePath = res.tempFilePath;

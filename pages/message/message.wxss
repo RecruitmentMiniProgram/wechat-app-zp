@@ -32,6 +32,10 @@
   background-color:#4a90e2;
   color:#ffff;
 }
+
+.nomsg{
+  font-size: 13px; 
+}
 .btn-hover {
   background-color: #007acc; /* 触摸时的背景色，可以根据需要调整 */
 }

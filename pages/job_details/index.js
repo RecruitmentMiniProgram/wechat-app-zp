@@ -230,12 +230,13 @@ Page({
       var id = null
       if(chatResult.data.length == 0) {
         var job = this.data.jobObj
+        console.log(job)
         //如果没有则创建聊天项，初始化消息记录,再进入chat页面
         var res = await  db.collection('chat_history').add({
           // data 字段表示需新增的 JSON 数据
           data: {
             company_id: job.companyId,
-            enter_name:job.company.name,
+            enter_name: job.company.fullName,
             enter_red: false,
             post_id: job._id,
             post_name: job.name,

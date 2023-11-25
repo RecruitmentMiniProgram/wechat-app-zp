@@ -1,8 +1,11 @@
 var app = getApp()
+const db=wx.cloud.database()
+const _=db.command
 /**
 用户:
 岗位推荐跳转
 没有消息时图片
+发消息时创建列表
 *//
 function addLeadingZero(number) {
   return number < 10 ? `0${number}` : number;
