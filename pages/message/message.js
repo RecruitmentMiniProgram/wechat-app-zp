@@ -87,8 +87,6 @@ Page({
         if (res.confirm) {
           //删除数据库
           var userId = wx.getStorageSync('userId')
-          userId = 'a5782af7655ca0cd0345893506161cf3'
-
           const db = wx.cloud.database()
           let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
           if(chatListResult.data.length == 0) return

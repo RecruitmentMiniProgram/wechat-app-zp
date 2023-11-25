@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/jobs_list/index",
+    "pages/index/index",
+    
     "pages/job_details/index",
     "pages/company_home/index",
     "pages/show_resume/show_resume",
@@ -27,16 +28,6 @@
     "pages/test/index",
     "pages/company/index",
 
-<<<<<<< HEAD
-    "pages/index/index",
-    "pages/jobs_list/index",
-    "pages/job_details/index",
-    "pages/company_home/index",
-
-    "pages/chat/chat",
-    
-=======
->>>>>>> master
     "pages/category_job/index",
     "pages/search/search",
     "pages/community/index",
