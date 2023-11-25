@@ -2,6 +2,9 @@
 page {
   background-color: #f1f1f1;
 }
+.btn-hover {
+  background-color: #007acc; /* 触摸时的背景色，可以根据需要调整 */
+}
 .text{
   margin-top: 130rpx;
   text-align: center;

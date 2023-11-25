@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    buttonHTML:"发送验证码"
+    buttonHTML:"发送验证码",
+    phone:'',
+    realPhone:''
   },
   /**
    * 验证手机号是否合法
@@ -108,7 +110,7 @@ Page({
   login(){
     //TODO
     //还未实现验证码校验
-    if(this.data.phone===this.data.realPhone){
+    if(this.data.phone===this.data.realPhone&&(this.data.phone!=''&&this.data.realPhone!='')){
       wx.showLoading({
         title: '加载中...',
       })

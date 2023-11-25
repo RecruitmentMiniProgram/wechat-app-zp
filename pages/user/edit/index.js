@@ -1,16 +1,11 @@
 
-const utils = require('../../../utils/util.js');
+const util = require('../../../utils/util.js');
 // index.js
 Page({
   data: {
     show: false,
     hobby: false,
     // 编辑时临时数据
-    tempList: {
-      avatarTemp: 'https://img0.baidu.com/it/u=345359896,661384602&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-      nameTemp: '布吉岛',
-      phoneTemp: '0000000000',
-    },
     arrayScale: ['10人以上', '50人以上', '100人以上', '500人以上', '1000人以上', '5000人以上','10000人以上'],
     scale:'',
     attrImg: [],
@@ -21,11 +16,33 @@ Page({
     company:'',
     boss:'',
     tele:'',
+    industry:"",
+    arrayIndustry:[],
+    website:"",
+    miniName:"",
+    logoUrl:"",
+    beginDate:""
   },
+
     /**
    * 生命周期函数--监听页面加载
    */
     onLoad(options) {
+      util.readJson()
+      .then(res=>{
+        console.log("读取成功")
+        console.log(res)
+        var data=res.data["industry"]
+        var arrayIndustry=[]
+        data.forEach(element => {
+          arrayIndustry.push(element.name)
+        });
+        this.setData({
+          arrayIndustry:arrayIndustry
+        })
+      }).catch(err=>{
+        console.log(err)
+      })
       console.log("onLoad")
     },
   
@@ -35,7 +52,39 @@ Page({
     onReady() {
       console.log("onReady")
     },
-
+  /**
+   * 注册时间
+   * @param {*} e 
+   */
+  bindBeginDateChange(e){
+    this.setData({
+      beginDate:e.detail.value
+    })
+    console.log(this.data.beginDate)
+  },
+    /**
+     * 公司简称
+     * @param {*} e 
+     */
+    companyMinNameChange(e){
+      this.setData({
+        miniName:e.detail.value
+      })
+    },
+    /**
+     * 公司官网
+     * @param {*} e 
+     */
+    websiteChange(e){
+      this.setData({
+        website:e.detail.value
+      })
+    },
+    industryChange(e){
+      this.setData({
+        industry:e.detail.value
+      })
+    },
   //长按删除卡牌
   longtapDeleteWork(e){
     let that = this;
@@ -94,14 +143,22 @@ Page({
       }else{
         //将企业的数据存到数据库中
         var companyData={
-          name:this.data.company,
+          miniName:this.data.miniName,
+          fullName:this.data.company,
           scale:this.data.arrayScale[this.data.scale],
           certification:this.data.attrImg,
           tele:this.data.tele,
           address:this.data.address,
-          introduction:this.data.introduction
-        }
-        
+          introduction:this.data.introduction,
+          incorporationDate:this.data.beginDate,
+          industry:this.data.arrayIndustry[this.data.industry],
+          img:this.data.logoUrl,
+          website:this.data.website,
+          boss:this.data.boss
+        } 
+        wx.showLoading({
+          title: '加载中...',
+        })
           //使用云函数直接插入数据库中
           // TODO
           wx.cloud.callFunction({
@@ -126,6 +183,7 @@ Page({
               url: '../index',
             })
           }).catch(err=>{
+            wx.hideLoading()
             console.log("企业用户注册失败")
           })
         
@@ -246,15 +304,10 @@ Page({
           success: (res) => {
             console.log('上传成功', res);
             filePath=res.fileID
-            if (type == '0') {
-              that.setData({
-                'tempList.avatarTemp': filePath
-              })
-            } else {
-              that.setData({
+
+            that.setData({
                 attrImg: attr.concat(filePath)
               })
-            }
             // 隐藏加载提示
             wx.hideLoading();
           },
@@ -296,6 +349,72 @@ Page({
   },
 
 
-
+  /**
+   * 公司Logo
+   */
+    // 添加证件照头像、证书【type为0则为上传证件照头像，反之为证书图片】
+  selectLogo(e) {
+      var that = this;
+      wx.chooseMedia({
+        count: 1,
+        mediaType: ['image'],
+        sourceType: ['album', 'camera'],
+        maxDuration: 30,
+        camera: 'back',
+        success(res) {
+          console.log(res)
+          var filePath=res.tempFiles[0].tempFilePath
+          wx.showLoading({
+            title: '上传中...',
+          });
+          wx.cloud.uploadFile({
+            cloudPath: "images/" + new Date().getTime() + '.png',
+            filePath: filePath,
+            success: (res) => {
+              console.log('上传成功', res);
+              filePath=res.fileID
+              that.setData({
+                logoUrl: filePath,
+                attrLogo:[filePath]
+              })
+              // 隐藏加载提示
+              wx.hideLoading();
+            },
+            fail: (error) => {
+              // 隐藏加载提示
+              wx.hideLoading();
+              console.error('上传失败', error);
+            }
+          });
+        }
+      })
+    },
+    // 长安删除图片
+    longtapDeleteLogo(e) {
+      let that = this;
+      let tag = e.currentTarget.dataset.index;
+      wx.showModal({
+        title: '提示',
+        content: '确定删除该图片吗？',
+        complete: (res) => {
+          if (res.confirm) {
+            var list = that.data.attrLogo;
+            list.splice(tag, 1);
+            that.setData({
+              attrLogo: list
+            })
+          }
+        }
+      })
+    },
+    // 图片查看
+    previewClickLogo(e) {
+      console.log(e)
+      let path = e.currentTarget.dataset.url;
+      wx.previewImage({
+        current: path, // 当前显示图片的http链接
+        urls: this.data.attrLogo // 需要预览的图片http链接列表
+      })
+    },
 
 })
