@@ -3,7 +3,7 @@
     "pages/jobs_list/index",
     "pages/index/index",
     "pages/user/index",
-    
+    "pages/user/view/view",
     "pages/job_details/index",
     "pages/show_resume/show_resume",
     "pages/message/message",
