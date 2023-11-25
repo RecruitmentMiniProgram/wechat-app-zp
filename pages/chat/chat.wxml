@@ -4,15 +4,17 @@
 
         <view wx:for="{{msgList}}" wx:key="index" class="news {{item.role == 1? 'contrary' : ''}}" id="msg-{{index}}">
 
-          <view wx:if="{{item.role != 3}}" class = "news-centent {{item.role == 1?'centent-right' : 'centent-left'}}">
+          <view wx:if="{{item.role < 3}}" class = "news-centent {{item.role == 1?'centent-right' : 'centent-left'}}">
             <view class="{{item.role == 1?'trianright':'trianleft'}}"></view>
 
             <text style="color: {{item.role == 1? '#FFF':'#000'}}" selectable="{{true}}" class="{{item.role == 1?'background_right':'background_left'}}" >{{item.msg}}</text>
           </view>
-          <view wx:else="">
-            <button style="width: 90%; height: 130px;" class="chatPost" bindtap="onButtonClick" data-index="{{index}}">查看岗位</button>
+          <view wx:elif="{{item.role == 3}}">
+            <button style="width: 90%; height: 130px;" class="chatPost" bindtap="onButtonClick"  data-role="{{item.role}}">查看岗位</button>
           </view>
-
+          <view wx:elif="{{item.role == 4}}">
+            <button style="width: 90%; height: 130px;" class="chatPost" bindtap="onButtonClick"  data-role="{{item.role}}">查看我的简历</button>
+          </view>
         </view>
       </scroll-view>
 
@@ -20,14 +22,17 @@
 
       <view wx:for="{{msgList}}" wx:key="index" class="news {{item.role == 2? 'contrary' : ''}}" id="msg-{{index}}">
 
-        <view wx:if="{{item.role != 3}}" class = "news-centent {{item.role == 2?'centent-right' : 'centent-left'}}">
+        <view wx:if="{{item.role < 3}}" class = "news-centent {{item.role == 2?'centent-right' : 'centent-left'}}">
           <view class="{{item.role == 2?'trianright':'trianleft'}}"></view>
 
           <text style="color: {{item.role == 2? '#FFF':'#000'}}" selectable="{{true}}" class="{{item.role == 2?'background_right':'background_left'}}" >{{item.msg}}</text>
         </view>
 
+        <view wx:elif="{{item.role == 3}}">
+            <button style="width: 90%; height: 130px;" class="chatPost" bindtap="onButtonClick" data-role="{{item.role}}">查看岗位</button>
+        </view>
         <view wx:else="">
-          <button style="width: 90%; height: 130px;" class="chatPost" bindtap="onButtonClick" data-index="{{index}}">查看他（她）的简历</button>
+          <button style="width: 90%; height: 130px;" class="chatPost" bindtap="onButtonClick" data-role="{{item.role}}">查看他（她）的简历</button>
         </view>
 
       </view>
