@@ -302,7 +302,7 @@ border: none;
   border-radius: 14%;
 }
 .job_list_wrap .job_list_raw navigator .content_top .content_top_rgt {
-  width: 20%;
+  width: 30%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;

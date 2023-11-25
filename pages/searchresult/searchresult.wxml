@@ -1,12 +1,62 @@
-<!--pages/searchinfor/searchresult.wxml-->
-<view  class='infor-text'wx:if="{{isnull==0}}"> 
-  <view ><text>暂无招聘信息</text></view>
-    <text >请更换城市搜索</text> 
-</view> 
+<!-- pages/searchinfor/searchresult.wxml -->
+<wxs src="../../utils/time.wxs" module="time" />
+
+<view class='infor-text' wx:if="{{isnull==0}}">
+  <view>
+    <text>暂无招聘信息</text>
+  </view>
+  <text>请更换城市搜索</text>
+</view>
 <view wx:else>
-            <scroll-view bindscrolltolower="scrolltolower" scroll-y="true" class="scoll-h" >
-                <block wx:for="{{detailInfo}}" wx:key="*this">
-                  <view class="detail-list" bindtap="showDetail" data-index="{{index}}">
+  <scroll-view bindscrolltolower="scrolltolower" scroll-y="true" class="scoll-h">
+    <!-- 职位列表 -->
+    <view class="job_list_wrap" wx:for="{{detailInfo}}" wx:key="jobId">
+      <view class="job_list_raw">
+        <navigator class="" target="" url="/pages/job_details/index?jobId={{item._id}}" hover-class="navigator-hover" open-type="navigate">
+          <view class="content content_top">
+            <!-- 图像 -->
+            <!-- <view class="list-image">
+                    <image src="{{item.img}}"/>
+                </view> -->
+            <view class="content_top_lft">
+              <!-- 职业名称 -->
+              <view class="job_name">{{item.name}}</view>
+              <!-- 职业要求 -->
+              <view class="job_details">
+                <view class="job_city" wx:if="{{item.position!=''}}">{{item.position}}</view>
+                <view class="job_skill" wx:if="{{item.description!=''}}">{{item.description}}</view>
+                <view class="job_year">{{item.age}}</view>
+                <view class="job_edu">{{item.education}}</view>
+              </view>
+            </view>
+            <!-- 工资 发布时间 -->
+            <view class="content_top_rgt">
+              <view class="job-salary">
+                <view class="job_skill">{{item.salary}}</view>
+              </view>
+              <!-- <view class="job_ad">{{item.time}}</view> -->
+            </view>
+          </view>
+          <view class="content_btm">
+            <view class="content_btm_lft">
+              <image class="" src="{{item.img}}" mode="aspectFit" />
+            </view>
+            <view class="content_btm_rgt">
+              <view class="cbr_top">{{item.company.minName}}</view>
+              <view class="cbr_btm">
+                <view class="cbr_btm_lft">
+                  <view class="">{{item.company.industry}}</view>
+                </view>
+                <view class="cbr_btm_rgt">
+                  <view class="">{{time.formatDateString(item.time)}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+    <!-- <view class="detail-list" bindtap="showDetail" data-index="{{index}}">
                     <view class="list-image">
                        <image src="{{item.detSrc}}"/>
                     </view>
@@ -26,8 +76,8 @@
                       </view>
                       <text class='list-text-time' >2018-03-14</text>
                     </view>
-                  </view>                  
-                </block>
-                <view class="loading">{{loadingTip}}</view>
-            </scroll-view>
+                  </view> -->
+    <!-- </block> -->
+    <view class="loading">{{loadingTip}}</view>
+  </scroll-view>
 </view>

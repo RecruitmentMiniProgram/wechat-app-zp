@@ -463,7 +463,7 @@ page {
   width: 100%;
   display: flex;
   bottom: 30rpx;
-  background-color: #fff; /* 底部栏背景色 */
+  /* background-color: #fff;  */
   align-items: center; /* 垂直居中 */
 }
 
