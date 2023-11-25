@@ -145,7 +145,6 @@ Page({
         id: id,
         status: status
       })
-      id = "b751f280655f6ea0006831713899c172"
       this.initChatList(id, this)
   },
 

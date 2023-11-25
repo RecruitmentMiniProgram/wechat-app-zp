@@ -144,7 +144,6 @@ Page({
 
   async onLoad(options) {
     var id = options.id
-    id = "09e78768655f3a8f005cf7a1117354ae"
     var status = wx.getStorageSync('status')
     this.setData({
       id: id,
