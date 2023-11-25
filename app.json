@@ -2,6 +2,7 @@
   "pages": [
     "pages/jobs_list/index",
     "pages/index/index",
+    "pages/user/index",
     
     "pages/job_details/index",
     "pages/show_resume/show_resume",
