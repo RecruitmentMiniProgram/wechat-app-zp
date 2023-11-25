@@ -3,7 +3,7 @@
 <view class="com_wrap" url="/pages/company_home/index?comId={{jobObj.jobComId}}">
     <view class="com">
         <view class="content_btm_lft">
-            <image class="" src="{{comObj.img}}" mode="aspectFit" />
+            <image class="" src="{{comObj.logo}}" mode="aspectFit" />
         </view>
         <view class="content_btm_rgt">
             <view class="cbr_top">{{comObj.minName}}</view>

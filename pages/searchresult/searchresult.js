@@ -30,6 +30,11 @@ Page({
   loadinfor: function () {
     var that = this;
     const keyword = this.data.searchValue;
+    wx.showToast({
+      title: "正在查询",
+      icon: 'loading',
+      duration: 1500
+    });
 
     db.collection('post').limit(1).get({
       success: function (res) {
@@ -41,7 +46,7 @@ Page({
             db.command.or(
               // 对集合中所有字段应用模糊搜索
               fields.map(field => ({
-                [field]: db.RegExp({ regexp: '^' + keyword + '^', options: '' })
+                [field]: db.RegExp({ regexp: '^' + keyword, options: '' })
               }))
             )
           )
@@ -54,10 +59,14 @@ Page({
                 data: { jobList: jobList }
               }).then(res => {
                 jobList = res.result;
-                that.setData({
-                  detailInfo: jobList,
-                  isnull: 1
-                });
+                if(jobList.length >0){
+                  that.setData({
+                    detailInfo: jobList,
+                    isnull: 1
+                  });
+
+                }
+                
 
               }).catch(err => {
                 console.log("failed")
@@ -80,11 +89,7 @@ Page({
     // ////console.log('aaaa' + this.data.searchValue);
     // query.equalTo("detAddr", that.data.searchValue);
     // query.descending('updatedAt');
-    // wx.showToast({
-    //   title: "正在查询",
-    //   icon: 'loading',
-    //   duration: 1500
-    // });
+    
     // // 查询所有数据
     // query.find({
     //   success: function (results) {

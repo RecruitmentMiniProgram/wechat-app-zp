@@ -350,25 +350,39 @@ Page({
   qbzwLoad: function () {
     var that = this;
 
-    db.collection('post').where({})
-      .get({
-        success: function (res) {
-          var jobList = res.data;
-          // 调用云函数获取jobList
-          wx.cloud.callFunction({
-            name: 'jobListQuery',
-            data: { jobList: jobList }
-          }).then(res => {
-            jobList = res.result;
-            that.setData({
-              jobList: jobList,
-            });
-
-          }).catch(err => {
-            console.log("failed")
-          })
-        }
+    wx.cloud.callFunction({
+      name: 'jobListQuery',
+      data: { }
+    }).then(res => {
+      var jobList = res.result.list;
+      // console.log(jobList)
+      that.setData({
+        jobList: jobList,
       });
+
+    }).catch(err => {
+      console.log("failed")
+    })
+
+    // db.collection('post').where({})
+    //   .get({
+    //     success: function (res) {
+    //       var jobList = res.data;
+    //       // 调用云函数获取jobList
+    //       wx.cloud.callFunction({
+    //         name: 'jobListQuery',
+    //         data: { jobList: jobList }
+    //       }).then(res => {
+    //         jobList = res.result;
+    //         that.setData({
+    //           jobList: jobList,
+    //         });
+
+    //       }).catch(err => {
+    //         console.log("failed")
+    //       })
+    //     }
+    //   });
 
   },
   //清空招聘列表

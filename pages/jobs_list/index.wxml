@@ -1,16 +1,16 @@
 <!-- 引入wxs脚本 -->
 <wxs src="../../utils/subutil.wxs" module="tools" />
 <wxs src="../../utils/time.wxs" module="time" />
-<view class="weui-search-bar">
+<!-- <view class="weui-search-bar">
   <view class="weui-search-bar__form">
     <view class="weui-search-bar__box">
       <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
       <input type="text" class="weui-search-bar__input" disabled='true' placeholder="搜索工作：如上海、深圳、昆山" bindtap="wxSearchTab" />
     </view>
   </view>
-</view>
+</view> -->
+<SearchInput></SearchInput>
 <view class="cates">
-  <!-- <SearchInput></SearchInput> -->
   <!-- 职位列表 -->
   <tabs id="mytabs" tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
     <block wx:if="{{tabs[0].isActive}}">
@@ -47,10 +47,10 @@
                   <image class="" src="{{item.img}}" mode="aspectFit" />
                 </view>
                 <view class="content_btm_rgt">
-                  <view class="cbr_top">{{item.company.minName}}</view>
+                  <view class="cbr_top">{{item.minName}}</view>
                   <view class="cbr_btm">
                     <view class="cbr_btm_lft">
-                      <view class="">{{item.company.industry}}</view>
+                      <view class="">{{item.industry}}</view>
                     </view>
                     <view class="cbr_btm_rgt">
                       <view class="">{{time.formatDateString(item.time)}}</view>

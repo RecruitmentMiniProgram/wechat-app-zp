@@ -159,28 +159,44 @@ Page({
   //获取职位信息列表数据
   getJobList: function () {
     var that = this;
-    db.collection('post').where({})
-      .get({
-        success: function (res) {
-          var jobList = res.data;
-          // 调用云函数获取jobList
-          wx.cloud.callFunction({
-            name: 'jobListQuery',
-            data: { jobList: jobList }
-          }).then(res => {
-            jobList = res.result;
 
-            var total = jobList.length;
-            var totalPages = Math.ceil(total / that.QueryParams.pagesize);
-            that.setData({
-              jobList: jobList,
-              totalPages: totalPages
-            });
-
-          }).catch(err => {
-            console.log("failed")
-          })
-        }
+    wx.cloud.callFunction({
+      name: 'jobListQuery',
+      data: {}
+    }).then(res => {
+      console.log(res.result.list)
+      var jobList = res.result.list;
+      var total = jobList.length;
+      var totalPages = Math.ceil(total / that.QueryParams.pagesize);
+      that.setData({
+        jobList: jobList,
+        totalPages: totalPages
       });
+    }).catch(err => {
+      console.log("failed")
+    })
+
+    // var that = this;
+    // db.collection('post').where({})
+    //   .get({
+    //     success: function (res) {
+    //       var jobList = res.data;
+    //       // 调用云函数获取jobList
+    //       wx.cloud.callFunction({
+    //         name: 'jobListQuery',
+    //         data: { jobList: jobList }
+    //       }).then(res => {
+    //         jobList = res.result;
+    //         var total = jobList.length;
+    //         var totalPages = Math.ceil(total / that.QueryParams.pagesize);
+    //         that.setData({
+    //           jobList: jobList,
+    //           totalPages: totalPages
+    //         });
+    //       }).catch(err => {
+    //         console.log("failed")
+    //       })
+    //     }
+    //   });
   }
 });

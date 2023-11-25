@@ -18,6 +18,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    wxSearchTab: function () {
+      //console.log('wxSearchTab');
+      wx.navigateTo({
+        url: '../search/search'
+      })
+    }
   }
 })

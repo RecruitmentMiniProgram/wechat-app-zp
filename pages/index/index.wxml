@@ -2,22 +2,14 @@
 <!--index.wxml-->
 <wxs src="../../utils/time.wxs" module="time" />
 
-<view class="weui-search-bar">
-  <view class="weui-search-bar__form">
-    <view class="weui-search-bar__box">
-      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-      <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="搜索工作：如上海、深圳、昆山" bindtap="wxSearchTab"/>
-    </view>
-  </view>
-</view>
- <view>{{searchValue}}</view> 
+<SearchInput></SearchInput>
 
 <!--轮播图-->
 <view class="swiper-container">
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{duration}}" current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">
     <block wx:for="{{imgUrls}}" wx:key="id">
       <swiper-item>
-        <image src="{{item.swiperImgSrc}}" class="img" bindtap="swipclick" />
+        <image src="{{item.swiperImgSrc}}" mode="aspectFit" class="img" bindtap="swipclick" />
       </swiper-item>
     </block>
   </swiper>
@@ -84,10 +76,10 @@
             <image class="" src="{{item.img}}" mode="aspectFit" />
           </view>
           <view class="content_btm_rgt">
-            <view class="cbr_top">{{item.company.minName}}</view>
+            <view class="cbr_top">{{item.minName}}</view>
             <view class="cbr_btm">
               <view class="cbr_btm_lft">
-                <view class="">{{item.company.industry}}</view>
+                <view class="">{{item.industry}}</view>
               </view>
               <view class="cbr_btm_rgt">
                 <view class="">{{time.formatDateString(item.time)}}</view>
