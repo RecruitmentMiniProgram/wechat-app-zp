@@ -1,4 +1,6 @@
 var app = getApp()
+const db=wx.cloud.database()
+const _=db.command
 /**
 用户:
 岗位推荐跳转

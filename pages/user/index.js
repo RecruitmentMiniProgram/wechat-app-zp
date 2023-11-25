@@ -27,6 +27,26 @@ Page({
    */
     onLoad(options) {
       this.checkLogin()
+      this.initChatInfo()
+    },
+
+    async initChatInfo() {
+      //初始化聊天信息
+      var id = null
+      var status = wx.getStorageSync("status")
+      if(status == 1) id = wx.getStorageSync("userId")
+      else id = wx.getStorageSync("companyId")
+
+      var chatListResult = await db.collection('chat_list').where({user_id: id}).get()
+      if(chatListResult.data.length == 0) {
+        await  db.collection('chat_list').add({
+          // data 字段表示需新增的 JSON 数据
+          data: {
+            user_id: id,
+            data:[]
+          },
+        })
+      }
     },
     /**
      * 页面显示时才加载

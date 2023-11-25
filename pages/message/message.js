@@ -86,7 +86,10 @@ Page({
       success: async (res) => {
         if (res.confirm) {
           //删除数据库
-          var userId = wx.getStorageSync('userId')
+          var userId = null
+          if(this.data.status == 1) userId = wx.getStorageSync('userId')
+          else userId = wx.getStorageSync('companyId')
+          
           const db = wx.cloud.database()
           let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
           if(chatListResult.data.length == 0) return
@@ -245,7 +248,9 @@ Page({
             if(chatListResult.data.length == 0) return
 
             var dbList = chatListResult.data[0].data
-            if(that.data.newTime < dbList[0].time) {
+            if(dbList.length == 0) return
+            if(that.data.chatList.length == 0 ||
+               that.data.newTime < dbList[0].time) {
               if(status == 1) {
                 const db = wx.cloud.database()
                 var chatList = new Array()
