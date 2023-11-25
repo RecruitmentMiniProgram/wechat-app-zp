@@ -1,3 +1,4 @@
+<wxs src="../../utils/time.wxs" module="time" />
 <!-- 公司介绍 -->
 <view class="com_wrap" url="/pages/company_home/index?comId={{jobObj.jobComId}}">
     <view class="com">
@@ -8,7 +9,11 @@
             <view class="cbr_top">{{comObj.minName}}</view>
             <view class="cbr_btm">
                 <view class="cbr_btm_lft">
-                    <view class="l1"><text decode="{{true}}">{{comObj.industry}}&nbsp;|&nbsp;{{comObj.scale}}</text></view>
+                    <view class="l1">
+                        <text decode="{{true}}">
+                            {{comObj.industry}}&nbsp;|&nbsp;{{comObj.scale}}
+                        </text>
+                    </view>
                 </view>
             </view>
         </view>
@@ -27,53 +32,49 @@
         <view class="title com_addr">公司地址</view>
         <view class="content">{{comObj.address}}》</view>
     </block>
-
-
     <!-- 另一个列表################################################################# -->
     <block wx:elif="{{tabs[1].isActive}}">
-      <!-- 职位列表 -->
-      <view class="job_list_wrap" wx:for="{{jobList}}" wx:key="jobId">
-        <view class="job_list_raw">
-            <navigator class="" target="" url="/pages/job_details/index?jobId={{item.jobId}}" hover-class="navigator-hover" open-type="navigate">
-              <view class="content content_top">
-                  <view class="content_top_lft">
-                    <view class="job_name">{{item.name}}</view>
-                    <view class="job_details">
-                      <view class="job_city">{{item.position}}</view>
-                      <view class="job_skill">{{item.description}}</view>
-                      <view class="job_year">{{item.age}}</view>
-                      <view class="job_edu">{{item.education}}</view>
+        <!-- 职位列表 -->
+        <view class="job_list_wrap" wx:for="{{jobList}}" wx:key="jobId">
+            <view class="job_list_raw">
+                <navigator class="" target="" url="/pages/job_details/index?jobId={{item._id}}" hover-class="navigator-hover" open-type="navigate">
+                    <view class="content content_top">
+                        <view class="content_top_lft">
+                            <view class="job_name">{{item.name}}</view>
+                            <view class="job_details">
+                                <view class="job_city">{{item.position}}</view>
+                                <view class="job_skill">{{item.description}}</view>
+                                <view class="job_year">{{item.age}}</view>
+                                <view class="job_edu">{{item.education}}</view>
+                            </view>
+                        </view>
+                        <view class="content_top_rgt">
+                            <view class="job-salary">
+                                <view class="job_skill">{{item.salary}}</view>
+                            </view>
+                            <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->
+                        </view>
                     </view>
-                  </view>
-                  <view class="content_top_rgt">
-                      <view class="job-salary">
-                          <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view>
-                      </view>
-                      <!-- <view class="job_ad">{{item.time}}</view> -->
-                  </view>
-              </view>
-              <view class="content_btm">
-                <view class="content_btm_lft">
-                    <image class="" src="{{item.img}}" mode="aspectFit" />
-                </view>
-                <view class="content_btm_rgt">
-                    <view class="cbr_top">{{comObj.minName}}</view>
-                    <view class="cbr_btm">
-                        <view class="cbr_btm_lft">
-                            <view class="">{{comObj.industry}}</view>
-                            <!-- <view class="">短视频</view>
+                    <view class="content_btm">
+                        <view class="content_btm_lft">
+                            <image class="" src="{{item.img}}" mode="aspectFit" />
+                        </view>
+                        <view class="content_btm_rgt">
+                            <view class="cbr_top">{{comObj.minName}}</view>
+                            <view class="cbr_btm">
+                                <view class="cbr_btm_lft">
+                                    <view class="">{{comObj.industry}}</view>
+                                    <!-- <view class="">短视频</view>
                             <view class="">D轮以上</view> -->
-                        </view>
-                        <view class="cbr_btm_rgt">
-                            <view class="">13天前</view>
-                            <!-- <view class="">{{item.time}}</view> -->
-                            
+                                </view>
+                                <view class="cbr_btm_rgt">
+                                    <view class="">{{time.formatDateString(item.time)}}</view>
+                                </view>
+                            </view>
                         </view>
                     </view>
-                </view>
-              </view>
-            </navigator>
+                </navigator>
+            </view>
         </view>
-      </view>
     </block>
 </tabs>

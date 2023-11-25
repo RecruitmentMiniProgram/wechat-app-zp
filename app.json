@@ -1,9 +1,20 @@
 {
   "pages": [
     "pages/jobs_list/index",
-    "pages/index/index",
-    "pages/user/index",
+    "pages/search/search",
+    "pages/searchresult/searchresult",
     
+    "pages/search/index",
+
+    "pages/index/index",
+    
+    "pages/user/index",
+    "pages/user/view/view",
+    "pages/register/register",
+    "pages/login/login",
+    "pages/user/resume/index",
+    "pages/company_home/index",
+
     "pages/job_details/index",
     "pages/show_resume/show_resume",
     "pages/message/message",
@@ -26,7 +37,6 @@
 
     
     "pages/category_job/index",
-    "pages/search/search",
     "pages/community/index",
     "pages/expect_jobs/index",
     "pages/expect_cities/index",
@@ -37,7 +47,6 @@
     "pages/servicephone/servicephone",
     "pages/map/map",
     "pages/personal/personal",
-    "pages/searchresult/searchresult",
     "pages/myjoin/myjoin",
     "pages/myaward/myaward",
     "pages/analysis/index",
@@ -45,7 +54,6 @@
     "pages/cart/index",
     "pages/collect/index",
     "pages/order/index",
-    "pages/search/index",
     "pages/feedback/index",
     "pages/feedback_job/index",
     "pages/auth/index",
