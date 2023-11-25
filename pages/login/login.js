@@ -1,4 +1,6 @@
 // pages/login/login.js
+const db=wx.cloud.database()
+const _=db.command
 Page({
 
   /**
@@ -107,6 +109,9 @@ Page({
     //TODO
     //还未实现验证码校验
     if(this.data.phone===this.data.realPhone){
+      wx.showLoading({
+        title: '加载中...',
+      })
       wx.cloud.callFunction({
         // 要调用的云函数名称
         name: 'userTypeSearch',
@@ -122,20 +127,37 @@ Page({
           console.log(res)
           if(res.result.data.data[0].userType==0){
             console.log("个人用户")
-            // 在页面A的js文件中
-            wx.redirectTo({
-              url: '../../pages/user/index'
-            });
-            //设置登入状态
-            wx.setStorageSync('status', 1);
+            db.collection("user").where({
+              phone:res.result.data.data[0].phone
+            }).get().then(userRes=>{
+                console.log(userRes)
+                //设置登入状态
+                wx.setStorageSync('status', 1);
+                wx.setStorageSync('userId',userRes.data[0]._id)
+                // 在页面A的js文件中
+                wx.switchTab({
+                  url: '../../pages/user/index'
+                });
+            }).catch(userErr=>{
+              wx.hideLoading()
+              console.log("个人用户登入失败:",userErr)
+            })
           }else{
             console.log("企业用户")
-            // 在页面A的js文件中
-            wx.redirectTo({
-              url: '../../pages/company/index'
-            });
-            //设置登入状态
-            wx.setStorageSync('status', 2);
+            db.collection("company").where({
+              tele:res.result.data.data[0].phone
+            }).get().then(userRes=>{
+                //设置登入状态
+                wx.setStorageSync('status', 2);
+                wx.setStorageSync('companyId',userRes.data[0]._id)
+                // 在页面A的js文件中
+                wx.switchTab({
+                  url: '../../pages/user/index'
+                });
+            }).catch(userErr=>{
+              wx.hideLoading()
+              console.log("企业用户登入失败:",userErr)
+            })
           }
         }else{
           //账号不存在跳转到注册页面
@@ -146,6 +168,7 @@ Page({
           })
         }
       }).catch(err => {
+        wx.hideLoading()
         wx.showModal({  
           title: '登入失败',  
           content: '请检查验证码和手机号',  

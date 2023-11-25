@@ -11,7 +11,10 @@ Page({
       headUrl:null,
       name:"用户名",
       userId:null,
-      pdfFile:null
+      pdfFile:null,
+      //用于指定用户类型 1:个体 2:企业
+      status:1,
+      windowsHeight:"100%"
     },
     /**
      * 点击进入登入页面
@@ -28,6 +31,7 @@ Page({
     onLoad(options) {
       this.checkLogin()
       this.initChatInfo()
+      wx.hideLoading()
     },
 
     async initChatInfo() {
@@ -47,11 +51,13 @@ Page({
           },
         })
       }
+
     },
     /**
      * 页面显示时才加载
      */
     onShow(){
+      this.checkLogin()
       this.getUser()
     },
     /**
@@ -89,11 +95,19 @@ Page({
           this.setData({
             login: false,
           });
+          var height=wx.getSystemInfoSync().windowHeight;
+          this.setData({
+            windowsHeight:height
+          })
+          console.log(height)
+          console.log("未登入")
         } else {
          //登录
           this.setData({
+            status:status,
             login: true,
           });
+          console.log("登入")
         }
       }catch (e) {
         console.log('读取session发生错误' + e)
@@ -186,8 +200,9 @@ Page({
                 })
                 //将数据更新到user表中
                 db.collection("user").doc(that.data.userId).update(
-                  { data:{
-                    resume:filePath
+                  { 
+                    data:{
+                      resume:filePath
                     }
                   }
                 ).then((dataRes)=>{
@@ -227,9 +242,9 @@ Page({
     //个人中心的意见反馈,点击跳转到意见反馈
     view() {
       console.log("意见反馈")
-      // wx.navigateTo({
-      //   url: '../view/view',
-      // })
+      wx.navigateTo({
+        url: './view/view',
+      })
     },
     //我的地址
     addr(){
@@ -239,8 +254,10 @@ Page({
     },
     //退出登录
     signOut(){
-      wx.navigateTo({
-        url: '../logs/log',
+      wx.setStorageSync('status', 0)
+      wx.setStorageSync('userId','')
+      this.setData({
+        login:false
       })
     }
   })

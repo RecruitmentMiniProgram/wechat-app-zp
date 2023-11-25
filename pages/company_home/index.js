@@ -21,6 +21,7 @@ Page({
         submit_stat: "收藏",
         isCollect_com: false,
         comObj: [],
+        jobList:[],
         tabs: [{
                 id: 0,
                 value: "公司介绍",
@@ -122,32 +123,28 @@ Page({
           that.setData({
               comObj: result.data
           })
-          that.comInfoStorage = result.data
-              // 1 先获取缓存中的购物车数组
-          let collects_com = wx.getStorageSync("collects_com") || [];
-          // 2 判断商品对象是否存在于购物车的数组中
-          let index = collects_com.findIndex(v => v.comId === that.comInfoStorage.comId);
-          if (index != -1) {
-              // 说明被收藏了
-              console.log("已被收藏")
-              that.setData({
-                  isCollect_com: true,
-                  submit_stat: "已被收藏"
-              })
-          }
-
         }
-        
-
       })
-        
+    },
+    async getComPostDetail(comId) {
+      var that = this;
+      db.collection('post').where({companyId:comId}).get({
+        success:function(result){
+          // console.log(result.data);
+          that.setData({
+              jobList: result.data
+          })
+        }
+      })
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        // console.log("onload:"+options);
+      // options.comId = wx.getStorageSync('comId');
+      // console.log("onload:",options);
         this.getComDetail(options.comId);
+        this.getComPostDetail(options.comId);
 
     }
 })

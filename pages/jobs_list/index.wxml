@@ -38,7 +38,7 @@
                   <view class="job_details">
                     <view class="job_city" wx:if="{{item.position!=''}}">{{item.position}}</view>
                     <view class="job_skill" wx:if="{{item.description!=''}}">{{item.description}}</view>
-                    <!-- <view class="job_year">{{item.jobAge}}</view> -->
+                    <view class="job_year">{{item.age}}</view>
                     <view class="job_edu">{{item.education}}</view>
                   </view>
                 </view>
@@ -47,7 +47,7 @@
                   <view class="job-salary">
                     <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view>
                   </view>
-                  <!-- <view class="job_ad">{{item.time}}</view> -->
+                  <view class="job_ad">{{item.time}}</view>
                   <!-- <view class="job_ad">hi{{time.parseTime(item.time,'date')}}</view> -->
                 </view>
               </view>
@@ -56,11 +56,11 @@
                   <image class="" src="{{item.img}}" mode="aspectFit" />
                 </view>
                 <view class="content_btm_rgt">
-                  <view class="cbr_top">{{item.company.name}}</view>
+                  <view class="cbr_top">{{item.company.minName}}</view>
                   <view class="cbr_btm">
-                    <!-- <view class="cbr_btm_lft">
-                      <view class="">{{item.company.name}}</view>
-                    </view> -->
+                    <view class="cbr_btm_lft">
+                      <view class="">{{item.company.industry}}</view>
+                    </view>
                     <view class="cbr_btm_rgt">
                       <view class=""></view>
                     </view>

@@ -177,7 +177,7 @@ Page({
       db.collection('post').get({
         success: function(res) {
           const jobList = res.data;
-          
+          console.log("jobList:",jobList)
           // 用于存放所有的 Promise 对象
           const promiseList = [];
       
