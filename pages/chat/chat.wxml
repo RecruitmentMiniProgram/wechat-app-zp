@@ -2,32 +2,44 @@
   <view wx:if="{{type != 0}}">
         <scroll-view wx:if="{{status == 1}}" bindtouchstart="scrollstart" scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
 
-        <view wx:for="{{msgList}}" wx:key="index" class="news {{item.role == 1? 'contrary' : ''}}" id="msg-{{index}}">
+        <view wx:for="{{msgList}}" wx:key="index" class="{{item.role == 1? 'news contrary' : item.role==2? 'news' : 'f'}}" id="msg-{{index}}">
 
-          <view wx:if="{{item.role != 3}}" class = "news-centent {{item.role == 1?'centent-right' : 'centent-left'}}">
+          <view wx:if="{{item.role < 3}}" class = "news-centent {{item.role == 1?'centent-right' : 'centent-left'}}">
             <view class="{{item.role == 1?'trianright':'trianleft'}}"></view>
 
             <text style="color: {{item.role == 1? '#FFF':'#000'}}" selectable="{{true}}" class="{{item.role == 1?'background_right':'background_left'}}" >{{item.msg}}</text>
           </view>
-          <view wx:else="">
-            <button style="width: 90%; height: 130px;" class="chatPost" bindtap="onButtonClick" data-index="{{index}}">查看岗位</button>
-          </view>
+          
+              <view class="con" wx:elif="{{item.role == 3}}">
+                <image src ="/images/check_post.png" class="chatPost" bindtap="onButtonClick" data-role="{{item.role}}"></image>
+                <text style="white-space: nowrap;" class="text">查看岗位</text>
+            </view>
 
+            <view class="conb" wx:else="">
+              <image src="/images/check_resume.png" class="chatResume" bindtap="onButtonClick" data-role="{{item.role}}"></image>
+              <text style="white-space: nowrap;" class="text">查看我的简历</text>
+            </view>
         </view>
       </scroll-view>
 
       <scroll-view wx:else="{{status == 2}}" bindtouchstart="scrollstart" scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
 
-      <view wx:for="{{msgList}}" wx:key="index" class="news {{item.role == 2? 'contrary' : ''}}" id="msg-{{index}}">
+      <view wx:for="{{msgList}}" wx:key="index" class="{{item.role == 2? 'news contrary' : item.role==1?'news':'f'}}" id="msg-{{index}}">
 
-        <view wx:if="{{item.role != 3}}" class = "news-centent {{item.role == 2?'centent-right' : 'centent-left'}}">
+        <view wx:if="{{item.role < 3}}" class = "news-centent {{item.role == 2?'centent-right' : 'centent-left'}}">
           <view class="{{item.role == 2?'trianright':'trianleft'}}"></view>
 
           <text style="color: {{item.role == 2? '#FFF':'#000'}}" selectable="{{true}}" class="{{item.role == 2?'background_right':'background_left'}}" >{{item.msg}}</text>
         </view>
 
-        <view wx:else="">
-          <button style="width: 90%; height: 130px;" class="chatPost" bindtap="onButtonClick" data-index="{{index}}">查看他（她）的简历</button>
+        <view class="con" wx:elif="{{item.role == 3}}">
+            <image src ="/images/check_post.png" class="chatPost" bindtap="onButtonClick" data-role="{{item.role}}"></image>
+            <text style="white-space: nowrap;" class="text">查看岗位</text>
+        </view>
+
+        <view class="conb" wx:else="">
+          <image src="/images/check_resume.png" class="chatResume" bindtap="onButtonClick" data-role="{{item.role}}"></image>
+          <text style="white-space: nowrap;" class="text">查看他（她）的简历</text>
         </view>
 
       </view>

@@ -4,10 +4,10 @@
 <view wx:if="{{login}}">
 <!-- 个人 -->
   <view wx:if="{{status==1}}">
-          <view class='mine_info'>
+    <view class='mine_info'>
       <image class='mine_banner' src='../../images/earth.png'></image>
       <view class='mine_info_head'>
-        <view class='mine_head_left' bindtap='info'>
+        <view class='mine_head_left' bindtap='userCommunication'>
           <view class='mine_head_leftPic'>{{communication}}</view>
           <view class='mine_head_leftDes'>已沟通</view>
         </view>
@@ -26,7 +26,7 @@
           <view class='lv'>个人用户</view>
         </view>
         <view class='jiange'></view>
-        <view class='mine_head_right' bindtap='addr'>
+        <view class='mine_head_right' bindtap='userDeliver'>
           <view class='mine_head_rightPic'>{{deliver}}</view>
           <view class='mine_head_rightDes'>已投递</view>
         </view>
@@ -73,36 +73,41 @@
   <!-- 企业 -->
   <view wx:else>
     <view class='mine_info'>
+      <view class="title">
+        <view class="company">{{fullName}}</view>
+        <view class="tele">{{phone}}</view> 
+        <!-- <view class="address">{{address}}</view> -->
+      </view>
       <image class='mine_banner' src='../../images/earth.png'></image>
       <view class='mine_info_head'>
-        <view class='mine_head_left' bindtap='info'>
-          <view class='mine_head_leftPic'>{{communication}}</view>
+        <view class='mine_head_left' bindtap='companyCommunication'>
+          <view class='mine_head_leftPic'>{{companyCommunication}}</view>
           <view class='mine_head_leftDes'>已沟通</view>
         </view>
         <view class='jiange'></view>
         <view class='mine_head_center'>
           <view class='headBorder'>
-            <view wx:if="{{headUrl!=null}}">
-                <image  src="{{headUrl}}" class="Head"></image> 
+            <view wx:if="{{logoUrl!=null}}">
+                <image  src="{{logoUrl}}" class="Head"></image> 
             </view>
             <view wx:else>
                 <open-data type="userAvatarUrl" class="Head"></open-data> 
             </view>
           </view>
           <view class='dian'></view>
-          <view class='nameBox'><view class="name">{{name}}</view> </view>
+          <view class='nameBox'><view class="name">{{company}}</view> </view>
           <view class='lv'>企业用户</view>
         </view>
         <view class='jiange'></view>
-        <view class='mine_head_right' bindtap='addr'>
-          <view class='mine_head_rightPic'>{{deliver}}</view>
-          <view class='mine_head_rightDes'>已发布</view>
+        <view class='mine_head_right' bindtap='companyResume'>
+          <view class='mine_head_rightPic'>{{post}}</view>
+          <view class='mine_head_rightDes'>简历数</view>
         </view>
       </view>
     </view>
     <!-- 内容 -->
     <view class='list_content'>
-      <view class='list' bindtap='resumeChange'>
+      <view class='list' bindtap='companyChange'>
         <view class='list_left'>
           <image class='listIcon' src='../../images/info.png'></image>
           <view class='listName'>企业信息</view>
@@ -110,7 +115,7 @@
         
         <image src='../../images/jiantou.png' class='jiantou'></image>
       </view>
-      <view class='list' bindtap='submitResume'>
+      <view class='list' bindtap='postChange'>
         <view class='list_left'>
           <image class='listIcon' src='../../images/resume.png'></image>
           <view class='listName'>发布职位</view>
@@ -120,7 +125,7 @@
           <image src='../../images/jiantou.png' class='jiantou'></image>
         </view>  
       </view>
-      <view class='list' bindtap="showPdf">
+      <view class='list' bindtap="recruitChange">
         <view class='list_left'>
           <image class='listIcon' src='../../images/aboutme.png'></image>
           <view class='listName'>招聘管理</view>
@@ -145,8 +150,10 @@
 </view>
 <view wx:else style="background-color: #ffff; width: 100%; height: {{windowsHeight}}px;">
   <view class="unLogin" >
+      <!-- <image style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%)" src="../../images/msg_unLogin.png"/>
+      <button  hover-class="btn-hover" bindtap="onLoginButtonClick" style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="btn">立即登录</button> -->
       <image style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%)" src="../../images/msg_unLogin.png"/>
-      <button  bindtap="onLoginButtonClick" style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="btn">立即登录</button>
+      <button  hover-class="btn-hover" bindtap="onLoginButtonClick" style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="btn">立即登录</button>
  </view>
 </view>
 

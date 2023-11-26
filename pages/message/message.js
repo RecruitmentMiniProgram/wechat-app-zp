@@ -1,16 +1,8 @@
 
-/**
- * 消息红点：
- * 未点击聊天页面有红点
- * 点击聊天页面或本来就在聊天中红点消失
- 
- * 发送消息时顺便设置红点
- * 聊天页面退出时消红点
- * 
- *  */
+
 
 let intervalId;
- function ChatData(id,type,nickname, lastMessage, lastMessageTime, red)
+ function ChatData(id,type,nickname, lastMessage, lastMessageTime, red, url)
  {
    this.id = id;
    this.type = type;
@@ -18,6 +10,7 @@ let intervalId;
    this.lastMessage = lastMessage;
    this.lastMessageTime = lastMessageTime;
    this.red = red
+   this.url = url
  }
  function addLeadingZero(number) {
   return number < 10 ? `0${number}` : number;
@@ -113,6 +106,11 @@ Page({
   },
 
   async onLoad() {
+    this.setData({load: false})
+    wx.showLoading({
+      title: '加载中...',
+      mask: true, // 是否显示透明蒙层，防止触摸穿透
+    });
     var that = this
     var isLogin = false
     var status = wx.getStorageSync('status')
@@ -138,206 +136,138 @@ Page({
 
     //如果登录，则初始化消息列表
     if(isLogin) {
-        if(status == 1) {
-            var userId = wx.getStorageSync('userId')
-            this.setData({userId: userId})
-
-            const db = wx.cloud.database()
-            let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
-            if(chatListResult.data.length == 0) return
-
-            var dbList = chatListResult.data[0].data
-            var chatList = new Array()
-            var index = 0
-            if(dbList.length != 0) {
-              this.setData({
-                newTime: dbList[0].time
-              })
-            }
-
-            for (let i = 0; i < dbList.length; i++) {
-                var data = dbList[i]
-                var type = data.type
-                var id = data.id
-                if(type == 0) {
-                    //优质企业推送,读取推荐历史
-                    let userEnterResult = await db.collection('user_enter_history').where({user_id: userId}).get()
-                    if(userEnterResult.length == 0) return
-
-                    var enters = userEnterResult.data[0].data
-                    var lastEnter = enters[enters.length - 1]
-                    var updateTime = lastEnter.time 
-                    var nickname = '岗位推荐'
-                    var postId = lastEnter.post_id
-
-                    //读取岗位细节
-                    let postResult = await db.collection('post').doc(postId).get()
-                    var entername = postResult.data.name
-                    var chatData = new ChatData(id, type,nickname, entername, convertUnixTimestampToString(updateTime))
-                    chatList[index] = chatData
-                    index = index + 1;
-                } else {
-                  //消息, 通过id读取消息记录
-                  let chatResult = await db.collection('chat_history').doc(id).get()
-                  var chatDetail = chatResult.data
-                  var time = chatDetail.data[chatDetail.data.length - 1].time
-                  var red = chatDetail.user_red
-                  var chatData = new ChatData(id, type,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red)
-                  chatList[index] = chatData
-                 
-                  index = index + 1;
-                }
-            }
-
-            this.setData({
-              chatList: chatList
-            })
-        } else {
-          //企业用户
-          var userId = wx.getStorageSync('companyId')
-          this.setData({userId: userId})
-          
-            //可见的聊天列表
-            const db = wx.cloud.database()
-            let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
-            if(chatListResult.data.length == 0) return
-
-            var dbList = chatListResult.data[0].data
-            var chatList = new Array()
-            var index = 0
-
-            if(dbList.length != 0) {
-              this.setData({
-                newTime: dbList[0].time
-              })
-            }
-
-            for (let i = 0; i < dbList.length; i++) {
-                var data = dbList[i]
-                var id = data.id
-                var type = data.type
-                if(type == 0) continue
-
-                //消息, 通过id读取消息记录
-                let chatResult = await db.collection('chat_history').doc(id).get()
-                var chatDetail = chatResult.data
-                var lastData = chatDetail.data[chatDetail.data.length - 1]
-                var time = lastData.time
-                var lastMsg = lastData.msg
-                var name = chatDetail.user_name
-                var red = chatDetail.enter_red
-
-                var chatData = new ChatData(id, type, name, truncateString(lastMsg, 14), convertUnixTimestampToString(time), red)
-                chatList[index] = chatData
-                index = index + 1;
-            }
-
-            this.setData({
-              chatList: chatList
-            })
-        }
+       await this.initChatList(this)
 
         var that = this
         //用户启动监听，如果消息列表发生变化则刷新
         intervalId = setInterval(async function() {
-            var userId = that.data.userId
+          var userId = that.data.userId
           
-            //可见的聊天列表
-            const db = wx.cloud.database()
-            let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
-            if(chatListResult.data.length == 0) return
-
-            var dbList = chatListResult.data[0].data
-            if(dbList.length == 0) return
-            if(that.data.chatList.length == 0 ||
-               that.data.newTime < dbList[0].time) {
-              if(status == 1) {
-                const db = wx.cloud.database()
-                var chatList = new Array()
-                var index = 0
-                if(dbList.length != 0) {
-                  that.setData({
-                    newTime: dbList[0].time
-                  })
-                }
-    
-                for (let i = 0; i < dbList.length; i++) {
-                    var data = dbList[i]
-                    var type = data.type
-                    var id = data.id
-                    if(type == 0) {
-                        //优质企业推送,读取推荐历史
-                        let userEnterResult = await db.collection('user_enter_history').where({user_id: userId}).get()
-                        if(userEnterResult.length == 0) return
-    
-                        var enters = userEnterResult.data[0].data
-                        var lastEnter = enters[enters.length - 1]
-                        var updateTime = lastEnter.time 
-                        var nickname = '岗位推荐'
-                        var postId = lastEnter.post_id
-    
-                        //读取岗位细节
-                        let postResult = await db.collection('post').doc(postId).get()
-                        var entername = postResult.data.name
-                        var chatData = new ChatData(id, type,nickname, entername, convertUnixTimestampToString(updateTime))
-                        chatList[index] = chatData
-                        index = index + 1;
-                    } else {
-                      //消息, 通过id读取消息记录
-                      let chatResult = await db.collection('chat_history').doc(id).get()
-                      var chatDetail = chatResult.data
-                      var time = chatDetail.data[chatDetail.data.length - 1].time
-                      var red = chatDetail.user_red
-                      var chatData = new ChatData(id, type,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red)
-                      chatList[index] = chatData
-                      index = index + 1;
-                    }
-                }
-    
-                that.setData({
-                  chatList: chatList
-                })
-               } else {
-              //企业用户
-                //可见的聊天列表
-                var chatList = new Array()
-                var index = 0
-    
-                if(dbList.length != 0) {
-                  that.setData({
-                    newTime: dbList[0].time
-                  })
-                }
-    
-                for (let i = 0; i < dbList.length; i++) {
-                    var data = dbList[i]
-                    var id = data.id
-                    var type = data.type
-                    if(type == 0) continue
-    
-                    //消息, 通过id读取消息记录
-                    let chatResult = await db.collection('chat_history').doc(id).get()
-                    var chatDetail = chatResult.data
-                    var lastData = chatDetail.data[chatDetail.data.length - 1]
-                    var time = lastData.time
-                    var lastMsg = lastData.msg
-                    var name = chatDetail.user_name
-                    var red = chatDetail.enter_red
-                    var chatData = new ChatData(id, type, name, truncateString(lastMsg, 14), convertUnixTimestampToString(time), red)
-    
-                    chatList[index] = chatData
-                    index = index + 1;
-                }
-    
-                that.setData({
-                  chatList: chatList
-                })
-               }
-            }
+          //可见的聊天列表
+          const db = wx.cloud.database()
+          let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
+          if(chatListResult.data.length == 0) return
+          var dbList = chatListResult.data[0].data
+          if(dbList.length == 0) return
+          if(that.data.chatList.length == 0 ||
+             that.data.newTime < dbList[0].time) {
+              that.initChatList(that)
+          }
         }, 2000);
     }
+    this.setData({load:true})
+    wx.hideLoading();
   },
+  
+  async initChatList(that) {
+    var status = that.data.status
+    if(status == 1) {
+      var userId = wx.getStorageSync('userId')
+      that.setData({userId: userId})
 
+      const db = wx.cloud.database()
+      let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
+      if(chatListResult.data.length == 0) return
+
+      var dbList = chatListResult.data[0].data
+      var chatList = new Array()
+      var index = 0
+      if(dbList.length != 0) {
+        that.setData({
+          newTime: dbList[0].time
+        })
+      }
+
+      for (let i = 0; i < dbList.length; i++) {
+          var data = dbList[i]
+          var type = data.type
+          var id = data.id
+          if(type == 0) {
+              //优质企业推送,读取推荐历史
+              let userEnterResult = await db.collection('user_enter_history').where({user_id: userId}).get()
+              if(userEnterResult.length == 0) return
+
+              var enters = userEnterResult.data[0].data
+              var lastEnter = enters[enters.length - 1]
+              var updateTime = lastEnter.time 
+              var nickname = '岗位推荐'
+              var postId = lastEnter.post_id
+
+              //读取岗位细节
+              let postResult = await db.collection('post').doc(postId).get()
+              var entername = postResult.data.name
+              var chatData = new ChatData(id, type,nickname, entername, convertUnixTimestampToString(updateTime),"../../pages/re_img.png")
+              chatList[index] = chatData
+              index = index + 1;
+          } else {
+            //消息, 通过id读取消息记录
+            let chatResult = await db.collection('chat_history').doc(id).get()
+            var chatDetail = chatResult.data
+            var time = chatDetail.data[chatDetail.data.length - 1].time
+            var red = chatDetail.user_red
+            //根据企业ID读取企业头像
+            var companyId = chatDetail.company_id
+            let companyResult = await db.collection('company').doc(companyId).get()
+            var url = companyResult.data.logo
+            var chatData = new ChatData(id, type,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
+            chatList[index] = chatData
+            index = index + 1;
+          }
+      }
+
+      that.setData({
+        chatList: chatList
+      })
+  } else {
+    //企业用户
+    var userId = wx.getStorageSync('companyId')
+    that.setData({userId: userId})
+    
+      //可见的聊天列表
+      const db = wx.cloud.database()
+      let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
+      if(chatListResult.data.length == 0) return
+
+      var dbList = chatListResult.data[0].data
+      var chatList = new Array()
+      var index = 0
+
+      if(dbList.length != 0) {
+        this.setData({
+          newTime: dbList[0].time
+        })
+      }
+
+      for (let i = 0; i < dbList.length; i++) {
+          var data = dbList[i]
+          var id = data.id
+          var type = data.type
+          if(type == 0) continue
+
+          //消息, 通过id读取消息记录
+          let chatResult = await db.collection('chat_history').doc(id).get()
+          var chatDetail = chatResult.data
+          var lastData = chatDetail.data[chatDetail.data.length - 1]
+          var time = lastData.time
+          var lastMsg = lastData.msg
+          var name = chatDetail.user_name
+          var red = chatDetail.enter_red
+
+           //根据用户ID读取企业头像
+           var userId = chatDetail.user_id
+           let userResult = await db.collection('user').doc(userId).get()
+           var url = userResult.data.headUrl
+           
+          var chatData = new ChatData(id, type, name, truncateString(lastMsg, 14), convertUnixTimestampToString(time), red, url)
+          chatList[index] = chatData
+          index = index + 1;
+      }
+
+      that.setData({
+        chatList: chatList
+      })
+  }
+  },
  
   onLoginButtonClick: function () {
     wx.navigateTo({

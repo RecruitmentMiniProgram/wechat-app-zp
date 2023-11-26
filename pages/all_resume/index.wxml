@@ -1,10 +1,9 @@
 <view class="message">
-  <view wx:if="{{login && chatList.length > 0}}" class = "login">
+  <view wx:if="{{chatList.length > 0}}" class = "login">
     <block wx:for="{{chatList}}" wx:for-item="chat" wx:for-index="index">
     <view class ="head">
 
     <image class="icon" src="{{chat.url}}"></image>
-
         <view bindtap="goToChat" bindlongpress="showDeleteConfirm" data-index="{{index}}" class="chat-item">
           <view class="info">
             <view class="left">
@@ -23,12 +22,8 @@
     </view>
     </block>
   </view>
-  <view wx:elif="{{login&&load}}">
+  <view wx:elif="{{load}}">
     <image style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%)" src="../../images/no_msg.png"/>
-      <text style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="nomsg">暂无消息</text>
-  </view>
-  <view wx:elif="{{!login}}" class="unLogin">
-      <image style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%)" src="../../images/msg_unLogin.png"/>
-      <button  hover-class="btn-hover" bindtap="onLoginButtonClick" style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="btn">立即登录</button>
+      <text style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="nomsg">暂无投递记录</text>
   </view>
 </view>

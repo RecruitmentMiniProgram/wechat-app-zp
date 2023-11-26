@@ -1,35 +1,35 @@
 {
   "pages": [
+    "pages/user/index",
+    "pages/user/edit/index",
+
     "pages/jobs_list/index",
     "pages/index/index",
     "pages/company_home/index",
 
     "pages/search/search",
     "pages/searchresult/searchresult",
-  
-    
-    "pages/user/index",
+
     "pages/user/view/view",
     "pages/register/register",
     "pages/login/login",
     "pages/user/resume/index",
 
+    "pages/all_resume/index",
+    "pages/all_chat/index",
+    "pages/index/index",
+
     "pages/job_details/index",
     "pages/show_resume/show_resume",
     "pages/message/message",
     "pages/chat/chat",
-
-
-
     "pages/user/resume/work/index",
     "pages/user/resume/intention/index",
-
-    
-
     "pages/resume/index",
     "pages/resume/work/index",
     "pages/resume/intention/index",
-    "pages/user/edit/index",
+
+
 
     "pages/test/index",
 

@@ -16,7 +16,9 @@ page {
     color: red;
   }
   
-  
+  .btn-hover {
+    background-color: #007acc; /* 触摸时的背景色，可以根据需要调整 */
+  }
   .level {
     display: flex;
     flex-direction: row;

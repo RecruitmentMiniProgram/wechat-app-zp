@@ -388,3 +388,50 @@ input {
   border-radius: 5rpx;
   cursor: pointer;
 }
+
+.chatPost{
+  width: 100%;
+  height: 100%;
+  border: 1px solid #4a90e2; /* 设置边框，可以根据需要调整宽度和颜色 */
+}
+
+.con {
+  width: 200px;
+  height: 150px;
+  margin-top: 20rpx;
+  margin-bottom: 26rpx;
+  position: relative;
+}
+
+.conb {
+  width: 200px;
+  height: 150px;
+  margin-bottom: 80rpx;
+  position: relative;
+}
+
+
+.chatResume{
+  width: 100%;
+  height: 100%;
+  border: 1px solid #4a90e2; /* 设置边框，可以根据需要调整宽度和颜色 */
+}
+
+.f{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.text {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff; /* 文字颜色 */
+  font-size: 16px; /* 字体大小 */
+  text-align: center;
+  padding: 10px; /* 内边距 */
+
+  border-radius: 5px; /* 圆角 */
+  background-color: #4a90e2;
+}
