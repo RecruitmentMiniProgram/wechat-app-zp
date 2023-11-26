@@ -1,6 +1,7 @@
 {
     "usingComponents": {
-        "tabs": "../../components/tabs/tabs"
+        "tabs": "../../components/tabs/tabs",
+        "jobList": "../../components/jobList/jobList"
     },
     "navigationBarTitleText": "公司主页"
 }
