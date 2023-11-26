@@ -106,6 +106,11 @@ Page({
   },
 
   async onLoad() {
+    this.setData({load: false})
+    wx.showLoading({
+      title: '加载中...',
+      mask: true, // 是否显示透明蒙层，防止触摸穿透
+    });
     var that = this
     var isLogin = false
     var status = wx.getStorageSync('status')
@@ -131,7 +136,7 @@ Page({
 
     //如果登录，则初始化消息列表
     if(isLogin) {
-        this.initChatList(this)
+       await this.initChatList(this)
 
         var that = this
         //用户启动监听，如果消息列表发生变化则刷新
@@ -150,6 +155,8 @@ Page({
           }
         }, 2000);
     }
+    this.setData({load:true})
+    wx.hideLoading();
   },
   
   async initChatList(that) {
@@ -201,7 +208,7 @@ Page({
             //根据企业ID读取企业头像
             var companyId = chatDetail.company_id
             let companyResult = await db.collection('company').doc(companyId).get()
-            var url = companyResult.data.img
+            var url = companyResult.data.logo
             var chatData = new ChatData(id, type,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
             chatList[index] = chatData
             index = index + 1;

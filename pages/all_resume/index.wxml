@@ -22,7 +22,7 @@
     </view>
     </block>
   </view>
-  <view wx:else="">
+  <view wx:elif="{{load}}">
     <image style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%)" src="../../images/no_msg.png"/>
       <text style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="nomsg">暂无投递记录</text>
   </view>

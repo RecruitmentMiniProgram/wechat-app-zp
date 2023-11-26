@@ -89,7 +89,7 @@ Page({
             //根据企业ID读取企业头像
             var companyId = chatDetail.company_id
             let companyResult = await db.collection('company').doc(companyId).get()
-            var url = companyResult.data.img
+            var url = companyResult.data.logo
             var chatData = new ChatData(id, 1,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
             chatList[index] = chatData
             index = index + 1;
@@ -139,13 +139,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
+      this.setData({load: false})
+      wx.showLoading({
+        title: '加载中...',
+        mask: true, // 是否显示透明蒙层，防止触摸穿透
+      });
       var id = options.id
       var status = wx.getStorageSync('status')
       this.setData({
         id: id,
         status: status
       })
-      this.initChatList(id, this)
+      await this.initChatList(id, this)
+      this.setData({load:true})
+      wx.hideLoading();
   },
 
   /**
