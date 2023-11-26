@@ -1,10 +1,9 @@
 {
   "pages": [
+    "pages/jobs_list/index",
     "pages/user/index",
     "pages/user/edit/index",
 
-    "pages/jobs_list/index",
-    "pages/index/index",
     "pages/company_home/index",
 
     "pages/search/search",

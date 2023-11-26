@@ -1,4 +1,4 @@
-<import src="../../templates/jobList.wxml" />
+<import src="../../template/jobList.wxml" />
 <SearchInput></SearchInput>
 <view class="cates">
   <!-- 职位列表 -->

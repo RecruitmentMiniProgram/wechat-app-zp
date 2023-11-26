@@ -1,5 +1,5 @@
 <!-- index.wxml -->
-<import src="../../templates/jobList.wxml" />
+<import src="../../template/jobList.wxml" />
 <!-- <wxs src="../../utils/time.wxs" module="time" /> -->
 <SearchInput></SearchInput>
 <!-- 轮播图 -->

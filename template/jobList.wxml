@@ -1,6 +1,6 @@
 @import "../../app.wxss";
+<wxs src="../utils/time.wxs" module="time" />
 <template name="jobList">
-  <wxs src="../utils/time.wxs" module="time" />
   <view class="job_list_wrap" wx:for="{{jobList}}" wx:key="jobId">
     <view class="job_list_raw">
       <navigator class="" target="" url="/pages/job_details/index?jobId={{item._id}}" hover-class="navigator-hover" open-type="navigate">

@@ -205,10 +205,10 @@ Page({
           // 调用云函数获取jobList
           wx.cloud.callFunction({
             name: 'jobListQuery',
-            data: { jobList: jobList }
+            data: {jobList: jobList }
           }).then(res => {
             jobList = res.result;
-            console.log(jobList)
+            // console.log(jobList)
 
             var total = jobList.length;
             var totalPages = Math.ceil(total / QueryParams.pagesize);
