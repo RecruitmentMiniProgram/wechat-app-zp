@@ -43,7 +43,7 @@ Page({
   swipclick: function (e) {
     console.log(this.data.swiperCurrent);
     wx.switchTab({
-     // url: this.data.links[this.data.swiperCurrent]
+      // url: this.data.links[this.data.swiperCurrent]
     })
   },
 
@@ -68,7 +68,7 @@ Page({
         // console.log(res.data);
       }
     });
-    
+
   },
 
   //分页加载
@@ -168,7 +168,7 @@ Page({
    * 今日招聘（全部职位）跳转
    */
   bindViewToday: function () {
-    app.globalData.tabid = 0;
+    getApp().globalData.tabid = 0;
     wx.switchTab({
       url: '../jobs_list/index',
     })
@@ -177,42 +177,28 @@ Page({
  * 今日招聘（高薪资）跳转
  */
   bindViewTodayGxz: function () {
-    app.globalData.tabid = 1;
+    getApp().globalData.tabid = 1;
+
     wx.switchTab({
       url: '../jobs_list/index',
-      success: function (e) {
-        var page = getCurrentPages().pop();
-        if (page == undefined || page == null) return;
-        page.onLoad();
-      }
     })
   },
   /**
  * 今日招聘（临时工）跳转
  */
   bindViewTodayLsg: function () {
-    app.globalData.tabid = 2;
+    getApp().globalData.tabid = 2;
     wx.switchTab({
       url: '../jobs_list/index',
-      success: function (e) {
-        var page = getCurrentPages().pop();
-        if (page == undefined || page == null) return;
-        page.onLoad();
-      }
     })
   },
   /**
  * 今日招聘（推荐）跳转
  */
   bindViewTodayTj: function () {
-    app.globalData.tabid = 3;
+    getApp().globalData.tabid = 3;
     wx.switchTab({
       url: '../jobs_list/index',
-      success: function (e) {
-        var page = getCurrentPages().pop();
-        if (page == undefined || page == null) return;
-        page.onLoad();
-      }
     })
   },
   /**
@@ -286,22 +272,9 @@ Page({
   qbzwLoad: function () {
     var that = this;
 
-    // wx.cloud.callFunction({
-    //   name: 'jobListQuery',
-    //   data: { }
-    // }).then(res => {
-    //   var jobList = res.result.list;
-    //   // console.log(jobList)
-    //   that.setData({
-    //     jobList: jobList,
-    //   });
-
-    // }).catch(err => {
-    //   console.log("failed")
-    // })
 
     db.collection('post').where({})
-    .orderBy('timestamp', 'desc')
+      .orderBy('timestamp', 'desc')
       .get({
         success: function (res) {
           var jobList = res.data;

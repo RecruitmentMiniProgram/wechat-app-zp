@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    test: 0,
     //职位数组
     jobList: [],
     // 分页需要的参数
@@ -28,7 +29,7 @@ Page({
     },
     {
       id: 3,
-      value: "紧急",
+      value: "更多",
       isActive: false
     }
     ],
@@ -36,7 +37,7 @@ Page({
   QueryParams: {
     query: "",
     cid: "",
-    jobType: "all",
+    jobType: 0,
     pagenum: 1,
     pagesize: 10,
   },
@@ -53,10 +54,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options);
+  },
+
+  onShow: function () {
+    var tabId = getApp().globalData.tabid || 0;
     // this.QueryParams.cid = options.cid
+    // this.data.tabs.forEach((v, i) => i === tabId ? v.isActive = true : v.isActive = false);
+    var updatedTabs = this.data.tabs.map((v, i) => {
+      return {
+        ...v,
+        isActive: i === tabId
+      };
+    });
+
+    this.setData({
+      tabs: updatedTabs
+    });
+
+    this.QueryParams.jobType = tabId;
+    // console.log(this.data);
+
     // this.newData()
     this.getJobList(this.QueryParams);
+
+
   },
 
   newData: function () {
@@ -108,19 +129,15 @@ Page({
     let { tabs } = this.data;
     tabs.forEach((v, i) => i === index ? v.isActive = true : v.isActive = false);
     if (index == 0) {
-      this.QueryParams.jobType = "all"
-      // this.getJobList(this.QueryParams)
+      this.QueryParams.jobType = 0
     } else if (index == 1) {
-      this.QueryParams.jobType = "salary"
-      // this.getJobList(this.QueryParams)
+      this.QueryParams.jobType = 1
 
     } else if (index == 2) {
-      this.QueryParams.jobType = "time"
-      // this.getJobList(this.QueryParams)
+      this.QueryParams.jobType = 2
 
     } else {
-      this.QueryParams.jobType = "all"
-      // this.getJobList(this.QueryParams)
+      this.QueryParams.jobType = 3
 
     }
     //  3 赋值到data中
@@ -181,31 +198,38 @@ Page({
 
     var that = this;
     var jobType = QueryParams.jobType
-    var feild = '_id'
+    var field = '_id'
     switch (jobType) {
-      case "all":
-        feild = "_id"
+      case 0:
+        field = "_id"
         break;
-      case "salary":
-        feild = "min_salary"
+      case 1:
+        field = "min_salary"
         break
-      case "time":
-        feild = "timestamp"
+      case 2:
+        field = "timestamp"
         break
       default:
-        feild = "_id"
+        field = "_id"
         break
     }
+    // console.log('field', field)
+    // wx.showToast({
+    //   title: "正在加载",
+    //   icon: 'loading',
+    //   duration: 1000
+    // });
+
 
     db.collection('post').where({})
-      .orderBy(feild, 'desc')
+      .orderBy(field.toString(), 'desc')
       .get({
         success: function (res) {
           var jobList = res.data;
           // 调用云函数获取jobList
           wx.cloud.callFunction({
             name: 'jobListQuery',
-            data: {jobList: jobList }
+            data: { jobList: jobList }
           }).then(res => {
             jobList = res.result;
             // console.log(jobList)
