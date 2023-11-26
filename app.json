@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/index/index",
-
     "pages/jobs_list/index",
+    "pages/index/index",
+    "pages/company_home/index",
+
     "pages/search/search",
     "pages/searchresult/searchresult",
   
@@ -12,7 +13,6 @@
     "pages/register/register",
     "pages/login/login",
     "pages/user/resume/index",
-    "pages/company_home/index",
 
     "pages/job_details/index",
     "pages/show_resume/show_resume",

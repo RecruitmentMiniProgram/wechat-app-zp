@@ -1,4 +1,4 @@
-.search_input {
+/* .search_input {
   height: 90rpx;
   padding: 10rpx;
   background-color: #4a90e2;
@@ -12,7 +12,7 @@
   background-color: #fff;
   border-radius: 15rpx;
   color: #666;
-}
+} */
 
 @import "../../wxSearchView/wxSearchView.wxss";
 

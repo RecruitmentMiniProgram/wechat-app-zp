@@ -1,9 +1,8 @@
 <wxs src="../../utils/time.wxs" module="time" />
-
 <view class="head">
     <view class="job_up">
         <view class="job_name">{{jobObj.name}}</view>
-        <view class="job_salary">{{jobObj.salary}}</view>
+        <view class="job_salary">{{jobObj.min_salary}}-{{jobObj.max_salary}}</view>
     </view>
     <view class="job_down">
         <view class="job_place">
@@ -12,7 +11,6 @@
         <view class="job_year padr">
             <!-- <text decode="{{true}}">实习要求：{{jobObj.jobDayPerWeek}}&nbsp;{{jobObj.jobTimeSpan}}</text> -->
             <text decode="{{true}}">实习要求：{{jobObj.description}}&nbsp;|&nbsp;</text>
-            
         </view>
         <view class="job_edu padr">
             <text decode="{{true}}">{{jobObj.education}}</text>
@@ -62,13 +60,12 @@
     <view class="loca_title">工作城市</view>
     <view class="loca_details">{{jobObj.position}}</view>
 </view>
-
-
-
 <view wx:if="{{status != 2}}" class="bottom-bar">
-   <image wx:if="{{status == 1}}" class="chat-icon"src="../../images/talk.png" bindtap="goToChatPage"></image>
-
-    <button wx:if="{{status == 1}}"hover-class="btn-hover" bindtap="submitResume"  class="submit-resume">立即投递</button>
-
-    <button wx:else=""hover-class="btn-hover" bindtap="submitResume"  class="submit-resume">登录后投递</button>
+    <image wx:if="{{status == 1}}" class="chat-icon" src="../../images/talk.png" bindtap="goToChatPage"></image>
+    <button wx:if="{{status == 1}}" hover-class="btn-hover" bindtap="submitResume" class="submit-resume">
+        立即投递
+    </button>
+    <button wx:else="" hover-class="btn-hover" bindtap="submitResume" class="submit-resume">
+        登录后投递
+    </button>
 </view>

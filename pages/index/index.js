@@ -41,57 +41,26 @@ Page({
   },
   //点击图片触发事件
   swipclick: function (e) {
-    //console.log(this.data.swiperCurrent);
-    // wx.switchTab({
-    //  // url: this.data.links[this.data.swiperCurrent]
-    // })
-  },
-  //点击招聘列表页面跳转，页面传参
-  showDetail: function (e) {
-    var that = this;
-    // 获取wxml元素绑定的index值
-    var index = e.currentTarget.dataset.index;
-    //  console.log("1111111" + index);
-    // 取出objectId
-    var objectId = that.data.detailInfo[index].id;
-    //console.log("1111111" + objectId);
-    // 跳转到详情页
-    wx.navigateTo({
-      url: '../detail/detail?objectId=' + objectId
-    });
-  },
-  //点击门店导航页面跳转
-  bindViewLoaction: function () {
-    wx.navigateTo({
-      url: '../map/map'
+    console.log(this.data.swiperCurrent);
+    wx.switchTab({
+     // url: this.data.links[this.data.swiperCurrent]
     })
-
   },
-  //点击微信咨询
-  bindViewXWZX: function () {
-    wx.showToast({
-      title: '此功能暂未启用',
-      image: "../../images/warning.png",
-      duration: 2000,
-      mask: true
-    })
 
-  },
   /**
    * 
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.addNewData();
     this.getswitchimg();
     this.qbzwLoad();
   },
 
+
   //加载轮播图
   getswitchimg: function () {
     var that = this;
-
-    db.collection('img').get({
+    db.collection('swiperImage').get({
       success: function (res) {
         that.setData({
           imgUrls: res.data
@@ -99,7 +68,9 @@ Page({
         // console.log(res.data);
       }
     });
+    
   },
+
   //分页加载
   loadArticle: function () {
     ////console.log('分页传值:' + this.data.currentTab);
@@ -191,31 +162,6 @@ Page({
     //console.log('wxSearchTab');
     wx.navigateTo({
       url: '../search/search'
-    })
-  },
-  /**
-   * 列表详情跳转
-   */
-  bindViewList: function () {
-    wx.navigateTo({
-      url: '../detail/detail'
-    })
-  },
-  /**
-   * 推荐奖励跳转
-   */
-  bindViewAward: function () {
-    wx.switchTab({
-      url: '../award/award'
-    })
-  },
-
-  /**
-   * 求职热线跳转
-   */
-  bindViewServicePhone: function () {
-    wx.navigateTo({
-      url: '../servicephone/servicephone'
     })
   },
   /**
@@ -311,16 +257,6 @@ Page({
 
   },
 
-  // 滚动切换标签样式
-  switchTab: function (e) {
-    var cur = e.detail.current;
-    this.setData({
-      currentTab: e.detail.current
-    });
-    this.checkCor();
-    ////console.log('滑动' + cur);
-    this.switchTabLoad(cur + '');
-  },
   // 点击标题切换当前页时改变样式
   swichNav: function (e) {
 
@@ -350,39 +286,40 @@ Page({
   qbzwLoad: function () {
     var that = this;
 
-    wx.cloud.callFunction({
-      name: 'jobListQuery',
-      data: { }
-    }).then(res => {
-      var jobList = res.result.list;
-      // console.log(jobList)
-      that.setData({
-        jobList: jobList,
-      });
-
-    }).catch(err => {
-      console.log("failed")
-    })
-
-    // db.collection('post').where({})
-    //   .get({
-    //     success: function (res) {
-    //       var jobList = res.data;
-    //       // 调用云函数获取jobList
-    //       wx.cloud.callFunction({
-    //         name: 'jobListQuery',
-    //         data: { jobList: jobList }
-    //       }).then(res => {
-    //         jobList = res.result;
-    //         that.setData({
-    //           jobList: jobList,
-    //         });
-
-    //       }).catch(err => {
-    //         console.log("failed")
-    //       })
-    //     }
+    // wx.cloud.callFunction({
+    //   name: 'jobListQuery',
+    //   data: { }
+    // }).then(res => {
+    //   var jobList = res.result.list;
+    //   // console.log(jobList)
+    //   that.setData({
+    //     jobList: jobList,
     //   });
+
+    // }).catch(err => {
+    //   console.log("failed")
+    // })
+
+    db.collection('post').where({})
+    .orderBy('timestamp', 'desc')
+      .get({
+        success: function (res) {
+          var jobList = res.data;
+          // 调用云函数获取jobList
+          wx.cloud.callFunction({
+            name: 'jobListQuery',
+            data: { jobList: jobList }
+          }).then(res => {
+            jobList = res.result;
+            that.setData({
+              jobList: jobList,
+            });
+
+          }).catch(err => {
+            console.log("failed")
+          })
+        }
+      });
 
   },
   //清空招聘列表
