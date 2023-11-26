@@ -10,7 +10,7 @@
         </view>
         <view class="job_year padr">
             <!-- <text decode="{{true}}">实习要求：{{jobObj.jobDayPerWeek}}&nbsp;{{jobObj.jobTimeSpan}}</text> -->
-            <text decode="{{true}}">实习要求：{{jobObj.description}}&nbsp;|&nbsp;</text>
+            <!-- <text decode="{{true}}">实习要求：{{jobObj.description}}&nbsp;|&nbsp;</text> -->
         </view>
         <view class="job_edu padr">
             <text decode="{{true}}">{{jobObj.education}}</text>
@@ -21,7 +21,7 @@
 <navigator url="/pages/company_home/index?comId={{jobObj.company._id}}" class="com_wrap">
     <view class="com">
         <view class="content_btm_lft">
-            <image class="" src="{{jobObj.img}}" mode="aspectFit" />
+            <image class="" src="{{jobObj.company.logo}}" mode="aspectFit" />
         </view>
         <view class="content_btm_rgt">
             <view class="cbr_top">{{jobObj.company.minName}}</view>
@@ -49,13 +49,12 @@
         <text>{{jobObj.description}}</text>
     </view>
 </view>
-<view class="job_desc">
+<!-- <view class="job_desc">
     <view class="desc_title">岗位职责</view>
     <view class="desc_details">
         <rich-text nodes="{{jobObj.description}}"></rich-text>
-        <!-- <text>{{jobObj.jobDetails}}</text> -->
     </view>
-</view>
+</view> -->
 <view class="Interview_loca">
     <view class="loca_title">工作城市</view>
     <view class="loca_details">{{jobObj.position}}</view>

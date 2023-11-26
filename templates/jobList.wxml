@@ -8,7 +8,7 @@
         <view class="job_list_raw">
           <navigator   class="" target="" url="/pages/job_details/index?jobId={{item._id}}" hover-class="navigator-hover" open-type="navigate">
             <view class="content content_top">
-              <view class="content_top_lft">
+                <view class="content_top_lft">
                 <!-- 职业名称 -->
                 <view class="job_name">{{item.name}}</view>
                 <!-- 职业要求 -->
@@ -18,15 +18,15 @@
                   <view class="job_year" wx:if="{{item.workTime !=null && item.workTime!=undefined}}">{{item.workTime}}</view>
                   <view class="job_edu">{{item.education}}</view>
                 </view>
-              </view>
-              <!-- 工资 发布时间 -->
-              <view class="content_top_rgt">
+                </view>
+                <!-- 工资 发布时间 -->
+                <view class="content_top_rgt">
                 <view class="job-salary">
                   <!-- <view class="job_skill">{{item.salary}}</view> -->
                   <!-- <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view> -->
                 </view>
                 <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->
-              </view>
+                </view>
             </view>
             <view class="content_btm">
               <view class="content_btm_lft">

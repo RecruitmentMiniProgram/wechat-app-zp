@@ -7,7 +7,7 @@ Page({
    */
   data: {
     searchValue: '',
-    detailInfo: "",
+    jobList: "",
     isnull: 0,
 
   },
@@ -59,14 +59,15 @@ Page({
                 data: { jobList: jobList }
               }).then(res => {
                 jobList = res.result;
-                if(jobList.length >0){
+                console.log(jobList)
+                if (jobList.length > 0) {
                   that.setData({
-                    detailInfo: jobList,
+                    jobList: jobList,
                     isnull: 1
                   });
 
                 }
-                
+
 
               }).catch(err => {
                 console.log("failed")
@@ -89,7 +90,7 @@ Page({
     // ////console.log('aaaa' + this.data.searchValue);
     // query.equalTo("detAddr", that.data.searchValue);
     // query.descending('updatedAt');
-    
+
     // // 查询所有数据
     // query.find({
     //   success: function (results) {
