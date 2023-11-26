@@ -10,7 +10,7 @@
         </view>
         <view class="job_year padr">
             <!-- <text decode="{{true}}">实习要求：{{jobObj.jobDayPerWeek}}&nbsp;{{jobObj.jobTimeSpan}}</text> -->
-            <text decode="{{true}}">实习要求：{{jobObj.description}}&nbsp;|&nbsp;</text>
+            <!-- <text decode="{{true}}">实习要求：{{jobObj.description}}&nbsp;|&nbsp;</text> -->
         </view>
         <view class="job_edu padr">
             <text decode="{{true}}">{{jobObj.education}}</text>

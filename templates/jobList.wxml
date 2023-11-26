@@ -11,7 +11,7 @@
             <!-- 职业要求 -->
             <view class="job_details">
               <view class="job_city" wx:if="{{item.position!=''}}">{{item.position}}</view>
-              <view class="job_skill" wx:if="{{item.description!=''}}">{{item.description}}</view>
+              <!-- <view class="job_skill" wx:if="{{item.description!=''}}">{{item.description}}</view> -->
               <view class="job_year">{{item.age}}岁</view>
               <view class="job_edu">{{item.education}}</view>
             </view>
