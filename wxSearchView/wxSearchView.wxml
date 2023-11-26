@@ -14,7 +14,7 @@
      </view>
 </view>
 
-<view class="wxSearch" style="'block';height:{{wxSearchData.view.seachHeight}}px;top:{{wxSearchData.view.barHeight}}px;">
+<view class="wxSearch" style="display:block;height:{{wxSearchData.view.seachHeight}}px;top:{{wxSearchData.view.barHeight}}px;">
 
   <view class="wxSearchInner">
     <!-- 搜索提示部分 -->

@@ -1,19 +1,18 @@
 {
   "pages": [
+    "pages/jobs_list/index",
     "pages/user/index",
     "pages/user/edit/index",
 
-    "pages/jobs_list/index",
+    "pages/company_home/index",
+
     "pages/search/search",
     "pages/searchresult/searchresult",
-    
-    "pages/search/index",
 
     "pages/user/view/view",
     "pages/register/register",
     "pages/login/login",
     "pages/user/resume/index",
-    "pages/company_home/index",
 
     "pages/all_resume/index",
     "pages/all_chat/index",
@@ -30,35 +29,19 @@
     "pages/resume/intention/index",
 
 
+
     "pages/test/index",
+
     "pages/category_job/index",
-    "pages/community/index",
-    "pages/expect_jobs/index",
-    "pages/expect_cities/index",
     "pages/setting/index",
     "pages/job_publish/index",
-    "pages/detail/detail",
-    "pages/award/award",
-    "pages/servicephone/servicephone",
     "pages/map/map",
-    "pages/personal/personal",
     "pages/myjoin/myjoin",
-    "pages/myaward/myaward",
-    "pages/analysis/index",
     "pages/school_details/index",
-    "pages/cart/index",
-    "pages/collect/index",
-    "pages/order/index",
     "pages/feedback/index",
     "pages/feedback_job/index",
-    "pages/auth/index",
-    "pages/pay/index",
     "pages/school_recruit/index",
     "pages/school_recruit2/index",
-    "pages/message/index",
-    "pages/article_details/index",
-    "pages/question_details/index",
-    "pages/dialog/index",
     "pages/customized/index",
     "pages/customized_res/index",
     "pages/recruit/index",

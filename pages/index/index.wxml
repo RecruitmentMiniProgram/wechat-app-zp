@@ -1,101 +1,49 @@
-
-<!--index.wxml-->
-<wxs src="../../utils/time.wxs" module="time" />
-
-<view class="weui-search-bar">
-  <view class="weui-search-bar__form">
-    <view class="weui-search-bar__box">
-      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-      <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="搜索工作：如上海、深圳、昆山" bindtap="wxSearchTab"/>
-    </view>
-  </view>
-</view>
- <view>{{searchValue}}</view> 
-
-<!--轮播图-->
+<!-- index.wxml -->
+<import src="../../template/jobList.wxml" />
+<!-- <wxs src="../../utils/time.wxs" module="time" /> -->
+<SearchInput></SearchInput>
+<!-- 轮播图 -->
 <view class="swiper-container">
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{duration}}" current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">
     <block wx:for="{{imgUrls}}" wx:key="id">
       <swiper-item>
-        <image src="{{item.swiperImgSrc}}" class="img" bindtap="swipclick" />
+        <image src="{{item.swiperImgSrc}}" mode="aspectFit" class="img" bindtap="swipclick" />
       </swiper-item>
     </block>
   </swiper>
 </view>
-<!--导航-->
-    <view class="nav-up">
-      <view class="nav-one-up nav-all" bindtap='bindViewToday'>
-        <view class="nav-one-up-img nav-all-img">
-          <image src="../../images/zwgw.png" />
-        </view>
-        <view class="nav-text" >全部职位</view>
-      </view>
-      <view class="nav-tow-up nav-all" bindtap='bindViewTodayGxz' >
-        <view class="nav-tow-up-img nav-all-img">
-          <image src="../../images/bt.png"/>
-        </view>
-        <view class="nav-text">高薪资</view>
-      </view>
-      <view class="nav-three-up nav-all" bindtap='bindViewTodayLsg' >
-        <view class="nav-three-up-img nav-all-img">
-          <image src="../../images/xz.png"/>
-        </view>
-        <view class="nav-text">临时工</view>        
-      </view>
-      <view class="nav-four-up nav-all" bindtap='bindViewTodayTj'>
-        <view class="nav-four-up-img nav-all-img">
-          <image src="../../images/sgry.png"/>
-        </view>
-        <view class="nav-text">推荐</view>
-      </view>
+<!-- 导航 -->
+<view class="nav-up">
+  <view class="nav-one-up nav-all" bindtap='bindViewToday'>
+    <view class="nav-one-up-img nav-all-img">
+      <image src="../../images/zwgw.png" />
     </view>
-    
+    <view class="nav-text">全部职位</view>
+  </view>
+  <view class="nav-tow-up nav-all" bindtap='bindViewTodayGxz'>
+    <view class="nav-tow-up-img nav-all-img">
+      <image src="../../images/bt.png" />
+    </view>
+    <view class="nav-text">高薪资</view>
+  </view>
+  <view class="nav-three-up nav-all" bindtap='bindViewTodayLsg'>
+    <view class="nav-three-up-img nav-all-img">
+      <image src="../../images/xz.png" />
+    </view>
+    <view class="nav-text">临时工</view>
+  </view>
+  <view class="nav-four-up nav-all" bindtap='bindViewTodayTj'>
+    <view class="nav-four-up-img nav-all-img">
+      <image src="../../images/sgry.png" />
+    </view>
+    <view class="nav-text">推荐</view>
+  </view>
+</view>
 <view style="height: 50rpx;color: gray;"></view>
-
 <view>
-  <view class="tab-item" >急聘职位</view>
+  <view class="tab-item">急聘职位</view>
   <view style="height: 10rpx;"></view>
-  <view class="job_list_wrap" wx:for="{{jobList}}" wx:key="jobId">
-    <view class="job_list_raw">
-      <navigator class="" target="" url="/pages/job_details/index?jobId={{item._id}}" hover-class="navigator-hover" open-type="navigate">
-        <view class="content content_top">
-          <view class="content_top_lft">
-            
-            <!-- 职业名称 -->
-            <view class="job_name">{{item.name}}</view>
-            <!-- 职业要求 -->
-            <view class="job_details">
-              <view class="job_city" wx:if="{{item.position!=''}}">{{item.position}}</view>
-              <view class="job_skill" wx:if="{{item.description!=''}}">{{item.description}}</view>
-              <view class="job_year">{{item.age}}</view>
-              <view class="job_edu">{{item.education}}</view>
-            </view>
-          </view>
-          <!-- 工资 发布时间 -->
-          <view class="content_top_rgt">
-            <view class="job-salary">
-              <view class="job_skill">{{item.salary}}</view>
-            </view>
-            <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->
-          </view>
-        </view>
-        <view class="content_btm">
-          <view class="content_btm_lft">
-            <image class="" src="{{item.img}}" mode="aspectFit" />
-          </view>
-          <view class="content_btm_rgt">
-            <view class="cbr_top">{{item.company.minName}}</view>
-            <view class="cbr_btm">
-              <view class="cbr_btm_lft">
-                <view class="">{{item.company.industry}}</view>
-              </view>
-              <view class="cbr_btm_rgt">
-                <view class="">{{time.formatDateString(item.time)}}</view>
-              </view>
-            </view>
-          </view>
-        </view>
-      </navigator>
-    </view>    
-  </view>  
+  <view>
+    <template is="jobList" data="{{jobList:jobList}}" />
+  </view>
 </view>

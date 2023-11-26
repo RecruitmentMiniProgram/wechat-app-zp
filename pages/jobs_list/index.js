@@ -1,7 +1,6 @@
 // import { request } from "../../requests/index.js";
 const db = wx.cloud.database();
 const util = require('../../utils/util');
-// import { formatTime } from '../../utils/util';
 Page({
 
   /**
@@ -14,22 +13,22 @@ Page({
 
     tabs: [{
       id: 0,
-      value: "校招",
+      value: "全部",
       isActive: true
     },
     {
       id: 1,
-      value: "实习",
+      value: "高薪资",
       isActive: false
     },
     {
       id: 2,
-      value: "社招",
+      value: "临时工",
       isActive: false
     },
     {
       id: 3,
-      value: "全部",
+      value: "紧急",
       isActive: false
     }
     ],
@@ -37,7 +36,7 @@ Page({
   QueryParams: {
     query: "",
     cid: "",
-    jobType: '1',
+    jobType: "all",
     pagenum: 1,
     pagesize: 10,
   },
@@ -56,28 +55,40 @@ Page({
   onLoad: function (options) {
     // console.log(options);
     // this.QueryParams.cid = options.cid
-    // this.addNewData();
-    this.getJobList();
+    // this.newData()
+    this.getJobList(this.QueryParams);
+  },
+
+  newData: function () {
+
+    // 新数据
+    const timestamp = new Date();
+    const timeString = util.formatTime(timestamp)
+    const newData = {
+      companyId: 'b751f2806561c6bb00d1bab91b11b3d1',
+      age: 26,
+      description: "1个月",
+      education: "本科",
+      img: "",
+      max_salary: "30000",
+      min_salary: "20000",
+      name: "大数据挖掘",
+      position: "武汉",
+      timestamp: timestamp,
+      time: timeString
+    };
+    db.collection('post').add({
+      data: newData,
+      success: function (res) {
+        console.log('添加成功', res);
+      },
+      fail: function (err) {
+        console.error('添加失败', err);
+      },
+    });
   },
 
 
-  addNewData: function () {
-    // db.collection('post').add({
-    //   // data 字段表示需新增的 JSON 数据
-    //   data: {
-    //     enter_id:"11",
-    //     name: "测试",
-    //     min_salary: 1
-    // },
-    //   success: function(res) {
-    //     // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-    //     console.log(res)
-    //   }
-    // })
-    var time = this.formatTime(new Date());
-    console.log('timewhat', time);
-
-  },
 
   /**
  * 页面搜索事件的处理函数
@@ -92,17 +103,25 @@ Page({
   handleTabsItemChange(e) {
     // 1 获取被点击的标题索引
     const { index } = e.detail;
+    // console.log(e)
     // // 修改源数组
     let { tabs } = this.data;
     tabs.forEach((v, i) => i === index ? v.isActive = true : v.isActive = false);
     if (index == 0) {
-      this.QueryParams.jobType = "2"
+      this.QueryParams.jobType = "all"
+      // this.getJobList(this.QueryParams)
     } else if (index == 1) {
-      this.QueryParams.jobType = "1"
+      this.QueryParams.jobType = "salary"
+      // this.getJobList(this.QueryParams)
+
     } else if (index == 2) {
-      this.QueryParams.jobType = "3"
+      this.QueryParams.jobType = "time"
+      // this.getJobList(this.QueryParams)
+
     } else {
-      this.QueryParams.jobType = ""
+      this.QueryParams.jobType = "all"
+      // this.getJobList(this.QueryParams)
+
     }
     //  3 赋值到data中
     this.setData({
@@ -157,26 +176,46 @@ Page({
   },
 
   //获取职位信息列表数据
-  getJobList: function () {
+  getJobList: function (QueryParams) {
+    // console.log(QueryParams)
+
     var that = this;
+    var jobType = QueryParams.jobType
+    var feild = '_id'
+    switch (jobType) {
+      case "all":
+        feild = "_id"
+        break;
+      case "salary":
+        feild = "min_salary"
+        break
+      case "time":
+        feild = "timestamp"
+        break
+      default:
+        feild = "_id"
+        break
+    }
+
     db.collection('post').where({})
+      .orderBy(feild, 'desc')
       .get({
         success: function (res) {
           var jobList = res.data;
           // 调用云函数获取jobList
           wx.cloud.callFunction({
             name: 'jobListQuery',
-            data: { jobList: jobList }
+            data: {jobList: jobList }
           }).then(res => {
             jobList = res.result;
+            // console.log(jobList)
 
             var total = jobList.length;
-            var totalPages = Math.ceil(total / that.QueryParams.pagesize);
+            var totalPages = Math.ceil(total / QueryParams.pagesize);
             that.setData({
               jobList: jobList,
               totalPages: totalPages
             });
-
           }).catch(err => {
             console.log("failed")
           })

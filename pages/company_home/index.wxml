@@ -1,80 +1,40 @@
-<wxs src="../../utils/time.wxs" module="time" />
+<!-- <wxs src="../../utils/time.wxs" module="time" /> -->
+<import src="../../template/jobList.wxml" />
 <!-- 公司介绍 -->
 <view class="com_wrap" url="/pages/company_home/index?comId={{jobObj.jobComId}}">
-    <view class="com">
-        <view class="content_btm_lft">
-            <image class="" src="{{comObj.img}}" mode="aspectFit" />
-        </view>
-        <view class="content_btm_rgt">
-            <view class="cbr_top">{{comObj.minName}}</view>
-            <view class="cbr_btm">
-                <view class="cbr_btm_lft">
-                    <view class="l1">
-                        <text decode="{{true}}">
-                            {{comObj.industry}}&nbsp;|&nbsp;{{comObj.scale}}
-                        </text>
-                    </view>
-                </view>
-            </view>
-        </view>
+  <view class="com">
+    <view class="content_btm_lft">
+      <image class="" src="{{comObj.logo}}" mode="aspectFit" />
     </view>
+    <view class="content_btm_rgt">
+      <view class="cbr_top">{{comObj.minName}}</view>
+      <view class="cbr_btm">
+        <view class="cbr_btm_lft">
+          <view class="l1">
+            <text decode="{{true}}">{{comObj.industry}}&nbsp;|&nbsp;{{comObj.scale}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>
 <tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
-    <block wx:if="{{tabs[0].isActive}}">
-        <view class="title com_intro">公司简介</view>
-        <view class="content">{{comObj.introduction}}</view>
-        <view class="title busi_info">工商信息</view>
-        <view class="content">公司全称: {{comObj.fullName}}</view>
-        <!-- <view class="content">法定代表人:{{comObj.comRepresentative}}</view> -->
-        <!-- <view class="content">注册资本:{{comObj.AuthCapital}}</view> -->
-        <view class="content">成立时间: {{comObj.incorporationDate}}</view>
-        <view class="content">企业官网：{{comObj.website}}</view>
-        <view class="title com_addr">公司地址</view>
-        <view class="content">{{comObj.address}}》</view>
-    </block>
-    <!-- 另一个列表################################################################# -->
-    <block wx:elif="{{tabs[1].isActive}}">
-        <!-- 职位列表 -->
-        <view class="job_list_wrap" wx:for="{{jobList}}" wx:key="jobId">
-            <view class="job_list_raw">
-                <navigator class="" target="" url="/pages/job_details/index?jobId={{item._id}}" hover-class="navigator-hover" open-type="navigate">
-                    <view class="content content_top">
-                        <view class="content_top_lft">
-                            <view class="job_name">{{item.name}}</view>
-                            <view class="job_details">
-                                <view class="job_city">{{item.position}}</view>
-                                <view class="job_skill">{{item.description}}</view>
-                                <view class="job_year">{{item.age}}</view>
-                                <view class="job_edu">{{item.education}}</view>
-                            </view>
-                        </view>
-                        <view class="content_top_rgt">
-                            <view class="job-salary">
-                                <view class="job_skill">{{item.salary}}</view>
-                            </view>
-                            <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->
-                        </view>
-                    </view>
-                    <view class="content_btm">
-                        <view class="content_btm_lft">
-                            <image class="" src="{{item.img}}" mode="aspectFit" />
-                        </view>
-                        <view class="content_btm_rgt">
-                            <view class="cbr_top">{{comObj.minName}}</view>
-                            <view class="cbr_btm">
-                                <view class="cbr_btm_lft">
-                                    <view class="">{{comObj.industry}}</view>
-                                    <!-- <view class="">短视频</view>
-                            <view class="">D轮以上</view> -->
-                                </view>
-                                <view class="cbr_btm_rgt">
-                                    <view class="">{{time.formatDateString(item.time)}}</view>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                </navigator>
-            </view>
-        </view>
-    </block>
+  <block wx:if="{{tabs[0].isActive}}">
+    <view class="title com_intro">公司简介</view>
+    <view class="content">{{comObj.introduction}}</view>
+    <view class="title busi_info">工商信息</view>
+    <view class="content">公司全称: {{comObj.fullName}}</view>
+    <!-- <view class="content">法定代表人:{{comObj.comRepresentative}}</view> -->
+    <!-- <view class="content">注册资本:{{comObj.AuthCapital}}</view> -->
+    <view class="content">成立时间: {{comObj.incorporationDate}}</view>
+    <view class="content">企业官网：{{comObj.website}}</view>
+    <view class="title com_addr">公司地址</view>
+    <view class="content">{{comObj.address}}》</view>
+  </block>
+  <!-- 另一个列表################################################################# -->
+  <block wx:elif="{{tabs[1].isActive}}">
+    <view>
+      <template is="jobList" data="{{jobList:jobList}}" />
+    </view>
+  </block>
 </tabs>

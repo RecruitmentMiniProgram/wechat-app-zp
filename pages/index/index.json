@@ -1,3 +1,6 @@
 {
+  "usingComponents": {
+    "SearchInput": "../../components/SearchInput/SearchInput"
+  },
   "navigationBarTitleText": "招聘小程序"
 }

@@ -3,7 +3,7 @@ function formatNumber(n) {
   n = n.toString();
   return n[1] ? n : '0' + n;
 }
-
+// 将时间戳转为字符串
 var formatTime = function(time) {
 
   var date = getDate(time)
@@ -14,12 +14,13 @@ var formatTime = function(time) {
   var minute = date.getMinutes()
   var second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  // return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [month, day].map(formatNumber).join('/')
 }
-var formatDateString = function(inputDate) {
-  // 将 "2023-11-24" 截取成 "11-24"
-  var formattedDate = inputDate.substring(5);
 
+// 将 "2023-11-24" 截取成 "11-24"
+var formatDateString = function(inputDate) {
+  var formattedDate = inputDate.substring(5);
   return formattedDate;
 }
 

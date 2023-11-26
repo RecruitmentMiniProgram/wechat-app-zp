@@ -6,6 +6,27 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+
+  // var db = cloud.database()
+  // var $ = db.command.aggregate
+  // var result = await db.collection('post').aggregate()
+  //   .lookup({
+  //     from: "company",
+  //     localField: "companyId",
+  //     foreignField: "_id",
+  //     as: "company"
+  //   })
+  //   .replaceRoot({
+  //     newRoot: $.mergeObjects([ $.arrayElemAt(['$company', 0]), '$$ROOT' ])
+  //   })
+  //   .project({
+  //     company: 0
+  //   })
+  //   .end()
+  //   return result
+
+
+
   const {jobList} = event;
   try {
     // const res = await db.collection('post').where({_id:jobId}).get();
@@ -29,4 +50,6 @@ exports.main = async (event, context) => {
       statusCode: 443
     };
   }
+
+  
 }
