@@ -416,6 +416,9 @@ Page({
     recruitChange(){
       //TODO
       console.log("招聘管理")
+      wx.navigateTo({
+        url:"/pages/user/manage/index?edit=1&companyId="+this.data.companyId
+      })
     },
 
     /**
@@ -424,7 +427,9 @@ Page({
     postChange(){
       //TODO
       console.log("发布职位")
-
+      wx.navigateTo({
+        url:"/pages/user/post/index?edit=0&postId=''"
+      })
     },
 
     /**

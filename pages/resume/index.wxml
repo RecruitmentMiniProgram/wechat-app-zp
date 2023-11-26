@@ -156,8 +156,7 @@
                 <textarea name="skill" auto-height="true" class="text-area" maxlength="300" placeholder="{{item.experience}}" disabled="true"></textarea>
               </view>
               <view class="row">
-                  <input class="delete_btn" placeholder="长按删除" maxlength="30" />
-                  <!-- <view class="delete_btn">长 按 删 除</view> -->
+                  <input disabled="true" class="delete_btn" placeholder="长按删除" maxlength="30" />
               </view>
           </view>
 

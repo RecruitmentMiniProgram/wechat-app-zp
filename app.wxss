@@ -3,7 +3,24 @@ page {
   --themeColor: #4a90e2;
   /* 你的主题颜色代码 */
 }
-
+.end {
+  border: none;
+  /* padding-bottom: 10rpx; */
+}
+.row {
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* padding: 25rpx 0; */
+  margin-bottom: 20rpx;
+  /* font-size: 30rpx; */
+  border-bottom: 1rpx solid #f1f1f1;
+  /* justify-content: space-between; */
+  /* position: relative; */
+}
+.delete_btn{
+  margin:0 auto;
+  text-align: center;
+}
 .container {
   height: 100%;
   display: flex;
