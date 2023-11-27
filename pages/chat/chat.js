@@ -104,7 +104,6 @@ Page({
     this.setData({type: type})
     this.setData({id: id})
     this.setData({status: status})
-
     const db = wx.cloud.database()
     if(type == 0) {
         wx.setNavigationBarTitle({
@@ -134,10 +133,10 @@ Page({
     } else {
       var chatList = new Array();
       var index = 0;
-      
+ 
       let chatHistory = await db.collection('chat_history').doc(id).get()
       if(chatHistory.length == 0) return
-
+  
       var chatData = chatHistory.data
       if(status == 1) {
           wx.setNavigationBarTitle({

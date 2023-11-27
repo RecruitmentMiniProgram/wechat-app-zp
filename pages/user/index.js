@@ -45,7 +45,6 @@ Page({
    */
     onLoad(options) {
       this.checkLogin()
-      this.initChatInfo()
       wx.hideLoading()
     },
 
@@ -82,6 +81,7 @@ Page({
       }else if(this.data.status==2){
         this.getCompany()
       }
+      this.initChatInfo()
       wx.hideLoading()
     },
     /**

@@ -54,7 +54,7 @@ Page({
    * 生命周期函数--监听页面加载(获取用户的微信信息)
    */
   data: {
-    
+    lastChat:0
   },
 
   goToChat: function (event) {
@@ -64,6 +64,7 @@ Page({
     this.setData({
       chatList: this.data.chatList
     })
+    this.setData({lastChat: index + 1})
     // 根据聊天信息跳转到相应的聊天页面，你需要传递聊天相关的参数
     wx.navigateTo({
       url: '/pages/chat/chat?type=' + chat.type + '&id=' + chat.id,
@@ -105,6 +106,7 @@ Page({
     });
   },
 
+
   async onLoad() {
     this.setData({load: false})
     wx.showLoading({
@@ -114,6 +116,7 @@ Page({
     var that = this
     var isLogin = false
     var status = wx.getStorageSync('status')
+    console.log(status)
     this.setData({status: status})
 
     try{
@@ -133,9 +136,10 @@ Page({
     }catch (e) {
       console.log('读取session发生错误' + e)
     }
-
+    this.setData({loadBefore:false})
     //如果登录，则初始化消息列表
     if(isLogin) {
+      this.setData({loadBefore:true})
        await this.initChatList(this)
 
         var that = this
@@ -284,8 +288,67 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  async onShow() {
+    var that = this
+    var isLogin = false
+    var status = wx.getStorageSync('status')
+    this.setData({status: status})
 
+    try{
+      if(status == 0 || status == null) {
+        isLogin = false;
+        //未登录
+        this.setData({
+          login: false,
+          loadBefore: false
+        });
+      } else {
+        isLogin = true;
+        //登录
+        this.setData({
+          login: true,
+        });
+      }
+    }catch (e) {
+      console.log('读取session发生错误' + e)
+    }
+
+    if(isLogin) {
+      var index = this.data.lastChat
+      if(index != 0) {
+        const chat = this.data.chatList[index - 1];
+        chat.red = false
+        this.setData({
+          chatList: this.data.chatList
+        })
+        this.setData({lastChat: 0})
+      }
+    }
+
+    //如果登录，则初始化消息列表
+    if(isLogin) {
+        this.setData({load: false})
+       await this.initChatList(this)
+
+        var that = this
+        //用户启动监听，如果消息列表发生变化则刷新
+        intervalId = setInterval(async function() {
+            var userId = that.data.userId
+            
+            //可见的聊天列表
+            const db = wx.cloud.database()
+            let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
+            if(chatListResult.data.length == 0) return
+            var dbList = chatListResult.data[0].data
+            if(dbList.length == 0) return
+            if(that.data.chatList.length == 0 ||
+              that.data.newTime < dbList[0].time) {
+                that.initChatList(that)
+            }
+        }, 2000);
+        this.setData({load:true})
+    }
+    
   },
 
   /**

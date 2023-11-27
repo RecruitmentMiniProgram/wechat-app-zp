@@ -272,7 +272,6 @@ Page({
   qbzwLoad: function () {
     var that = this;
 
-
     db.collection('post').where({})
       .orderBy('timestamp', 'desc')
       .get({
@@ -287,7 +286,6 @@ Page({
             that.setData({
               jobList: jobList,
             });
-
           }).catch(err => {
             console.log("failed")
           })

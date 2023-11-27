@@ -12,12 +12,13 @@
           
               <view class="con" wx:elif="{{item.role == 3}}">
                 <image src ="/images/check_post.png" class="chatPost" bindtap="onButtonClick" data-role="{{item.role}}"></image>
-                <text style="white-space: nowrap;" class="text">查看岗位</text>
+                <text bindtap="onButtonClick" 
+                data-role="{{item.role}}" style="white-space: nowrap;" class="text">查看岗位</text>
             </view>
 
             <view class="conb" wx:else="">
               <image src="/images/check_resume.png" class="chatResume" bindtap="onButtonClick" data-role="{{item.role}}"></image>
-              <text style="white-space: nowrap;" class="text">查看我的简历</text>
+              <text data-role="{{item.role}}" bindtap="onButtonClick" style="white-space: nowrap;" class="text">查看我的简历</text>
             </view>
         </view>
       </scroll-view>
@@ -34,12 +35,12 @@
 
         <view class="con" wx:elif="{{item.role == 3}}">
             <image src ="/images/check_post.png" class="chatPost" bindtap="onButtonClick" data-role="{{item.role}}"></image>
-            <text style="white-space: nowrap;" class="text">查看岗位</text>
+            <text data-role="{{item.role}}" bindtap="onButtonClick" style="white-space: nowrap;" class="text">查看岗位</text>
         </view>
 
         <view class="conb" wx:else="">
           <image src="/images/check_resume.png" class="chatResume" bindtap="onButtonClick" data-role="{{item.role}}"></image>
-          <text style="white-space: nowrap;" class="text">查看他（她）的简历</text>
+          <text data-role="{{item.role}}" bindtap="onButtonClick" style="white-space: nowrap;" class="text">查看他（她）的简历</text>
         </view>
 
       </view>
