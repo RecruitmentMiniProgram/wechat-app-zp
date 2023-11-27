@@ -1,0 +1,6 @@
+<view>
+  <view>
+    <job edit="1" query="{{query}}"></job>
+  </view>
+</view>
+

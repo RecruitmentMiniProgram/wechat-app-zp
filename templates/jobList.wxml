@@ -1,55 +1,120 @@
-@import "../../app.wxss";
-<wxs src="../utils/time.wxs" module="time" />
+@import "/app.wxss";
+<wxs src="/utils/time.wxs" module="time" />
 <template name="jobList">
-  <view class="job_list_wrap" wx:for="{{jobList}}" wx:key="jobId">
-    <view class="job_list_raw">
-      <navigator class="" target="" url="/pages/job_details/index?jobId={{item._id}}" hover-class="navigator-hover" open-type="navigate">
-        <view class="content content_top">
-          <view class="content_top_lft">
-            <!-- 职业名称 -->
-            <view class="job_name">{{item.name}}</view>
-            <!-- 职业要求 -->
-            <view class="job_details">
-              <view class="job_city" wx:if="{{item.position!=''}}">{{item.position}}</view>
-              <view class="job_skill" wx:if="{{item.description!=''}}">{{item.description}}</view>
-              <view class="job_year">{{item.age}}岁</view>
-              <view class="job_edu">{{item.education}}</view>
+  <!-- 不可编辑的jobList -->
+  <view wx:if="{{edit==undefined||edit==null||edit==0}}">
+    <view  wx:for="{{jobList}}" wx:key="jobId">
+      <view class="job_list_wrap" >
+        <view class="job_list_raw">
+          <navigator   class="" target="" url="/pages/job_details/index?jobId={{item._id}}" hover-class="navigator-hover" open-type="navigate">
+            <view class="content content_top">
+                <view class="content_top_lft">
+                <!-- 职业名称 -->
+                <view class="job_name">{{item.name}}</view>
+                <!-- 职业要求 -->
+                <view class="job_details">
+                  <view class="job_city" wx:if="{{item.position!=''}}">{{item.position}}</view>
+                  <!-- <view class="job_skill" wx:if="{{item.description!=''}}">{{item.description}}</view> -->
+                  <view class="job_year" wx:if="{{item.workTime !=null && item.workTime!=undefined}}">{{item.workTime}}</view>
+                  <view class="job_edu">{{item.education}}</view>
+                </view>
+                </view>
+                <!-- 工资 发布时间 -->
+                <view class="content_top_rgt">
+                <view class="job-salary">
+                  <!-- <view class="job_skill">{{item.salary}}</view> -->
+                  <!-- <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view> -->
+                </view>
+                <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->
+                </view>
             </view>
-          </view>
-          <!-- 工资 发布时间 -->
-          <view class="content_top_rgt">
-            <view class="job-salary">
-              <!-- <view class="job_skill">{{item.salary}}</view> -->
-              <!-- <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view> -->
+            <view class="content_btm">
+              <view class="content_btm_lft">
+                <image class="" src="{{item.img}}" mode="aspectFit" />
+              </view>
+              <view class="content_btm_rgt">
+                <view class="cbr_top">
+                  <view class="cbr_top_lft">
+                    <view class="">{{item.company.minName}}</view>
+                  </view>
+                  <view class="cbr_top_rgt">
+                    <view class="">{{item.min_salary}}-{{item.max_salary}}</view>
+                  </view>
+                </view>
+                <view class="cbr_btm">
+                  <view class="cbr_btm_lft">
+                    <view class="">{{item.company.industry}}</view>
+                  </view>
+                  <view class="cbr_btm_rgt">
+                    <!-- <view class="">{{time.formatDateString(item.time)}}</view> -->
+                    <view class="">{{time.formatTime(item.timestamp)}}</view>
+                  </view>
+                </view>
+              </view>
             </view>
-            <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->
-          </view>
+          </navigator>
         </view>
-        <view class="content_btm">
-          <view class="content_btm_lft">
-            <image class="" src="{{item.company.logo}}" mode="aspectFit" />
-          </view>
-          <view class="content_btm_rgt">
-            <view class="cbr_top">
-              <view class="cbr_top_lft">
-                <view class="">{{item.company.minName}}</view>
-              </view>
-              <view class="cbr_top_rgt">
-                <view class="">{{item.min_salary}}-{{item.max_salary}}</view>
-              </view>
-            </view>
-            <view class="cbr_btm">
-              <view class="cbr_btm_lft">
-                <view class="">{{item.company.industry}}</view>
-              </view>
-              <view class="cbr_btm_rgt">
-                <!-- <view class="">{{time.formatDateString(item.time)}}</view> -->
-                <view class="">{{time.formatTime(item.timestamp)}}</view>
-              </view>
-            </view>
-          </view>
-        </view>
-      </navigator>
+      </view>
     </view>
   </view>
+
+  <!-- 可编辑的jobList -->
+  <view wx:else>
+    <view  class="row" wx:for="{{jobList}}" wx:key="jobId"  bindlongpress="longtapDeleteWork" data-index="{{index}}">
+      <view class="job_list_wrap" >
+        <view class="job_list_raw">
+          <navigator class="" target="" url="/pages/user/post/index?edit=1&postId={{item._id}}" hover-class="navigator-hover" open-type="navigate">
+            <view class="content content_top">
+              <view class="content_top_lft">
+                <!-- 职业名称 -->
+                <view class="job_name">{{item.name}}</view>
+                <!-- 职业要求 -->
+                <view class="job_details">
+                  <view class="job_city" wx:if="{{item.position!=''}}">{{item.position}}</view>
+                  <!-- <view class="job_skill" wx:if="{{item.description!=''}}">{{item.description}}</view> -->
+                  <view class="job_year" wx:if="{{item.workTime !=null && item.workTime!=undefined}}">{{item.workTime}}</view>
+                  <view class="job_edu">{{item.education}}</view>
+                </view>
+              </view>
+              <!-- 工资 发布时间 -->
+              <view class="content_top_rgt">
+                <view class="job-salary">
+                  <!-- <view class="job_skill">{{item.salary}}</view> -->
+                  <!-- <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view> -->
+                </view>
+                <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->
+              </view>
+            </view>
+            <view class="content_btm">
+              <view class="content_btm_lft">
+                <image class="" src="{{item.img}}" mode="aspectFit" />
+              </view>
+              <view class="content_btm_rgt">
+                <view class="cbr_top">
+                  <view class="cbr_top_lft">
+                    <view class="">{{item.company.minName}}</view>
+                  </view>
+                  <view class="cbr_top_rgt">
+                    <view class="">{{item.min_salary}}-{{item.max_salary}}</view>
+                  </view>
+                </view>
+                <view class="cbr_btm">
+                  <view class="cbr_btm_lft">
+                    <view class="">{{item.company.industry}}</view>
+                  </view>
+                  <view class="cbr_btm_rgt">
+                    <!-- <view class="">{{time.formatDateString(item.time)}}</view> -->
+                    <view class="">{{time.formatTime(item.timestamp)}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </navigator>
+        </view>
+      </view>
+      <input class="delete_btn" placeholder="长按删除"  disabled='true' maxlength="30" />
+    </view>
+  </view>
+
+  <view style="height:5rpx"></view>
 </template>

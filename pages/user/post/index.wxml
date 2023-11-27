@@ -1,0 +1,141 @@
+<!-- 数据内容 -->
+<form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">基本信息</view>
+    </view>
+    <view class="row end">
+      <view>岗位名称<text class="required">*</text></view>
+    </view>
+    <view class="row">
+      <textarea value="{{name}}" name="skill" bindinput="postNameChange" auto-height="true" class="address_text-area" maxlength="20" placeholder="例如：大数据开发工程师"></textarea>
+    </view>
+    <view class="row end">
+      <view>工作时间<text class="required">*</text></view>
+    </view>
+    <view class="row">
+        <textarea value="{{workTime}}" name="skill" bindinput="workTimeChange" auto-height="true" class="address_text-area" maxlength="35" placeholder="例如：5天/周,6个月以上"></textarea>
+    </view>
+    <view class="row ">
+      <view>学历要求<text class="required">*</text></view>
+      <picker class="right" value="{{education}}" bindchange="bindEducationChange" range="{{arrayEducation}}">
+        <text>{{arrayEducation[education]}}</text>
+        <text class="triangle">▼</text>
+      </picker>
+    </view>
+    <view class="row">
+      <view>工作城市<text class="required">*</text></view>
+        <picker class="right" level="city"  mode="region" bindchange="bindRegionChange" value="{{region}}">
+            <text>{{address==''?region:address}}</text>
+            <text class="triangle">▼</text>
+        </picker>
+    </view>
+    <view class="row end">
+      <view>工作经验<text class="required">*</text></view>
+      <picker class="right" value="{{experience}}" bindchange="experienceChange" range="{{arrayExperience}}">
+        <text>{{arrayExperience[experience]}}</text>
+        <text class="triangle">▼</text>
+      </picker>
+    </view>
+  </view>
+
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">薪资待遇</view>
+    </view>
+    <view class="row {{salary ==0 ? 'end':''}}">
+      <view>是否面议<text class="required">*</text></view>
+        <picker class="right"  bindchange="bindSalaryChange" value="{{salary}}"  range="{{arraySalary}}">
+            <text>{{arraySalary[salary]}}</text>
+            <text class="triangle">▼</text>
+        </picker>
+    </view>
+    <view wx:if="{{salary==1}}">
+      <view class="row {{salary == 0 ? 'red' : ''}}">
+      <view>最低月薪<text class="required">*</text></view>
+      <view class="right">
+        <input value="{{minSalary}}"  type="number" bindchange="minSalaryChange" name="mail" placeholder="请输入最低月薪" maxlength="20" />
+      </view>
+    </view>
+    <view class="row end">
+      <view>最高月薪<text class="required">*</text></view>
+      <view class="right">
+        <input value="{{maxSalary}}" type="number" bindchange="maxSalaryChange" name="mail" placeholder="请输入最高月薪" maxlength="20" />
+      </view>
+    </view>
+    </view>
+
+  </view>
+
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">岗位描述<text class="required">*</text></view>
+    </view>
+    <view class="row">
+      <textarea value="{{description}}" name="skill" bindinput="descriptionChange" auto-height="true" class="text-area" placeholder="填写岗位要求" maxlength="2000"></textarea>
+      <view class="word-count {{descriptionLength >= 2000 ? 'red' : ''}}">
+        {{descriptionLength}}/2000</view>
+    </view>
+  </view>
+  <!-- 岗位职责 -->
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">任职要求<text class="required">*</text></view>
+    </view>
+    <view class="row">
+      <textarea value="{{responsibility}}" name="skill" bindinput="responsibilityChange" auto-height="true" class="text-area" placeholder="填写岗位职责" maxlength="2000"></textarea>
+      <view class="word-count {{responsibilityLength >= 2000 ? 'red' : ''}}">
+        {{responsibilityLength}}/2000</view>
+    </view>
+  </view>
+
+
+  <!-- 公司logo -->
+  <!-- <view class="box">
+    <view class="level nav-flex">
+      <view class="level">
+        <view class="dot"></view>
+        <view class="title">公司标志</view>
+      </view>
+      <view class="add-img" bindtap="selectLogo" data-tag="1">+</view>
+    </view>
+    <view class="row">
+      <textarea name="certificate" auto-height="true"  maxlength="300" disabled="true" placeholder="点击右上角加号可添加公司照片，长按图片删除"></textarea>
+    </view>
+    <view class="attr-img">
+      <block wx:for="{{attrLogo}}" wx:for-index="index" wx:for-item="item" wx:key="item">
+        <image bindlongpress="longtapDeleteLogo" data-index="{{index}}" bindtap="previewClickLogo" data-url="{{item}}" class="img" src="{{item}}" mode="widthFix"></image>
+      </block>
+    </view>
+  </view> -->
+
+  <!-- 其他信息 -->
+  <view class="box">
+    <view class="level nav">
+      <view class="dot"></view>
+      <view class="title">其他信息<text class="required">*</text></view>
+    </view>
+    <view class="row ">
+      <view>工作类型<text class="required">*</text></view>
+      <picker class="right" value="{{kind}}" bindchange="bindKindChange" range="{{arrayKind}}">
+        <text>{{arrayKind[kind]}}</text>
+        <text class="triangle">▼</text>
+      </picker>
+    </view>
+    <view class="row end">
+      <view>是否接受应届<text class="required">*</text></view>
+      <picker class="right" value="{{graduate}}" bindchange="bindGraduateChange" range="{{arrayGraduate}}">
+        <text>{{arrayGraduate[graduate]}}</text>
+        <text class="triangle">▼</text>
+      </picker>
+    </view>
+  </view>
+  <view class="btn_container">
+    <button formType="submit" class="btn" hover-class="btn-hover">提交</button>
+  </view>
+</form>
+
