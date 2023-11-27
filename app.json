@@ -1,27 +1,23 @@
 {
   "pages": [
-    
     "pages/index/index",
+    "pages/join_group/index",
+    
     "pages/user/manage/index",
     "pages/user/index",
     "pages/user/post/index",
     "pages/jobs_list/index",
-
     "pages/user/edit/index",
-
     "pages/company_home/index",
     "pages/award/award",
     "pages/search/search",
     "pages/searchresult/searchresult",
-
     "pages/user/view/view",
     "pages/register/register",
     "pages/login/login",
     "pages/user/resume/index",
-
     "pages/all_resume/index",
     "pages/all_chat/index",
-
     "pages/job_details/index",
     "pages/show_resume/show_resume",
     "pages/message/message",
@@ -31,11 +27,7 @@
     "pages/resume/index",
     "pages/resume/work/index",
     "pages/resume/intention/index",
-
-
-
     "pages/test/index",
-
     "pages/category_job/index",
     "pages/setting/index",
     "pages/job_publish/index",
@@ -51,6 +43,7 @@
     "pages/recruit/index",
     "pages/recruit_detail/index",
     "pages/recruit_old/index"
+    
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
