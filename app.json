@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/join_group/index",
+    "pages/index/index",
+    
     
     "pages/user/manage/index",
     "pages/user/index",
@@ -80,5 +81,11 @@
         "text": "我的"
       }
     ]
-  }
+  },
+  "plugins": {
+    "materialPlugin": {
+      "version": "1.0.5",
+          "provider": "wx4d2deeab3aed6e5a"
+    }
+  }  
 }
