@@ -128,22 +128,27 @@ Component({
   //提交修改
   submitPost(e){
     console.log(this.data.deleteList)
+
     // 小程序端的代码
     wx.cloud.callFunction({
       name: 'deleteByIdBatch',
       data: {
         idsToDelete:this.data.deleteList
-      },
-      success: res => {
-        console.log("批量删除职位成功");
-        // 处理删除成功的情况
-        wx.navigateBack()
-      },
-      fail: err => {
-        console.error("批量删除职位失败:",err);
-        // 处理删除失败的情况
       }
-});
+     }).then(res=>{
+      wx.cloud.callFunction({
+        name: 'deleteResumeBatch',
+        data: {
+          idsToDelete:this.data.deleteList
+        }
+      })
+    }).then(res=>{
+      console.log("批量删除职位成功");
+      // 处理删除成功的情况
+      wx.navigateBack()
+    }).catch(err=>{
+      console.error("批量删除职位失败:",err);
+    })
 
 
   }

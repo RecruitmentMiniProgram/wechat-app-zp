@@ -9,7 +9,7 @@
       <view>岗位名称<text class="required">*</text></view>
     </view>
     <view class="row">
-      <textarea value="{{name}}" name="skill" bindinput="postNameChange" auto-height="true" class="address_text-area" maxlength="20" placeholder="例如：大数据开发工程师"></textarea>
+      <textarea value="{{name}}" name="skill" bindinput="postNameChange" auto-height="true" class="address_text-area" maxlength="50" placeholder="例如：大数据开发工程师"></textarea>
     </view>
     <view class="row end">
       <view>工作时间<text class="required">*</text></view>
