@@ -4,6 +4,8 @@
     "pages/resume/index",
     "pages/join_group/index",
     
+    
+    
     "pages/user/manage/index",
     "pages/user/index",
     "pages/user/post/index",
@@ -86,5 +88,11 @@
     "scope.makePhoneCall": {
       "desc": "请授权小程序拨打电话功能"
     }
-  }
+  },
+  "plugins": {
+    "materialPlugin": {
+      "version": "1.0.5",
+          "provider": "wx4d2deeab3aed6e5a"
+    }
+  }  
 }

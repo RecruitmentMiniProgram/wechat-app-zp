@@ -1,2 +1,27 @@
-<!--pages/join_group/index.wxml-->
-<text>pages/join_group/index.wxml</text>
+<view style="height: {{adaptiveViewHeight}}" id="adaptiveView" class="group">
+    <text class="title">{{data.title}}</text>
+    <text class="invi">邀你入群</text>
+    <view class="cow"> 
+    <icon class="gou" type="success" size="18" color="red" />
+    <text class="t">最新优质职位</text>
+    </view>
+
+    <view class="cow"> 
+    <icon class="gou" type="success" size="18" color="red" />
+    <text class="t">一对一职位推荐</text>
+    </view>
+
+    <view class="cow"> 
+    <icon class="gou" type="success" size="18" color="red" />
+    <text class="t">个人职场提升</text>
+    </view>
+
+    <view class="cow"> 
+    <icon class="gou" type="success" size="18" color="red" />
+    <text class="t">专业咨询指导</text>
+    </view>
+    <image mode="aspectFit"style=" margin-top: 5%; margin-bottom: 5%;width: 200px;" src = "/images/invite.png"></image>
+   
+ </view>
+
+ <button style="text-align: center; line-height: 50px;margin-top: 10%;" hover-class="btn-hover" bindtap="preview"  class="btn">加入群聊</button>

@@ -1,1 +1,73 @@
-/* pages/join_group/index.wxss */
+.group{
+  background-color: rgba(141, 240, 219, 0.3); 
+  width: 90%;
+  height: 80vh;
+  border-radius: 15px;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+}
+
+.title{
+  margin-top: 10%;
+  color: #000; /* 文字颜色 */
+  font-size: 22px; /* 字体大小 */
+  font-family: "思源黑体";
+  letter-spacing: 1px;
+  font-weight: 800;
+}
+
+.invi{
+  margin-top: 5%;
+  color: #fff; /* 文字颜色 */
+  font-size: 15px; /* 字体大小 */
+  letter-spacing: 1px;
+  font-weight: 500;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px; /* 圆角 */
+  background-color: #04BE02
+}
+
+.cow{
+  margin-top: 5%;
+  color: #000; /* 文字颜色 */
+  font-size: 15px; /* 字体大小 */
+  letter-spacing: 1px;
+  font-weight: 550;
+
+  display: inline-block;
+  width: 70%; /* 设置固定的宽度，可以根据需要调整 */
+  background-color: #8df0db; /* 背景颜色 */
+  padding: 7px; /* 可选：添加内边距以增加背景区域 */
+
+  border-radius: 500px; /* 圆角 */
+  background-color: #fff
+}
+
+.gou{
+  padding-left: 5px;
+}
+
+.t{
+  padding-left: 10px;
+}
+
+.btn{
+  width: 50%;
+  height: 50px;
+  font-size: 15px; 
+  border-radius: 5px;
+  background-color:#4a90e2;
+  color:#ffff;
+}
+
+.btn-hover {
+  background-color: #007acc; /* 触摸时的背景色，可以根据需要调整 */
+}
+
