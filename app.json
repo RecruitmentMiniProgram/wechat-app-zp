@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/join_group/index",
     "pages/index/index",
+    "pages/join_group/index",
+    
     
     
     "pages/user/manage/index",
