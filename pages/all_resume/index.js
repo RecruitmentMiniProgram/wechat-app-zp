@@ -96,7 +96,7 @@ Page({
             var companyId = chatDetail.company_id
             let companyResult = await db.collection('company').doc(companyId).get()
             var url = companyResult.data.logo
-            var chatData = new ChatData(id, 1,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
+            var chatData = new ChatData(chatDetail._id, 1,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
             chatList[index] = chatData
             index = index + 1;
       }
@@ -131,7 +131,7 @@ Page({
            let userResult = await db.collection('user').doc(userId).get()
            var url = userResult.data.headUrl
            
-          var chatData = new ChatData(id, 1, name, chatDetail.post_name, convertUnixTimestampToString(time), red, url)
+          var chatData = new ChatData(chatDetail._id, 1, name, chatDetail.post_name, convertUnixTimestampToString(time), red, url)
           chatList[index] = chatData
           index = index + 1;
       }
