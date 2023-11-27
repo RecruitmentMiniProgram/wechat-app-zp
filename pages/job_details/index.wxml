@@ -2,18 +2,25 @@
 <view class="head">
     <view class="job_up">
         <view class="job_name">{{jobObj.name}}</view>
-        <view class="job_salary">{{jobObj.min_salary}}-{{jobObj.max_salary}}</view>
+        <view class="job_salary" wx:if="{{jobObj.salary=='面议'}}">{{jobObj.salary}}</view>
+        <view class="job_salary" wx:else>{{jobObj.min_salary}}-{{jobObj.max_salary}}/{{jobObj.settlement}}</view>
     </view>
     <view class="job_down">
         <view class="job_place">
             <text decode="{{true}}">{{jobObj.position}}&nbsp;|&nbsp;</text>
         </view>
-        <view class="job_year padr">
+        <view class="padr">
             <!-- <text decode="{{true}}">实习要求：{{jobObj.jobDayPerWeek}}&nbsp;{{jobObj.jobTimeSpan}}</text> -->
             <!-- <text decode="{{true}}">实习要求：{{jobObj.description}}&nbsp;|&nbsp;</text> -->
         </view>
         <view class="job_edu padr">
             <text decode="{{true}}">{{jobObj.education}}</text>
+        </view>
+        <view class="padr" wx:if="{{jobObj.kind!=null && jobObj.kind !=undefined && jobObj.kind!=''}}">
+            <text decode="{{true}}">&nbsp;|&nbsp;{{ jobObj.kind}}</text>
+        </view>
+        <view class="padr" wx:if="{{jobObj.graduate!=null && jobObj.graduate !=undefined && jobObj.graduate!=''}}">
+            <text decode="{{true}}">&nbsp;|&nbsp;{{ jobObj.graduate==0?'社招':'校招'}}</text>
         </view>
     </view>
 </view>
@@ -49,12 +56,12 @@
         <text>{{jobObj.description}}</text>
     </view>
 </view>
-<!-- <view class="job_desc">
-    <view class="desc_title">岗位职责</view>
+<view class="job_desc">
+    <view class="desc_title">任职要求</view>
     <view class="desc_details">
-        <rich-text nodes="{{jobObj.description}}"></rich-text>
+        <rich-text nodes="{{jobObj.responsibility}}"></rich-text>
     </view>
-</view> -->
+</view>
 <view class="Interview_loca">
     <view class="loca_title">工作城市</view>
     <view class="loca_details">{{jobObj.position}}</view>

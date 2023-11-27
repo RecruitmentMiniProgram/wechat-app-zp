@@ -1,4 +1,6 @@
 // index.js
+const db=wx.cloud.database()
+const _=db.command
 Page({
   data: {
     show: false,
@@ -36,24 +38,22 @@ Page({
     region:'',
     workList:[],
     intentionData:null,
+    invitation:0,
+    realIntentionData:null,
     itemStyle: []// 用于存储每个 item 的样式
   },
     /**
    * 生命周期函数--监听页面加载
    */
     onLoad(options) {
-      console.log("onLoad")
     },
   
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady() {
-      console.log("onReady")
     },
   bindRegionChange(e){
-    console.log("选择区域")
-    console.log(e.detail.value)
     var temp=''
     for(var i=0;i<e.detail.value.length;i++){
       temp+=e.detail.value[i]
@@ -77,8 +77,6 @@ Page({
           that.setData({
             workList: list
           })
-          console.log("删除后")
-          console.log(this.data.workList)
         }
       }
     })
@@ -93,6 +91,15 @@ Page({
     return regex.test(phoneNumber);  
   },
     /**
+   * 邀请码
+   * @param {*} e 
+   */
+    invitationChange(e){
+      this.setData({
+        invitation:e.detail.value
+      })
+    },
+    /**
    * 提交数据
    * @param {*} e 
    */
@@ -101,26 +108,17 @@ Page({
         this.data.phone=='请填写手机号'||
         this.data.sex==''||
         this.data.education==''||
-        this.data.intentionData==null||
         this.data.date==''||
-        this.data.experience.length==0)){
-          console.log(this.data.nickName)
-          console.log(this.data.sex)
-          console.log(this.data.phone)
-          console.log(this.data.education)
-          console.log(this.data.intentionData)
-          console.log(this.data.date)
-          console.log(this.data.experience)
+        this.data.experience.length==0||
+        this.data.realIntentionData==null)){
         wx.showModal({  
           title: '提示',  
           content: '请补充完整必填项',  
           success: function(res) {  
             if (res.confirm) {  
               // 点击确定按钮触发的回调函数  
-              console.log('用户点击了确定')  
             } else if (res.cancel) {  
               // 点击取消按钮触发的回调函数  
-              console.log('用户点击了取消')  
             }  
           }  
         })
@@ -132,25 +130,21 @@ Page({
             success: function(res) {  
               if (res.confirm) {  
                 // 点击确定按钮触发的回调函数  
-                console.log('用户点击了确定')  
               } else if (res.cancel) {  
                 // 点击取消按钮触发的回调函数  
-                console.log('用户点击了取消')  
               }  
             }  
           })
         }else{
-          console.log(this.data.workList)
-          console.log(this.data.intentionData)
             //将用户的数据存到数据库中
         var userData={
           name:this.data.nickName,
           sex:this.data.arraySex[this.data.sex],
           age:this.data.date,
           experience:this.data.experience,
-          intention:this.data.intentionData,
+          intention:this.data.realIntentionData,
           degree:this.data.arrayEducation[this.data.education],
-          work:this.data.workList,
+          work:this.data.realWorkList,
           education:{
             school:this.data.school,
             major:this.data.major,
@@ -167,7 +161,8 @@ Page({
           interview:0,
           headUrl:this.data.avatar==this.data.defaultUrl?"":this.data.avatar,
           self:this.data.self,
-          email:this.data.email
+          email:this.data.email,
+          invitation:0
         }
         
           //使用云函数直接插入数据库中
@@ -178,8 +173,7 @@ Page({
               data:userData
             }
           }).then(res=>{
-            console.log("用户注册成功")
-            console.log(res)
+            console.log("用户注册成功",res)
             wx.setStorageSync(
               "userId",res.result.data.user._id
             )
@@ -189,20 +183,42 @@ Page({
             wx.setStorageSync(
               "companyId",''
             )
+            if(this.data.invitation.length!=0){
+              try{
+                let id=this.data.invitation.split('::')[1]
+                db.collection('user').doc(id).update({
+                  data:{
+                    invitation:_.inc(1)
+                  }
+                })
+              }catch(err){
+                console.log("用户邀请码失效:",err)
+              }
+            }
+          }).then(res=>{
             // 跳转到个人页面
             wx.switchTab({
               url: '../user/index'
             })
           }).catch(err=>{
-            console.log("用户注册失败")
+            console.log("用户注册失败:",err)
           })
         }
       }
     },
   onShow(){
     //检查回传的数据
-    console.log(this.data.intentionData)
-    console.log(this.data.workList)
+    if(this.data.intentionData!=null||this.data.intentionData!=undefined){
+      this.setData({
+        realIntentionData:this.data.intentionData
+      })
+    }
+    if(this.data.workList!=[]||this.data.workList!=undefined){
+      this.setData({
+        realWorkList:this.data.workList
+      })
+    }
+
   },
   /**
    * 专业
@@ -212,7 +228,6 @@ Page({
     this.setData({
       major:e.detail.value
     })
-    console.log(this.data.major)
   },
   /**
    * 毕业时间
@@ -221,7 +236,6 @@ Page({
     this.setData({
       endDate:e.detail.value
     })
-    console.log(this.data.endDate)
   },
   /**
    * 入学时间
@@ -231,7 +245,6 @@ Page({
     this.setData({
       beginDate:e.detail.value
     })
-    console.log(this.data.beginDate)
   },
   /**
    * 记录学校
@@ -241,25 +254,22 @@ Page({
     this.setData({
       school:e.detail.value
     })
-    console.log(this.data.school)
   },
   /**
    * 邮箱
    * @param {} e 
    */
   emailChange(e){
-    console.log("记录邮箱")
     this.setData({
       email:e.detail.value
     })
-    console.log(this.data.email)
+
   },
   /**
    * 求职意向
    * @param {} e 
    */
   intentionChange(e){
-    console.log("编辑求职意向")
     wx.navigateTo({
       url: './intention/index',
     })
@@ -269,7 +279,6 @@ Page({
    * @param {*} e 
    */
   workChange(e){
-    console.log("编辑工作经历")
     wx.navigateTo({
       url: './work/index',
     })
@@ -310,7 +319,6 @@ Page({
    * @param {*} e 
    */
   bindDateChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
       this.data.date=e.detail.value
       this.setData({
         date:e.detail.value
@@ -321,7 +329,6 @@ Page({
    * @param {*} e 
    */
   bindEducationChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
       this.setData({
         education:e.detail.value
       })
@@ -332,7 +339,6 @@ Page({
    * @param {*} e 
    */
   bindSexChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       sex:e.detail.value
     })
@@ -343,7 +349,6 @@ Page({
    * @param {*} e 
    */
   bindMarryChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       marry: e.detail.value
     })
@@ -387,7 +392,6 @@ Page({
       maxDuration: 30,
       camera: 'back',
       success(res) {
-        console.log(res)
         var filePath=res.tempFiles[0].tempFilePath
         wx.showLoading({
           title: '上传中...',
@@ -396,7 +400,6 @@ Page({
           cloudPath: "images/" + new Date().getTime() + '.png',
           filePath: filePath,
           success: (uploadRes) => {
-            console.log('上传成功', uploadRes);
             filePath=uploadRes.fileID
             if (type == '0') {
               that.setData({

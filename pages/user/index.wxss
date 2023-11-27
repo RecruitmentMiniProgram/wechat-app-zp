@@ -122,10 +122,10 @@ page{
 }
 
 .Head{
-  width: 158rpx;
-  height: 158rpx;
+  width: 150rpx;
+  height: 150rpx;
   display: block;
-  clip-path: circle(79rpx at center); 
+  clip-path: circle(75rpx at center); 
   margin: 4rpx auto;
 }
 .dian{

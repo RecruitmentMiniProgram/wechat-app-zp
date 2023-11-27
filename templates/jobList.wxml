@@ -38,7 +38,8 @@
                     <view class="">{{item.company.minName}}</view>
                   </view>
                   <view class="cbr_top_rgt">
-                    <view class="">{{item.min_salary}}-{{item.max_salary}}</view>
+                    <view class="" wx:if="{{item.salary=='面议'}}">{{item.salary}}</view>
+                    <view class="" wx:else>{{item.min_salary}}-{{item.max_salary}}/{{item.settlement}}</view>
                   </view>
                 </view>
                 <view class="cbr_btm">
@@ -95,7 +96,8 @@
                     <view class="">{{item.company.minName}}</view>
                   </view>
                   <view class="cbr_top_rgt">
-                    <view class="">{{item.min_salary}}-{{item.max_salary}}</view>
+                    <view class="" wx:if="{{item.salary=='面议'}}">{{item.salary}}</view>
+                    <view class="" wx:else>{{item.min_salary}}-{{item.max_salary}}/{{item.settlement}}</view>
                   </view>
                 </view>
                 <view class="cbr_btm">

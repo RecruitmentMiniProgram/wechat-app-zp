@@ -41,7 +41,6 @@ Component({
       // wx.showLoading({
       //   title: '加载中...',
       // })
-      console.log(this.data.query)
       this.getJobList(this.data.QueryParams)
     },
   },
@@ -84,8 +83,6 @@ Component({
             data: {jobList: jobList }
           }).then(res => {
             jobList = res.result;
-            console.log(jobList)
-
             var total = jobList.length;
             var totalPages = Math.ceil(total / QueryParams.pagesize);
             that.setData({
@@ -95,7 +92,6 @@ Component({
             });
             wx.hideLoading()
           }).catch(err => {
-            console.log("failed")
             wx.hideLoading()
           })
         }
@@ -105,7 +101,6 @@ Component({
   //长按删除卡牌
   longtapDeleteWork(e){
       let that = this;
-      console.log(e)
       let tag = e.currentTarget.dataset.index;
       
       wx.showModal({
@@ -143,7 +138,6 @@ Component({
         }
       })
     }).then(res=>{
-      console.log("批量删除职位成功");
       // 处理删除成功的情况
       wx.navigateBack()
     }).catch(err=>{

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/resume/index",
     "pages/user/manage/index",
     "pages/user/index",
     "pages/user/post/index",
@@ -27,7 +28,7 @@
     "pages/chat/chat",
     "pages/user/resume/work/index",
     "pages/user/resume/intention/index",
-    "pages/resume/index",
+
     "pages/resume/work/index",
     "pages/resume/intention/index",
 
@@ -86,5 +87,10 @@
         "text": "我的"
       }
     ]
+  },
+  "permission": {
+    "scope.makePhoneCall": {
+      "desc": "请授权小程序拨打电话功能"
+    }
   }
 }

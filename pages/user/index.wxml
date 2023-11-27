@@ -59,6 +59,20 @@
         </view>
         <image src='../../images/jiantou.png' class='jiantou'></image>
       </view>
+      <view class='list' bindtap="groupChange">
+        <view class='list_left'>
+          <image class='listIcon' src='../../images/groups.png'></image>
+          <view class='listName'>加入群聊</view>
+        </view>
+        <image src='../../images/jiantou.png' class='jiantou'></image>
+      </view>
+      <view class='list' bindtap="ourChange">
+        <view class='list_left'>
+          <image class='listIcon' src='../../images/ours.png'></image>
+          <view class='listName'>联系客服</view>
+        </view>
+        <image src='../../images/jiantou.png' class='jiantou'></image>
+      </view>
       <view class='list' bindtap='view'>
         <view class='list_left'>
           <image class='listIcon' src='../../images/feedback.png'></image>
@@ -66,7 +80,15 @@
         </view>
         <image src='../../images/jiantou.png' class='jiantou'></image>
       </view>
-
+      <view class='list' bindtap="copyText">
+        <view class='list_left'>
+          <image class='listIcon' src='../../images/share.png'></image>
+          <view class='listName'>一键邀请</view>
+        </view>
+        <view class='list_right'>
+          <view class='check'>复制</view>
+        </view>  
+      </view>
       <button class='signOut' bindtap='signOut'>退出登录</button>
     </view>
   </view>
@@ -132,6 +154,20 @@
         </view>
         <image src='../../images/jiantou.png' class='jiantou'></image>
       </view>
+      <view class='list' bindtap="groupChange">
+        <view class='list_left'>
+          <image class='listIcon' src='../../images/groups.png'></image>
+          <view class='listName'>加入群聊</view>
+        </view>
+        <image src='../../images/jiantou.png' class='jiantou'></image>
+      </view>
+      <view class='list' bindtap="ourChange">
+        <view class='list_left'>
+          <image class='listIcon' src='../../images/ours.png'></image>
+          <view class='listName'>联系客服</view>
+        </view>
+        <image src='../../images/jiantou.png' class='jiantou'></image>
+      </view>
       <view class='list' bindtap='view'>
         <view class='list_left'>
           <image class='listIcon' src='../../images/feedback.png'></image>
@@ -139,14 +175,21 @@
         </view>
         <image src='../../images/jiantou.png' class='jiantou'></image>
       </view>
-
+      <view class='list' bindtap="copyText">
+        <view class='list_left'>
+          <image class='listIcon' src='../../images/share.png'></image>
+          <view class='listName'>一键邀请</view>
+        </view>
+        <view class='list_right'>
+          <view class='check'>复制</view>
+        </view>  
+      </view>
       <button class='signOut' bindtap='signOut'>退出登录</button>
     </view>
   </view>
-
-    <!-- 热线 -->
-    <!-- <import src="../template/template.wxml"/>
-    <template is="rexian"/> -->
+          <!-- 热线 -->
+  <import src="./template/template.wxml"/>
+  <template is="rexian"/>
 </view>
 <view wx:else style="background-color: #ffff; width: 100%; height: {{windowsHeight}}px;">
   <view class="unLogin" >

@@ -39,6 +39,7 @@ Page({
     workList:[],
     intentionData:null,
     itemStyle: [],// 用于存储每个 item 的样式
+    invitation:''
   },
 
         /**
@@ -109,6 +110,15 @@ Page({
       region:temp
     })
   },
+  /**
+   * 邀请码
+   * @param {*} e 
+   */
+    invitationChange(e){
+      this.setData({
+        invitation:e.detail.value
+      })
+    },
   //长按删除卡牌
   longtapDeleteWork(e){
     let that = this;
