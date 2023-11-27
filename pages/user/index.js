@@ -501,6 +501,9 @@ Page({
     groupChange(){
       console.log("加入群聊")
       //TODO
+      wx.navigateTo({
+        url:"/pages/join_group/index"
+      })
     },
 
     //联系我们
