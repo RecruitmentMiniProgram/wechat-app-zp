@@ -248,8 +248,9 @@ page {
 }
 
 .scoll-h {
-  height: 100%;
+  height: 950rpx;
   margin: 0;
+  /* overflow-y: auto; */
 }
 
  .conbtn {
