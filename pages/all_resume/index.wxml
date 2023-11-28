@@ -3,7 +3,7 @@
     <block wx:for="{{chatList}}" wx:for-item="chat" wx:for-index="index">
     <view class ="head">
 
-    <image class="icon" src="{{chat.url}}"></image>
+    <image mode="widthFix" class="icon" src="{{chat.url}}"></image>
         <view bindtap="goToChat" bindlongpress="showDeleteConfirm" data-index="{{index}}" class="chat-item">
           <view class="info">
             <view class="left">

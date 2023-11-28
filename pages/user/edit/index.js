@@ -25,6 +25,8 @@ Page({
     logoUrl:"",
     beginDate:"",
     companyId:null,
+    //邀请码，只有注册时才有效
+    invitation:'',
     //判断是编辑页面 1 还是注册页面 0
     edit:0
   },
@@ -104,6 +106,15 @@ Page({
       beginDate:e.detail.value
     })
     console.log(this.data.beginDate)
+  },
+  /**
+   * 邀请码
+   * @param {*} e 
+   */
+  invitationChange(e){
+    this.setData({
+      invitation:e.detail.value
+    })
   },
     /**
      * 公司简称
@@ -197,7 +208,8 @@ Page({
           industry:this.data.arrayIndustry[this.data.industry],
           logo:this.data.logoUrl,
           website:this.data.website,
-          boss:this.data.boss
+          boss:this.data.boss,
+          invitation:0
         } 
         wx.showLoading({
           title: '更新中...',
@@ -211,7 +223,19 @@ Page({
               data:companyData
             }
           }).then(res=>{
-            console.log("企业用户注册成功")
+            //根据邀请码给予奖励
+            if(this.data.invitation.length!=0){
+              try{
+                let id=this.data.invitation.split('::')[1]
+                db.collection('company').doc(id).update({
+                  data:{
+                    invitation:_.inc(1)
+                  }
+                })
+              }catch(err){
+                console.log("企业邀请码失效:",err)
+              }
+            }
             wx.setStorageSync(
               "companyId",res.result.data.company._id
             )
@@ -221,6 +245,9 @@ Page({
             wx.setStorageSync(
               "status",2
             )
+
+          }).then(res=>{
+            console.log("企业用户注册成功")
             // 跳转到个人中心
             wx.switchTab({
               url: '../index',
@@ -236,7 +263,7 @@ Page({
             data:companyData
           }).then(res=>{
             wx.navigateBack()
-          }).err(res=>{
+          }).catch(err=>{
             wx.hideLoading()
             console.log("编辑失败")
           })

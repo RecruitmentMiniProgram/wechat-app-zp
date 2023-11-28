@@ -63,6 +63,7 @@ Page({
       chatList: this.data.chatList
     })
     // 根据聊天信息跳转到相应的聊天页面，你需要传递聊天相关的参数
+
     wx.navigateTo({
       url: '/pages/chat/chat?type=' + chat.type + '&id=' + chat.id,
     });
@@ -90,7 +91,7 @@ Page({
             var companyId = chatDetail.company_id
             let companyResult = await db.collection('company').doc(companyId).get()
             var url = companyResult.data.logo
-            var chatData = new ChatData(id, 1,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
+            var chatData = new ChatData(chatDetail._id, 1,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
             chatList[index] = chatData
             index = index + 1;
       }
@@ -123,7 +124,7 @@ Page({
            let userResult = await db.collection('user').doc(userId).get()
            var url = userResult.data.headUrl
            
-          var chatData = new ChatData(id, 1, name, truncateString(lastMsg, 14), convertUnixTimestampToString(time), red, url)
+          var chatData = new ChatData(chatDetail._id, 1, name, truncateString(lastMsg, 14), convertUnixTimestampToString(time), red, url)
           chatList[index] = chatData
           index = index + 1;
       }

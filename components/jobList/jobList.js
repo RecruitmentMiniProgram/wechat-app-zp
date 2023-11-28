@@ -41,7 +41,6 @@ Component({
       // wx.showLoading({
       //   title: '加载中...',
       // })
-      console.log(this.data.query)
       this.getJobList(this.data.QueryParams)
     },
   },
@@ -84,8 +83,6 @@ Component({
             data: {jobList: jobList }
           }).then(res => {
             jobList = res.result;
-            console.log(jobList)
-
             var total = jobList.length;
             var totalPages = Math.ceil(total / QueryParams.pagesize);
             that.setData({
@@ -95,7 +92,6 @@ Component({
             });
             wx.hideLoading()
           }).catch(err => {
-            console.log("failed")
             wx.hideLoading()
           })
         }
@@ -105,7 +101,6 @@ Component({
   //长按删除卡牌
   longtapDeleteWork(e){
       let that = this;
-      console.log(e)
       let tag = e.currentTarget.dataset.index;
       
       wx.showModal({
@@ -128,22 +123,26 @@ Component({
   //提交修改
   submitPost(e){
     console.log(this.data.deleteList)
+
     // 小程序端的代码
     wx.cloud.callFunction({
       name: 'deleteByIdBatch',
       data: {
         idsToDelete:this.data.deleteList
-      },
-      success: res => {
-        console.log("批量删除职位成功");
-        // 处理删除成功的情况
-        wx.navigateBack()
-      },
-      fail: err => {
-        console.error("批量删除职位失败:",err);
-        // 处理删除失败的情况
       }
-});
+     }).then(res=>{
+      wx.cloud.callFunction({
+        name: 'deleteResumeBatch',
+        data: {
+          idsToDelete:this.data.deleteList
+        }
+      })
+    }).then(res=>{
+      // 处理删除成功的情况
+      wx.navigateBack()
+    }).catch(err=>{
+      console.error("批量删除职位失败:",err);
+    })
 
 
   }

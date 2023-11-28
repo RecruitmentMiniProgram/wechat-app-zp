@@ -79,12 +79,19 @@
 .head{
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon {
+<<<<<<< HEAD
   width: 40px; 
   height: 40px; 
   margin-left: 5px;
   margin-top: 5px;
   margin-right: 5px;
+=======
+  width: 15%; 
+  margin-left: 15px;
+>>>>>>> 67c791a17b0a8fe4f80884f6b4d0d2acc7788d2b
 }

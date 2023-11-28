@@ -45,7 +45,6 @@ Page({
    */
     onLoad(options) {
       this.checkLogin()
-      this.initChatInfo()
       wx.hideLoading()
     },
 
@@ -82,6 +81,7 @@ Page({
       }else if(this.data.status==2){
         this.getCompany()
       }
+      this.initChatInfo()
       wx.hideLoading()
     },
     /**
@@ -416,6 +416,7 @@ Page({
     recruitChange(){
       //TODO
       console.log("招聘管理")
+      var id=wx.getStorageSync("companyId")
       wx.navigateTo({
         url:"/pages/user/manage/index?edit=1&companyId="+this.data.companyId
       })
@@ -461,7 +462,62 @@ Page({
             }
           )
         },
+    //一键复制推广码
+    copyText(){
+      let text=`
+    🚀 智慧招聘小程序助你轻松踏入理想职场！🌟
 
+    🔍 **智能匹配**：快速找到符合你技能和兴趣的职位。
+      
+    🌈 **职位推荐**：个性化推送最新、最适合你的职位信息。
+      
+    📑 **简历一键投递**：简单流程，省时高效。
+      
+    💬 **即时沟通**：与雇主直接互动，更容易获得面试机会。
+      
+    🎯 **职业规划**：获得职业建议，提升职场竞争力。
+      
+    📱 加入我们，解锁更多职业发展的可能性！💼✨
+    #招聘 #求职 #职业发展
+      `
+      let status=wx.getStorageSync('status')
+      //用户
+      if(status==1){
+        let userId=wx.getStorageSync('userId')
+        text=text+"\n\t助力你的好友，填写邀请码:userId::"+userId
+      }else{
+        let companyId=wx.getStorageSync('companyId')
+        text=text+"\n\t助力你的好友，填写邀请码:companyId::"+companyId
+      }
+      console.log(text)
+      wx.setClipboardData({
+        data: text,
+        success: (res) => {
+          console.log('文本已复制到剪贴板');
+        }
+      });
+    },   
+    //加入群聊
+    groupChange(){
+      console.log("加入群聊")
+      //TODO
+      wx.navigateTo({
+        url:"/pages/join_group/index"
+      })
+    },
+
+    //联系我们
+    ourChange(e){
+      wx.makePhoneCall({
+        phoneNumber: '13380874078', // 替换为你要拨打的电话号码
+        success: function () {
+          console.log("拨打电话成功！");
+        },
+        fail: function () {
+          console.log("拨打电话失败！");
+        }
+      });
+    },
     //个人中心的意见反馈,点击跳转到意见反馈
     view() {
       console.log("意见反馈")

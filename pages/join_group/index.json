@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cell": "plugin://materialPlugin/cell"
+  },
+  "navigationBarTitleText": "交流群"
+}

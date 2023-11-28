@@ -31,6 +31,8 @@ Page({
     name:'',
     workTime:'',
     logoUrl:'',
+    settlement:2,
+    arraySettlement:['日','周','月','年'],
   },
     /**
      * 获取时间
@@ -115,7 +117,8 @@ Page({
                 kind:this.data.arrayKind.indexOf(result.data.kind),
                 graduate:result.data.graduate,
                 workTime:result.data.workTime,
-                logoUrl:result.data.img
+                logoUrl:result.data.img,
+                settlement:this.data.arraySettlement.indexOf(result.data.settlement)
               })
             }).catch((err) => {
               console.log("编辑post时加载信息失败",err)
@@ -197,7 +200,8 @@ Page({
           timestamp:date.currentDate,
           time:date.formattedDate,
           img:this.data.logoUrl,
-          salary:this.data.arraySalary[this.data.salary]
+          salary:this.data.arraySalary[this.data.salary],
+          settlement:this.data.arraySettlement[this.data.settlement]
         } 
         wx.showLoading({
           title: '更新中...',
@@ -295,6 +299,15 @@ Page({
           })
         },
   /**
+   * 结算方式
+   * @param {*} e 
+   */
+  bindSettlementChange : function (e) {
+    this.setData({
+      settlement: e.detail.value,
+    })
+  },
+  /**
    * 学历要求
    * @param {*} e 
    */
@@ -310,7 +323,7 @@ Page({
    */
   maxSalaryChange(e){
     this.setData({
-      maxSalary:e.detail.value
+      maxSalary:parseInt(e.detail.value)
     })
   },
   /**
@@ -319,7 +332,7 @@ Page({
    */
   minSalaryChange(e){
     this.setData({
-      minSalary:e.detail.value
+      minSalary:parseInt(e.detail.value)
     })
   },
   /**

@@ -15,12 +15,12 @@
       <view>公司全称<text class="required">*</text></view>
     </view>
     <view class="row end">
-      <textarea value="{{company}}" name="skill" bindinput="companyChange" auto-height="true" class="address_text-area" maxlength="20" placeholder="例如：腾讯控股有限公司"></textarea>
+      <textarea value="{{company}}" name="skill" bindinput="companyChange" auto-height="true" class="address_text-area" maxlength="50" placeholder="例如：腾讯控股有限公司"></textarea>
     </view>
     <view class="row">
       <view>联系人<text class="required">*</text></view>
       <view class="right">
-        <input value="{{boss}}" bindchange="bossChange" name="mail" placeholder="请输入联系人" maxlength="20" />
+        <input value="{{boss}}" bindchange="bossChange" name="mail" placeholder="请输入联系人" maxlength="30" />
       </view>
     </view>
     <view class="row">
@@ -111,7 +111,7 @@
     </view>
   </view>
 
-  
+  <!-- 公司简介 -->
   <view class="box">
     <view class="level nav">
       <view class="dot"></view>
@@ -123,6 +123,20 @@
         {{introductionLength}}/800</view>
     </view>
   </view>
+
+  <!-- 注册邀请码 -->
+  <view wx:if="{{edit==0}}">
+    <view class="box">
+      <view class="level nav">
+        <view class="dot"></view>
+        <view class="title">注册邀请码</view>
+      </view>
+      <view class="row">
+        <textarea  name="skill" bindinput="invitationChange" auto-height="true" class="address_text-area" maxlength="50" placeholder="请填写邀请码（选填）"></textarea>
+      </view>
+    </view>
+  </view>
+
   <view class="btn_container">
     <button formType="submit" class="btn" hover-class="btn-hover">提交</button>
   </view>

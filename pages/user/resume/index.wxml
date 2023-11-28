@@ -165,24 +165,6 @@
     </view>
   </view>
 
-  <!-- 获奖证书 -->
-  <!-- <view class="box">
-    <view class="level nav-flex">
-      <view class="level">
-        <view class="dot"></view>
-        <view class="title">获奖证书</view>
-      </view>
-      <view class="add-img" bindtap="selectImage" data-tag="1">+</view>
-    </view>
-    <view class="row">
-      <textarea name="certificate" auto-height="true" class="text-area" maxlength="300" placeholder="点击右上角加号可添加证书图片哦~"></textarea>
-    </view>
-    <view class="attr-img">
-      <block wx:for="{{attrImg}}" wx:for-index="index" wx:for-item="item" wx:key="item">
-        <image bindlongpress="longtapDeleteImg" data-index="{{index}}" bindtap="previewClick" data-url="{{item}}" class="img" src="{{item}}" mode="widthFix"></image>
-      </block>
-    </view>
-  </view> -->
   <!-- 经验方向 -->
   <view class="box">
     <view class="level nav">
@@ -196,6 +178,7 @@
     </view>
   </view>
   
+  <!-- 自我描述 -->
   <view class="box">
     <view class="level nav">
       <view class="dot"></view>
@@ -208,6 +191,7 @@
     </view>
   </view>
 
+  <!-- 个人技能 -->
   <view class="box">
     <view class="level nav">
       <view class="dot"></view>
@@ -220,24 +204,17 @@
     </view>
   </view>
 
-  <!-- 兴趣爱好 -->
-  <!-- <view class="box">
+  <!-- 注册邀请码 -->
+  <view class="box">
     <view class="level nav">
       <view class="dot"></view>
-      <view class="title">兴趣爱好</view>
+      <view class="title">注册邀请码</view>
     </view>
-    <view class="row wrap-box">
-      <block wx:for="{{labelList}}" wx:for-index="index" wx:for-item="item" wx:key="item">
-        <view bindlongpress="longtapDeleteLabel" data-index="{{index}}"  class="add-btn data-btn">{{item}}</view>
-      </block>
-      <view class="add-btn" bindtap="addHobbyClick">+添加</view>
+    <view class="row">
+      <textarea  name="skill" bindinput="invitationChange" auto-height="true" class="address_text-area" maxlength="50" placeholder="请填写邀请码（选填）"></textarea>
     </view>
-  </view> -->
+  </view>
 
-  <!-- <view class="level btn-area">
-    <button formType="reset">重置</button>
-    <button type="primary" formType="submit">提交</button>
-  </view> -->
   <view class="btn_container">
     <button formType="submit" class="btn">提交</button>
   </view>
