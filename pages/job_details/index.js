@@ -23,6 +23,8 @@ const db = wx.cloud.database();
 Page({
 
     data: {
+        load: false,
+        notExist: false,
         submit_stat: "立即投递",
         photo: "",
         goodsObj: {},
@@ -51,6 +53,14 @@ Page({
     // 工作信息全局对象
     jobInfoStorage: {},
     onLoad: function (options) {
+      this.setData({
+        load: false
+      })
+      wx.showLoading({
+        title: '加载中...',
+        mask: true, // 是否显示透明蒙层，防止触摸穿透
+      });
+
       var status = wx.getStorageSync('status')
      // status = 1
       var userId = wx.getStorageSync('userId')
@@ -121,14 +131,22 @@ Page({
             that.setData({
                 jobObj: res.data,
             });
+
+            that.setData({load:true})
+            wx.hideLoading();
           })
+
+          
         },
 
         fail: function(res) {
           that.setData({notExist: true})
+          that.setData({load:true})
+          wx.hideLoading();
         }
       });
     },
+
     // 判断该职位是否在缓存数组中
     hasSendJob() {
         // 1 获取缓存中的发送简历的数组

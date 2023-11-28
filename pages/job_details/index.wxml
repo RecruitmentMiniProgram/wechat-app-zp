@@ -1,5 +1,5 @@
 <wxs src="../../utils/time.wxs" module="time" />
-<view wx:if = "{{notExist==false}}">
+<view wx:if = "{{notExist==false && load}}">
 
 <view class="head">
     <view class="job_up">
@@ -79,6 +79,6 @@
 </view>
 </view>
 
-<view wx:else="">
+<view wx:elif="{{load}}">
   <text style="white-space: nowrap;" class="text">该岗位已被删除</text>
 </view>
