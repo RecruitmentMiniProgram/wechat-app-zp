@@ -3,7 +3,7 @@
     <view class="cates_container">
         <!-- 左侧菜单 -->
         <scroll-view scroll-y class="left_menu" bind:scroll="scrollTop" bindscrolltoupper="bindscrolltoupper">
-            <view class="{{top>1?'topnav':''}}" class="menu_item {{index===currentIndex?'active':''}} {{index===leftMenuList.length-1?'lf_last':''}}" wx:for="{{leftMenuList}}" wx:key="*this" bindtap="handleItemTap" data-index="{{index}}">
+            <view class="{{top>1?'topnav':''}}" class="menu_item {{index===currentIndex?'active':''}} {{index===leftMenuList.length-1?'lf_last':''}}" wx:for="{{leftMenuList}}" wx:key="id" bindtap="handleItemTap" data-index="{{index}}">
                 {{item}}
             </view>
         </scroll-view>

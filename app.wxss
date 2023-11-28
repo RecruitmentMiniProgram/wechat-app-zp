@@ -82,7 +82,7 @@ page {
 
 .job_list_wrap .job_list_raw navigator .content_top .content_top_lft .job_name {
   font-size: 35rpx;
-  font-weight: bold;
+  /* font-weight: bold; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -163,10 +163,10 @@ page {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 32rpx;
   /* font-size: 24rpx; */
-  color: #645f5f;
+  color: rgba(0, 0, 0, 0.925)
 }
 
 .job_list_wrap .job_list_raw navigator .content_btm .content_btm_rgt .cbr_top .cbr_top_rgt {
