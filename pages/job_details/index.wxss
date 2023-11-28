@@ -491,3 +491,17 @@ page {
 .btn-hover {
   background-color: #007acc; /* 触摸时的背景色，可以根据需要调整 */
 }
+
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff; /* 文字颜色 */
+  font-size: 60rpx; /* 字体大小 */
+  text-align: center;
+  padding: 20rpx; /* 内边距 */
+
+  border-radius: 5px; /* 圆角 */
+  background-color: #4a90e2;
+}

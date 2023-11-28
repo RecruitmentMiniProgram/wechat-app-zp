@@ -112,6 +112,7 @@ Page({
       var that = this;
       db.collection('post').doc(jobId).get({
         success:function(res){
+          that.setData({notExist: false})
           that.jobInfoStorage = res.data;
           const company_id = res.data.companyId;
           const companyPromise = db.collection('company').doc(company_id).get();
@@ -121,6 +122,10 @@ Page({
                 jobObj: res.data,
             });
           })
+        },
+
+        fail: function(res) {
+          that.setData({notExist: true})
         }
       });
     },

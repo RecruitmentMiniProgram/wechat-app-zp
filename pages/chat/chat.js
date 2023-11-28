@@ -74,14 +74,13 @@ Page({
   onButtonClick: function(e) {
     const params = e.currentTarget.dataset;
     var role = params.role
-    console.log(params)
     if(role == 3) {
-      //用户点击，跳转到岗位介绍页面
+      //跳转到岗位介绍页面
       wx.navigateTo({
         url: '/pages/job_details/index?jobId=' + this.data.postId,
       });
     } else if(role == 4) {
-       //企业点击，跳转到用户简历界面
+       //跳转到用户简历界面
        var userId = this.data.userId
        wx.navigateTo({
         url: '/pages/show_resume/show_resume?userId=' + userId,
