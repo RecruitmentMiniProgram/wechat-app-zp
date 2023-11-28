@@ -46,17 +46,19 @@
 
 .left {
   display: flex;
+  font-size: 30rpx;
   align-items: center;
 }
 
 .right {
   color: #999; /* 根据实际需求调整最近消息的样式 */
-  font-size: 30rpx; /* 设置时间的字体大小，根据实际需求调整 */
+  font-size: 25rpx; /* 设置时间的字体大小，根据实际需求调整 */
 }
 
 .lmsg {
+  margin-top: 8rpx;
   color: #999; /* 根据实际需求调整最近消息的样式 */
-  font-size: 30rpx; /* 设置时间的字体大小，根据实际需求调整 */
+  font-size: 25rpx; /* 设置时间的字体大小，根据实际需求调整 */
 }
 
 
@@ -84,6 +86,10 @@
 }
 
 .icon {
-  width: 15%; 
   margin-left: 15px;
+  float: left;
+  width: 150rpx;
+  height: 100rpx;
+  border-radius: 30%;
+  margin-right: 10px;
 }

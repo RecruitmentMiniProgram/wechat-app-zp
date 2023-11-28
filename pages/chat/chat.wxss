@@ -396,16 +396,16 @@ input {
 }
 
 .con {
-  width: 200px;
-  height: 150px;
+  width: 400rpx;
+  height: 300rpx;
   margin-top: 20rpx;
   margin-bottom: 26rpx;
   position: relative;
 }
 
 .conb {
-  width: 200px;
-  height: 150px;
+  width: 400rpx;
+  height: 300rpx;
   margin-bottom: 80rpx;
   position: relative;
 }
@@ -422,15 +422,16 @@ input {
   justify-content: center;
   text-align: center;
 }
+
 .text {
   position: absolute;
   top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #ffffff; /* 文字颜色 */
-  font-size: 16px; /* 字体大小 */
+  font-size: 35rpx; /* 字体大小 */
   text-align: center;
-  padding: 10px; /* 内边距 */
+  padding: 20rpx; /* 内边距 */
 
   border-radius: 5px; /* 圆角 */
   background-color: #4a90e2;

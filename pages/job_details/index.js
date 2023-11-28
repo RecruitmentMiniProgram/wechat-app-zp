@@ -207,7 +207,7 @@ Page({
           }).get()
           if(resumeResult.data.length != 0) {
             wx.navigateTo({
-              url: '/pages/chat/chat?type=' + 1 + '&id=' + resumeResult.data[0]._id,
+              url: '/pages/chat/chat?type=' + 1 + '&id=' + resumeResult.data[0].chat_id,
             });
             return
           }
