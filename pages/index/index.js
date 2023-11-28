@@ -173,21 +173,27 @@ Page({
       url: '../jobs_list/index',
     })
   },
+
+  bindViewCategory: function () {
+    getApp().globalData.tabid = 0;
+    wx.switchTab({
+      url: '../category_job/index',
+    })
+  },
   /**
  * 今日招聘（高薪资）跳转
  */
   bindViewTodayGxz: function () {
     getApp().globalData.tabid = 1;
-
     wx.switchTab({
       url: '../jobs_list/index',
     })
   },
   /**
- * 今日招聘（临时工）跳转
+ * 兼职跳转
  */
-  bindViewTodayLsg: function () {
-    getApp().globalData.tabid = 2;
+  bindViewPartTime: function () {
+    getApp().globalData.tabid = 2; // TODO
     wx.switchTab({
       url: '../jobs_list/index',
     })
@@ -201,6 +207,16 @@ Page({
       url: '../jobs_list/index',
     })
   },
+
+  // bindViewXWZX: function () {
+  //   wx.showToast({
+  //     title: '此功能暂未启用',
+  //     image: "../../images/warning.png",
+  //     duration: 2000,
+  //     mask: true
+  //   })
+
+  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
