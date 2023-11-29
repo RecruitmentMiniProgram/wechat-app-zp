@@ -77,7 +77,7 @@ Page({
             .then((result) => {
               console.log("加载企业信息",result)
               that.setData({
-                logoUrl:result.data.logo,
+                logoUrl:result.data.logo.length==0?'/images/damage_map.png':result.data.logo,
                 scale:this.data.arrayScale.indexOf(result.data.scale),
                 attrImg: result.data.certification,
                 introductionLength:result.data.introduction.length,
@@ -206,7 +206,7 @@ Page({
           introduction:this.data.introduction,
           incorporationDate:this.data.beginDate,
           industry:this.data.arrayIndustry[this.data.industry],
-          logo:this.data.logoUrl,
+          logo:this.data.logoUrl.length==0?'/images/damage_map.png':this.data.logoUrl,
           website:this.data.website,
           boss:this.data.boss,
           invitation:0
@@ -347,7 +347,7 @@ Page({
     // 上传图片到云存储
     uploadToCloud: function (filePath) {
       wx.cloud.uploadFile({
-        cloudPath: 'uploaded_images/' + new Date().getTime() + '.png', // 云存储路径，这里使用时间戳作为文件名
+        cloudPath: 'images/' + new Date().getTime() + '.png', // 云存储路径，这里使用时间戳作为文件名
         filePath: filePath, // 选择的图片文件路径
         success: (res) => {
           console.log('上传成功', res.fileID);

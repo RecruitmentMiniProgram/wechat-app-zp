@@ -126,6 +126,13 @@
       <view class="dot"></view>
       <view class="title">其他信息<text class="required">*</text></view>
     </view>
+    <view class="row">
+      <view>产业类型</view>
+      <picker class="right" value="{{industry}}" bindchange="industryChange" range="{{arrayIndustry}}">
+        <text>{{arrayIndustry[industry]}}</text>
+        <text class="triangle">▼</text>
+      </picker>
+    </view>
     <view class="row ">
       <view>工作类型<text class="required">*</text></view>
       <picker class="right" value="{{kind}}" bindchange="bindKindChange" range="{{arrayKind}}">

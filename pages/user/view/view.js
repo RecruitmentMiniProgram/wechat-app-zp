@@ -33,7 +33,6 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         screenHeight = res.screenHeight
-        // console.log(res.screenHeight)
       }
     });
     //创建节点选择器

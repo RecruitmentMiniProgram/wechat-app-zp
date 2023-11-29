@@ -159,7 +159,7 @@ Page({
           communication:0,
           collection:[],
           interview:0,
-          headUrl:this.data.avatar==this.data.defaultUrl?"":this.data.avatar,
+          headUrl:this.data.avatar==this.data.defaultUrl?(this.data.sex==0?'/images/female.png':'/images/male.png'):this.data.avatar,
           self:this.data.self,
           email:this.data.email,
           invitation:0
