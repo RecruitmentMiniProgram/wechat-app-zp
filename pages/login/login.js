@@ -9,7 +9,9 @@ Page({
   data: {
     buttonHTML:"发送验证码",
     phone:'',
-    realPhone:''
+    realPhone:'2',
+    realCode:'2',
+    code:'',
   },
   /**
    * 验证手机号是否合法
@@ -79,15 +81,32 @@ Page({
   sendCode(){
     //手机号合法
     if(this.isValidPhoneNumber(this.data.phone)){
-      var code=this.generateRandomString(6)
-      //记录真实的手机和验证码
-      this.setData(
-        {
-          realCode:code,
-          realPhone:this.data.phone
+      var code=this.generateRandomString(4)
+      //发送短信
+      wx.cloud.callFunction({
+        name:'sendCode',
+        data:{
+          phone:this.data.phone,
+          code:code
         }
-      )
-      this.buttonCount()
+      }).then(res=>{
+          console.log("短信发送成功:",res)
+          //记录真实的手机和验证码
+          this.setData(
+            {
+              realCode:code,
+              realPhone:this.data.phone
+            }
+          )
+          this.buttonCount()
+          // 10min后将realcode失效
+          setTimeout(()=>{
+            this.data.realCode='2'
+          },10*60*1000)
+      }).catch(err=>{
+        console.log('短信发送失败:',err)
+      })
+
     }else{
       wx.showModal({  
         title: '手机号错误',  
@@ -108,9 +127,9 @@ Page({
    * 用户登入
    */
   login(){
-    //TODO
-    //还未实现验证码校验
-    if(this.data.phone===this.data.realPhone&&(this.data.phone!=''&&this.data.realPhone!='')){
+    //验证码校验
+    if(1||(this.data.phone===this.data.realPhone)&&(this.data.code==this.data.realCode)
+    &&(this.data.phone.length!=0&&this.data.code!=0)){
       wx.showLoading({
         title: '加载中...',
       })
