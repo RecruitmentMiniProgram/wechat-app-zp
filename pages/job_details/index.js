@@ -23,6 +23,8 @@ const db = wx.cloud.database();
 Page({
 
     data: {
+        load: false,
+        notExist: false,
         submit_stat: "立即投递",
         photo: "",
         goodsObj: {},
@@ -51,6 +53,14 @@ Page({
     // 工作信息全局对象
     jobInfoStorage: {},
     onLoad: function (options) {
+      this.setData({
+        load: false
+      })
+      wx.showLoading({
+        title: '加载中...',
+        mask: true, // 是否显示透明蒙层，防止触摸穿透
+      });
+
       var status = wx.getStorageSync('status')
      // status = 1
       var userId = wx.getStorageSync('userId')
@@ -112,6 +122,7 @@ Page({
       var that = this;
       db.collection('post').doc(jobId).get({
         success:function(res){
+          that.setData({notExist: false})
           that.jobInfoStorage = res.data;
           const company_id = res.data.companyId;
           const companyPromise = db.collection('company').doc(company_id).get();
@@ -120,10 +131,22 @@ Page({
             that.setData({
                 jobObj: res.data,
             });
+
+            that.setData({load:true})
+            wx.hideLoading();
           })
+
+          
+        },
+
+        fail: function(res) {
+          that.setData({notExist: true})
+          that.setData({load:true})
+          wx.hideLoading();
         }
       });
     },
+
     // 判断该职位是否在缓存数组中
     hasSendJob() {
         // 1 获取缓存中的发送简历的数组
@@ -207,7 +230,7 @@ Page({
           }).get()
           if(resumeResult.data.length != 0) {
             wx.navigateTo({
-              url: '/pages/chat/chat?type=' + 1 + '&id=' + resumeResult.data[0]._id,
+              url: '/pages/chat/chat?type=' + 1 + '&id=' + resumeResult.data[0].chat_id,
             });
             return
           }

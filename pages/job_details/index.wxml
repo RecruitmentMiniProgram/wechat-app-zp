@@ -1,4 +1,6 @@
 <wxs src="../../utils/time.wxs" module="time" />
+<view wx:if = "{{notExist==false && load}}">
+
 <view class="head">
     <view class="job_up">
         <view class="job_name">{{jobObj.name}}</view>
@@ -74,4 +76,9 @@
     <button wx:else="" hover-class="btn-hover" bindtap="submitResume" class="submit-resume">
         登录后投递
     </button>
+</view>
+</view>
+
+<view wx:elif="{{load}}">
+  <text style="white-space: nowrap;" class="text">该岗位已被删除</text>
 </view>

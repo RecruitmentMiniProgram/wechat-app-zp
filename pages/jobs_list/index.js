@@ -19,12 +19,12 @@ Page({
     },
     {
       id: 1,
-      value: "高薪资",
+      value: "急聘",
       isActive: false
     },
     {
       id: 2,
-      value: "临时工",
+      value: "兼职",
       isActive: false
     },
     {
@@ -204,10 +204,10 @@ Page({
         field = "_id"
         break;
       case 1:
-        field = "min_salary"
+        field = "timestamp"
         break
       case 2:
-        field = "timestamp"
+        field = "timestamp"  //TODO
         break
       default:
         field = "_id"
