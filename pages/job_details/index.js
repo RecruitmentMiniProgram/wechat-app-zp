@@ -304,6 +304,11 @@ Page({
               msg:"查看简历",
               role: 4,
               time: (Date.now()/1000)
+            },
+            {
+              msg:"电话面试",
+              role: 5,
+              time: (Date.now()/1000)
             }
           ]
           },
