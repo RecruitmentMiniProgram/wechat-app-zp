@@ -101,7 +101,8 @@ Page({
       db.collection("company").doc(id).get()
       .then((result) => {
         that.data.logoUrl=result.data.logo
-        that.data.company=result.data.fullName
+        that.data.company=result.data.fullName,
+        that.data.companyMinName=result.data.minName,
         that.data.boss=result.data.boss
         that.data.tele=result.data.tele
         that.data.attrLogo=[result.data.logo]
@@ -226,6 +227,8 @@ Page({
           salary:this.data.arraySalary[this.data.salary],
           settlement:this.data.arraySettlement[this.data.settlement],
           industry:this.data.arrayIndustry[this.data.industry],
+          companyMinName:this.data.companyMinName,
+          companyFullName:this.data.company,
         } 
         wx.showLoading({
           title: '更新中...',
@@ -438,7 +441,7 @@ Page({
             filePath=res.fileID
 
             that.setData({
-                attrImg: attr.concat(filePath)
+                attrImg: [filePath]
               })
             // 隐藏加载提示
             wx.hideLoading();
