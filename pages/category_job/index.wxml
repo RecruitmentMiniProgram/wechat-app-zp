@@ -18,7 +18,7 @@
                 </view> -->
                 <!-- <view class="goods_title {{index1>0?'second':''}} ">{{item1.name}}</view> -->
                 <view class="goods_list">
-                    <navigator url="/pages/jobs_list/index?cid={{item1.id}}">
+                    <navigator url="/pages/searchresult/searchresult?fromCate=1&searchValue={{item1.name}}">
                         {{item1.name}}
                     </navigator>
                 </view>

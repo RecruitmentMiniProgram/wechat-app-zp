@@ -53,6 +53,10 @@ Page({
     this.getCates2();
   },
   onShow: function () { },
+
+  onNavigatorTap: function () {
+    console.log('点击了 navigator 元素！');
+  },
   //获取分类数据
   async getCates2() {
 

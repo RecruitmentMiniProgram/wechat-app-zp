@@ -265,11 +265,8 @@ Page({
                 post_id: this.data.jobId,
                 user_id: uuid,
                 chat_id: id,
-<<<<<<< HEAD
-                createTime:new Date(),
-=======
                 createTime: new Date()
->>>>>>> 3949971a595c37e860982f12bcfda5cfc5b29fb3
+
               },
             })
 

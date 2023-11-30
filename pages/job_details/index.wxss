@@ -412,15 +412,11 @@ page {
   color: #645f5f;
 }
 .btm_tool {
-  border-top: 1rpx solid #ccc;
   position: fixed;
-  left: 0;
   bottom: 0;
   width: 100%;
-  height: 90rpx;
+  height: 130rpx;
   background-color: #fff;
-  display: flex;
-  padding: 10rpx;
 }
 .btm_tool .tool_item {
   flex: 1px;
@@ -458,13 +454,11 @@ page {
 
 
 .bottom-bar {
-  border-top: 1px solid #ddd; /* 灰色边框 */
-  position: fixed;
+  /* border-top: 1px solid #ddd;  */
+  position: relative;
   width: 100%;
-  display: flex;
-  bottom: 30rpx;
-  /* background-color: #fff;  */
-  align-items: center; /* 垂直居中 */
+  margin-top: 20rpx;
+  align-items: center; 
 }
 
 .chat-icon {
