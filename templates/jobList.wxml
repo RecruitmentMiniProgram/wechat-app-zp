@@ -44,7 +44,7 @@
                 </view>
                 <view class="cbr_btm">
                   <view class="cbr_btm_lft">
-                    <view class="">{{item.company.industry}}</view>
+                    <view class="">{{item.industry}}</view>
                   </view>
                   <view class="cbr_btm_rgt">
                     <!-- <view class="">{{time.formatDateString(item.time)}}</view> -->

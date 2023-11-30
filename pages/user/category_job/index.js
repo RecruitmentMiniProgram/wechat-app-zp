@@ -1,4 +1,4 @@
-import { request } from "../../requests/index.js";
+import { request } from "../../../requests/index.js";
 const db = wx.cloud.database();
 Page({
 
@@ -36,8 +36,6 @@ Page({
     top: 0,
     //接口的返回数据
     Cates2: [],
-    //判断职业分类表是用于搜索还是选择
-    isSearch:1,
   },
 
   bindscrolltoupper() {
@@ -52,18 +50,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    // 判明是搜索还是职业选择
-    if(options.isSearch==undefined||options.isSearch==null||options.isSearch==''){
-      this.setData({
-        isSearch:1
-      })
-    }
-    else{
-        this.setData({
-          isSearch:options.isSearch
-        })
-      }
     this.getCates2();
   },
   onShow: function () { },
@@ -136,13 +122,12 @@ Page({
     var pages = getCurrentPages();
     var prevPage = pages[pages.length - 2];
     //修改数据
-    console.log(prevPage)
-    // let array=
-    // prevPage.setData({
-    //   work:intentionData
-    // })
-    // wx.navigateBack({
-    //   delta: 1,
-    // })
+    let array=prevPage.data.workList
+    prevPage.setData({
+      work:array.push(data)
+    })
+    wx.navigateBack({
+      delta: 1,
+    })
   }
 })

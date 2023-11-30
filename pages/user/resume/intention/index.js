@@ -10,17 +10,57 @@ Page({
     arrayWorkType:['无要求','全职','实习'],
     workType:null,
     salary:null,
+    workList:[],
+    
+    //职业选择器template的数据
+    workNumSelector:0,
+    pickerDisabledSelector:false,
+    labelListSelector:[]
   },
+
+  /****************************************
+   * ***** 职业选择器模板的相关方法*********
+   * *********************************** */
+  //使用职业分类页面进行选择
+  industryChange(e){
+    console.log("选择产业类型")
+    wx.navigateTo({
+      url: '/pages/user/category_job/index',
+    })
+  },
+
+    // 长安删除图片
+  // 长安删除兴趣爱好标签
+  longtapDeleteLabel(e) {
+    let that = this;
+    let tag = e.currentTarget.dataset.index;
+    wx.showModal({
+      title: '提示',
+      content: '确定删除该职业吗？',
+      complete: (res) => {
+        if (res.confirm) {
+          var list = that.data.labelListSelector;
+          list.splice(tag, 1);
+          that.setData({
+            labelListSelector: list,
+            workNumSelector:this.data.workNumSelector-1
+          })
+        }
+        if(this.data.workNumSelector<5){
+          this.setData({
+            pickerDisabledSelector:false
+          })
+        }
+      }
+    })
+  },
+
   /**
    * 提交表单
    * @param {*} e 
    */
   formSubmit(e){
-    // 获取自定义组件实例
-    const customComponent = this.selectComponent('#salary');
-    // 判断组件是否存在
-    // 通过组件实例访问组件内部的数据
-    const customData = customComponent.data.labelList;
+    const customData = this.data.workList;
     console.log('自定义组件的数据：', customData);
     if(customData.length==0||this.data.workType===null||this.data.salary==null){
       wx.showModal({  
@@ -41,7 +81,7 @@ Page({
       var intentionData={
         salary:this.data.arraySalary[this.data.salary],
         type:this.data.arrayWorkType[this.data.workType],
-        workList:customData 
+        workList:customData
       }
 
       // 获取上一页的数据
@@ -92,7 +132,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.setData({
+      labelListSelector:this.data.workList,
+      workNumSelector:this.data.workList.length,
+      pickerDisabledSelector:this.data.workList.length==5
+    })
   },
 
   /**

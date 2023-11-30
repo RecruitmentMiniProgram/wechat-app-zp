@@ -35,9 +35,6 @@ Component({
       '医疗': ['医生', '护士', '药品经理'],
       '建筑': ['材料']
     },
-    level1:[],
-    level2:[],
-    level3:[],
     multiSelectorRange: [],
     multiSelectorDefault: [0, 0], // 默认选中第一个科室和第一个医生
     selectedDepartment: '',
@@ -50,6 +47,11 @@ Component({
   pageLifetimes: {
     // 组件所在页面的生命周期函数
     show: function () { 
+      this.setData({
+        labelList:this.data.workList
+      })
+      console.log(this.data.labelList)
+      console.log(this.data.workList)
       this.generateMultiSelectorRange();
     },
   },
@@ -57,6 +59,14 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    //使用职业分类页面进行选择
+    industryChange(e){
+      console.log("选择产业类型")
+      wx.navigateTo({
+        url: '/pages/user/category_job/index',
+      })
+    },
+
     //将数据存到localstorage中便于获取信息
     getData(e){
       console.log("将职业数据放入localstorage中")

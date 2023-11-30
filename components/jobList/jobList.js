@@ -33,14 +33,21 @@ Component({
         pagesize: 10,
       },
       companyId:'',
-      show:0
+      show:0,
+
+      // 分页需要的参数
+      page_index: 0,
+      page_size: 4,
+      selectionType: 0,
+      loadingTip: "上拉加载更多",
+      // 职位分类
+      cid: '',
+
+
   },
   pageLifetimes: {
     // 组件所在页面的生命周期函数
     show: function () { 
-      // wx.showLoading({
-      //   title: '加载中...',
-      // })
       this.getJobList(this.data.QueryParams)
     },
   },

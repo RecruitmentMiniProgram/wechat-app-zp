@@ -12,8 +12,10 @@ Page({
     // 分页需要的参数
     page_index: 0,
     page_size: 4,
-    jobType: 0,
+    selectionType: 0,
     loadingTip: "上拉加载更多",
+    // 职位分类
+    cid: '',
 
 
     tabs: [{
@@ -41,7 +43,7 @@ Page({
   // QueryParams: {
   //   query: "",
   //   cid: "",
-  //   jobType: 0,
+  //   selectionType: 0,
   //   pagenum: 1,
   //   pagesize: 10,
   // },
@@ -58,6 +60,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(options)
+    this.data.cid = options.cid;
+
   },
 
   onShow: function () {
@@ -72,14 +77,11 @@ Page({
 
     this.setData({
       tabs: updatedTabs,
-      jobType: tabId
+      selectionType: tabId
     });
     // console.log(this.data);
-
     // this.newData()
     this.getJobList();
-
-
   },
 
   newData: function () {
@@ -130,10 +132,10 @@ Page({
     // // 修改源数组
     let { tabs } = this.data;
     tabs.forEach((v, i) => i === index ? v.isActive = true : v.isActive = false);
-    this.data.jobType = index;
     //  3 赋值到data中
     this.setData({
       tabs,
+      selectionType: index,
       jobList: [],
       page_index: 0,
       loadingTip: "上拉加载更多"
@@ -186,11 +188,12 @@ Page({
     // console.log(QueryParams)
 
     var that = this;
-    var jobType = that.data.jobType
+    const selectionType = that.data.selectionType
     const page_index = that.data.page_index
     const page_size = that.data.page_size
+    const cid = that.data.cid
     var field = '_id'
-    switch (jobType) {
+    switch (selectionType) {
       case 0:
         field = "_id"
         break;
@@ -213,7 +216,7 @@ Page({
 
 
     db.collection('post')
-      .where({})
+      .where({ 'industry': cid })
       .orderBy(field.toString(), 'desc')
       .skip(page_index * page_size)
       .limit(page_size)
