@@ -12,7 +12,6 @@ Page({
     loadingTip: "上拉加载更多",
     page_index: 0,
     page_size: 4,
-    detailInfo: "",
 
     swiperCurrent: 0,
     indicatorDots: true,
@@ -21,7 +20,7 @@ Page({
     duration: 800,
     circular: true,
     imgUrls: '',
-    jobList:[],
+    jobList: [],
 
     //tab 
     winHeight: "",//窗口高度
@@ -49,7 +48,7 @@ Page({
     })
   },
 
-  
+
 
   //加载轮播图
   getswitchimg: function () {
@@ -142,7 +141,7 @@ Page({
   //   })
 
   // },
-  
+
 
   // 点击标题切换当前页时改变样式
   swichNav: function (e) {
@@ -250,7 +249,7 @@ Page({
   //清空招聘列表
   cleardata: function () {
     this.setData({
-      detailInfo: []
+      jobList: []
     });
   }
 
