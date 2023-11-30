@@ -7,15 +7,56 @@ Page({
    */
   data: {
     searchValue: '',
-    jobList: "",
+    jobList: [],
     isnull: 0,
+    fromCate: 0,
+    fieldName: [],
+
+    page_index: 0,
+    page_size: 4,
+    selectionType: 0,
+    loadingTip: "上拉加载更多",
+
+    tabs: [{
+      id: 0,
+      value: "全部",
+      isActive: true
+    },
+    {
+      id: 1,
+      value: "急聘",
+      isActive: false
+    },
+    {
+      id: 2,
+      value: "兼职",
+      isActive: false
+    },
+    {
+      id: 3,
+      value: "更多",
+      isActive: false
+    }
+    ],
 
   },
+
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // if (options.fromCate && options.searchValue) {
+    //   //console.log('onload' + options.searchValue)
+    //   this.setData({
+    //     searchValue: options.searchValue
+    //   });
+    //   // this.searchCates();
+    //   this.loadinfor();
+
+
+    // }
     // 搜索
     if (options && options.searchValue) {
       //console.log('onload' + options.searchValue)
@@ -26,14 +67,33 @@ Page({
     }
 
   },
+
+
+
   //查询搜索结果是否存在（只能搜索post表的字段）
   loadinfor: function () {
     var that = this;
-    const keyword = this.data.searchValue;
+    const { searchValue, selectionType, page_index, page_size } = that.data;
+
+    var field = '_id'
+    switch (selectionType) {
+      case 0:
+        field = "_id"
+        break;
+      case 1:
+        field = "timestamp"
+        break
+      case 2:
+        field = "timestamp"  //TODO
+        break
+      default:
+        field = "_id"
+        break
+    }
     wx.showToast({
-      title: "正在查询",
+      title: "加载中",
       icon: 'loading',
-      duration: 1500
+      duration: 800
     });
 
     db.collection('post').limit(1).get({
@@ -46,26 +106,39 @@ Page({
             db.command.or(
               // 对集合中所有字段应用模糊搜索
               fields.map(field => ({
-                [field]: db.RegExp({ regexp: '^' + keyword, options: '' })
+                [field]: db.RegExp({ regexp: '^' + searchValue, options: '' })
               }))
             )
           )
+          .orderBy(field.toString(), 'desc')
+          .skip(page_index * page_size)
+          .limit(page_size)
           .get({
             success: function (res) {
-              var jobList = res.data;
+              const results = res.data;
               // 调用云函数获取jobList
               wx.cloud.callFunction({
                 name: 'jobListQuery',
-                data: { jobList: jobList }
+                data: { jobList: results }
               }).then(res => {
-                jobList = res.result;
-                console.log(jobList)
+                var jobList = res.result;
+                // console.log(jobList)
                 if (jobList.length > 0) {
                   that.setData({
-                    jobList: jobList,
+                    // jobList: jobList,
                     isnull: 1
                   });
 
+                }
+                that.setData({
+                  jobList: that.data.jobList.concat(jobList),
+                  page_index: that.data.page_index + 1
+                });
+                // 如果返回的数据数量小于每页数据数量，表示没有更多数据
+                if (results.length < page_size) {
+                  that.setData({
+                    loadingTip: '没有更多内容'
+                  });
                 }
 
 
@@ -78,100 +151,24 @@ Page({
     });
 
 
-
-
-
-
-
-
-    // // 动态添加列表详情
-    // var DetailInfo = Bmob.Object.extend("DetailInfo");
-    // var query = new Bmob.Query(DetailInfo);
-    // ////console.log('aaaa' + this.data.searchValue);
-    // query.equalTo("detAddr", that.data.searchValue);
-    // query.descending('updatedAt');
-
-    // // 查询所有数据
-    // query.find({
-    //   success: function (results) {
-    //     //console.log("查询到的信息 " + results.length + "条记录");
-    //     if (results.length!=0)
-    //     {
-    //       //请求将数据存入detailInfo
-    //       that.setData({
-    //         detailInfo: results,
-    //         isnull:1
-    //       });
-    //     }
-
-    //   },
-    //   error: function (error) {
-    //     //console.log("查询失败: " + error.code + " " + error.message);
-    //   }
-    // });
-
   },
-  //点击招聘列表页面跳转，页面传参
-  showDetail: function (e) {
-    var that = this;
-    // 获取wxml元素绑定的index值
-    var index = e.currentTarget.dataset.index;
-    //console.log("1111111" + index);
-    // 取出objectId
-    var objectId = that.data.detailInfo[index].id;
-    ////console.log("1111111" + objectId);
-    // 跳转到详情页
-    wx.navigateTo({
-      url: '../detail/detail?objectId=' + objectId
-    });
+  handleTabsItemChange(e) {
+    // 1 获取被点击的标题索引
+    const { index } = e.detail;
+    // // 修改源数组
+    let { tabs } = this.data;
+    tabs.forEach((v, i) => i === index ? v.isActive = true : v.isActive = false);
+    //  3 赋值到data中
+    this.setData({
+      tabs,
+      selectionType: index,
+      jobList: [],
+      page_index: 0,
+      loadingTip: "上拉加载更多"
+    })
+    this.loadinfor();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
