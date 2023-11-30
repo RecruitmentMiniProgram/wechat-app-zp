@@ -74,8 +74,6 @@ Page({
     onShow(){
       this.checkLogin()
       console.log("进入个人中心...")
-      console.log(this.data.communication)
-      console.log(this.data.deliver)
       if(this.data.status==1){
         this.getUser()
       }else if(this.data.status==2){
@@ -88,6 +86,10 @@ Page({
      * 加载企业用户信息 
      */
     getCompany(){
+      var status=wx.getStorageSync('status')
+      if(status==0){
+        return
+      }
       var id=wx.getStorageSync("companyId")
       let that=this
       that.data.companyId=id
@@ -158,6 +160,10 @@ Page({
      * 加载用户信息
      */
     getUser(){
+      var status=wx.getStorageSync('status')
+      if(status==0){
+        return
+      }
       var id=wx.getStorageSync("userId")
       let that=this
       that.data.userId=id
@@ -237,8 +243,6 @@ Page({
           this.setData({
             windowsHeight:height
           })
-          console.log(height)
-          console.log("未登入")
         } else {
          //登录
           this.setData({

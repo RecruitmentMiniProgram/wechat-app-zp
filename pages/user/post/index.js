@@ -1,6 +1,7 @@
 // index.js
 const db=wx.cloud.database()
 const _=db.command
+const util = require('../../../utils/util.js');
 Page({
   data: {
     show: false,
@@ -33,6 +34,8 @@ Page({
     logoUrl:'',
     settlement:2,
     arraySettlement:['日','周','月','年'],
+    industry:"",
+    arrayIndustry:[],
   },
     /**
      * 获取时间
@@ -55,6 +58,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
     onLoad(options) {
+      util.readJson()
+      .then(res=>{
+        console.log("读取成功")
+        console.log(res)
+        var data=res.data["industry"]
+        var arrayIndustry=[]
+        data.forEach(element => {
+          arrayIndustry.push(element.name)
+        });
+        this.setData({
+          arrayIndustry:arrayIndustry
+        })
+      }).catch(err=>{
+        console.log(err)
+      })
       this.getCompany()
       this.setData({
         edit:options.edit,
@@ -118,13 +136,18 @@ Page({
                 graduate:result.data.graduate,
                 workTime:result.data.workTime,
                 logoUrl:result.data.img,
-                settlement:this.data.arraySettlement.indexOf(result.data.settlement)
+                settlement:this.data.arraySettlement.indexOf(result.data.settlement),
+                industry:this.data.arrayIndustry.indexOf(result.data.industry),
               })
             }).catch((err) => {
               console.log("编辑post时加载信息失败",err)
             });
           },
-
+  industryChange(e){
+    this.setData({
+      industry:e.detail.value
+    })
+  },
   //长按删除卡牌
   longtapDeleteWork(e){
     let that = this;
@@ -199,9 +222,10 @@ Page({
           workTime:this.data.workTime,
           timestamp:date.currentDate,
           time:date.formattedDate,
-          img:this.data.logoUrl,
+          img:this.data.logoUrl.length==0?'/images/damage_map.png':this.data.logoUrl,
           salary:this.data.arraySalary[this.data.salary],
-          settlement:this.data.arraySettlement[this.data.settlement]
+          settlement:this.data.arraySettlement[this.data.settlement],
+          industry:this.data.arrayIndustry[this.data.industry],
         } 
         wx.showLoading({
           title: '更新中...',

@@ -16,7 +16,7 @@ Page({
       phoneTemp: '0000000000',
     },
     arraySex: ['女', '男'],
-    sex: '',
+    sex: 0,
     arrayMarry: ['未婚', '已婚'],
     indexMarry: 0,
     arrayEducation: ['小学', '初中', '高中', '大专', '本科', '硕士','博士'],
@@ -54,7 +54,7 @@ Page({
         console.log("个人用户信息:",result)
         that.data.userData=result.data
         that.setData({
-          avatar:result.data.headUrl,
+          avatar:result.data.headUrl.length==0?(result.data.sex=='女'?'/images/female.png':'/images/male.png'):result.data.headUrl,
           interview:result.data.interview,
           collection:result.data.collection,
           communication:result.data.communication,
@@ -156,18 +156,25 @@ Page({
     formSubmit(e){
       if((this.data.nickName=='请填写姓名'||
         this.data.phone=='请填写手机号'||
-        this.data.sex==''||
         this.data.education==''||
         this.data.intentionData==null||
         this.data.date==''||
         this.data.experience.length==0)){
-          console.log(this.data.nickName)
-          console.log(this.data.sex)
-          console.log(this.data.phone)
-          console.log(this.data.education)
-          console.log(this.data.intentionData)
-          console.log(this.data.date)
-          console.log(this.data.experience)
+          // console.log(this.data.nickName=='请填写姓名')
+          // console.log(this.data.phone=='请填写手机号')
+          // console.log(this.data.sex=='')
+          // console.log( this.data.education=='')
+          // console.log(this.data.intentionData==null)
+          // console.log(this.data.date=='')
+          // console.log( this.data.experience.length==0)
+          // console.log("--------------")
+          // console.log(this.data.nickName)
+          // console.log(this.data.sex)
+          // console.log(this.data.phone)
+          // console.log(this.data.education)
+          // console.log(this.data.intentionData)
+          // console.log(this.data.date)
+          // console.log(this.data.experience)
         wx.showModal({  
           title: '提示',  
           content: '请补充完整必填项',  
