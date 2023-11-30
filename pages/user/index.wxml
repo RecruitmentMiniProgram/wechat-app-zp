@@ -98,7 +98,7 @@
       <view class="title">
         <view class="company">{{fullName}}</view>
         <view class="tele">{{phone}}</view> 
-        <!-- <view class="address">{{address}}</view> -->
+        <view class="address">{{examine==0?"审核中":examine==1?"审核通过":"审核失败"}}</view>
       </view>
       <image class='mine_banner' src='../../images/earth.png'></image>
       <view class='mine_info_head'>

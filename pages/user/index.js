@@ -29,7 +29,8 @@ Page({
       companyData:null,
       //用于指定用户类型 1:个体 2:企业
       status:1,
-      windowsHeight:"100%"
+      windowsHeight:"100%",
+      examine:0,
     },
     /**
      * 点击进入登入页面
@@ -149,7 +150,9 @@ Page({
           fullName:result.data.fullName,
           phone:"电话："+result.data.tele,
           // address:result.data.address,
-          address:"地址："+result.data.address+"翻斗大街翻斗花园804B的玩法呼唤动物达瓦"
+          address:"地址："+result.data.address+"翻斗大街翻斗花园804B的玩法呼唤动物达瓦",
+          // 企业审核情况
+          examine:result.data.examine,
         })
       }).catch((err) => {
         console.log("加载信息失败",err)
@@ -418,6 +421,12 @@ Page({
      * 招聘管理，用于删除或是编辑职位信息
      */
     recruitChange(){
+      if(this.data.examine!=1){
+        wx.showModal({
+          title:"请等待企业信息审核通过"
+        })
+        return;
+      }
       //TODO
       console.log("招聘管理")
       var id=wx.getStorageSync("companyId")
@@ -430,6 +439,12 @@ Page({
      * 发布新的岗位
      */
     postChange(){
+      if(this.data.examine!=1){
+        wx.showModal({
+          title:"请等待企业信息审核通过"
+        })
+        return;
+      }
       //TODO
       console.log("发布职位")
       wx.navigateTo({
@@ -468,6 +483,12 @@ Page({
         },
     //一键复制推广码
     copyText(){
+      if(this.data.examine!=1){
+        wx.showModal({
+          title:"请等待企业信息审核通过"
+        })
+        return;
+      }
       let text=`
     🚀 智慧招聘小程序助你轻松踏入理想职场！🌟
 

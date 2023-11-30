@@ -43,23 +43,23 @@ page{
   font-weight: bold;
 }
 .title .tele{
-  margin-top:20rpx;
+  margin-top:10rpx;
   color:rgb(175, 165, 165);
   font-size: 28rpx;
   /* display: flex; */
   width: 260rpx;
-  height: 60rpx;
+  /* height: 30rpx; */
   white-space: normal; /* 设置为 normal，即允许文本自动换行 */
   word-wrap: break-word; /* 设置为 break-word，确保单词内部也能换行 */
   overflow: hidden;
 }
 .title .address{
-  position: absolute;
-  right: 0rpx;
-  top: 0rpx;
+  /* position: absolute;
+  right: 50rpx;
+  top: 35rpx; */
   color:rgb(175, 165, 165);
-  font-size: 25rpx;
-  /* display: flex; */
+  font-size: 28rpx;
+  display: flex;
   width: 200rpx;
   white-space: normal; /* 设置为 normal，即允许文本自动换行 */
   word-wrap: break-word; /* 设置为 break-word，确保单词内部也能换行 */

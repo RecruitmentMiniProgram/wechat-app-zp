@@ -264,7 +264,8 @@ Page({
                 company_id: uid,
                 post_id: this.data.jobId,
                 user_id: uuid,
-                chat_id: id
+                chat_id: id,
+                createTime:new Date(),
               },
             })
 

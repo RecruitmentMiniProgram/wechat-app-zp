@@ -13,9 +13,7 @@ exports.main = async (event, context) => {
         // "path": '/index.html',
         "phoneNumberList": [
           "+86"+event.phone
-        ],
-        "smsType": 'Marketing',
-        "useShortName": true
+        ]
       })
     return result
   } catch (err) {
