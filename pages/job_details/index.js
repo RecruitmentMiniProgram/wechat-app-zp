@@ -265,7 +265,11 @@ Page({
                 post_id: this.data.jobId,
                 user_id: uuid,
                 chat_id: id,
+<<<<<<< HEAD
                 createTime:new Date(),
+=======
+                createTime: new Date()
+>>>>>>> 3949971a595c37e860982f12bcfda5cfc5b29fb3
               },
             })
 
@@ -304,6 +308,11 @@ Page({
             {
               msg:"查看简历",
               role: 4,
+              time: (Date.now()/1000)
+            },
+            {
+              msg:"电话面试",
+              role: 5,
               time: (Date.now()/1000)
             }
           ]

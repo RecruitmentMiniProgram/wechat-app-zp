@@ -24,7 +24,7 @@
         </view>
       </view>
     </block>
-    <block wx:elif="{{tabs[3].isActive}}">
+    <block wx:elif="{{tabs[3].isActive}}" bidntap='showCategoriesModal'>
       <view class="first_tab">
         <view>
           <template is="jobList" data="{{jobList:jobList}}" />

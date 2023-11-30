@@ -16,7 +16,7 @@
                 data-role="{{item.role}}" style="white-space: nowrap;" class="text">查看岗位</text>
             </view>
 
-            <view class="conb" wx:else="">
+            <view class="conb" wx:elif="{{item.role == 4}}">
               <image src="/images/check_resume.png" class="chatResume" bindtap="onButtonClick" data-role="{{item.role}}"></image>
               <text data-role="{{item.role}}" bindtap="onButtonClick" style="white-space: nowrap;" class="text">查看我的简历</text>
             </view>
@@ -38,10 +38,16 @@
             <text data-role="{{item.role}}" bindtap="onButtonClick" style="white-space: nowrap;" class="text">查看岗位</text>
         </view>
 
-        <view class="conb" wx:else="">
+        <view class="conb" wx:elif="{{item.role == 4}}">
           <image src="/images/check_resume.png" class="chatResume" bindtap="onButtonClick" data-role="{{item.role}}"></image>
           <text data-role="{{item.role}}" bindtap="onButtonClick" style="white-space: nowrap;" class="text">查看他（她）的简历</text>
         </view>
+
+        <view class="conbb" wx:elif="{{item.role == 5}}">
+          <image src="/images/jobinter.jpg" class="interview" bindtap="interview" data-role="{{item.role}}"></image>
+          <text data-role="{{item.role}}" bindtap="interview" style="white-space: nowrap;" class="text">电话面试</text>
+        </view>
+
 
       </view>
       </scroll-view>
