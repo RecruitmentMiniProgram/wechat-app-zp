@@ -7,10 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    test: 0,
     //职位数组
     jobList: [],
     // 分页需要的参数
+    page_index: 0,
+    page_size: 4,
+    jobType: 0,
+    loadingTip: "上拉加载更多",
+
 
     tabs: [{
       id: 0,
@@ -34,13 +38,13 @@ Page({
     }
     ],
   },
-  QueryParams: {
-    query: "",
-    cid: "",
-    jobType: 0,
-    pagenum: 1,
-    pagesize: 10,
-  },
+  // QueryParams: {
+  //   query: "",
+  //   cid: "",
+  //   jobType: 0,
+  //   pagenum: 1,
+  //   pagesize: 10,
+  // },
 
   bindscrolltoupper() {
     // console.log("top..")
@@ -58,8 +62,7 @@ Page({
 
   onShow: function () {
     var tabId = getApp().globalData.tabid || 0;
-    // this.QueryParams.cid = options.cid
-    // this.data.tabs.forEach((v, i) => i === tabId ? v.isActive = true : v.isActive = false);
+
     var updatedTabs = this.data.tabs.map((v, i) => {
       return {
         ...v,
@@ -68,14 +71,13 @@ Page({
     });
 
     this.setData({
-      tabs: updatedTabs
+      tabs: updatedTabs,
+      jobType: tabId
     });
-
-    this.QueryParams.jobType = tabId;
     // console.log(this.data);
 
     // this.newData()
-    this.getJobList(this.QueryParams);
+    this.getJobList();
 
 
   },
@@ -128,56 +130,43 @@ Page({
     // // 修改源数组
     let { tabs } = this.data;
     tabs.forEach((v, i) => i === index ? v.isActive = true : v.isActive = false);
-    if (index == 0) {
-      this.QueryParams.jobType = 0
-    } else if (index == 1) {
-      this.QueryParams.jobType = 1
-
-    } else if (index == 2) {
-      this.QueryParams.jobType = 2
-
-    } else {
-      this.QueryParams.jobType = 3
-
-    }
+    this.data.jobType = index;
     //  3 赋值到data中
     this.setData({
-      tabs
+      tabs,
+      jobList: [],
+      page_index: 0,
+      loadingTip: "上拉加载更多"
     })
-    this.setData({
-      jobList: []
-    })
-    this.getJobList(this.QueryParams);
+    this.getJobList();
   },
+
+
   onReachBottom: function () {
-    // 1  判断还有没有下一页数据
-    if (this.QueryParams.pagenum >= this.totalPages) {
-      // 没有下一页数据
-      // console.log("没有下一页");
-      wx.showToast({
-        title: '没有下一页数据了',
-        icon: 'none',
-        image: '',
-        duration: 1500,
-        mask: false,
-        success: (result) => {
 
-        },
-        fail: () => { },
-        complete: () => { }
-      });
-
-    } else {
-      this.QueryParams.pagenum++;
+    if (this.data.loadingTip != "没有更多内容") {
       wx.showToast({
-        title: '加载中',
-        icon: 'none',
-        image: '',
-        duration: 1000,
-        mask: false,
+        title: "正在加载",
+        icon: 'loading',
+        duration: 1000
       });
-      this.getJobList(this.QueryParams);
+      this.getJobList();
     }
+  },
+
+  showCategoriesModal: function () {
+    console.log('hi')
+    wx.showModal({
+      title: '职位分类',
+      content: '这里放置你的分类信息',
+      showCancel: false,
+      confirmText: '确定',
+      success: (res) => {
+        if (res.confirm) {
+          console.log('用户点击确定');
+        }
+      },
+    });
   },
 
   onPageScroll(e) {
@@ -193,11 +182,13 @@ Page({
   },
 
   //获取职位信息列表数据
-  getJobList: function (QueryParams) {
+  getJobList: function () {
     // console.log(QueryParams)
 
     var that = this;
-    var jobType = QueryParams.jobType
+    var jobType = that.data.jobType
+    const page_index = that.data.page_index
+    const page_size = that.data.page_size
     var field = '_id'
     switch (jobType) {
       case 0:
@@ -214,34 +205,40 @@ Page({
         break
     }
     // console.log('field', field)
-    // wx.showToast({
-    //   title: "正在加载",
-    //   icon: 'loading',
-    //   duration: 1000
-    // });
+    wx.showToast({
+      title: "正在加载",
+      icon: 'loading',
+      duration: 800
+    });
 
 
-    db.collection('post').where({})
+    db.collection('post')
+      .where({})
       .orderBy(field.toString(), 'desc')
+      .skip(page_index * page_size)
+      .limit(page_size)
       .get({
         success: function (res) {
-          var jobList = res.data;
-          // 调用云函数获取jobList
+          const results = res.data;
           wx.cloud.callFunction({
             name: 'jobListQuery',
-            data: { jobList: jobList }
+            data: { jobList: results }
           }).then(res => {
-            jobList = res.result;
+            const jobList = res.result;
             // console.log(jobList)
-
-            var total = jobList.length;
-            var totalPages = Math.ceil(total / QueryParams.pagesize);
             that.setData({
-              jobList: jobList,
-              totalPages: totalPages
+              jobList: that.data.jobList.concat(jobList),
+              page_index: that.data.page_index + 1
             });
+            // 如果返回的数据数量小于每页数据数量，表示没有更多数据
+            if (results.length < page_size) {
+              that.setData({
+                loadingTip: '没有更多内容'
+              });
+            }
+
           }).catch(err => {
-            console.log("failed")
+            console.log(err)
           })
         }
       });
