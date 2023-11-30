@@ -406,12 +406,27 @@ input {
 .conb {
   width: 400rpx;
   height: 300rpx;
-  margin-bottom: 80rpx;
+  margin-top: 20rpx;
+  margin-bottom: 26rpx;
+  position: relative;
+}
+
+.conbb {
+  width: 400rpx;
+  height: 300rpx;
+  margin-top: 20rpx;
+  margin-bottom: 26rpx;
   position: relative;
 }
 
 
 .chatResume{
+  width: 100%;
+  height: 100%;
+  border: 1px solid #4a90e2; /* 设置边框，可以根据需要调整宽度和颜色 */
+}
+
+.interview{
   width: 100%;
   height: 100%;
   border: 1px solid #4a90e2; /* 设置边框，可以根据需要调整宽度和颜色 */

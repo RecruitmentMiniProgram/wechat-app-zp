@@ -209,7 +209,9 @@ Page({
           logo:this.data.logoUrl.length==0?'/images/damage_map.png':this.data.logoUrl,
           website:this.data.website,
           boss:this.data.boss,
-          invitation:0
+          invitation:0,
+          examine:0,
+          createTime:new Date(),
         } 
         wx.showLoading({
           title: '更新中...',

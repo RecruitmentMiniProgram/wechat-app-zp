@@ -162,7 +162,8 @@ Page({
           headUrl:this.data.avatar==this.data.defaultUrl?(this.data.sex==0?'/images/female.png':'/images/male.png'):this.data.avatar,
           self:this.data.self,
           email:this.data.email,
-          invitation:0
+          invitation:0,
+          createTime:new Date()
         }
         
           //使用云函数直接插入数据库中

@@ -35,6 +35,9 @@ Component({
       '医疗': ['医生', '护士', '药品经理'],
       '建筑': ['材料']
     },
+    level1:[],
+    level2:[],
+    level3:[],
     multiSelectorRange: [],
     multiSelectorDefault: [0, 0], // 默认选中第一个科室和第一个医生
     selectedDepartment: '',
