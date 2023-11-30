@@ -81,7 +81,7 @@ page {
 }
 
 .job_list_wrap .job_list_raw navigator .content_top .content_top_lft .job_name {
-  font-size: 35rpx;
+  font-size: 37rpx;
   /* font-weight: bold; */
   overflow: hidden;
   text-overflow: ellipsis;

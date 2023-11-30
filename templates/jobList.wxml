@@ -30,7 +30,7 @@
             </view>
             <view class="content_btm">
               <view class="content_btm_lft">
-                <image class="" src="{{item.img}}" mode="aspectFit" />
+                <image class="" src="{{item.company.logo}}" mode="aspectFit" />
               </view>
               <view class="content_btm_rgt">
                 <view class="cbr_top">

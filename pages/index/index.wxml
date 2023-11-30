@@ -13,7 +13,7 @@
 </view>
 <!-- 导航 -->
 <view class="nav-up">
-  <view class="nav-one-up nav-all" bindtap='bindViewToday'>
+  <view class="nav-one-up nav-all" bindtap='bindViewAllJobs'>
     <view class="nav-one-up-img nav-all-img">
       <image src="../../images/zwgw.png" />
     </view>
@@ -25,7 +25,7 @@
     </view>
     <view class="nav-text">企业分类</view>
   </view>
-  <view class="nav-tow-up nav-all" bindtap='bindViewTodayGxz'>
+  <view class="nav-tow-up nav-all" bindtap='bindViewEmergency'>
     <view class="nav-tow-up-img nav-all-img">
       <image src="../../images/bt.png" />
     </view>
@@ -54,7 +54,9 @@
 <view class="space-line"></view>
 <view>
   <view class="tab-item">急聘职位</view>
-  <view>
-    <template is="jobList" data="{{jobList:jobList}}" />
-  </view>
+  <scroll-view height="200rpx" bindscrolltolower="scrolltolower" scroll-y="true" class="scoll-h">
+    <view>
+      <template is="jobList" data="{{jobList:jobList}}" />
+    </view>
+  </scroll-view>
 </view>

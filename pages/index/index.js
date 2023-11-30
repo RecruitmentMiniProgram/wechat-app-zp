@@ -11,7 +11,7 @@ Page({
   data: {
     loadingTip: "上拉加载更多",
     page_index: 0,
-    detailInfo: "",
+    page_size: 4,
 
     swiperCurrent: 0,
     indicatorDots: true,
@@ -20,6 +20,7 @@ Page({
     duration: 800,
     circular: true,
     imgUrls: '',
+    jobList: [],
 
     //tab 
     winHeight: "",//窗口高度
@@ -47,14 +48,6 @@ Page({
     })
   },
 
-  /**
-   * 
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    this.getswitchimg();
-    this.qbzwLoad();
-  },
 
 
   //加载轮播图
@@ -65,95 +58,27 @@ Page({
         that.setData({
           imgUrls: res.data
         });
-        // console.log(res.data);
       }
     });
 
-  },
-
-  //分页加载
-  loadArticle: function () {
-    ////console.log('分页传值:' + this.data.currentTab);
-    var that = this;
-    var page_size = 10;
-    var DetailInfo = Bmob.Object.extend("DetailInfo");
-    var query = new Bmob.Query(DetailInfo);
-    ////console.log('分页传值:' + currentTaB);
-    switch (that.data.currentTab) {
-      case 0:
-        //console.log('全部职位');
-        //this.qbzwLoad();
-        query.descending('updatedAt');
-        break;
-      case 1:
-        //console.log('高薪资');
-        query.equalTo("payType", 0);
-        query.descending('detPayMax');
-
-        break;
-      case 2:
-        //console.log('临时工');
-        query.equalTo("payType", 1);
-        query.descending('detPayMax');
-
-        break;
-      case 3:
-        //console.log('推荐');
-        query.descending('entNum');
-        break;
-    }
-    // 分页
-    query.limit(page_size);
-    query.skip(that.data.page_index * page_size);
-    var aaa = that.data.page_index * page_size
-    //console.log('跳过:' +aaa)
-    // 查询所有数据
-    query.find({
-      success: function (results) {
-        // 请求成功将数据存入article_list
-        that.setData({
-          detailInfo: that.data.detailInfo.concat(results)
-        });
-        //console.log('查询数量:' + results.length + '加载数量' + page_size)
-
-        if (results.length < page_size) {
-          //如果数据库中剩余的条数 不够下次分页加载则全部加载
-          query.skip(that.data.page_index * page_size);
-          query.find({
-            success: function (results) {
-              //console.log('最后剩余数量：'+results.length)
-              that.setData({
-                detailInfo: that.data.detailInfo.concat(results)
-              })
-            }
-          });
-
-          that.setData({
-            loadingTip: '没有更多内容'
-          });
-
-        }
-      }
-
-    });
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   scrolltolower: function () {
-    //console.log('--下拉刷新-')
-    this.setData({
-      page_index: ++this.data.page_index
-    });
+    // console.log('--下拉刷新-')
+    // this.setData({
+    //   page_index: ++this.data.page_index
+    // });
     if (this.data.loadingTip != "没有更多内容") {
       wx.showToast({
         title: "正在加载",
         icon: 'loading',
         duration: 1000
       });
+      this.loadArticle();
     }
-    this.loadArticle();
   },
   /**
    * 页面搜索事件的处理函数
@@ -167,7 +92,7 @@ Page({
   /**
    * 今日招聘（全部职位）跳转
    */
-  bindViewToday: function () {
+  bindViewAllJobs: function () {
     getApp().globalData.tabid = 0;
     wx.switchTab({
       url: '../jobs_list/index',
@@ -175,15 +100,14 @@ Page({
   },
 
   bindViewCategory: function () {
-    getApp().globalData.tabid = 0;
     wx.switchTab({
       url: '../category_job/index',
     })
   },
   /**
- * 今日招聘（高薪资）跳转
+ * 急聘
  */
-  bindViewTodayGxz: function () {
+  bindViewEmergency: function () {
     getApp().globalData.tabid = 1;
     wx.switchTab({
       url: '../jobs_list/index',
@@ -217,47 +141,7 @@ Page({
   //   })
 
   // },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
 
   // 点击标题切换当前页时改变样式
   swichNav: function (e) {
@@ -284,6 +168,17 @@ Page({
       })
     }
   },
+
+  /**
+   * 
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.getswitchimg();
+    // this.qbzwLoad();
+    this.loadArticle();
+  },
+
   //全部职位加载
   qbzwLoad: function () {
     var that = this;
@@ -309,10 +204,52 @@ Page({
       });
 
   },
+
+  //分页加载
+  loadArticle: function () {
+
+    const that = this;
+    const page_size = that.data.page_size;
+    const page_index = that.data.page_index;
+    db.collection('post')
+      .where({})
+      .orderBy('timestamp', 'desc')
+      .skip(page_index * page_size)
+      .limit(page_size)
+      .get({
+        success: function (res) {
+          const results = res.data;
+          // console.log(results)
+          wx.cloud.callFunction({
+            name: 'jobListQuery',
+            data: { jobList: results }
+          }).then(res => {
+            const jobList = res.result;
+            that.setData({
+              jobList: that.data.jobList.concat(jobList)
+            });
+            // 如果返回的数据数量小于每页数据数量，表示没有更多数据
+            if (results.length < page_size) {
+              that.setData({
+                loadingTip: '没有更多内容'
+              });
+            }
+            // 更新分页索引
+            that.setData({
+              page_index: that.data.page_index + 1
+            });
+          }).catch(err => {
+            console.log("failed")
+          })
+        },
+      });
+
+
+  },
   //清空招聘列表
   cleardata: function () {
     this.setData({
-      detailInfo: []
+      jobList: []
     });
   }
 
