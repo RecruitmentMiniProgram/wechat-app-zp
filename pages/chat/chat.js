@@ -1,3 +1,5 @@
+import { send_photo } from "../../utils/httputil";
+
 var app = getApp()
 const db=wx.cloud.database()
 const _=db.command
@@ -69,6 +71,35 @@ Page({
    * 生命周期----显示页面
    */
   onShow:function(e){
+  },
+
+  async interview(e) {
+    var that = this
+    const db = wx.cloud.database()
+    var id = this.data.userId
+    let user = await db.collection('user').doc(id).get()
+
+    wx.makePhoneCall({
+      phoneNumber: user.data.phone, // 替换为你要拨打的电话号码
+      success: async function () {
+        var res = await  db.collection('interviews').add({
+          // data 字段表示需新增的 JSON 数据
+          data: {
+            company_id: that.data.postId,
+            post_id: that.data.companyId,
+            user_id: that.data.userId,
+            time: Date.now()
+          },
+        })
+
+        var status = 2
+         await that.sendMsg(status, "发起了一次电话面试")
+
+      },
+      fail: function () {
+        console.log("拨打电话失败！");
+      }
+    });
   },
 
   onButtonClick: function(e) {
@@ -245,11 +276,11 @@ Page({
          }
        })
   },
-  async sendClick(e) {
-     var status = this.data.status
 
+  async sendMsg(status, msg) {
     //写消息时将消息栏自动置顶到对应用户列表中
-    var msgInfo = new MsgInfo(this.data.status, e.detail.value, (Date.now()/1000))
+    var msgInfo = new MsgInfo(status, msg, (Date.now()/1000))
+
     //更新数据库
     const db = wx.cloud.database()
     const _ = db.command
@@ -298,5 +329,10 @@ Page({
       toView: "msg-" + list.length - 1
     })
   },
+
+  async sendClick(e) {
+    var status = this.data.status
+    await this.sendMsg(status, e.detail.value)
+  }
 })
 

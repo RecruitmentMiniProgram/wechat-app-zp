@@ -25,7 +25,8 @@ App({
         // env: 'cloud1-1gqwq0cu50854c5d',
         env:'haianjiuye-9gwh0gp7bb2e3aa1',
         traceUser: true,
-      })
+    })
+
     }
 
     this.globalData = {}
