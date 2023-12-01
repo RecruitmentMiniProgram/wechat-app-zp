@@ -47,9 +47,11 @@
   </view>
 </view>
 <view>
+  <navigator url="/pages/join_group/index">
   <view class="group-container">
     <image src="../../images/join_group.png" mode="widthFix" class="image"></image>
   </view>
+  </navigator>
 </view>
 <view class="space-line"></view>
 <view>

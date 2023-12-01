@@ -175,35 +175,9 @@ Page({
    */
   onLoad: function (options) {
     this.getswitchimg();
-    // this.qbzwLoad();
     this.loadArticle();
   },
 
-  //全部职位加载
-  qbzwLoad: function () {
-    var that = this;
-
-    db.collection('post').where({})
-      .orderBy('timestamp', 'desc')
-      .get({
-        success: function (res) {
-          var jobList = res.data;
-          // 调用云函数获取jobList
-          wx.cloud.callFunction({
-            name: 'jobListQuery',
-            data: { jobList: jobList }
-          }).then(res => {
-            jobList = res.result;
-            that.setData({
-              jobList: jobList,
-            });
-          }).catch(err => {
-            console.log("failed")
-          })
-        }
-      });
-
-  },
 
   //分页加载
   loadArticle: function () {
@@ -211,41 +185,35 @@ Page({
     const that = this;
     const page_size = that.data.page_size;
     const page_index = that.data.page_index;
-    db.collection('post')
-      .where({})
-      .orderBy('timestamp', 'desc')
-      .skip(page_index * page_size)
-      .limit(page_size)
-      .get({
-        success: function (res) {
-          const results = res.data;
-          // console.log(results)
-          wx.cloud.callFunction({
-            name: 'jobListQuery',
-            data: { jobList: results }
-          }).then(res => {
-            const jobList = res.result;
-            that.setData({
-              jobList: that.data.jobList.concat(jobList)
-            });
-            // 如果返回的数据数量小于每页数据数量，表示没有更多数据
-            if (results.length < page_size) {
-              that.setData({
-                loadingTip: '没有更多内容'
-              });
-            }
-            // 更新分页索引
-            that.setData({
-              page_index: that.data.page_index + 1
-            });
-          }).catch(err => {
-            console.log("failed")
-          })
-        },
-      });
 
+    wx.cloud.callFunction({
+      name: 'jobListQuery',
+      data: {
+        'condition': {},
+        'field': 'timestamp',
+        'sort': 'desc',
+        'skip': page_index * page_size,
+        'limit': page_size
+      }
+    }).then(res => {
+      // console.log(res)
+      const jobList = res.result.data;
+
+      that.setData({
+        jobList: that.data.jobList.concat(jobList),
+        page_index: that.data.page_index + 1
+      });
+      if (jobList.length < page_size) {
+        that.setData({
+          loadingTip: '没有更多内容'
+        });
+      }
+    }).catch(err => {
+      console.log("failed")
+    })
 
   },
+
   //清空招聘列表
   cleardata: function () {
     this.setData({

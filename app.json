@@ -1,17 +1,16 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/company_home/index",
+    "pages/job_details/index",
     "pages/resume/index",
     "pages/join_group/index",
-    
-    
     
     "pages/user/manage/index",
     "pages/user/index",
     "pages/user/post/index",
     "pages/jobs_list/index",
     "pages/user/edit/index",
-    "pages/company_home/index",
     "pages/award/award",
     "pages/search/search",
     "pages/searchresult/searchresult",
@@ -21,7 +20,6 @@
     "pages/user/resume/index",
     "pages/all_resume/index",
     "pages/all_chat/index",
-    "pages/job_details/index",
     "pages/show_resume/show_resume",
     "pages/message/message",
     "pages/chat/chat",
