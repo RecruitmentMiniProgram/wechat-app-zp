@@ -121,6 +121,8 @@ page {
 .job_list_wrap .job_list_raw navigator .content_top .content_top_rgt .job_ad {
   margin-top: 20rpx;
   float: right;
+  font-size: 30rpx;
+  /* font-weight: bold; */
 }
 
 .job_list_wrap .job_list_raw navigator .content_btm {
