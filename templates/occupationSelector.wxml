@@ -1,10 +1,7 @@
   <!-- 兴趣爱好 -->
-  <view class="row">
-    <!-- <view>{{innerTitle}} <text class="word-count {{workNum >= 5 ? 'red' : ''}}">{{workNum}}/5</text></view>
-    <picker class="right" mode="multiSelector" range="{{multiSelectorRange}}" bindchange="getData" bindcolumnchange="multiPickerChange" wx:if="{{!pickerDisabled}}">
-      <text class="triangle">▼</text>
-    </picker> -->
-    <view>意向职位<text class="word-count {{workNum >= 5 ? 'red' : ''}}">{{workNum}}/5</text></view>
+  <template name="occupationSelector">
+    <view class="row">
+    <view>意向职位<text class="word-count-selector {{workNum >= 5 ? 'red-selector' : ''}}">{{workNum}}/5</text></view>
     <view class="right" wx:if="{{!pickerDisabled}}">
         <view class="add-img" bindtap="industryChange">+</view>
     </view>   
@@ -18,3 +15,4 @@
       <view bindtap="longtapDeleteLabel" data-index="{{index}}"  class="add-btn data-btn">{{item}}</view>
     </block>
   </view>
+  </template>

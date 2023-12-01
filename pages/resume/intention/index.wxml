@@ -5,7 +5,10 @@
       <view class="dot"></view>
       <view class="title">求职意向<text class="required">*</text></view>
     </view>
-    <i-selector id="salary" innerTitle="意向职位"></i-selector>
+    <!-- <i-selector id="salary" innerTitle="意向职位"></i-selector> -->
+    <import src="/templates/occupationSelector.wxml"/>
+    <template is="occupationSelector" data="{{workNum:workNumSelector,pickerDisabled:pickerDisabledSelector,labelList:labelListSelector}}"/>
+    
     <view class="row">
       <view>薪资</view>
         <picker class="right" value="{{salary}}"  bindchange="salaryChange" range="{{arraySalary}}">

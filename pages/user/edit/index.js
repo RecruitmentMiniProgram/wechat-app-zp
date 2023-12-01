@@ -200,7 +200,7 @@ Page({
           minName:this.data.minName,
           fullName:this.data.company,
           scale:this.data.arrayScale[this.data.scale],
-          certification:this.data.attrImg,
+          certification:this.data.attrImg[0],
           tele:this.data.tele,
           address:this.data.address,
           introduction:this.data.introduction,
@@ -389,7 +389,7 @@ Page({
             filePath=res.fileID
 
             that.setData({
-                attrImg: attr.concat(filePath)
+                attrImg: [filePath]
               })
             // 隐藏加载提示
             wx.hideLoading();
@@ -415,7 +415,7 @@ Page({
           var list = that.data.attrImg;
           list.splice(tag, 1);
           that.setData({
-            attrImg: list
+            attrImg: []
           })
         }
       }
