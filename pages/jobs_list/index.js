@@ -201,7 +201,7 @@ Page({
         field = "timestamp"
         break
       case 2:
-        field = "timestamp"  //TODO
+        field = "kind"  //TODO
         break
       default:
         field = "_id"

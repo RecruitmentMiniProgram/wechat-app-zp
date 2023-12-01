@@ -23,10 +23,9 @@
               </view>
               <!-- 工资 发布时间 -->
               <view class="content_top_rgt">
-                <view class="job-salary">
-                  <!-- <view class="job_skill">{{item.salary}}</view> -->
+                  <view class="job_ad">{{item.kind}}</view>
                   <!-- <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view> -->
-                </view>
+                
                 <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->
               </view>
             </view>

@@ -1,7 +1,7 @@
 {
     "usingComponents": {
-        "SearchInput": "../../components/SearchInput/SearchInput"
+        "SearchInput": "../../components/SearchInput/SearchInput",
+        "category": "../../components/category/category"
     },
     "navigationBarTitleText": "职业分类"
-
 }
