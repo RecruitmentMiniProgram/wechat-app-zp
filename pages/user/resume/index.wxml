@@ -204,17 +204,6 @@
     </view>
   </view>
 
-  <!-- 注册邀请码 -->
-  <view class="box">
-    <view class="level nav">
-      <view class="dot"></view>
-      <view class="title">注册邀请码</view>
-    </view>
-    <view class="row">
-      <textarea  name="skill" bindinput="invitationChange" auto-height="true" class="address_text-area" maxlength="50" placeholder="请填写邀请码（选填）"></textarea>
-    </view>
-  </view>
-
   <view class="btn_container">
     <button formType="submit" class="btn">提交</button>
   </view>

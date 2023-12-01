@@ -16,6 +16,15 @@ page {
   .red {
     color: red;
   }
+
+  .word-count-selector {
+    color: #999;
+  }
+  
+  .red-selector {
+    color: red;
+  }
+  
   
   
   .level {

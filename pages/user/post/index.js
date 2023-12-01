@@ -9,7 +9,7 @@ Page({
     arrayEducation: ['不限','高中', '大专及以下', '本科', '硕士','博士'],
     arrayExperience: ['不限', '1年', '2年', '3年', '3-5年', '5-10年','10年以上'],
     arrayGraduate:['不接受','接受'],
-    arrayKind:['全职','实习'],
+    arrayKind:['全职','实习','兼职'],
     arraySalary:['面议','不面议'],
     education:0,
     experience:0,
@@ -35,7 +35,7 @@ Page({
     settlement:2,
     arraySettlement:['日','周','月','年'],
     industry:"",
-    arrayIndustry:[],
+    workList:[],
   },
     /**
      * 获取时间
@@ -58,21 +58,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
     onLoad(options) {
-      util.readJson()
-      .then(res=>{
-        console.log("读取成功")
-        console.log(res)
-        var data=res.data["industry"]
-        var arrayIndustry=[]
-        data.forEach(element => {
-          arrayIndustry.push(element.name)
-        });
-        this.setData({
-          arrayIndustry:arrayIndustry
-        })
-      }).catch(err=>{
-        console.log(err)
-      })
       this.getCompany()
       this.setData({
         edit:options.edit,
@@ -84,6 +69,10 @@ Page({
       console.log("onLoad")
     },
     onShow(){
+      console.log(this.data.workList)
+      this.setData({
+        industry:this.data.workList.length==0?'':this.data.workList[this.data.workList.length-1]
+      })
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -101,7 +90,8 @@ Page({
       db.collection("company").doc(id).get()
       .then((result) => {
         that.data.logoUrl=result.data.logo
-        that.data.company=result.data.fullName
+        that.data.company=result.data.fullName,
+        that.data.companyMinName=result.data.minName,
         that.data.boss=result.data.boss
         that.data.tele=result.data.tele
         that.data.attrLogo=[result.data.logo]
@@ -137,36 +127,16 @@ Page({
                 workTime:result.data.workTime,
                 logoUrl:result.data.img,
                 settlement:this.data.arraySettlement.indexOf(result.data.settlement),
-                industry:this.data.arrayIndustry.indexOf(result.data.industry),
+                industry:result.data.industry,
               })
             }).catch((err) => {
               console.log("编辑post时加载信息失败",err)
             });
           },
   industryChange(e){
-    this.setData({
-      industry:e.detail.value
-    })
-  },
-  //长按删除卡牌
-  longtapDeleteWork(e){
-    let that = this;
-    let tag = e.currentTarget.dataset.index;
-    
-    wx.showModal({
-      title: '提示',
-      content: '确定删除该工作经历吗？',
-      complete: (res) => {
-        if (res.confirm) {
-          var list = that.data.workList;
-          list.splice(tag, 1);
-          that.setData({
-            workList: list
-          })
-          console.log("删除后")
-          console.log(this.data.workList)
-        }
-      }
+    console.log("选择产业类型")
+    wx.navigateTo({
+      url: '/pages/user/category_job/index',
     })
   },
   /**
@@ -225,7 +195,9 @@ Page({
           img:this.data.logoUrl.length==0?'/images/damage_map.png':this.data.logoUrl,
           salary:this.data.arraySalary[this.data.salary],
           settlement:this.data.arraySettlement[this.data.settlement],
-          industry:this.data.arrayIndustry[this.data.industry],
+          industry:this.data.industry,
+          companyMinName:this.data.companyMinName,
+          companyFullName:this.data.company,
         } 
         wx.showLoading({
           title: '更新中...',
@@ -438,7 +410,7 @@ Page({
             filePath=res.fileID
 
             that.setData({
-                attrImg: attr.concat(filePath)
+                attrImg: [filePath]
               })
             // 隐藏加载提示
             wx.hideLoading();

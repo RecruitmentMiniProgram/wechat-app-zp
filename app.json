@@ -5,10 +5,18 @@
     "pages/job_details/index",
     "pages/resume/index",
     "pages/join_group/index",
+
     
+
+
+    "pages/user/resume/index",
+    "pages/user/post/index",
+    "pages/user/category_job/index",
+
+
     "pages/user/manage/index",
     "pages/user/index",
-    "pages/user/post/index",
+
     "pages/jobs_list/index",
     "pages/user/edit/index",
     "pages/award/award",
@@ -17,7 +25,7 @@
     "pages/user/view/view",
     "pages/register/register",
     "pages/login/login",
-    "pages/user/resume/index",
+
     "pages/all_resume/index",
     "pages/all_chat/index",
     "pages/show_resume/show_resume",

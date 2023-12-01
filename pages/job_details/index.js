@@ -266,7 +266,6 @@ Page({
                 user_id: uuid,
                 chat_id: id,
                 createTime: new Date()
-
               },
             })
 
