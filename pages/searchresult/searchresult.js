@@ -11,6 +11,7 @@ Page({
     isnull: 0,
     fromCate: 0,
     fieldName: [],
+    condition: [],
 
     page_index: 0,
     page_size: 4,
@@ -47,25 +48,40 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // if (options.fromCate && options.searchValue) {
-    //   //console.log('onload' + options.searchValue)
-    //   this.setData({
-    //     searchValue: options.searchValue
-    //   });
-    //   // this.searchCates();
-    //   this.loadinfor();
+    const that = this
 
+    db.collection('post').limit(1).get({
+      success: function (res) {
+        // 搜索
+        if (options && options.searchValue) {
+          // console.log('onload' + options.searchValue)
+          var fieldName = Object.keys(res.data[0])
+          // console.log(fieldName)
 
-    // }
-    // 搜索
-    if (options && options.searchValue) {
-      //console.log('onload' + options.searchValue)
-      this.setData({
-        searchValue: options.searchValue
-      });
-      this.loadinfor();
-    }
+          var condition = db.command.or(
+            // 对集合中所有字段应用模糊搜索
+            fieldName.map(field => ({
+              [field]: db.RegExp({ regexp: '^' + options.searchValue, options: '' })
+            }))
+          )
 
+          // console.log(condition)
+          // that.setData({
+          //   condition: condition,
+          //   searchValue: options.searchValue
+          // });
+          // that.loadinfor();
+
+          that.setData({
+            condition: condition,
+            searchValue: options.searchValue
+          }, function () {
+            that.loadinfor();
+          });
+        }
+
+      }
+    })
   },
 
 
@@ -73,7 +89,8 @@ Page({
   //查询搜索结果是否存在（只能搜索post表的字段）
   loadinfor: function () {
     var that = this;
-    const { searchValue, selectionType, page_index, page_size } = that.data;
+    const { searchValue, selectionType, page_index, page_size, condition } = that.data;
+    console.log(that.data)
 
     var field = '_id'
     switch (selectionType) {
@@ -96,60 +113,70 @@ Page({
       duration: 800
     });
 
-    db.collection('post').limit(1).get({
-      success: function (res) {
-        // 获得post表的字段:[_id,age,..]
-        const fields = Object.keys(res.data[0])
+    // db.collection('post')
+    //   .where(condition)
+    //   .orderBy(field, 'desc')
+    //   .skip(page_index * page_size)
+    //   .limit(page_size)
+    //   .get({
+    //     success: function (res) {
+    //       // console.log(res.data);
 
-        db.collection('post')
-          .where(
-            db.command.or(
-              // 对集合中所有字段应用模糊搜索
-              fields.map(field => ({
-                [field]: db.RegExp({ regexp: '^' + searchValue, options: '' })
-              }))
-            )
-          )
-          .orderBy(field.toString(), 'desc')
-          .skip(page_index * page_size)
-          .limit(page_size)
-          .get({
-            success: function (res) {
-              const results = res.data;
-              // 调用云函数获取jobList
-              wx.cloud.callFunction({
-                name: 'jobListQuery',
-                data: { jobList: results }
-              }).then(res => {
-                var jobList = res.result;
-                // console.log(jobList)
-                if (jobList.length > 0) {
-                  that.setData({
-                    // jobList: jobList,
-                    isnull: 1
-                  });
+    //       const jobList = res.data;
 
-                }
-                that.setData({
-                  jobList: that.data.jobList.concat(jobList),
-                  page_index: that.data.page_index + 1
-                });
-                // 如果返回的数据数量小于每页数据数量，表示没有更多数据
-                if (results.length < page_size) {
-                  that.setData({
-                    loadingTip: '没有更多内容'
-                  });
-                }
+    //       if (jobList.length > 0) {
+    //         that.setData({
+    //           isnull: 1
+    //         });
+    //       }
+    //       that.setData({
+    //         jobList: that.data.jobList.concat(jobList),
+    //         page_index: that.data.page_index + 1
+    //       });
+    //       if (jobList.length < page_size) {
+    //         that.setData({
+    //           loadingTip: '没有更多内容'
+    //         });
+    //       }
+    //       // 处理查询结果
+    //     },
+    //     fail: function (error) {
+    //       console.error("Failed to fetch data:", error);
+    //     }
 
 
-              }).catch(err => {
-                console.log("failed")
-              })
-            }
-          });
+    //   })
+
+    wx.cloud.callFunction({
+      name: 'jobListQuery',
+      data: {
+        'field': field,
+        'condition': condition,
+        'sort': 'desc',
+        'skip': page_index * page_size,
+        'limit': page_size
       }
-    });
+    }).then(res => {
+      // console.log(res)
+      const jobList = res.result.data;
+      if (jobList.length > 0) {
+        that.setData({
+          isnull: 1
+        });
+      }
 
+      that.setData({
+        jobList: that.data.jobList.concat(jobList),
+        page_index: that.data.page_index + 1
+      });
+      if (jobList.length < page_size) {
+        that.setData({
+          loadingTip: '没有更多内容'
+        });
+      }
+    }).catch(err => {
+      console.log("failed")
+    })
 
   },
   handleTabsItemChange(e) {

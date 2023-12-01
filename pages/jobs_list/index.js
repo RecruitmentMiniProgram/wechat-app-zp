@@ -11,7 +11,7 @@ Page({
     jobList: [],
     // 分页需要的参数
     page_index: 0,
-    page_size: 4,
+    page_size: 10,
     selectionType: 0,
     loadingTip: "上拉加载更多",
     // 职位分类
@@ -215,35 +215,31 @@ Page({
     });
 
 
-    db.collection('post')
-      .where({ 'industry': cid })
-      .orderBy(field.toString(), 'desc')
-      .skip(page_index * page_size)
-      .limit(page_size)
-      .get({
-        success: function (res) {
-          const results = res.data;
-          wx.cloud.callFunction({
-            name: 'jobListQuery',
-            data: { jobList: results }
-          }).then(res => {
-            const jobList = res.result;
-            // console.log(jobList)
-            that.setData({
-              jobList: that.data.jobList.concat(jobList),
-              page_index: that.data.page_index + 1
-            });
-            // 如果返回的数据数量小于每页数据数量，表示没有更多数据
-            if (results.length < page_size) {
-              that.setData({
-                loadingTip: '没有更多内容'
-              });
-            }
-
-          }).catch(err => {
-            console.log(err)
-          })
-        }
+    wx.cloud.callFunction({
+      name: 'jobListQuery',
+      data: {
+        'condition': {},
+        'field': field.toString(),
+        'sort': 'desc',
+        'skip': page_index * page_size,
+        'limit': page_size
+      }
+    }).then(res => {
+      // console.log(res)
+      const results = res.result.data;
+      that.setData({
+        jobList: that.data.jobList.concat(results),
+        page_index: that.data.page_index + 1
       });
+      if (results.length < page_size) {
+        that.setData({
+          loadingTip: '没有更多内容'
+        });
+      }
+    }).catch(err => {
+      console.log("failed")
+    })
+
+
   }
 });

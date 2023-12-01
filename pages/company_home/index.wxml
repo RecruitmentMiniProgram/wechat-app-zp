@@ -30,7 +30,7 @@
     <view class="content">成立时间: {{comObj.incorporationDate}}</view>
     <view class="content">企业官网：{{comObj.website}}</view>
     <view class="title com_addr">公司地址</view>
-    <view class="content">{{comObj.address}}》</view>
+    <view class="content">{{comObj.address}}</view>
   </block>
   <!-- 另一个列表################################################################# -->
   <block wx:elif="{{tabs[1].isActive}}">

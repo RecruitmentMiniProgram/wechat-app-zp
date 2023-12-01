@@ -18,6 +18,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    loadingTip: "上拉加载更多",
+    page_index: 0,
+    page_size: 10,
     submit_stat: "收藏",
     isCollect_com: false,
     comObj: [],
@@ -47,55 +50,6 @@ Page({
     });
   },
 
-
-
-
-  // 公司信息全局对象
-  comInfoStorage: {},
-  // 点击收藏图标
-  handleCollectAdd() {
-    let isCollect_com = false;
-    // 1 先获取缓存中的购物车数组
-    let collects_com = wx.getStorageSync("collects_com") || [];
-    // 2 判断商品对象是否存在于购物车的数组中
-    let index = collects_com.findIndex(v => v.comId === this.comInfoStorage.comId);
-    if (index != -1) {
-      // 能找到 已经收藏过 再点击则取消收藏
-      collects_com.splice(index, 1);
-      isCollect_com = false;
-      wx.showToast({
-        title: '取消成功',
-        icon: 'success',
-        mask: true
-      });
-      this.setData({
-        submit_stat: "收藏"
-      })
-    } else {
-      // 没有收藏过
-      collects_com.push(this.comInfoStorage);
-      isCollect_com = true;
-      wx.showToast({
-        title: '收藏成功',
-        icon: 'success',
-        mask: true
-      });
-      this.setData({
-        submit_stat: "已收藏"
-      })
-    }
-    // 5 把收藏夹重新添加回缓存中
-    wx.setStorageSync("collects_com", collects_com);
-    this.setData({
-      isCollect_com
-    })
-  },
-  // 获取订单列表的方法
-  async getOrders(type) {
-    this.setData({
-      // orders: res.orders
-    })
-  },
   // 根据标题的索引来激活选中 标题数组
   changeTitleByIndex(index) {
     // 2 修改源数组
@@ -106,13 +60,13 @@ Page({
       tabs
     })
   },
+
   handleTabsItemChange(e) {
     // 1 获取被点击的标题索引
     const { index } = e.detail;
     this.changeTitleByIndex(index);
-    // 2 重新发送请求
-    this.getOrders(index + 1);
   },
+
   // 获取公司主页数据
   async getComDetail(comId) {
     var that = this;
@@ -127,23 +81,32 @@ Page({
     })
   },
   async getComPostDetail(comId) {
-    var that = this;
-    const jobRes = await db.collection('post').where({ companyId: comId }).get()
+    const that = this;
+    const page_size = that.data.page_size;
+    const page_index = that.data.page_index;
 
-    const myJobs = jobRes.data
-    try {
-      const res = await wx.cloud.callFunction({
-        name: 'jobListQuery',
-        data: { jobList: myJobs }
-      });
-
-      const jobList = res.result;
+    wx.cloud.callFunction({
+      name: 'jobListQuery',
+      data: {
+        'condition': { companyId: comId },
+        'skip': page_index * page_size,
+        'limit': page_size
+      }
+    }).then(res => {
+      const jobList = res.result.data;
       that.setData({
-        jobList: jobList
+        jobList: that.data.jobList.concat(jobList),
+        page_index: that.data.page_index + 1
+
       });
-    } catch (err) {
-      console.log("failed", err);
-    }
+      if (jobList.length < page_size) {
+        that.setData({
+          loadingTip: '没有更多内容'
+        });
+      }
+    }).catch(err => {
+      console.log("failed")
+    })
 
   },
   /**
