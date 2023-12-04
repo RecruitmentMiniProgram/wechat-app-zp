@@ -534,7 +534,7 @@ Page({
     //联系我们
     ourChange(e){
       wx.makePhoneCall({
-        phoneNumber: '13380874078', // 替换为你要拨打的电话号码
+        phoneNumber: '19552757657', // 替换为你要拨打的电话号码
         success: function () {
           console.log("拨打电话成功！");
         },

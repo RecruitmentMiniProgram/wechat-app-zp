@@ -85,8 +85,8 @@ Page({
     1 获取被点击的标题身上的索引
     2 给data中的currentIndex赋值就可以了
     */
-    // const { index } = e.currentTarget.dataset;
-    const { index } = e.detail;
+    const { index } = e.currentTarget.dataset;
+    // const { index } = e.detail;
 
     // let rightContent = this.data.Cates2[index].child;
     let rightContent = this.data.Cates2[index].subList;

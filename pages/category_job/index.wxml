@@ -1,4 +1,4 @@
-<view class="cates">
+<!-- <view class="cates">
     <view wx:if="{{isSearch==1}}">
         <SearchInput></SearchInput>
     </view>
@@ -11,11 +11,9 @@
         <scroll-view scroll-top="{{scrollTop}}" scroll-y="{{true}}" class="right_contents">
             <view class="goods_group" wx:for="{{rightContent}}" wx:key="id" wx:for-index="index1" wx:for-item="item1">
                 <view class="goods_list">
-                    <!-- 搜索时进行分类 -->
                     <navigator wx:if="{{isSearch==1}}" url="/pages/searchresult/searchresult?fromCate=1&searchValue={{item1.name}}">
                         {{item1.name}}
                     </navigator>
-                    <!-- 发布职位时进行分类 -->
                     <navigator wx:else bindtap="selectOccupation" url="" data-index="{{item1.name}}">
                         {{item1.name}}
                     </navigator>
@@ -23,8 +21,8 @@
             </view>
         </scroll-view>
     </view>
-</view>
--->
+</view> -->
+
 <view class="cates">
     <SearchInput></SearchInput>
     <view>

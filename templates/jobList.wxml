@@ -112,7 +112,7 @@
                   </view>
                   <view class="cbr_btm_rgt">
                     <!-- <view class="">{{time.formatDateString(item.time)}}</view> -->
-                    <view class="">{{time.formatTime(item.timestamp)}}</view>
+                    <view class="">{{item.time}}</view>
                   </view>
                 </view>
               </view>

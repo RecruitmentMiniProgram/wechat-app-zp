@@ -73,13 +73,13 @@
         </view>
         <image src='../../images/jiantou.png' class='jiantou'></image>
       </view>
-      <view class='list' bindtap='view'>
+      <!-- <view class='list' bindtap='view'>
         <view class='list_left'>
           <image class='listIcon' src='../../images/feedback.png'></image>
           <view class='listName'>意见反馈</view>
         </view>
         <image src='../../images/jiantou.png' class='jiantou'></image>
-      </view>
+      </view> -->
       <view class='list' bindtap="copyText">
         <view class='list_left'>
           <image class='listIcon' src='../../images/share.png'></image>
@@ -168,13 +168,13 @@
         </view>
         <image src='../../images/jiantou.png' class='jiantou'></image>
       </view>
-      <view class='list' bindtap='view'>
+      <!-- <view class='list' bindtap='view'>
         <view class='list_left'>
           <image class='listIcon' src='../../images/feedback.png'></image>
           <view class='listName'>意见反馈</view>
         </view>
         <image src='../../images/jiantou.png' class='jiantou'></image>
-      </view>
+      </view> -->
       <view class='list' bindtap="copyText">
         <view class='list_left'>
           <image class='listIcon' src='../../images/share.png'></image>
