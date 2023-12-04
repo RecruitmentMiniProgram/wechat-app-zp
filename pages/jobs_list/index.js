@@ -35,7 +35,7 @@ Page({
     },
     {
       id: 3,
-      value: "更多",
+      value: "实习",
       isActive: false
     }
     ],
@@ -193,6 +193,7 @@ Page({
     const page_size = that.data.page_size
     const cid = that.data.cid
     var field = '_id'
+    var condition = {}
     switch (selectionType) {
       case 0:
         field = "_id"
@@ -201,7 +202,10 @@ Page({
         field = "timestamp"
         break
       case 2:
-        field = "kind"  //TODO
+        condition = { 'kind': "兼职" }
+        break
+      case 3:
+        condition = { 'kind': "实习" }
         break
       default:
         field = "_id"
@@ -218,7 +222,7 @@ Page({
     wx.cloud.callFunction({
       name: 'jobListQuery',
       data: {
-        'condition': {},
+        'condition': condition,
         'field': field.toString(),
         'sort': 'desc',
         'skip': page_index * page_size,

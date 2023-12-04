@@ -23,9 +23,8 @@
               </view>
               <!-- 工资 发布时间 -->
               <view class="content_top_rgt">
-                  <view class="job_ad">{{item.kind}}</view>
-                  <!-- <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view> -->
-                
+                <view class="job_ad">{{item.kind}}</view>
+                <!-- <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view> -->
                 <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->
               </view>
             </view>
@@ -50,8 +49,8 @@
                     <view class="">{{item.industry}}</view>
                   </view>
                   <view class="cbr_btm_rgt">
-                    <!-- <view class="">{{time.formatDateString(item.time)}}</view> -->
-                    <view class="">{{time.formatTime(item.timestamp)}}</view>
+                    <view class="">{{time.formatDateString(item.time)}}</view>
+                    <!-- <view class="">{{time.formatTime(item.timestamp)}}</view> -->
                   </view>
                 </view>
               </view>
