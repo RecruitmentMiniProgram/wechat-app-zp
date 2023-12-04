@@ -8,10 +8,10 @@
 </view>
 <view wx:else>
   <scroll-view bindscrolltolower="scrolltolower" scroll-y="true" class="scoll-h">
-    <!-- <view>
+    <view>
       <template is="jobList" data="{{jobList:jobList}}" />
-    </view> -->
-    <tabs id="mytabs" tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
+    </view>
+    <!-- <tabs id="mytabs" tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
       <block wx:if="{{tabs[0].isActive}}">
         <view class="first_tab">
           <view>
@@ -40,7 +40,7 @@
           </view>
         </view>
       </block>
-    </tabs>
+    </tabs> -->
     <!-- <view class="loading">{{loadingTip}}</view> -->
   </scroll-view>
   <!-- <view class="loading">{{loadingTip}}</view> -->
