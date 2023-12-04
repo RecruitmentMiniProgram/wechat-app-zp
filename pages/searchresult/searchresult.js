@@ -1,4 +1,5 @@
 // pages/searchinfor/searchresult.js
+const util = require('../../utils/util')
 const db = wx.cloud.database();
 Page({
 
@@ -35,7 +36,7 @@ Page({
     },
     {
       id: 3,
-      value: "更多",
+      value: "实习",
       isActive: false
     }
     ],
@@ -74,6 +75,7 @@ Page({
 
           that.setData({
             condition: condition,
+            fieldName: fieldName,
             searchValue: options.searchValue
           }, function () {
             that.loadinfor();
@@ -89,96 +91,51 @@ Page({
   //查询搜索结果是否存在（只能搜索post表的字段）
   loadinfor: function () {
     var that = this;
-    const { searchValue, selectionType, page_index, page_size, condition } = that.data;
-    console.log(that.data)
+    var { searchValue, selectionType, page_index, page_size, condition, fieldName } = that.data;
+    // console.log(that.data)
 
     var field = '_id'
-    switch (selectionType) {
-      case 0:
-        field = "_id"
-        break;
-      case 1:
-        field = "timestamp"
-        break
-      case 2:
-        field = "timestamp"  //TODO
-        break
-      default:
-        field = "_id"
-        break
-    }
+
     wx.showToast({
       title: "加载中",
       icon: 'loading',
       duration: 800
     });
 
-    // db.collection('post')
-    //   .where(condition)
-    //   .orderBy(field, 'desc')
-    //   .skip(page_index * page_size)
-    //   .limit(page_size)
-    //   .get({
-    //     success: function (res) {
-    //       // console.log(res.data);
+    db.collection('post')
+      .where(condition)
+      .orderBy(field, 'desc')
+      .skip(page_index * page_size)
+      .limit(page_size)
+      .get({
+        success: function (res) {
 
-    //       const jobList = res.data;
+          const jobList = res.data;
 
-    //       if (jobList.length > 0) {
-    //         that.setData({
-    //           isnull: 1
-    //         });
-    //       }
-    //       that.setData({
-    //         jobList: that.data.jobList.concat(jobList),
-    //         page_index: that.data.page_index + 1
-    //       });
-    //       if (jobList.length < page_size) {
-    //         that.setData({
-    //           loadingTip: '没有更多内容'
-    //         });
-    //       }
-    //       // 处理查询结果
-    //     },
-    //     fail: function (error) {
-    //       console.error("Failed to fetch data:", error);
-    //     }
+          if (jobList.length > 0) {
+            that.setData({
+              isnull: 1
+            });
+          }
+          that.setData({
+            jobList: that.data.jobList.concat(jobList),
+            page_index: that.data.page_index + 1
+          });
+          if (jobList.length < page_size) {
+            that.setData({
+              loadingTip: '没有更多内容'
+            });
+          }
+          // 处理查询结果
+        },
+        fail: function (error) {
+          console.error("Failed to fetch data:", error);
+        }
+      })
 
-
-    //   })
-
-    wx.cloud.callFunction({
-      name: 'jobListQuery',
-      data: {
-        'field': field,
-        'condition': condition,
-        'sort': 'desc',
-        'skip': page_index * page_size,
-        'limit': page_size
-      }
-    }).then(res => {
-      // console.log(res)
-      const jobList = res.result.data;
-      if (jobList.length > 0) {
-        that.setData({
-          isnull: 1
-        });
-      }
-
-      that.setData({
-        jobList: that.data.jobList.concat(jobList),
-        page_index: that.data.page_index + 1
-      });
-      if (jobList.length < page_size) {
-        that.setData({
-          loadingTip: '没有更多内容'
-        });
-      }
-    }).catch(err => {
-      console.log("failed")
-    })
 
   },
+
   handleTabsItemChange(e) {
     // 1 获取被点击的标题索引
     const { index } = e.detail;
