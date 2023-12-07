@@ -5,9 +5,7 @@
     "pages/job_details/index",
     "pages/resume/index",
     "pages/join_group/index",
-
-    
-
+    "pages/category_job/index",
 
     "pages/user/resume/index",
     "pages/user/post/index",
@@ -37,7 +35,6 @@
     "pages/resume/work/index",
     "pages/resume/intention/index",
     "pages/test/index",
-    "pages/category_job/index",
     "pages/setting/index",
     "pages/job_publish/index",
     "pages/map/map",
