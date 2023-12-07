@@ -20,7 +20,7 @@
     <icon class="gou" type="success" size="18" color="red" />
     <text class="t">专业咨询指导</text>
     </view>
-    <image mode="aspectFit"style=" margin-top: 5%; margin-bottom: 5%;width: 200px;" src = "/images/invite.png"></image>
+    <image mode="aspectFit"style=" margin-top: 5%; margin-bottom: 5%;width: 200px;" src = "cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/invite.png"></image>
    
  </view>
 
