@@ -79,7 +79,7 @@ Page({
               that.setData({
                 logoUrl:result.data.logo.length==0?'/images/damage_map.png':result.data.logo,
                 scale:this.data.arrayScale.indexOf(result.data.scale),
-                attrImg: result.data.certification,
+                attrImg: [result.data.certification],
                 introductionLength:result.data.introduction.length,
                 addressLength:result.data.address.length,
                 introduction:result.data.introduction,

@@ -483,12 +483,6 @@ Page({
         },
     //一键复制推广码
     copyText(){
-      if(this.data.examine!=1){
-        wx.showModal({
-          title:"请等待企业信息审核通过"
-        })
-        return;
-      }
       let text=`
     🚀 智慧招聘小程序助你轻松踏入理想职场！🌟
 
@@ -511,6 +505,12 @@ Page({
         let userId=wx.getStorageSync('userId')
         text=text+"\n\t助力你的好友，填写邀请码:userId::"+userId
       }else{
+        if(this.data.examine!=1){
+          wx.showModal({
+            title:"请等待企业信息审核通过"
+          })
+          return;
+        }
         let companyId=wx.getStorageSync('companyId')
         text=text+"\n\t助力你的好友，填写邀请码:companyId::"+companyId
       }

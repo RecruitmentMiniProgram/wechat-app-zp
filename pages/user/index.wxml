@@ -5,7 +5,7 @@
 <!-- 个人 -->
   <view wx:if="{{status==1}}">
     <view class='mine_info'>
-      <image class='mine_banner' src='../../images/earth.png'></image>
+      <image class='mine_banner' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/earth.png'></image>
       <view class='mine_info_head'>
         <view class='mine_head_left' bindtap='userCommunication'>
           <view class='mine_head_leftPic'>{{communication}}</view>
@@ -36,53 +36,53 @@
     <view class='list_content'>
       <view class='list' bindtap='resumeChange'>
         <view class='list_left'>
-          <image class='listIcon' src='../../images/info.png'></image>
+          <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/info.png'></image>
           <view class='listName'>在线简历</view>
         </view>
         
-        <image src='../../images/jiantou.png' class='jiantou'></image>
+        <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
       </view>
       <view class='list' bindtap='submitResume'>
         <view class='list_left'>
-          <image class='listIcon' src='../../images/resume.png'></image>
+          <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/resume.png'></image>
           <view class='listName'>上传附件</view>
         </view>
         <view class='list_right'>
           <view class='check'>添加</view>
-          <image src='../../images/jiantou.png' class='jiantou'></image>
+          <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
         </view>  
       </view>
       <view class='list' bindtap="showPdf">
         <view class='list_left'>
-          <image class='listIcon' src='../../images/aboutme.png'></image>
+          <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/aboutme.png'></image>
           <view class='listName'>查看信息</view>
         </view>
-        <image src='../../images/jiantou.png' class='jiantou'></image>
+        <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
       </view>
       <view class='list' bindtap="groupChange">
         <view class='list_left'>
           <image class='listIcon' src='../../images/groups.png'></image>
           <view class='listName'>加入群聊</view>
         </view>
-        <image src='../../images/jiantou.png' class='jiantou'></image>
+        <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
       </view>
       <view class='list' bindtap="ourChange">
         <view class='list_left'>
-          <image class='listIcon' src='../../images/ours.png'></image>
+          <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/ours.png'></image>
           <view class='listName'>联系客服</view>
         </view>
-        <image src='../../images/jiantou.png' class='jiantou'></image>
+        <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
       </view>
       <!-- <view class='list' bindtap='view'>
         <view class='list_left'>
           <image class='listIcon' src='../../images/feedback.png'></image>
           <view class='listName'>意见反馈</view>
         </view>
-        <image src='../../images/jiantou.png' class='jiantou'></image>
+        <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
       </view> -->
       <view class='list' bindtap="copyText">
         <view class='list_left'>
-          <image class='listIcon' src='../../images/share.png'></image>
+          <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/share.png'></image>
           <view class='listName'>一键邀请</view>
         </view>
         <view class='list_right'>
@@ -100,7 +100,7 @@
         <view class="tele">{{phone}}</view> 
         <view class="address">{{examine==0?"审核中":examine==1?"审核通过":"审核失败"}}</view>
       </view>
-      <image class='mine_banner' src='../../images/earth.png'></image>
+      <image class='mine_banner' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/earth.png'></image>
       <view class='mine_info_head'>
         <view class='mine_head_left' bindtap='companyCommunication'>
           <view class='mine_head_leftPic'>{{companyCommunication}}</view>
@@ -131,53 +131,53 @@
     <view class='list_content'>
       <view class='list' bindtap='companyChange'>
         <view class='list_left'>
-          <image class='listIcon' src='../../images/info.png'></image>
+          <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/info.png'></image>
           <view class='listName'>企业信息</view>
         </view>
         
-        <image src='../../images/jiantou.png' class='jiantou'></image>
+        <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
       </view>
       <view class='list' bindtap='postChange'>
         <view class='list_left'>
-          <image class='listIcon' src='../../images/resume.png'></image>
+          <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/resume.png'></image>
           <view class='listName'>发布职位</view>
         </view>
         <view class='list_right'>
           <view class='check'>添加</view>
-          <image src='../../images/jiantou.png' class='jiantou'></image>
+          <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
         </view>  
       </view>
       <view class='list' bindtap="recruitChange">
         <view class='list_left'>
-          <image class='listIcon' src='../../images/aboutme.png'></image>
+          <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/aboutme.png'></image>
           <view class='listName'>招聘管理</view>
         </view>
-        <image src='../../images/jiantou.png' class='jiantou'></image>
+        <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
       </view>
       <view class='list' bindtap="groupChange">
         <view class='list_left'>
           <image class='listIcon' src='../../images/groups.png'></image>
           <view class='listName'>加入群聊</view>
         </view>
-        <image src='../../images/jiantou.png' class='jiantou'></image>
+        <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
       </view>
       <view class='list' bindtap="ourChange">
         <view class='list_left'>
-          <image class='listIcon' src='../../images/ours.png'></image>
+          <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/ours.png'></image>
           <view class='listName'>联系客服</view>
         </view>
-        <image src='../../images/jiantou.png' class='jiantou'></image>
+        <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
       </view>
       <!-- <view class='list' bindtap='view'>
         <view class='list_left'>
           <image class='listIcon' src='../../images/feedback.png'></image>
           <view class='listName'>意见反馈</view>
         </view>
-        <image src='../../images/jiantou.png' class='jiantou'></image>
+        <image src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jiantou.png' class='jiantou'></image>
       </view> -->
       <view class='list' bindtap="copyText">
         <view class='list_left'>
-          <image class='listIcon' src='../../images/share.png'></image>
+          <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/share.png'></image>
           <view class='listName'>一键邀请</view>
         </view>
         <view class='list_right'>
