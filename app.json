@@ -33,24 +33,8 @@
     "pages/user/resume/intention/index",
 
     "pages/resume/work/index",
-    "pages/resume/intention/index",
-    "pages/test/index",
-    "pages/setting/index",
-    "pages/job_publish/index",
-    "pages/map/map",
-    "pages/myjoin/myjoin",
-    "pages/school_details/index",
-    "pages/feedback/index",
-    "pages/feedback_job/index",
-    "pages/school_recruit/index",
-    "pages/school_recruit2/index",
-    "pages/customized/index",
-    "pages/customized_res/index",
-    "pages/recruit/index",
-    "pages/recruit_detail/index",
-    "pages/recruit_old/index"
-    
-  ],
+    "pages/resume/intention/index"
+   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black",

@@ -44,7 +44,7 @@
         </view>
 
         <view class="conbb" wx:elif="{{item.role == 5}}">
-          <image src="/images/jobinter.jpg" class="interview" bindtap="interview" data-role="{{item.role}}"></image>
+          <image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jobinter.jpg" class="interview" bindtap="interview" data-role="{{item.role}}"></image>
           <text data-role="{{item.role}}" bindtap="interview" style="white-space: nowrap;" class="text">电话面试</text>
         </view>
 
