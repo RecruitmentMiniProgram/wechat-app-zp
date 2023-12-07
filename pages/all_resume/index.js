@@ -87,14 +87,24 @@ Page({
             var id = data.chat_id
 
             //消息, 通过id读取消息记录
-            let chatResult = await db.collection('chat_history').doc(id).get()
+            let chatResult = null
+            try{
+            chatResult = await db.collection('chat_history').doc(id).get()
+            } catch(e) {
+              continue
+            }
             var chatDetail = chatResult.data
 
             var time = chatDetail.data[chatDetail.data.length - 1].time
             var red = chatDetail.user_red
             //根据企业ID读取企业头像
             var companyId = chatDetail.company_id
-            let companyResult = await db.collection('company').doc(companyId).get()
+            let companyResult = null
+            try {
+            companyResult = await db.collection('company').doc(companyId).get()
+            } catch(e) {
+              continue
+            }
             var url = companyResult.data.logo
             var chatData = new ChatData(chatDetail._id, 1,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
             chatList[index] = chatData
@@ -117,7 +127,12 @@ Page({
         var data = dbList[i]
         var id = data.chat_id
         //消息, 通过id读取消息记录
-        let chatResult = await db.collection('chat_history').doc(id).get()
+        let chatResult = null
+        try{
+        chatResult = await db.collection('chat_history').doc(id).get()
+        } catch(e) {
+          continue
+        }
         var chatDetail = chatResult.data
 
           var lastData = chatDetail.data[chatDetail.data.length - 1]
@@ -128,7 +143,12 @@ Page({
 
            //根据用户ID读取企业头像
            var userId = chatDetail.user_id
-           let userResult = await db.collection('user').doc(userId).get()
+           let userResult = null
+           try{
+           userResult = await db.collection('user').doc(userId).get()
+           } catch(e) {
+             continue
+           }
            var url = userResult.data.headUrl
            
           var chatData = new ChatData(chatDetail._id, 1, name, chatDetail.post_name, convertUnixTimestampToString(time), red, url)

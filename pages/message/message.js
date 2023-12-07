@@ -211,7 +211,12 @@ Page({
             var red = chatDetail.user_red
             //根据企业ID读取企业头像
             var companyId = chatDetail.company_id
-            let companyResult = await db.collection('company').doc(companyId).get()
+            let companyResult = null
+            try {
+            companyResult =  await db.collection('company').doc(companyId).get()
+            } catch(e) {
+              continue
+            }
             var url = companyResult.data.logo
             var chatData = new ChatData(id, type,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
             chatList[index] = chatData
@@ -259,7 +264,12 @@ Page({
 
            //根据用户ID读取企业头像
            var userId = chatDetail.user_id
-           let userResult = await db.collection('user').doc(userId).get()
+           let userResult = null
+           try{
+           userResult = await db.collection('user').doc(userId).get()
+           } catch(e) {
+             continue
+           }
            var url = userResult.data.headUrl
            
           var chatData = new ChatData(id, type, name, truncateString(lastMsg, 14), convertUnixTimestampToString(time), red, url)
