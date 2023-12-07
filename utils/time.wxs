@@ -5,7 +5,7 @@ function formatNumber(n) {
 }
 // 将时间戳转为字符串
 var formatTime = function(time) {
-
+  console.log("wxs的时间格式化",time)
   var date = getDate(time)
   var year = date.getFullYear()
   var month = date.getMonth() + 1

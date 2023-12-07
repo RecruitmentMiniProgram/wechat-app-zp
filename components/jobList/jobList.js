@@ -62,34 +62,13 @@ Component({
     var that = this;
     var jobType = QueryParams.jobType
     var feild = '_id'
-    switch (jobType) {
-      case "all":
-        feild = "_id"
-        break;
-      case "salary":
-        feild = "min_salary"
-        break
-      case "time":
-        feild = "timestamp"
-        break
-      default:
-        feild = "_id"
-        break
-    }
-    // wx.showLoading({
-    //   title: '加载中...',
-    // })
     db.collection('post').where(this.data.query)
       .orderBy(feild, 'desc')
       .get({
         success: function (res) {
           var jobList = res.data;
+          console.log("公司的发布的post:",res.data)
           // 调用云函数获取jobList
-          wx.cloud.callFunction({
-            name: 'jobListQuery',
-            data: {jobList: jobList }
-          }).then(res => {
-            jobList = res.result;
             var total = jobList.length;
             var totalPages = Math.ceil(total / QueryParams.pagesize);
             that.setData({
@@ -98,9 +77,6 @@ Component({
               show:1
             });
             wx.hideLoading()
-          }).catch(err => {
-            wx.hideLoading()
-          })
         }
       });
   },

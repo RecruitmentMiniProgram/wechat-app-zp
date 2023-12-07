@@ -58,7 +58,7 @@ Page({
           // console.log('onload' + options.searchValue)
           var fieldName = Object.keys(res.data[0])
           // console.log(fieldName)
-
+          
           var condition = db.command.or(
             // 对集合中所有字段应用模糊搜索
             fieldName.map(field => ({
