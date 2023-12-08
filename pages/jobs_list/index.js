@@ -35,7 +35,7 @@ Page({
     },
     {
       id: 3,
-      value: "实习",
+      value: "企业分类",
       isActive: false
     }
     ],

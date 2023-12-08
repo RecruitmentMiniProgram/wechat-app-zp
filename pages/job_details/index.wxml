@@ -1,102 +1,79 @@
 <wxs src="../../utils/time.wxs" module="time" />
-<view wx:if = "{{notExist==false && load}}">
-
-<view class="head">
-    <view class="job_up">
-        <view class="job_name">{{jobObj.name}}</view>
-        <view class="job_salary" wx:if="{{jobObj.salary=='面议'}}">{{jobObj.salary}}</view>
-        <view class="job_salary" wx:else>{{jobObj.min_salary}}-{{jobObj.max_salary}}/{{jobObj.settlement}}</view>
+<view wx:if="{{notExist==false && load}}">
+    <view class="head">
+        <view class="job_up">
+            <view class="job_name">{{jobObj.name}}</view>
+            <view class="job_salary" wx:if="{{jobObj.salary=='面议'}}">{{jobObj.salary}}</view>
+            <view class="job_salary" wx:else>
+                {{jobObj.min_salary}}-{{jobObj.max_salary}}/{{jobObj.settlement}}
+            </view>
+        </view>
+        <view class="job_down">
+            <view class="job_place">
+                <text decode="{{true}}">{{jobObj.position}}&nbsp;|&nbsp;</text>
+            </view>
+            <view class="padr">
+                <!-- <text decode="{{true}}">实习要求：{{jobObj.jobDayPerWeek}}&nbsp;{{jobObj.jobTimeSpan}}</text> -->
+                <!-- <text decode="{{true}}">实习要求：{{jobObj.description}}&nbsp;|&nbsp;</text> -->
+            </view>
+            <view class="job_edu padr">
+                <text decode="{{true}}">{{jobObj.education}}</text>
+            </view>
+            <view class="padr" wx:if="{{jobObj.kind!=null && jobObj.kind !=undefined && jobObj.kind!=''}}">
+                <text decode="{{true}}">&nbsp;|&nbsp;{{ jobObj.kind}}</text>
+            </view>
+            <view class="padr" wx:if="{{jobObj.graduate!=null && jobObj.graduate !=undefined && jobObj.graduate!=''}}">
+                <text decode="{{true}}">&nbsp;|&nbsp;{{ jobObj.graduate==0?'社招':'校招'}}</text>
+            </view>
+        </view>
     </view>
-    <view class="job_down">
-        <view class="job_place">
-            <text decode="{{true}}">{{jobObj.position}}&nbsp;|&nbsp;</text>
-        </view>
-        <view class="padr">
-            <!-- <text decode="{{true}}">实习要求：{{jobObj.jobDayPerWeek}}&nbsp;{{jobObj.jobTimeSpan}}</text> -->
-            <!-- <text decode="{{true}}">实习要求：{{jobObj.description}}&nbsp;|&nbsp;</text> -->
-        </view>
-        <view class="job_edu padr">
-            <text decode="{{true}}">{{jobObj.education}}</text>
-        </view>
-        <view class="padr" wx:if="{{jobObj.kind!=null && jobObj.kind !=undefined && jobObj.kind!=''}}">
-            <text decode="{{true}}">&nbsp;|&nbsp;{{ jobObj.kind}}</text>
-        </view>
-        <view class="padr" wx:if="{{jobObj.graduate!=null && jobObj.graduate !=undefined && jobObj.graduate!=''}}">
-            <text decode="{{true}}">&nbsp;|&nbsp;{{ jobObj.graduate==0?'社招':'校招'}}</text>
-        </view>
-    </view>
-</view>
-<!-- 公司介绍 -->
-<navigator url="/pages/company_home/index?comId={{jobObj.company._id}}" class="com_wrap">
-    <view class="com">
-        <view class="content_btm_lft">
-            <image class="" src="{{jobObj.company.logo}}" mode="aspectFit" />
-        </view>
-        <view class="content_btm_rgt">
-            <view class="cbr_top">{{jobObj.company.minName}}</view>
-            <view class="cbr_btm">
-                <view class="cbr_btm_lft">
-                    <view class="l1">
+    <!-- 公司介绍 -->
+    <navigator url="/pages/company_home/index?comId={{jobObj.company._id}}" class="com_wrap">
+        <view class="com">
+            <view class="content_btm_lft">
+                <image class="" src="{{jobObj.company.logo}}" mode="aspectFit" />
+            </view>
+            <view class="content_btm_rgt">
+                <view class="cbr_top">{{jobObj.company.minName}}</view>
+                <view class="cbr_btm">
+                    <view class="cbr_btm_lft">
                         <text decode="{{true}}">
                             {{jobObj.company.industry}}&nbsp;|&nbsp;{{jobObj.company.scale}}
                         </text>
                     </view>
                 </view>
-                <view class="cbr_btm_rgt">
-                    <view class="">
-                        <text>></text>
-                    </view>
-                </view>
             </view>
         </view>
+    </navigator>
+    <view class="job_desc">
+        <view class="desc_title">岗位描述</view>
+        <view class="desc_details">
+            <!-- <rich-text nodes="{{jobObj.jobDesc1}}"></rich-text> -->
+            <text>{{jobObj.description}}</text>
+        </view>
     </view>
-</navigator>
-<view class="job_desc">
-    <view class="desc_title">岗位描述</view>
-    <view class="desc_details">
-        <!-- <rich-text nodes="{{jobObj.jobDesc1}}"></rich-text> -->
-        <text>{{jobObj.description}}</text>
+    <view class="job_desc">
+        <view class="desc_title">任职要求</view>
+        <view class="desc_details">
+            <rich-text nodes="{{jobObj.responsibility}}"></rich-text>
+        </view>
     </view>
-</view>
-<view class="job_desc">
-    <view class="desc_title">任职要求</view>
-    <view class="desc_details">
-        <rich-text nodes="{{jobObj.responsibility}}"></rich-text>
+    <view class="Interview_loca">
+        <view class="loca_title">工作城市</view>
+        <view class="loca_details">{{jobObj.position}}</view>
     </view>
-</view>
-<view class="Interview_loca">
-    <view class="loca_title">工作城市</view>
-    <view class="loca_details">{{jobObj.position}}</view>
-</view>
-
-<!-- <view class="btm_tool">
-    <view class="tool_item">
-        <view class="iconfont icon-yixianshi-"></view>
-        <view>分享</view>
-        <button open-type="share"></button>
+    <view class="btm_tool">
+        <view wx:if="{{status != 2}}" class="bottom-bar">
+            <image wx:if="{{status == 1}}" class="chat-icon" src="../../images/talk.png" bindtap="goToChatPage"></image>
+            <button wx:if="{{status == 1}}" hover-class="btn-hover" bindtap="submitResume" class="submit-resume-right">
+                立即投递
+            </button>
+            <button wx:if="{{status == 0}}" hover-class="btn-hover" bindtap="submitResume" class="submit-resume">
+                登录后投递
+            </button>
+        </view>
     </view>
-    <view class="tool_item" bindtap="handleCollectAdd">
-        <view class="iconfont  {{isCollect?'icon-shoucang':'icon-shou_cang'}}"></view>
-        <view>收藏</view>
-    </view>
-    <view class="tool_item btn_buy" id="{{submit_stat=='立即投递'?'':'isSubmit'}}" bindtap="resumeSubmit">
-        {{submit_stat}}
-    </view>
-</view> -->
-
-<view class="btm_tool">
-<view wx:if="{{status != 2}}" class="bottom-bar">
-    <image wx:if="{{status == 1}}" class="chat-icon" src="../../images/talk.png" bindtap="goToChatPage"></image>
-    <button wx:if="{{status == 1}}" hover-class="btn-hover" bindtap="submitResume" class="submit-resume">
-        立即投递
-    </button>
-    <button wx:else="" hover-class="btn-hover" bindtap="submitResume" class="submit-resume">
-        登录后投递
-    </button>
-</view>
-</view>
 </view>
 <view wx:elif="{{load}}">
-  <text style="white-space: nowrap;" class="text">该岗位已被删除</text>
+    <text style="white-space: nowrap;" class="text">该岗位已被删除</text>
 </view>
-
