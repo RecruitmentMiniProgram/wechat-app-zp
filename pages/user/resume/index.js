@@ -5,15 +5,15 @@ Page({
   data: {
     show: false,
     hobby: false,
-    defaultUrl:'https://img0.baidu.com/it/u=345359896,661384602&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-    avatar: 'https://img0.baidu.com/it/u=345359896,661384602&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+    defaultUrl:'cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/male.png',
+    avatar: 'cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/male.png',
     nickName: '请填写姓名',
     phone: '请填写手机号',
     // 编辑时临时数据
     tempList: {
-      avatarTemp: 'https://img0.baidu.com/it/u=345359896,661384602&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-      nameTemp: '布吉岛',
-      phoneTemp: '0000000000',
+      avatarTemp: 'cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/male.png',
+      nameTemp: '请填写姓名',
+      phoneTemp: '请填写手机号',
     },
     arraySex: ['女', '男'],
     sex: 0,
