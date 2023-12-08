@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/user/post/index",
+    "pages/user/edit/index",
     "pages/company_home/index",
     "pages/job_details/index",
     "pages/resume/index",
@@ -8,7 +10,7 @@
     "pages/category_job/index",
 
     "pages/user/resume/index",
-    "pages/user/post/index",
+
     "pages/user/category_job/index",
 
 
@@ -16,7 +18,7 @@
     "pages/user/index",
 
     "pages/jobs_list/index",
-    "pages/user/edit/index",
+
     "pages/award/award",
     "pages/search/search",
     "pages/searchresult/searchresult",

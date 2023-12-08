@@ -7,9 +7,34 @@ Page({
   data: {
     show: false,
     hobby: false,
+    region:0,
+    arrayRegion:[
+      "不限",
+      "海安镇",
+      "孙庄镇",
+      "高新区",
+      "开发区",
+      "滨海新区",
+      "城东镇",
+      "角斜镇",
+      "李堡镇",
+      "大公镇",
+      "雅周镇",
+      "曲塘镇",
+      "南莫镇",
+      "白甸镇",
+      "墩头镇"
+    ],
     // 编辑时临时数据
-    arrayScale: ['10人以上', '50人以上', '100人以上', '500人以上', '1000人以上', '5000人以上','10000人以上'],
-    scale:'',
+    arrayScale: ["不限",
+      "0-20人",
+      "20-99人",
+      "100-499人",
+      "500-999人",
+      "1000-9999人",
+      "10000人以上"
+      ],
+    scale:0,
     attrImg: [],
     introductionLength:0,
     addressLength:0,
@@ -25,6 +50,7 @@ Page({
     logoUrl:"",
     beginDate:"",
     companyId:null,
+    welfare:[],
     //邀请码，只有注册时才有效
     invitation:'',
     //判断是编辑页面 1 还是注册页面 0
@@ -35,6 +61,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
     onLoad(options) {
+
       this.setData({
         edit:options.edit
       })
@@ -70,6 +97,7 @@ Page({
      * 加载用户信息
      */
     getCompany(){
+            const myComponent = this.selectComponent('#welfare');
             var id=wx.getStorageSync("companyId")
             let that=this
             that.data.companyId=id
@@ -88,15 +116,27 @@ Page({
                 boss:result.data.boss,
                 tele:result.data.tele,
                 industry:this.data.arrayIndustry.indexOf(result.data.industry),
+                region:result.data.region?this.data.arrayRegion.indexOf(result.data.region):0,
+                welfare:result.data.welfare?result.data.welfare:[],
                 website:result.data.website,
                 minName:result.data.minName,
                 attrLogo:[result.data.logo],
-                beginDate:result.data.incorporationDate
+                beginDate:result.data.incorporationDate,
               })
+              myComponent.updateLabelList(this.data.welfare)
             }).catch((err) => {
               console.log("加载信息失败",err)
             });
           },
+  /**
+   * 选择区域
+   * @param {*} e 
+   */ 
+  bindRegionChange(e){
+    this.setData({
+      region:e.detail.value
+    })
+  },        
   /**
    * 注册时间
    * @param {*} e 
@@ -195,6 +235,8 @@ Page({
           }  
         })
       }else{
+        const myComponent = this.selectComponent('#welfare');
+        this.data.welfare=myComponent.data.labelList
         //将企业的数据存到数据库中
         var companyData={
           minName:this.data.minName,
@@ -212,6 +254,8 @@ Page({
           invitation:0,
           examine:0,
           createTime:new Date(),
+          welfare:this.data.welfare,
+          region:this.data.arrayRegion[this.data.region],
         } 
         wx.showLoading({
           title: '更新中...',

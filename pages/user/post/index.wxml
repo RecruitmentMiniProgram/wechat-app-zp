@@ -26,8 +26,8 @@
     </view>
     <view class="row">
       <view>工作城市<text class="required">*</text></view>
-        <picker class="right" level="city"  mode="region" bindchange="bindRegionChange" value="{{region}}">
-            <text>{{address==''?region:address}}</text>
+        <picker class="right" bindchange="bindRegionChange" value="{{region}}" range="{{arrayRegion}}">
+            <text>{{arrayRegion[region]}}</text>
             <text class="triangle">▼</text>
         </picker>
     </view>
@@ -54,15 +54,15 @@
     </view>
     <view wx:if="{{salary==1}}">
       <view class="row {{salary == 0 ? 'red' : ''}}">
-      <view>最低月薪<text class="required">*</text></view>
+      <view>最低薪资<text class="required">*</text></view>
       <view class="right">
-        <input value="{{minSalary}}"  type="number" bindchange="minSalaryChange" name="mail" placeholder="请输入最低月薪" maxlength="20" />
+        <input value="{{minSalary}}"  type="number" bindchange="minSalaryChange" name="mail" placeholder="请输入最低薪资" maxlength="20" />
       </view>
     </view>
     <view class="row">
-      <view>最高月薪<text class="required">*</text></view>
+      <view>最高薪资<text class="required">*</text></view>
       <view class="right">
-        <input value="{{maxSalary}}" type="number" bindchange="maxSalaryChange" name="mail" placeholder="请输入最高月薪" maxlength="20" />
+        <input value="{{maxSalary}}" type="number" bindchange="maxSalaryChange" name="mail" placeholder="请输入最高薪资" maxlength="20" />
       </view>
     </view>
     <view class="row end">

@@ -10,7 +10,6 @@
     </view>   
     <view class="right" wx:else>
       <input placeholder="最多选择5个职业" maxlength="30" disabled="true"/>
-
     </view>
   </view>
   <view class="row wrap-box" >
