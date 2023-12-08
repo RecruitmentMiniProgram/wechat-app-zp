@@ -54,11 +54,11 @@ page{
   overflow: hidden;
 }
 .title .address{
-  /* position: absolute;
-  right: 50rpx;
-  top: 35rpx; */
+  position: absolute;
+  right: 0rpx;
+  top: 80rpx;
   color:rgb(175, 165, 165);
-  font-size: 28rpx;
+  font-size: 35rpx;
   display: flex;
   width: 200rpx;
   white-space: normal; /* 设置为 normal，即允许文本自动换行 */
