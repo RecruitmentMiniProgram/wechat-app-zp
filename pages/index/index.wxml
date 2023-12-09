@@ -19,12 +19,12 @@
     </view>
     <view class="nav-text">全部职位</view>
   </view>
-  <!-- <view class="nav-three-up nav-all" bindtap='bindViewCategory'>
+  <view class="nav-three-up nav-all" bindtap='bindViewCategory'>
     <view class="nav-three-up-img nav-all-img">
       <image src="../../images/xz.png" />
     </view>
     <view class="nav-text">企业分类</view>
-  </view> -->
+  </view>
   <view class="nav-tow-up nav-all" bindtap='bindViewEmergency'>
     <view class="nav-tow-up-img nav-all-img">
       <image src="../../images/bt.png" />
