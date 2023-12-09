@@ -426,9 +426,6 @@ page {
   align-items: center;
   font-size: 24rpx;
   position: relative;
-  
-
-  
 }
 .btm_tool .tool_item button {
   position: absolute;
