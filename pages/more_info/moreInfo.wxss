@@ -1,0 +1,298 @@
+/* pages/components/bottomdialog/bottomdialog.wxss */
+.wrapAnimate{animation: wrapAnimate 0.5s ease-in-out forwards}
+@keyframes wrapAnimate{
+  0%{}
+  100%{background:rgba(0, 0, 0, 0.35);}
+}
+.wrapAnimateOut{animation: wrapAnimateOut 0.4s ease-in-out forwards}
+@keyframes wrapAnimateOut{
+  0%{background:rgba(0,0,0,0.35);}
+  100%{background:rgba(0, 0, 0, 0);}
+}
+.frameAnimate{animation: frameAnimate 0.5s ease forwards;}
+@keyframes frameAnimate{
+  0%{}
+  100%{opacity: 1;top:0vh;}
+}
+.frameAnimateOut{animation: frameAnimateOut 0.4s ease forwards;}
+@keyframes frameAnimateOut{
+  0%{opacity: 1;top:0vh;}
+  100%{opacity: 0;top:100vh;}
+}
+.frame-wrapper{position: fixed;height:100vh;width:100vw;z-index: 2;top: 50vh;}
+
+.frame{
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  width: 88.2vw;
+  padding: 5.9vw 5.9vw 0;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  z-index: 3;
+}
+
+.title-wrapper{
+  justify-content: space-between;
+  font-size: 4.9vw;
+  color: #4a4a4a;
+  margin-bottom: 5.9vw;
+}
+
+.title-wrapper>image{width:3.2vw;height:3.2vw;padding:0 5vw;margin-right:-5vw;}
+.flex{display: flex;align-items: center;}
+.wrap{position: fixed;z-index: 1;top: 0;left: 0;right: 0;bottom: 0;}
+
+.title-cancle{
+  font-size: 28rpx;
+  color: #000000;
+}
+
+.title-confirm{
+  font-size: 28rpx;
+  color: #4063E7;
+}
+
+.more_title{
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: bold;
+  padding-left: 46%;
+}
+
+.close {
+  position: relative;
+  display: inline-block;
+  width: 25rpx;
+  height: 25rpx;
+  overflow: hidden;
+}
+
+.close::before,
+.close::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  margin-top: -1px;
+  background: #808080;
+}
+.close::before {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.close::after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.btm_tool {
+ /* position: fixed;*/
+  bottom: 0;
+  width: 100%;
+  height: 130rpx;
+ /* background-color: #fff;*/
+}
+
+.bottom-bar {
+  /* border-top: 1px solid #ddd;  */
+  position: relative;
+  width: 100%;
+  margin-top: 0rpx;
+  align-items: center; 
+  display: flex; /* 使用 Flex 布局 */
+  justify-content: space-between;
+}
+.reset::after{
+  border: none;
+}
+.reset {
+  margin-top: 40rpx;
+  margin-left: 0rpx;
+  
+  width: 200rpx; 
+  height: 80rpx; 
+
+  font-weight: bold;
+  line-height: 80rpx; /* 设置行高等于按钮的高度，实现垂直居中 */
+  background-color:				#EFF8FF;
+  color:#1375E0;
+  padding: 0;
+  font-size: 30rpx; 
+  border-radius: 50;
+}
+
+
+.confirm::after{
+  border: none;
+}
+.confirm {
+  margin-top: 40rpx;
+  margin-right: 0rpx;
+
+  line-height: 80rpx; /* 设置行高等于按钮的高度，实现垂直居中 */
+  width: 430rpx; /* 右边4/5的宽度 */
+  height: 80rpx;
+
+  font-size: 30rpx; 
+  border-radius: 50;
+  background-color:	#0177FD;
+  color:#ffff;
+}
+
+.btn-hover-con {
+  background-color:			#156AA8; /* 触摸时的背景色，可以根据需要调整 */
+}
+
+.buttonAnimate{animation: buttonAnimate 0.5s ease forwards;}
+@keyframes buttonAnimate{
+  0%{}
+  100%{opacity: 1;}
+}
+
+.intitle{
+  font-size: 24rpx; 
+  font-weight: bold;
+}
+
+.incontent{
+  display: flex; /* 使用 Flex 布局 */
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  margin-top: 0rpx;
+  align-items: center; 
+}
+
+.inbutton::after{
+  border: none;
+}
+
+.inbutton-l::after{
+  border: none;
+}
+.inbutton-m::after{
+  border: none;
+}
+.inbutton-r::after{
+  border: none;
+}
+.inbutton-l{  
+  margin-left: 0rpx;
+  width: 210rpx; 
+  height: 70rpx; 
+
+  font-weight: bold;
+  line-height: 70rpx; /* 设置行高等于按钮的高度，实现垂直居中 */
+  background-color:				#EFF8FF;
+  color:#1375E0;
+  padding: 0;
+  font-size: 24rpx; 
+  border-radius: 50;
+}
+
+.inbutton-ld::after{
+  border: none;
+}
+.inbutton-ld{  
+  margin-left: 0rpx;
+  width: 210rpx; 
+  height: 70rpx; 
+
+  font-weight: bold;
+  line-height: 70rpx; /* 设置行高等于按钮的高度，实现垂直居中 */
+  
+  background-color:				#F6F6F6;
+  color:#000;
+  padding: 0;
+  font-size: 24rpx; 
+  border-radius: 50;
+}
+
+.inbutton-m{  
+  width: 210rpx; 
+  height: 70rpx; 
+
+  font-weight: bold;
+  line-height: 70rpx; /* 设置行高等于按钮的高度，实现垂直居中 */
+  background-color:				#EFF8FF;
+  color:#1375E0;
+  padding: 0;
+  font-size: 24rpx; 
+  border-radius: 50;
+}
+
+.inbutton-r{  
+  margin-right: 0rpx;
+  width: 210rpx; 
+  height: 70rpx; 
+
+  font-weight: bold;
+  line-height: 70rpx; /* 设置行高等于按钮的高度，实现垂直居中 */
+  background-color:				#EFF8FF;
+  color:#1375E0;
+  padding: 0;
+  font-size: 24rpx; 
+  border-radius: 50;
+}
+
+.inbutton-md::after{
+  border: none;
+}
+.inbutton-md{  
+  width: 210rpx; 
+  height: 70rpx; 
+
+  font-weight: bold;
+  line-height: 70rpx; /* 设置行高等于按钮的高度，实现垂直居中 */
+  
+  background-color:				#F6F6F6;
+  color:#000;
+  padding: 0;
+  font-size: 24rpx; 
+  border-radius: 50;
+}
+
+.inbutton-rd::after{
+  border: none;
+}
+.inbutton-rd{  
+  margin-right: 0rpx;
+  width: 210rpx; 
+  height: 70rpx; 
+
+  font-weight: bold;
+  line-height: 70rpx; /* 设置行高等于按钮的高度，实现垂直居中 */
+  
+  background-color:				#F6F6F6;
+  color:#000;
+  padding: 0;
+  font-size: 24rpx; 
+  border-radius: 50;
+}
+
+
+.inbutton-re::after{
+  border: none;
+}
+.inbutton-re{  
+  margin-right: 0rpx;
+  width: 210rpx; 
+  height: 70rpx; 
+
+  font-weight: bold;
+  line-height: 70rpx; /* 设置行高等于按钮的高度，实现垂直居中 */
+  background-color:				#fff;
+  color:#1375E0;
+  padding: 0;
+  font-size: 24rpx; 
+  border-radius: 50;
+}

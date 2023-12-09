@@ -29,6 +29,7 @@
   </view>
   <view wx:elif="{{!login}}" class="unLogin">
       <image style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%)" src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/msg_unLogin.png"/>
+
       <button  hover-class="btn-hover" bindtap="onLoginButtonClick" style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="btn">立即登录</button>
   </view>
 </view>
