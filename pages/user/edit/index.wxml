@@ -29,6 +29,13 @@
         <input value="{{tele}}" bindchange="phoneChange" name="mail" placeholder="请输入联系方式" maxlength="11" />
       </view>
     </view>
+    <view class="row">
+      <view>所在区域<text class="required">*</text></view>
+      <picker class="right" value="{{region}}" bindchange="bindRegionChange" range="{{arrayRegion}}">
+        <text>{{arrayRegion[region]}}</text>
+        <text class="triangle">▼</text>
+      </picker>
+    </view>
     <view class="row end">
       <view>公司地址<text class="required">*</text></view>
     </view>
@@ -65,12 +72,14 @@
         <text class="triangle">▼</text>
       </picker>
     </view>
+
     <view class="row end">
       <view>公司官网</view>
     </view>
     <view class="row">
       <textarea value="{{website}}" name="skill" bindinput="websiteChange" auto-height="true" class="address_text-area" maxlength="500" placeholder="填写公司官网"></textarea>
     </view>
+    <welfare-picker id="welfare"></welfare-picker>
   </view>
 
   <!-- 营业证书 -->

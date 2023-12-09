@@ -128,11 +128,16 @@ Page({
   onReady() {
 
   },
-
+  filter(data) {
+    var mySet=new Set(data)
+    var myArray = Array.from(mySet);
+    return myArray
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    this.data.workList=this.filter(this.data.workList)
     this.setData({
       labelListSelector:this.data.workList,
       workNumSelector:this.data.workList.length,
