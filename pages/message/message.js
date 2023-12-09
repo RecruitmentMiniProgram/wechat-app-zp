@@ -284,9 +284,10 @@ Page({
   },
  
   onLoginButtonClick: function () {
-    wx.navigateTo({
+   /* wx.navigateTo({
       url: '/pages/login/login'
-    });
+    });*/
+    this.selectComponent('#moreInfo').showFrame();
   },
 
   /**
