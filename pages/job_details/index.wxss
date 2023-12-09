@@ -1,30 +1,36 @@
 :root {
-  --themeColor: #4a90e2; /* 你的主题颜色代码 */
+  --themeColor: #4a90e2;
+  /* 你的主题颜色代码 */
 }
 
 page {
   padding-bottom: 100rpx;
 }
+
 .head {
   display: flex;
   flex-direction: column;
   padding: 0 30rpx;
 }
+
 .head .job_up {
   flex: 1;
   display: flex;
   justify-content: space-between;
   padding: 10rpx 0;
 }
+
 .head .job_up .job_name {
   font-size: 40rpx;
   font-weight: 600;
   color: #161616;
 }
+
 .head .job_up .job_salary {
   font-size: 37rpx;
   color: var(--themeColor);
 }
+
 .head .job_down {
   flex: 1;
   display: flex;
@@ -34,23 +40,27 @@ page {
   font-weight: 400;
   color: #161616;
 }
+
 .com_wrap {
   margin: 17rpx 0;
   padding: 10rpx 30rpx;
   border-bottom: 5rpx solid #f3efef;
   border-top: 5rpx solid #f3efef;
 }
+
 .com_wrap .com {
   flex: 1;
   display: flex;
   justify-content: space-around;
 }
+
 .com_wrap .com .content_btm_lft {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .com_wrap .com .content_btm_lft image {
   width: 90rpx;
   height: 90rpx;
@@ -58,22 +68,26 @@ page {
   margin-left: 20rpx;
   margin-right: 30rpx;
 }
+
 .com_wrap .com .content_btm_rgt {
   flex: 7;
   display: flex;
   flex-direction: column;
 }
+
 .com_wrap .com .content_btm_rgt .cbr_top {
   flex: 1;
   font-size: 34rpx;
   font-weight: 540;
   color: #161616;
 }
+
 .com_wrap .com .content_btm_rgt .cbr_btm {
   flex: 1;
   display: flex;
   justify-content: space-between;
 }
+
 .com_wrap .com .content_btm_rgt .cbr_btm .cbr_btm_lft {
   display: flex;
   justify-content: start;
@@ -82,62 +96,76 @@ page {
   color: #161616;
   padding-top: 10rpx;
 }
+
 .com_wrap .com .content_btm_rgt .cbr_btm .cbr_btm_lft text {
   display: inline-block;
   justify-content: center;
   align-items: center;
 }
+
 .com_wrap .com .content_btm_rgt .cbr_btm .cbr_btm_rgt {
   font-size: 25rpx;
   font-weight: 400;
   color: #161616;
   padding-top: 10rpx;
 }
+
 .com_wrap .com .content_btm_rgt .cbr_btm .cbr_btm_rgt text {
   display: inline-block;
   justify-content: center;
   align-items: center;
 }
+
 .job_desc {
   margin-bottom: 50rpx;
   padding: 0 30rpx;
 }
+
 .job_desc .desc_title {
   font-size: 33rpx;
   font-weight: bold;
 }
+
 .job_desc .desc_details {
   font-size: 30rpx;
   font-weight: 350;
   color: #161616;
 }
+
 .job_desc .desc_details .d1 {
   padding: 5rpx 0;
 }
+
 .job_skills {
   margin-bottom: 50rpx;
   padding: 0 30rpx;
 }
+
 .job_skills .skill_title {
   font-size: 33rpx;
   font-weight: bold;
 }
+
 .job_skills .skill_details {
   font-size: 30rpx;
   color: #161616;
 }
+
 .job_skills .skill_details .s1 {
   padding: 5rpx 0;
 }
+
 .Interview_loca {
   margin-bottom: 50rpx;
   padding: 0 30rpx;
 }
+
 .Interview_loca .loca_title {
   font-size: 35rpx;
   font-weight: 600;
   color: #161616;
 }
+
 .Interview_loca .loca_details {
   font-size: 30rpx;
   font-weight: 350;
@@ -145,18 +173,21 @@ page {
   display: flex;
   justify-content: start;
 }
+
 .sim {
   font-size: 33rpx;
   font-weight: bold;
   padding: 10rpx 30rpx;
   background-color: #f3efef;
 }
+
 .pupContentBG {
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
 }
+
 .pupContent {
   width: 100%;
   background: #f3efef;
@@ -168,13 +199,16 @@ page {
   height: 0;
   z-index: 999;
 }
+
 .pupContent .resume_head {
   width: 90%;
   margin: 30rpx auto;
 }
+
 .pupContent .resume_wrap {
   margin-bottom: 80rpx;
 }
+
 .pupContent .resume_wrap .raw {
   width: 90%;
   margin: 0 auto;
@@ -185,6 +219,7 @@ page {
   background-color: rgba(223, 222, 222, 0.4);
   border-radius: 20rpx;
 }
+
 .pupContent .resume_wrap .raw .img {
   flex: 1;
   font-size: 50rpx;
@@ -194,20 +229,24 @@ page {
   align-items: center;
   justify-content: center;
 }
+
 .pupContent .resume_wrap .raw .cnt {
   flex: 6;
   display: flex;
   flex-direction: column;
   padding: 15rpx 0;
 }
+
 .pupContent .resume_wrap .raw .cnt .name {
   flex: 1;
   font-size: 38rpx;
 }
+
 .pupContent .resume_wrap .raw .cnt .time {
   flex: 1;
   font-size: 29rpx;
 }
+
 .pupContent .tool_item {
   flex: 1px;
   display: flex;
@@ -217,6 +256,7 @@ page {
   font-size: 24rpx;
   position: relative;
 }
+
 .pupContent .tool_item button {
   position: absolute;
   top: 0;
@@ -225,6 +265,7 @@ page {
   height: 100%;
   opacity: 0;
 }
+
 .pupContent .btn_buy {
   flex: 4;
   background-color: var(--themeColor);
@@ -235,76 +276,94 @@ page {
   padding: 20rpx;
   font-weight: 500;
 }
+
 .pupContent #isSubmit {
   color: var(--themeColor);
   background-color: #fff;
 }
+
 /* 设置显示的背景 */
 .showBG {
   display: block;
 }
+
 .hideBG {
   display: none;
 }
+
 /* 弹出或关闭动画来动态设置内容高度 */
 @keyframes slideBGtUp {
   from {
     background: transparent;
   }
+
   to {
     background: rgba(0, 0, 0, 0.3);
   }
 }
+
 @keyframes slideBGDown {
   from {
     background: rgba(0, 0, 0, 0.3);
   }
+
   to {
     background: transparent;
   }
 }
+
 /* 显示或关闭内容时动画 */
 .openBG {
   animation: slideBGtUp 0.1s ease-in both;
   /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
 }
+
 .closeBG {
   animation: slideBGDown 0.1s ease-in both;
   /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
 }
+
 /* 设置显示内容 */
 .showContent {
   display: block;
 }
+
 .hideContent {
   display: none;
 }
+
 /* 弹出或关闭动画来动态设置内容高度 */
 @keyframes slideContentUp {
   from {
     height: 0;
   }
+
   to {
     height: 800rpx;
   }
 }
+
 @keyframes slideContentDown {
   from {
     height: 800rpx;
   }
+
   to {
     height: 0;
   }
 }
+
 /* 显示或关闭内容时动画 */
 .open {
   animation: slideContentUp 0.2s ease-in both;
   /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
 }
+
 .close {
   animation: slideContentDown 0.2s ease-in both;
   /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
 }
+
 .job_list_wrap {
   display: flex;
   justify-content: center;
@@ -312,24 +371,29 @@ page {
   background-color: #fff;
   border-bottom: 1rpx solid #f3efef;
 }
+
 .job_list_wrap .job_list_raw {
   width: 95%;
   display: flex;
 }
+
 .job_list_wrap .job_list_raw navigator {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
+
 .job_list_wrap .job_list_raw navigator .content_top {
   flex: 1;
   margin-top: 0rpx;
   display: flex;
   justify-content: space-between;
 }
+
 .job_list_wrap .job_list_raw navigator .content_top .content_top_lft {
   width: 70%;
 }
+
 .job_list_wrap .job_list_raw navigator .content_top .content_top_lft .job_name {
   font-size: 35rpx;
   font-weight: bold;
@@ -337,11 +401,13 @@ page {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .job_list_wrap .job_list_raw navigator .content_top .content_top_lft .job_details {
   margin: 12rpx 0;
   display: flex;
   justify-content: flex-start;
 }
+
 .job_list_wrap .job_list_raw navigator .content_top .content_top_lft .job_details view {
   font-size: 27rpx;
   padding: 4rpx 17rpx;
@@ -350,6 +416,7 @@ page {
   background-color: #edece9;
   border-radius: 14%;
 }
+
 .job_list_wrap .job_list_raw navigator .content_top .content_top_rgt {
   width: 30%;
   display: flex;
@@ -357,24 +424,29 @@ page {
   align-items: flex-end;
   flex-direction: column;
 }
+
 .job_list_wrap .job_list_raw navigator .content_top .content_top_rgt .job-salary {
   font-size: 30rpx;
   font-weight: bold;
   color: var(--themeColor);
   float: right;
 }
+
 .job_list_wrap .job_list_raw navigator .content_top .content_top_rgt .job_ad {
   margin-top: 20rpx;
   float: right;
 }
+
 .job_list_wrap .job_list_raw navigator .content_btm {
   flex: 1;
   display: flex;
   justify-content: space-between;
 }
+
 .job_list_wrap .job_list_raw navigator .content_btm .content_btm_lft {
   flex: 1;
 }
+
 .job_list_wrap .job_list_raw navigator .content_btm .content_btm_lft image {
   float: left;
   width: 70rpx;
@@ -382,21 +454,25 @@ page {
   border-radius: 50%;
   margin-right: 30rpx;
 }
+
 .job_list_wrap .job_list_raw navigator .content_btm .content_btm_rgt {
   flex: 7;
   display: flex;
   flex-direction: column;
 }
+
 .job_list_wrap .job_list_raw navigator .content_btm .content_btm_rgt .cbr_top {
   font-size: 32rpx;
   flex: 1;
 }
+
 .job_list_wrap .job_list_raw navigator .content_btm .content_btm_rgt .cbr_btm {
   flex: 1;
   display: flex;
   justify-content: space-between;
   padding: 5rpx 0;
 }
+
 .job_list_wrap .job_list_raw navigator .content_btm .content_btm_rgt .cbr_btm .cbr_btm_lft {
   display: flex;
   justify-content: center;
@@ -404,6 +480,7 @@ page {
   font-size: 24rpx;
   color: #645f5f;
 }
+
 .job_list_wrap .job_list_raw navigator .content_btm .content_btm_rgt .cbr_btm .cbr_btm_rgt {
   display: flex;
   justify-content: center;
@@ -411,6 +488,7 @@ page {
   font-size: 24rpx;
   color: #645f5f;
 }
+
 .btm_tool {
   position: fixed;
   bottom: 0;
@@ -418,6 +496,7 @@ page {
   height: 130rpx;
   background-color: #fff;
 }
+
 .btm_tool .tool_item {
   flex: 1px;
   display: flex;
@@ -426,10 +505,11 @@ page {
   align-items: center;
   font-size: 24rpx;
   position: relative;
-  
 
-  
+
+
 }
+
 .btm_tool .tool_item button {
   position: absolute;
   top: 0;
@@ -438,15 +518,17 @@ page {
   height: 100%;
   opacity: 0;
 }
+
 .btm_tool .btn_buy {
   flex: 3;
   padding: 0;
   width: 70%;
-  font-size: 13px; 
+  font-size: 13px;
   border-radius: 0;
-  background-color:#4a90e2;
-  color:#ffff;
+  background-color: #4a90e2;
+  color: #ffff;
 }
+
 .btm_tool #isSubmit {
   color: var(--themeColor);
   background-color: #fff;
@@ -455,35 +537,58 @@ page {
 
 .bottom-bar {
   /* border-top: 1px solid #ddd;  */
-  position: relative;
+  /* position: relative; */
+  justify-content: space-between;
   width: 100%;
-  margin-top: 20rpx;
-  align-items: center; 
+  align-items: center;
+  display: flex;
 }
 
+
 .chat-icon {
-  margin-top: 10rpx;
-  width: 50px; 
-  height: 50px; 
-  margin-left: auto;
+  /* margin-top: 10rpx; */
+  width: 50px;
+  height: 50px;
+  margin-left: 20rpx;
 }
 
 .submit-resume {
   margin-top: 10rpx;
   margin-right: auto;
-  line-height: 40px; /* 设置行高等于按钮的高度，实现垂直居中 */
-  width: 80%; /* 右边4/5的宽度 */
+  line-height: 40px;
+  /* 设置行高等于按钮的高度，实现垂直居中 */
+  width: 80%;
+  /* 右边4/5的宽度 */
   height: 40px;
 
   padding: 0;
-  font-size: 13px; 
+  font-size: 13px;
   border-radius: 70;
-  background-color:#4a90e2;
-  color:#ffff;
+  background-color: #4a90e2;
+  color: #ffff;
+}
+
+.submit-resume-right {
+  flex: 1;
+  height: 50px;
+  margin-left: 10px;
+
+  margin-top: 10rpx;
+  margin-right: 20rpx;
+  line-height: 40px;
+  width: 80%;
+  height: 40px;
+
+  padding: 0;
+  font-size: 13px;
+  border-radius: 70;
+  background-color: #4a90e2;
+  color: #ffff;
 }
 
 .btn-hover {
-  background-color: #007acc; /* 触摸时的背景色，可以根据需要调整 */
+  background-color: #007acc;
+  /* 触摸时的背景色，可以根据需要调整 */
 }
 
 .text {
@@ -491,11 +596,15 @@ page {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #ffffff; /* 文字颜色 */
-  font-size: 60rpx; /* 字体大小 */
+  color: #ffffff;
+  /* 文字颜色 */
+  font-size: 60rpx;
+  /* 字体大小 */
   text-align: center;
-  padding: 20rpx; /* 内边距 */
+  padding: 20rpx;
+  /* 内边距 */
 
-  border-radius: 5px; /* 圆角 */
+  border-radius: 5px;
+  /* 圆角 */
   background-color: #4a90e2;
 }

@@ -16,9 +16,7 @@ function Resume(userId, companyId, chatId) {
   this.chatId = chatId
 }
 
-import { request } from "../../requests/index.js";
 const httputil = require("../../utils/httputil.js") //一定要引入，根据你自己写的上传文件路径
-var out_photo = "";
 const db = wx.cloud.database();
 Page({
 

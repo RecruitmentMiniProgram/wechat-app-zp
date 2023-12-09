@@ -1,4 +1,3 @@
-import { request } from "../../../requests/index.js";
 const db = wx.cloud.database();
 Page({
 

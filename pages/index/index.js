@@ -11,7 +11,7 @@ Page({
   data: {
     loadingTip: "上拉加载更多",
     page_index: 0,
-    page_size: 4,
+    page_size: 10,
 
     swiperCurrent: 0,
     indicatorDots: true,
@@ -33,6 +33,16 @@ Page({
     this.setData({
       swiperCurrent: e.detail.current
     })
+  },
+  showActionSheet: function () {
+    wx.showActionSheet({
+      itemList: ['选项一', '选项二', '选项三'],
+      success: function (res) {
+        if (!res.cancel) {
+          console.log('用户点击了第' + (res.tapIndex + 1) + '项');
+        }
+      }
+    });
   },
   //点击指示点切换
   chuangEvent: function (e) {

@@ -1,4 +1,3 @@
-import { request } from "../../requests/index.js";
 const db = wx.cloud.database();
 Page({
 
@@ -7,7 +6,7 @@ Page({
    */
   data: {
     // 左侧的菜单数据
-    leftMenuList: ['1', '2'],
+    leftMenuList: [],
     // 右侧的商品数据
     rightContent: [],
     // 被点击的左侧菜单
@@ -49,19 +48,6 @@ Page({
   },
   //获取分类数据
   async getCates2() {
-
-    // const resultRes = await db.collection('category').doc("80e3bed06567362301b9fea3075992be").get()
-    // const result = resultRes.data.industry
-    // this.setData({
-    //   Cates2: result
-    // })
-    // let leftMenuList = result.map(v => v.name);
-    // let rightContent = result[0].child;
-    // this.setData({
-    //   leftMenuList,
-    //   rightContent
-    // })
-
     const resultRes = await db.collection('category').doc("aa14493d6567f7db008144531e794ebd").get()
     const result = resultRes.data.occupation
     // console.log(result[0])
@@ -72,7 +58,6 @@ Page({
     // console.log(leftMenuList)
     let rightContent = result[0].subList;
     this.setData({
-      // expectJobs,
       leftMenuList,
       rightContent
     })

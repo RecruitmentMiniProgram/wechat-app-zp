@@ -65,7 +65,7 @@ page {
 
 .nav-all-img image {
   width: 70%;
-  height: 100rpx;
+  height: 105rpx;
   border-radius: 50%;
   margin-top: 25rpx;
   /* width: 110rpx;
@@ -136,10 +136,15 @@ page {
 
 .swiper-container .swiper {
   width: 95%;
-  height: 250rpx;
+  height: 300rpx;
   border-radius: 20rpx;
   transform: translateY(0);
   overflow: hidden;
+}
+
+.img{
+  width: 100%; 
+  height: 100%; 
 }
 
 /* .swiper-container .swiper .img {
