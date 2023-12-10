@@ -26,6 +26,7 @@ Page({
       scale: []
 
     },
+    isnull: 1
   },
 
 
@@ -178,27 +179,15 @@ Page({
     moreInfo.showFrame();
   },
   onCategoryConfirm(e) {
+    // console.log(e.detail.result)
 
     this.selectComponent('#category').hideFrame();
-    // 解构赋值，如果键不存在，则使用默认值
-    const { region = [],
-      salary = [],
-      category = [],
-      businessDistrict = [],
-      welfare = [],
-      experience = [],
-      education = [],
-      scale = [] } = e.detail.result;
+    const category = Object.values(e.detail.result)
+    console.log(category)
+
 
     var params = this.data.filterParams;
-    params.region = region;
-    params.salary = salary;
     params.category = category;
-    params.businessDistrict = businessDistrict;
-    params.welfare = welfare;
-    params.experience = experience;
-    params.education = education;
-    params.scale = scale;
 
     this.filterData(params)
   },
@@ -255,6 +244,7 @@ Page({
     });
 
     this.setData({
+      isnull: filteredData.length > 0 ? 1 : 0,
       jobList: filteredData,
     });
 

@@ -22,8 +22,6 @@ Component({
     currentIndexJob: -1,
     scrollTop: 0,
     top: 0,
-    //接口的返回数据
-    Cates2: [],
     //判断职业分类表是用于搜索还是选择
     isSearch: 1,
 
@@ -143,20 +141,25 @@ Component({
       // 初始化数据的逻辑
       const leftMenuList = occupation.map(item => item.name);
       const rightContent = occupation[0].subList;
+
       this.setData({
         leftMenuList,
         rightContent
       });
-      console.log(this.data)
+      // console.log(this.data)
     },
 
     handleItemTap(e) {
       // 点击事件
       const { index } = e.currentTarget.dataset;
+      let rightContent = this.data.occupation[index].subList;
+
+      // console.log(e)
       // 2 触发 父组件的事件 自定义
       this.triggerEvent("tabsItemChange", { index });
       this.setData({
         currentIndex: index,
+        rightContent
       })
 
     },
@@ -193,9 +196,13 @@ Component({
     //点击按钮先查看记录中是否有，如果有则删除并改变按钮颜色，如果没用则记录总模块-子模块并改变按钮颜色
     //
     onChooseClick(event) {
-      const id = event.currentTarget.dataset.id
-      const title = this.data.titleData[id]
+      // console.log(event)
+      // const id = event.currentTarget.dataset.id
+      const id = this.data.currentIndex
+      const title = this.data.occupation[id].name
       const name = event.currentTarget.dataset.name;
+      console.log(id, title, name)
+
       var ischoose = true
       var result = this.data.result
       if (title in result) {

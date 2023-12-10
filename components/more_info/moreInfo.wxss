@@ -57,6 +57,7 @@
 .frame-wrapper {
   position: fixed;
   height: 100vh;
+  /* height: 80%; */
   width: 100vw;
   z-index: 2;
   top: 50vh;
