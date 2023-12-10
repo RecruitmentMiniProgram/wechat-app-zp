@@ -1,8 +1,40 @@
 <import src="../../templates/jobList.wxml" />
 <SearchInput></SearchInput>
 <view class="cates">
+  <moreInfo frameTitle="更多" id="moreInfo" bindmoreConfirm="onMoreConfirm"></moreInfo>
+  
+  <category id="category" bindmoreConfirm="onCategoryConfirm"></category>
+  <view class="tabs">
+    <view class="tab" bindtap="showRegionModal" data-index="0">
+      <text class="tab-text">工作区域</text>
+      <!-- <view class="triangle"></view> -->
+      <text class="triangle">▼</text>
+    </view>
+    <view class="tab" bindtap="showCategoriesModal" data-index="1">
+      <text class="tab-text">职位分类</text>
+      <!-- <view class="triangle"></view> -->
+      <text class="triangle">▼</text>
+      <picker value="{{industry}}" bindchange="industryChange" range="{{arrayIndustry}}">
+        <text>{{arrayIndustry[industry]}}</text>
+        <!-- <text class="triangle">▼</text> -->
+      </picker>
+    </view>
+    <view class="tab" bindtap="showSalaryRangeModal" data-index="2">
+      <text class="tab-text">薪资范围</text>
+      <!-- <view class="triangle"></view> -->
+      <text class="triangle">▼</text>
+    </view>
+    <view class="tab" bindtap="showMoreModal" data-index="3">
+      <text class="tab-text">更多</text>
+      <!-- <view class="triangle"></view> -->
+      <text class="triangle">▼</text>
+    </view>
+  </view>
+  <view>
+    <template is="jobList" data="{{jobList:jobList}}" />
+  </view>
   <!-- 职位列表 -->
-  <tabs id="mytabs" tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
+  <!-- <tabs id="mytabs" tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
     <block wx:if="{{tabs[0].isActive}}">
       <view class="first_tab">
         <view>
@@ -31,5 +63,5 @@
         </view>
       </view>
     </block>
-  </tabs>
+  </tabs> -->
 </view>

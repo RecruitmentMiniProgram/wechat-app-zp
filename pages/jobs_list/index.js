@@ -9,80 +9,36 @@ Page({
   data: {
     //职位数组
     jobList: [],
+    oldJobList: [],
     // 分页需要的参数
     page_index: 0,
     page_size: 10,
-    selectionType: 0,
     loadingTip: "上拉加载更多",
-    // 职位分类
-    cid: '',
+    // 筛选条件
+    filterParams: {
+      region: [],
+      salary: [],
+      category: [],
+      businessDistrict: [],
+      welfare: [],
+      experience: [],
+      education: [],
+      scale: []
 
-
-    tabs: [{
-      id: 0,
-      value: "全部",
-      isActive: true
     },
-    {
-      id: 1,
-      value: "急聘",
-      isActive: false
-    },
-    {
-      id: 2,
-      value: "兼职",
-      isActive: false
-    },
-    {
-      id: 3,
-      value: "企业分类",
-      isActive: false
-    }
-    ],
-  },
-  // QueryParams: {
-  //   query: "",
-  //   cid: "",
-  //   selectionType: 0,
-  //   pagenum: 1,
-  //   pagesize: 10,
-  // },
-
-  bindscrolltoupper() {
-    // console.log("top..")
   },
 
-  scrollTop() {
-    // console.log("scroll..");
-  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // console.log(options)
-    this.data.cid = options.cid;
+    this.getAllJobList();
+
 
   },
 
-  onShow: function () {
-    var tabId = getApp().globalData.tabid || 0;
-
-    var updatedTabs = this.data.tabs.map((v, i) => {
-      return {
-        ...v,
-        isActive: i === tabId
-      };
-    });
-
-    this.setData({
-      tabs: updatedTabs,
-      selectionType: tabId
-    });
-    // console.log(this.data);
-    // this.newData()
-    this.getJobList();
-  },
 
   newData: function () {
 
@@ -125,62 +81,198 @@ Page({
     })
   },
 
-  handleTabsItemChange(e) {
-    // 1 获取被点击的标题索引
-    const { index } = e.detail;
-    // console.log(e)
-    // // 修改源数组
-    let { tabs } = this.data;
-    tabs.forEach((v, i) => i === index ? v.isActive = true : v.isActive = false);
-    //  3 赋值到data中
-    this.setData({
-      tabs,
-      selectionType: index,
-      jobList: [],
-      page_index: 0,
-      loadingTip: "上拉加载更多"
-    })
-    this.getJobList();
-  },
 
 
   onReachBottom: function () {
 
-    if (this.data.loadingTip != "没有更多内容") {
-      wx.showToast({
-        title: "正在加载",
-        icon: 'loading',
-        duration: 1000
-      });
-      this.getJobList();
-    }
+    // if (this.data.loadingTip != "没有更多内容") {
+    //   wx.showToast({
+    //     title: "正在加载",
+    //     icon: 'loading',
+    //     duration: 1000
+    //   });
+    //   this.getJobList();
+    // }
   },
 
-  showCategoriesModal: function () {
-    console.log('hi')
-    wx.showModal({
-      title: '职位分类',
-      content: '这里放置你的分类信息',
-      showCancel: false,
-      confirmText: '确定',
-      success: (res) => {
-        if (res.confirm) {
-          console.log('用户点击确定');
-        }
-      },
-    });
+  showRegionModal: function (event) {
+    // console.log(event.currentTarget.dataset.index)
+
+    const moreInfo = this.selectComponent('#moreInfo');
+    const newTitle = ["region"]
+    const newData = [
+      { type: 0, id: 0, text: "工作区域" },
+      { type: 1, id: 0, text: ["墩头镇", "海安镇", "孙庄镇"] },
+      { type: 1, id: 0, text: ["高新区", "开发区", "滨海新区"] },
+      { type: 1, id: 0, text: ["城东镇", "角斜镇", "李堡镇"] },
+      { type: 1, id: 0, text: ["大公镇", "雅周镇", "曲塘镇"] },
+      { type: 1, id: 0, text: ["南莫镇", "白甸镇", ""] },
+    ]
+    moreInfo.updateData(newTitle, newData)
+    moreInfo.showFrame();
   },
+
+
+
+
+  showCategoriesModal: function (event) {
+    // console.log(event.currentTarget.dataset.index)
+    const category = this.selectComponent('#category');
+    category.showFrame();
+  },
+
+
+  showSalaryRangeModal: function (event) {
+    // console.log(event.currentTarget.dataset.index)
+
+    const moreInfo = this.selectComponent('#moreInfo');
+    const newTitle = ["salary"]
+
+    const newData = [
+      { type: 0, id: 0, text: "薪资范围" },
+      { type: 1, id: 0, text: ["面议", "1千以下", "1千-2千"] },
+      { type: 1, id: 0, text: ["2千-3千", "3千-5千", "5千-8千"] },
+      { type: 1, id: 0, text: ["8千1.2万", "1.2万-2万", "2万以上"] }
+    ]
+
+    moreInfo.updateData(newTitle, newData)
+    moreInfo.showFrame();
+  },
+
+
+
+  showMoreModal: function (event) {
+    // console.log(event.currentTarget.dataset.index)
+    const moreInfo = this.selectComponent('#moreInfo');
+    const newTitle = ["businessDistrict", "welfare", "experience", "education", "scale"]
+    const newData = [
+      { type: 0, id: 0, text: "商圈" },
+      { type: 1, id: 0, text: ["火车站", "汽车站", "田庄邻里中心"] },
+      { type: 1, id: 0, text: ["万达广场", "星湖001", "韩洋澳联商业广场"] },
+
+      { type: 0, id: 1, text: "福利待遇" },
+      { type: 1, id: 1, text: ["五险", "住房公积金", "提供食宿"] },
+      { type: 1, id: 1, text: ["年底双薪", "交通补助", "周末双休"] },
+      { type: 1, id: 1, text: ["单休", "调休", "加班补助"] },
+      { type: 1, id: 1, text: ["餐补", "话补", "房补"] },
+      { type: 1, id: 1, text: ["节日福利", "带薪年假", "班车接送"] },
+      { type: 1, id: 1, text: ["工作餐", "年终奖", "免费培训"] },
+      { type: 1, id: 1, text: ["晋升空间", "年度旅游", "定期体检"] },
+
+      { type: 0, id: 2, text: "经验要求" },
+      { type: 1, id: 2, text: ["在校生", "应届生", "1年以内"] },
+      { type: 1, id: 2, text: ["1-3年", "3-5年", "5-10年"] },
+      { type: 1, id: 2, text: ["10年以上"] },
+
+      { type: 0, id: 3, text: "学历要求" },
+      { type: 1, id: 3, text: ["初中及以下", "高中", "中专/技校"] },
+      { type: 1, id: 3, text: ["大专", "本科", "硕士"] },
+      { type: 1, id: 3, text: ["博士", "MBA/EMBA", ""] },
+
+      { type: 0, id: 4, text: "公司规模" },
+      { type: 1, id: 4, text: ["0-20人", "20-99人", "100-499人"] },
+      { type: 1, id: 4, text: ["500-999人", "1000-9999人", "10000人以上"] },
+    ]
+
+    moreInfo.updateData(newTitle, newData)
+    moreInfo.showFrame();
+  },
+  onCategoryConfirm(e) {
+
+    this.selectComponent('#category').hideFrame();
+    // 解构赋值，如果键不存在，则使用默认值
+    const { region = [],
+      salary = [],
+      category = [],
+      businessDistrict = [],
+      welfare = [],
+      experience = [],
+      education = [],
+      scale = [] } = e.detail.result;
+
+    var params = this.data.filterParams;
+    params.region = region;
+    params.salary = salary;
+    params.category = category;
+    params.businessDistrict = businessDistrict;
+    params.welfare = welfare;
+    params.experience = experience;
+    params.education = education;
+    params.scale = scale;
+
+    this.filterData(params)
+  },
+
+
+  onMoreConfirm(e) {
+
+    this.selectComponent('#moreInfo').hideFrame();
+    // 解构赋值，如果键不存在，则使用默认值
+    const { region = [],
+      salary = [],
+      category = [],
+      businessDistrict = [],
+      welfare = [],
+      experience = [],
+      education = [],
+      scale = [] } = e.detail.result;
+
+    var params = this.data.filterParams;
+    params.region = region;
+    params.salary = salary;
+    params.category = category;
+    params.businessDistrict = businessDistrict;
+    params.welfare = welfare;
+    params.experience = experience;
+    params.education = education;
+    params.scale = scale;
+
+    this.filterData(params)
+  },
+
+
+  filterData: function (params) {
+    // console.log(params)
+
+    const filters = {
+      position: params.region,
+      salary: params.salary,
+      category: params.category,
+      businessDistrict: params.businessDistrict,
+      welfare: params.welfare,
+      experience: params.experience,
+      education: params.education,
+      scale: params.scale
+    };
+
+    // 根据选择的筛选条件进行数据筛选
+    const filteredData = this.data.oldJobList.filter(item => {
+      return Object.keys(filters).every(key => {
+        // 如果某个条件不满足，返回 false
+        return filters[key].length === 0 || filters[key].includes(item[key]);
+
+      });
+    });
+
+    this.setData({
+      jobList: filteredData,
+    });
+
+    // console.log('Filtered data:', filteredData);
+  },
+
+
 
   onPageScroll(e) {
     //导航栏到达顶部固定
-    if (e.scrollTop > 280) {
-      // 当页面顶端距离大于一定高度时
-      let a = this.selectComponent("#mytabs");
-      a.meth1();
-    } else {
-      let b = this.selectComponent("#mytabs");
-      b.meth2();
-    }
+    // if (e.scrollTop > 280) {
+    //   // 当页面顶端距离大于一定高度时
+    //   let a = this.selectComponent("#mytabs");
+    //   a.meth1();
+    // } else {
+    //   let b = this.selectComponent("#mytabs");
+    //   b.meth2();
+    // }
   },
 
   //获取职位信息列表数据
@@ -233,6 +325,7 @@ Page({
       const results = res.result.data;
       that.setData({
         jobList: that.data.jobList.concat(results),
+        oldJobList: JSON.parse(JSON.stringify(this.data.jobList)),
         page_index: that.data.page_index + 1
       });
       if (results.length < page_size) {
@@ -245,5 +338,29 @@ Page({
     })
 
 
+  },
+
+  getAllJobList: function () {
+    // console.log(QueryParams)
+
+    var that = this;
+    wx.showToast({
+      title: "正在加载",
+      icon: 'loading',
+      duration: 800
+    });
+    db.collection('post').get({
+      success: function (res) {
+        // console.log(res)
+
+        const results = res.data;
+        // console.log(results)
+        that.setData({
+          jobList: results,
+          oldJobList: results
+        });
+      }
+    }
+    )
   }
 });

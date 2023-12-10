@@ -48,7 +48,7 @@ Page({
   },
   //获取分类数据
   async getCates2() {
-    const resultRes = await db.collection('category').doc("aa14493d6567f7db008144531e794ebd").get()
+    const resultRes = await db.collection('category').doc("80e3bed06573cfec02dd3a3267a07bf5").get()
     const result = resultRes.data.occupation
     // console.log(result[0])
     this.setData({
