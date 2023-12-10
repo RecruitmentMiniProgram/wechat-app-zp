@@ -7,20 +7,45 @@ page {
 }
 
 @import "../../wxSearchView/wxSearchView.wxss";
+@import "../category_job/index.wxss";
 
 .container {
   padding: 0;
   margin: 0;
 }
 
-.weui-search-bar,
-.weui-search-bar__form,
-.weui-search-bar__box,
-.weui-search-bar__input {
-  width: 100%;
+
+.tabs {
+  display: flex;
+  height: 100rpx;
 }
 
-.weui-search-bar {
-  border: 0rpx;
-  margin-top: 0rpx;
+
+.tab:last-child {
+  /* 最后一个 tab 去除右边框 */
+  border-right: none;
+}
+
+.tab {
+  flex: 1;
+  background-color: #ffffff;
+  display: flex;
+  /* 让文字和三角形共享一个 flex 容器 */
+  align-items: center;
+  /* 居中对齐 */
+  justify-content: center;
+  /* 居中对齐 */
+  border-bottom: 2px solid rgb(221, 221, 221);
+  /* color: #333; */
+}
+
+.tab-text {
+  /* margin-right: 4px; */
+  /* 为了在文字和三角形之间添加一些间距 */
+  font-size: 14px;
+}
+
+.triangle {
+  font-size: 11px;
+
 }
