@@ -31,6 +31,20 @@
             <text class="triangle">▼</text>
         </picker>
     </view>
+    <view class="row">
+      <view>商圈<text class="required">*</text></view>
+        <picker class="right" bindchange="bindDistrictChange" value="{{district}}" range="{{arrayBusinessDistrict}}">
+            <text>{{arrayBusinessDistrict[district]}}</text>
+            <text class="triangle">▼</text>
+        </picker>
+    </view>
+    <view class="row">
+      <view>年龄范围<text class="required">*</text></view>
+      <picker class="right" mode="multiSelector" bindchange="bindAgeChange" value="{{ageIndex}}" range="{{arrayAge}}">
+            <text>{{age}}</text>
+            <text class="triangle">▼</text>
+        </picker>
+    </view>
     <view class="row end">
       <view>工作经验<text class="required">*</text></view>
       <picker class="right" value="{{experience}}" bindchange="experienceChange" range="{{arrayExperience}}">
@@ -54,24 +68,24 @@
     </view>
     <view wx:if="{{salary==1}}">
       <view class="row {{salary == 0 ? 'red' : ''}}">
-      <view>最低薪资<text class="required">*</text></view>
+      <view>最低月资<text class="required">*</text></view>
       <view class="right">
         <input value="{{minSalary}}"  type="number" bindchange="minSalaryChange" name="mail" placeholder="请输入最低薪资" maxlength="20" />
       </view>
     </view>
-    <view class="row">
-      <view>最高薪资<text class="required">*</text></view>
+    <view class="row end">
+      <view>最高月资<text class="required">*</text></view>
       <view class="right">
         <input value="{{maxSalary}}" type="number" bindchange="maxSalaryChange" name="mail" placeholder="请输入最高薪资" maxlength="20" />
       </view>
     </view>
-    <view class="row end">
+    <!-- <view class="row end">
       <view>结算方式<text class="required">*</text></view>
-        <picker class="right"  bindchange="bindSettlementChange" value="{{settlement}}"  range="{{arraySettlement}}">
+        <picker  class="right"  bindchange="bindSettlementChange" value="{{settlement}}"  range="{{arraySettlement}}">
             <text>{{arraySettlement[settlement]}}</text>
             <text class="triangle">▼</text>
         </picker>
-    </view>
+    </view> -->
     </view>
 
   </view>

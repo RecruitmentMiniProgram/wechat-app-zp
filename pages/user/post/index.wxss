@@ -133,8 +133,7 @@ page {
   .right input {
     text-align: right;
     width: 100%;
-  }
-  
+  }  
   .triangle {
     padding-left: 10rpx;
   }

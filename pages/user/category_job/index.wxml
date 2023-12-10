@@ -18,8 +18,8 @@
                 <!-- <view class="goods_title {{index1>0?'second':''}} ">{{item1.name}}</view> -->
                 <view class="goods_list">
                     <!-- 发布职位时进行分类 -->
-                    <navigator bindtap="selectOccupation" url="" data-index="{{item1.name}}">
-                        {{item1.name}}
+                    <navigator bindtap="selectOccupation" url="" data-index="{{item1}}">
+                        {{item1}}
                     </navigator>
                 </view>
             </view>

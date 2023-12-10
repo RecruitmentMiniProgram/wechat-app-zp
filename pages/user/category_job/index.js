@@ -6,7 +6,7 @@ Page({
    */
   data: {
     // 左侧的菜单数据
-    leftMenuList: ['1', '2'],
+    leftMenuList: [],
     // 右侧的商品数据
     rightContent: [],
     // 被点击的左侧菜单
@@ -52,7 +52,7 @@ Page({
     //   rightContent
     // })
 
-    const resultRes = await db.collection('category').doc("aa14493d6567f7db008144531e794ebd").get()
+    const resultRes = await db.collection('category').doc("80e3bed06573cfec02dd3a3267a07bf5").get()
     const result = resultRes.data.occupation
     // console.log(result[0])
     this.setData({
