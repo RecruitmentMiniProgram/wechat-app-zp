@@ -27,7 +27,6 @@ page {
   width: 40%;
   white-space: normal;
   word-wrap: break-word;
-
 }
 
 .cates .cates_container .left_menu .topnav {
@@ -47,7 +46,21 @@ page {
   padding: 40rpx 5rpx;
   border-left: 9rpx #2f79e900 solid;
   font-size: 29rpx;
+  color: #646464;
 }
+
+.cates .cates_container .left_menu .menu_itema {
+  /* height: 80rpx; */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: #fff;
+  color: #646464;
+  padding: 40rpx 5rpx;
+  border-left: 9rpx #2f79e900 solid;
+  font-size: 29rpx;
+}
+
 
 .cates .cates_container .left_menu .lf_last {
   padding-bottom: 200rpx;
@@ -75,9 +88,9 @@ page {
   /* display: flex;
   flex-wrap: wrap; */
   flex: 2;
-  margin: 8rpx;
+  margin: 0rpx;
   padding: 17rpx 0rpx;
-  border: 1rpx #fff solid;
+  border: 0rpx #fff solid;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -166,8 +179,8 @@ page {
   background: #fff;
   position: absolute;
   bottom: 0;
-  width: 88.2vw;
-  padding: 5.9vw 5.9vw 0;
+  width: 100%;
+  padding: 5.9vw 0 0;
   border-top-left-radius: 20rpx;
   border-top-right-radius: 20rpx;
   z-index: 3;
@@ -178,6 +191,7 @@ page {
   font-size: 4.9vw;
   color: #4a4a4a;
   margin-bottom: 5.9vw;
+  padding-right: 5.9vw;
 }
 
 .title-wrapper>image {
@@ -257,7 +271,8 @@ page {
 .btm_tool {
   /* position: fixed;*/
   bottom: 0;
-  width: 100%;
+  width: 88.2vw;
+  padding: 0vw 5.9vw 0;
   height: 130rpx;
   /* background-color: #fff;*/
 }
@@ -485,3 +500,56 @@ page {
   font-size: 24rpx;
   border-radius: 50;
 }
+
+
+.job_item {
+  /* height: 80rpx; */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: #fff;
+  padding: 40rpx 5rpx;
+  border-left: 9rpx #2f79e900 solid;
+  font-size: 29rpx;
+  color: #646464;
+}
+
+.job_itema {
+  /* height: 80rpx; */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: #fff;
+  color: #0575F3;
+  font-weight: bold;
+  padding: 40rpx 5rpx;
+  border-left: 9rpx #2f79e900 solid;
+  font-size: 29rpx;
+}
+
+.gou{
+  flex: 0.9;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cates .cates_container .right_menu {
+  width: 60%;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+
+.cates .cates_container .right_menu .menu_item {
+  /* height: 80rpx; */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: rgba(223, 222, 222, 0.4);
+  padding: 40rpx 5rpx;
+  border-left: 9rpx #2f79e900 solid;
+  font-size: 29rpx;
+  color: #646464;
+}
+
+

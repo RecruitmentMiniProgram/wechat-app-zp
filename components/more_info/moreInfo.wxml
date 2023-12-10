@@ -5,7 +5,7 @@
     <view catchtap='catchNone' class='frame'>
       <!-- 头部 -->
       <view class='title-wrapper flex'>
-        <text class="more_title"></text>
+        <text class="more_title">{{frameTitle}}</text>
         <view catchtap='close' class="close"></view>
       </view>
       <!-- 滚动视图 -->

@@ -1,7 +1,8 @@
 <import src="../../templates/jobList.wxml" />
 <SearchInput></SearchInput>
 <view class="cates">
-  <moreInfo id="moreInfo" bindmoreConfirm="onMoreConfirm"></moreInfo>
+  <moreInfo frameTitle="更多" id="moreInfo" bindmoreConfirm="onMoreConfirm"></moreInfo>
+  
   <category id="category" bindmoreConfirm="onCategoryConfirm"></category>
   <view class="tabs">
     <view class="tab" bindtap="showRegionModal" data-index="0">

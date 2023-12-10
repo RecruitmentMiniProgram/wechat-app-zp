@@ -161,6 +161,13 @@ Component({
 
     },
 
+    handleJobTap(e) {
+      const { index } = e.currentTarget.dataset;
+      this.setData({
+        currentIndexJob: index,
+      })
+    },
+
 
     updateData: function (newTitle, newData) {
       this.setData({
