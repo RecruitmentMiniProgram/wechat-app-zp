@@ -52,6 +52,16 @@ Page({
       "白甸镇",
       "墩头镇"
     ],
+    district:0,
+    arrayBusinessDistrict:[
+      "不限",
+      "火车站",
+      "汽车站",
+      "万达广场",
+      "星湖001",
+      "韩洋澳联商业广场",
+      "田庄邻里中心"
+    ],
     attrImg: [],
     description:'',
     descriptionLength:0,
@@ -72,6 +82,11 @@ Page({
     arraySettlement:['日','周','月','年'],
     industry:"",
     workList:[],
+    welfare:[],
+    scale:"",
+    age:"18-55周岁",
+    ageIndex:[0,0],
+    arrayAge:[[],[]],
   },
     /**
      * 获取时间
@@ -90,10 +105,34 @@ Page({
         formattedDate:formattedDate
       }
     },
+    bindAgeChange(e){
+      var index=e.detail.value
+      var minAge=this.data.arrayAge[0][index[0]]
+      var maxAge=this.data.arrayAge[1][index[1]]
+      if(minAge>maxAge){
+        wx.showModal({
+          title: '警告',
+          content: '请输入合法的年龄',
+        })
+      }else{
+        this.setData({
+          age:minAge+"-"+maxAge+"周岁"
+        })
+      }
+
+    },
     /**
    * 生命周期函数--监听页面加载
    */
     onLoad(options) {
+      var tempArray=[[],[]]
+      for(var i=16;i<=65;i++){
+        tempArray[0].push(i)
+        tempArray[1].push(i)
+      }
+      this.setData({
+        arrayAge:tempArray
+      })
       this.getCompany()
       this.setData({
         edit:options.edit,
@@ -131,6 +170,8 @@ Page({
         that.data.boss=result.data.boss
         that.data.tele=result.data.tele
         that.data.attrLogo=[result.data.logo]
+        that.data.welfare=result.data.welfare
+        that.data.scale=result.data.scale
       }).catch((err) => {
         console.log("加载信息失败",err)
       });
@@ -164,6 +205,9 @@ Page({
                 logoUrl:result.data.img,
                 settlement:this.data.arraySettlement.indexOf(result.data.settlement),
                 industry:result.data.industry,
+                district:this.data.arrayBusinessDistrict.indexOf(result.data.businessDistrict),
+                //TODO
+                age:result.data.age
               })
             }).catch((err) => {
               console.log("编辑post时加载信息失败",err)
@@ -173,6 +217,11 @@ Page({
     console.log("选择产业类型")
     wx.navigateTo({
       url: '/pages/user/category_job/index',
+    })
+  },
+  bindDistrictChange(e){
+    this.setData({
+      district:e.detail.value
     })
   },
   /**
@@ -234,6 +283,10 @@ Page({
           industry:this.data.industry,
           companyMinName:this.data.companyMinName,
           companyFullName:this.data.company,
+          businessDistrict:this.data.arrayBusinessDistrict[this.data.district],
+          age:this.data.age,
+          welfare:this.data.welfare,
+          scale:this.data.scale
         } 
         wx.showLoading({
           title: '更新中...',
