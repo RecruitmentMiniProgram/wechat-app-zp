@@ -68,10 +68,15 @@
   position: absolute;
   bottom: 0;
   width: 88.2vw;
+  height: 80%;
   padding: 5.9vw 5.9vw 0;
   border-top-left-radius: 20rpx;
   border-top-right-radius: 20rpx;
   z-index: 3;
+}
+
+.container {
+  height: 75%;
 }
 
 .title-wrapper {

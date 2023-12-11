@@ -12,14 +12,14 @@ Component({
   },
 
   data: {
-    result: {},
+    result: "全部",
     flag: false,
     wrapAnimate: 'wrapAnimate',
     bgOpacity: 0,
     leftMenuList: [],
     rightContent: [],
     currentIndex: 0,
-    currentIndexJob: -1,
+    currentIndexJob: 0,
     scrollTop: 0,
     top: 0,
     //判断职业分类表是用于搜索还是选择
@@ -141,10 +141,13 @@ Component({
       // 初始化数据的逻辑
       const leftMenuList = occupation.map(item => item.name);
       const rightContent = occupation[0].subList;
+      var newArray = rightContent.slice();
+      newArray.unshift("全部")
+
 
       this.setData({
         leftMenuList,
-        rightContent
+        rightContent: newArray
       });
       // console.log(this.data)
     },
@@ -152,16 +155,28 @@ Component({
     handleItemTap(e) {
       // 点击事件
       const { index } = e.currentTarget.dataset;
+      // let content = this.data.occupation[index].subList;
       let rightContent = this.data.occupation[index].subList;
+      var newArray = rightContent.slice();
+      newArray.unshift("全部")
 
       // console.log(e)
       // 2 触发 父组件的事件 自定义
       this.triggerEvent("tabsItemChange", { index });
       this.setData({
+        currentIndexJob: 0,
         currentIndex: index,
-        rightContent
+        rightContent: newArray
       })
 
+    },
+
+    handleJobTap(e) {
+      const { index, name } = e.currentTarget.dataset;
+      this.setData({
+        currentIndexJob: index,
+        result: name
+      })
     },
 
 
@@ -233,11 +248,22 @@ Component({
 
     },
 
+    scrollTop(event) {
+      // Your scroll handling logic
+    },
+
     //重置
     moreReset(e) {
+      const rightContent = this.data.occupation[0].subList;
+      var newArray = rightContent.slice();
+      newArray.unshift("全部")
+
+
       this.setData({
-        result: { region: [] },
-        btnStyle: {}
+        rightContent: newArray,
+        currentIndexJob: 0,
+        currentIndex: 0,
+        result: "全部"
       })
     },
 
@@ -249,7 +275,7 @@ Component({
 
     //关闭弹窗
     close(e) {
-      console.log('click close button')
+      // console.log('click close button')
       this.hideFrame(e);
     }
 
