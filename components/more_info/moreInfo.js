@@ -116,14 +116,36 @@ Component({
     // 这个重置会将“工作区域”“薪资范围”“更多”这三个使用此组件的全部数据都清空，而不是仅清空当前的
     // 解决方法是，每个写一个组件
     moreReset(e) {
-      console.log(e)
+      //清空当前result
+      var result = this.data.result
+      for(var i = 0; i < this.data.titleData.length; ++ i) {
+        result[this.data.titleData[i]] = []
+      }
+      this.setData({result: result})
+
+      //清空当前按钮样式
+      var btnStyle = this.data.btnStyle
+      var moreData = this.data.moreData
+      for(var i = 0; i < moreData.length; ++ i) {
+          if(moreData[i].type == 0) continue
+          var id = moreData[i].id
+          for(var j = 0; j < moreData[i].text.length; ++ j) {
+            var name = id + moreData[i].text[j]
+            if(name in btnStyle) {
+              btnStyle[name] = false
+            }
+          }
+      }
       this.setData({
-        result: { region: [] },
-        btnStyle: {}
+        btnStyle: btnStyle
       })
+      console.log(this.data.titleData)
+      console.log(this.data.result)
+      console.log(this.data.btnStyle)
     },
 
     moreConfirm(e) {
+      
       this.triggerEvent('moreConfirm', {
         "result": this.data.result
       });
