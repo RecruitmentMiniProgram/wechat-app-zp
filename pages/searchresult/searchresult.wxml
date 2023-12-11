@@ -2,46 +2,13 @@
 <import src="../../templates/jobList.wxml" />
 <view class='infor-text' wx:if="{{isnull==0}}">
   <view>
-    <text>暂无招聘信息</text>
+    <text>暂无符合条件的招聘信息</text>
   </view>
-  <text>请更换城市搜索</text>
 </view>
 <view wx:else>
   <scroll-view bindscrolltolower="scrolltolower" scroll-y="true" class="scoll-h">
     <view>
       <template is="jobList" data="{{jobList:jobList}}" />
     </view>
-    <!-- <tabs id="mytabs" tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
-      <block wx:if="{{tabs[0].isActive}}">
-        <view class="first_tab">
-          <view>
-            <template is="jobList" data="{{jobList:jobList}}" />
-          </view>
-        </view>
-      </block>
-      <block wx:elif="{{tabs[1].isActive}}">
-        <view class="first_tab">
-          <view>
-            <template is="jobList" data="{{jobList:jobList}}" />
-          </view>
-        </view>
-      </block>
-      <block wx:elif="{{tabs[2].isActive}}">
-        <view class="first_tab">
-          <view>
-            <template is="jobList" data="{{jobList:jobList}}" />
-          </view>
-        </view>
-      </block>
-      <block wx:elif="{{tabs[3].isActive}}" bidntap='showCategoriesModal'>
-        <view class="first_tab">
-          <view>
-            <template is="jobList" data="{{jobList:jobList}}" />
-          </view>
-        </view>
-      </block>
-    </tabs> -->
-    <!-- <view class="loading">{{loadingTip}}</view> -->
   </scroll-view>
-  <!-- <view class="loading">{{loadingTip}}</view> -->
 </view>

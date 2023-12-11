@@ -59,3 +59,15 @@ page {
   display: flex;
   flex-wrap: wrap;
 }
+.cates .cates_container .right_contents .goods_group .goods_list navigator {
+  /* width: 47%; */
+  flex: 2;
+  margin: 8rpx;
+  padding: 17rpx 0rpx;
+  border: 1rpx #fff solid;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  background-color: rgba(223, 222, 222, 0.4);
+}

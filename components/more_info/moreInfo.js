@@ -1,6 +1,7 @@
 Component({
   data: {
     result: {},
+    frameTitle: '',
     flag: false,
     wrapAnimate: 'wrapAnimate',
     bgOpacity: 0,
@@ -38,16 +39,17 @@ Component({
     ],
     btnStyle: {}
   },
-  properties: {
-    frameTitle: {
-      type: String,
-      value: '标题',
-    }
-  },
+  // properties: {
+  //   frameTitle: {
+  //     type: String,
+  //     value: '标题',
+  //   }
+  // },
 
   methods: {
-    updateData: function (newTitle, newData) {
+    updateData: function (frameTitle, newTitle, newData) {
       this.setData({
+        frameTitle: frameTitle,
         titleData: newTitle,
         moreData: newData,
       });
@@ -126,7 +128,7 @@ Component({
 
     //关闭弹窗
     close(e) {
-      console.log('click close button')
+      // console.log('click close button')
       this.hideFrame(e);
     }
   }

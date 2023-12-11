@@ -26,6 +26,7 @@ Page({
       scale: []
 
     },
+    isnull: 1
   },
 
 
@@ -99,6 +100,7 @@ Page({
     // console.log(event.currentTarget.dataset.index)
 
     const moreInfo = this.selectComponent('#moreInfo');
+    const frameTitle = "工作区域"
     const newTitle = ["region"]
     const newData = [
       { type: 0, id: 0, text: "工作区域" },
@@ -108,7 +110,7 @@ Page({
       { type: 1, id: 0, text: ["大公镇", "雅周镇", "曲塘镇"] },
       { type: 1, id: 0, text: ["南莫镇", "白甸镇", ""] },
     ]
-    moreInfo.updateData(newTitle, newData)
+    moreInfo.updateData(frameTitle, newTitle, newData)
     moreInfo.showFrame();
   },
 
@@ -127,6 +129,8 @@ Page({
 
     const moreInfo = this.selectComponent('#moreInfo');
     const newTitle = ["salary"]
+    const frameTitle = "薪资范围"
+
 
     const newData = [
       { type: 0, id: 0, text: "薪资范围" },
@@ -135,7 +139,7 @@ Page({
       { type: 1, id: 0, text: ["8千1.2万", "1.2万-2万", "2万以上"] }
     ]
 
-    moreInfo.updateData(newTitle, newData)
+    moreInfo.updateData(frameTitle, newTitle, newData)
     moreInfo.showFrame();
   },
 
@@ -145,6 +149,8 @@ Page({
     // console.log(event.currentTarget.dataset.index)
     const moreInfo = this.selectComponent('#moreInfo');
     const newTitle = ["businessDistrict", "welfare", "experience", "education", "scale"]
+    const frameTitle = "更多"
+
     const newData = [
       { type: 0, id: 0, text: "商圈" },
       { type: 1, id: 0, text: ["火车站", "汽车站", "田庄邻里中心"] },
@@ -174,31 +180,24 @@ Page({
       { type: 1, id: 4, text: ["500-999人", "1000-9999人", "10000人以上"] },
     ]
 
-    moreInfo.updateData(newTitle, newData)
+    moreInfo.updateData(frameTitle, newTitle, newData)
+
     moreInfo.showFrame();
   },
+
+
   onCategoryConfirm(e) {
+    // console.log("onCategoryConfirme", e.detail.result)
 
     this.selectComponent('#category').hideFrame();
-    // 解构赋值，如果键不存在，则使用默认值
-    const { region = [],
-      salary = [],
-      category = [],
-      businessDistrict = [],
-      welfare = [],
-      experience = [],
-      education = [],
-      scale = [] } = e.detail.result;
+    var category = e.detail.result
 
     var params = this.data.filterParams;
-    params.region = region;
-    params.salary = salary;
-    params.category = category;
-    params.businessDistrict = businessDistrict;
-    params.welfare = welfare;
-    params.experience = experience;
-    params.education = education;
-    params.scale = scale;
+    if (category === "全部") {
+      params.category = []
+    } else {
+      params.category = [category]
+    }
 
     this.filterData(params)
   },
@@ -210,7 +209,6 @@ Page({
     // 解构赋值，如果键不存在，则使用默认值
     const { region = [],
       salary = [],
-      category = [],
       businessDistrict = [],
       welfare = [],
       experience = [],
@@ -220,7 +218,6 @@ Page({
     var params = this.data.filterParams;
     params.region = region;
     params.salary = salary;
-    params.category = category;
     params.businessDistrict = businessDistrict;
     params.welfare = welfare;
     params.experience = experience;
@@ -232,33 +229,50 @@ Page({
 
 
   filterData: function (params) {
-    // console.log(params)
-
+    var that = this
     const filters = {
       position: params.region,
       salary: params.salary,
-      category: params.category,
+      industry: params.category,
       businessDistrict: params.businessDistrict,
       welfare: params.welfare,
       experience: params.experience,
       education: params.education,
       scale: params.scale
     };
+    console.log(filters)
 
-    // 根据选择的筛选条件进行数据筛选
+
     const filteredData = this.data.oldJobList.filter(item => {
       return Object.keys(filters).every(key => {
-        // 如果某个条件不满足，返回 false
-        return filters[key].length === 0 || filters[key].includes(item[key]);
+        // console.log(key)
+        if (filters[key].length > 0) {
+          // 特殊处理welfare字段
+          if (key === 'welfare') {
+            return Array.isArray(item[key]) && filters[key].some(val => item[key].includes(val));
+          } else {
+            // 普通属性的处理
+            return filters[key].includes(item[key]);
+          }
+        } else {
+          // 如果筛选条件为空，则直接通过
+          return true;
+        }
+        // if (key === 'welfare') {
+        //   return filters[key].some(val => item[key].includes(val));
+        // } else {
+        //   return filters[key].length === 0 || filters[key].includes(item[key]);
+        // }
+        // return filters[key].length === 0 || filters[key].includes(item[key]);
 
       });
     });
 
     this.setData({
+      isnull: filteredData.length > 0 ? 1 : 0,
       jobList: filteredData,
     });
 
-    // console.log('Filtered data:', filteredData);
   },
 
 

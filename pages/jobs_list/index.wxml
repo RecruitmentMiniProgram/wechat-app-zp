@@ -14,10 +14,6 @@
       <text class="tab-text">职位分类</text>
       <!-- <view class="triangle"></view> -->
       <text class="triangle">▼</text>
-      <picker value="{{industry}}" bindchange="industryChange" range="{{arrayIndustry}}">
-        <text>{{arrayIndustry[industry]}}</text>
-        <!-- <text class="triangle">▼</text> -->
-      </picker>
     </view>
     <view class="tab" bindtap="showSalaryRangeModal" data-index="2">
       <text class="tab-text">薪资范围</text>
@@ -30,7 +26,12 @@
       <text class="triangle">▼</text>
     </view>
   </view>
-  <view>
+  <view class='infor-text' wx:if="{{isnull==0}}">
+    <view>
+      <text>暂无符合条件的招聘信息</text>
+    </view>
+  </view>
+  <view wx:else>
     <template is="jobList" data="{{jobList:jobList}}" />
   </view>
   <!-- 职位列表 -->
