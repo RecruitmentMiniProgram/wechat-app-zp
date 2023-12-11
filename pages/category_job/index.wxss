@@ -46,7 +46,7 @@ page {
 }
 .cates .cates_container .right_contents {
   flex: 5;
-  padding: 0 30rpx 140rpx 30rpx;
+  padding: 0 30rpx 0rpx 30rpx;
 }
 .cates .cates_container .right_contents .goods_group .goods_title {
   text-align: center;

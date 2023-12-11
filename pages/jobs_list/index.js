@@ -230,6 +230,8 @@ Page({
 
   filterData: function (params) {
     var that = this
+
+    // var filterJobList = this.data.oldJobList
     const filters = {
       position: params.region,
       salary: params.salary,
@@ -241,32 +243,47 @@ Page({
       scale: params.scale
     };
     console.log(filters)
+    const salaryRanges = [
+      { label: "面议", min: null, max: null },
+      { label: "1千以下", min: 0, max: 1000 },
+      { label: "1千-2千", min: 1000, max: 2000 },
+      { label: "2千-3千", min: 2000, max: 3000 },
+      { label: "3千-5千", min: 3000, max: 5000 },
+      { label: "5千-8千", min: 5000, max: 8000 },
+      { label: "8千1.2万", min: 8000, max: 12000 },
+      { label: "1.2万-2万", min: 12000, max: 20000 },
+      { label: "2万以上", min: 20000, max: null }
+    ];
+    // const selectedRange = salaryRanges[params.salaryRange];
+    const selectedRange = salaryRanges.find(range => filters.salary.includes(range.label));
+    console.log(selectedRange)
 
 
     const filteredData = this.data.oldJobList.filter(item => {
       return Object.keys(filters).every(key => {
-        // console.log(key)
+
         if (filters[key].length > 0) {
-          // 特殊处理welfare字段
-          if (key === 'welfare') {
+          if (key === 'salary') {
+            // if (filters.salary === "面议") return (item.salay === "面议")
+            if (item.salary === "面议") return (filters.salary === "面议")
+            else {
+              const querySalary = item.max_salary
+              return (querySalary >= selectedRange.min) && (querySalary <= selectedRange.max || selectedRange.max === null);
+            }
+          }
+          else if (key === 'welfare') {
             return Array.isArray(item[key]) && filters[key].some(val => item[key].includes(val));
           } else {
-            // 普通属性的处理
             return filters[key].includes(item[key]);
           }
         } else {
           // 如果筛选条件为空，则直接通过
           return true;
         }
-        // if (key === 'welfare') {
-        //   return filters[key].some(val => item[key].includes(val));
-        // } else {
-        //   return filters[key].length === 0 || filters[key].includes(item[key]);
-        // }
-        // return filters[key].length === 0 || filters[key].includes(item[key]);
 
       });
     });
+
 
     this.setData({
       isnull: filteredData.length > 0 ? 1 : 0,

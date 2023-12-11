@@ -229,7 +229,7 @@ page {
   text-align: center;
   font-size: 30rpx;
   font-weight: bold;
-  padding-left: 46%;
+  padding-left: 40%;
 }
 
 .close {
