@@ -9,7 +9,6 @@ Page({
   data: {
     //职位数组
     jobList: [],
-    oldJobList: [],
     // 分页需要的参数
     page_index: 0,
     page_size: 10,
@@ -35,7 +34,6 @@ Page({
    */
   onLoad: function (options) {
     // console.log()
-    // this.getAllJobList();
     this.loadFirstPage(this.data.filterParams)
 
 
@@ -250,7 +248,7 @@ Page({
       education: params.education,
       scale: params.scale
     };
-    // console.log('filters:', filters)
+    console.log('filters:', filters)
 
     let queryConditions = {};
 
@@ -384,9 +382,6 @@ Page({
       }
       )
 
-
   },
-
-
 
 });
