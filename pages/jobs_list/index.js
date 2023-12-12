@@ -34,8 +34,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
-    this.getAllJobList();
+    // console.log()
+    // this.getAllJobList();
+    this.loadFirstPage(this.data.filterParams)
 
 
   },
@@ -86,14 +87,15 @@ Page({
 
   onReachBottom: function () {
 
-    // if (this.data.loadingTip != "没有更多内容") {
-    //   wx.showToast({
-    //     title: "正在加载",
-    //     icon: 'loading',
-    //     duration: 1000
-    //   });
-    //   this.getJobList();
-    // }
+    if (this.data.loadingTip != "没有更多内容") {
+      wx.showToast({
+        title: "正在加载",
+        icon: 'loading',
+        duration: 1000
+      });
+      this.loadNextPage(this.data.filterParams)
+    }
+
   },
 
   showRegionModal: function (event) {
@@ -102,19 +104,18 @@ Page({
     const moreInfo = this.selectComponent('#moreInfo');
     const frameTitle = "工作区域"
     const newTitle = ["region"]
+
     const newData = [
-      { type: 0, id: 0, text: "工作区域" },
-      { type: 1, id: 0, text: ["墩头镇", "海安镇", "孙庄镇"] },
-      { type: 1, id: 0, text: ["高新区", "开发区", "滨海新区"] },
-      { type: 1, id: 0, text: ["城东镇", "角斜镇", "李堡镇"] },
-      { type: 1, id: 0, text: ["大公镇", "雅周镇", "曲塘镇"] },
-      { type: 1, id: 0, text: ["南莫镇", "白甸镇", ""] },
-    ]
+      { type: 0, id: 0, text: '工作区域' },
+      { type: 1, id: 0, text: ['不限', '海安镇', '孙庄镇'] },
+      { type: 1, id: 0, text: ['高新区', '开发区', '滨海新区'] },
+      { type: 1, id: 0, text: ['城东镇', '角斜镇', '李堡镇'] },
+      { type: 1, id: 0, text: ['大公镇', '雅周镇', '曲塘镇'] },
+      { type: 1, id: 0, text: ['南莫镇', '白甸镇', '墩头镇'] },
+    ];
     moreInfo.updateData(frameTitle, newTitle, newData)
     moreInfo.showFrame();
   },
-
-
 
 
   showCategoriesModal: function (event) {
@@ -190,16 +191,19 @@ Page({
     // console.log("onCategoryConfirme", e.detail.result)
 
     this.selectComponent('#category').hideFrame();
-    var category = e.detail.result
+    const category = e.detail.result
 
     var params = this.data.filterParams;
-    if (category === "全部") {
-      params.category = []
-    } else {
-      params.category = [category]
-    }
+    params.category = [category]
 
-    this.filterData(params)
+    this.setData({
+      filterParams: params,
+      page_index: 0,
+      loadingTip: '上拉加载更多'
+
+    })
+
+    this.loadFirstPage(params)
   },
 
 
@@ -223,15 +227,19 @@ Page({
     params.experience = experience;
     params.education = education;
     params.scale = scale;
+    this.setData({
+      filterParams: params,
+      page_index: 0,
+      loadingTip: '上拉加载更多'
 
-    this.filterData(params)
+    })
+
+    this.loadFirstPage(params)
   },
 
-
-  filterData: function (params) {
+  getQueryCondition: function (params) {
     var that = this
 
-    // var filterJobList = this.data.oldJobList
     const filters = {
       position: params.region,
       salary: params.salary,
@@ -242,9 +250,27 @@ Page({
       education: params.education,
       scale: params.scale
     };
-    console.log(filters)
-    const salaryRanges = [
-      { label: "面议", min: null, max: null },
+    // console.log('filters:', filters)
+
+    let queryConditions = {};
+
+    Object.keys(filters).forEach(key => {
+      if (filters[key].length > 1) {
+        queryConditions[key] = db.command.in(filters[key]);
+      } else if (filters[key].length == 1) {
+        if ((key === 'position' && filters[key][0] === '不限')
+          || (key === 'industry' && filters[key][0] === "全部")) {
+          delete queryConditions[key]
+        }
+        else {
+          queryConditions[key] = filters[key][0]
+        }
+      }
+
+    });
+
+    const salaryRangesDict = [
+      { label: "面议", min: -1, max: -1 },
       { label: "1千以下", min: 0, max: 1000 },
       { label: "1千-2千", min: 1000, max: 2000 },
       { label: "2千-3千", min: 2000, max: 3000 },
@@ -252,146 +278,115 @@ Page({
       { label: "5千-8千", min: 5000, max: 8000 },
       { label: "8千1.2万", min: 8000, max: 12000 },
       { label: "1.2万-2万", min: 12000, max: 20000 },
-      { label: "2万以上", min: 20000, max: null }
+      { label: "2万以上", min: 20000, max: 1000000 }
     ];
-    // const selectedRange = salaryRanges[params.salaryRange];
-    const selectedRange = salaryRanges.find(range => filters.salary.includes(range.label));
-    console.log(selectedRange)
 
 
-    const filteredData = this.data.oldJobList.filter(item => {
-      return Object.keys(filters).every(key => {
+    if (filters.salary.length > 0) {
+      delete queryConditions.salary;
 
-        if (filters[key].length > 0) {
-          if (key === 'salary') {
-            // if (filters.salary === "面议") return (item.salay === "面议")
-            if (item.salary === "面议") return (filters.salary === "面议")
-            else {
-              const querySalary = item.max_salary
-              return (querySalary >= selectedRange.min) && (querySalary <= selectedRange.max || selectedRange.max === null);
-            }
-          }
-          else if (key === 'welfare') {
-            return Array.isArray(item[key]) && filters[key].some(val => item[key].includes(val));
-          } else {
-            return filters[key].includes(item[key]);
-          }
+      const selectedRanges = filters.salary.map(selectedLabel => {
+        const range = salaryRangesDict.find(item => item.label === selectedLabel);
+        if (range) {
+          return { min: range.min, max: range.max };
         } else {
-          // 如果筛选条件为空，则直接通过
-          return true;
+          return null;
         }
-
       });
-    });
+      // console.log('selectedRanges', selectedRanges)
+      if (selectedRanges.length > 1) {
+
+        queryConditions.$or = queryConditions.$or || [];
+        // 处理每个选中的薪资范围
+        selectedRanges.forEach(selectedRange => {
+          const condition = {};
+          condition.$gte = selectedRange.min;
+          condition.$lte = selectedRange.max;
+          queryConditions.$or.push({
+            max_salary: condition
+          });
+        });
+      }
+      else {
+        queryConditions.max_salary = {}
+        queryConditions.max_salary.$gte = selectedRanges[0].min;
+        queryConditions.max_salary.$lte = selectedRanges[0].max;
+      }
+    }
 
 
-    this.setData({
-      isnull: filteredData.length > 0 ? 1 : 0,
-      jobList: filteredData,
-    });
+    return queryConditions;
 
   },
 
 
+  loadFirstPage: function (params) {
+    var that = this
 
-  onPageScroll(e) {
-    //导航栏到达顶部固定
-    // if (e.scrollTop > 280) {
-    //   // 当页面顶端距离大于一定高度时
-    //   let a = this.selectComponent("#mytabs");
-    //   a.meth1();
-    // } else {
-    //   let b = this.selectComponent("#mytabs");
-    //   b.meth2();
-    // }
-  },
-
-  //获取职位信息列表数据
-  getJobList: function () {
-    // console.log(QueryParams)
-
-    var that = this;
-    const selectionType = that.data.selectionType
     const page_index = that.data.page_index
     const page_size = that.data.page_size
-    const cid = that.data.cid
-    var field = '_id'
-    var condition = {}
-    switch (selectionType) {
-      case 0:
-        field = "_id"
-        break;
-      case 1:
-        field = "timestamp"
-        break
-      case 2:
-        condition = { 'kind': "兼职" }
-        break
-      case 3:
-        condition = { 'kind': "实习" }
-        break
-      default:
-        field = "_id"
-        break
-    }
-    // console.log('field', field)
-    wx.showToast({
-      title: "正在加载",
-      icon: 'loading',
-      duration: 800
-    });
+    const queryConditions = that.getQueryCondition(params)
 
 
-    wx.cloud.callFunction({
-      name: 'jobListQuery',
-      data: {
-        'condition': condition,
-        'field': field.toString(),
-        'sort': 'desc',
-        'skip': page_index * page_size,
-        'limit': page_size
+    console.log('queryConditions:', queryConditions)
+
+
+    db.collection('post')
+      .where(queryConditions)
+      .skip(page_index * page_size)
+      .limit(page_size)
+      .get({
+        success: function (res) {
+          console.log(res)
+
+          const results = res.data;
+          that.setData({
+            jobList: results,
+            page_index: that.data.page_index + 1
+          });
+          if (results.length < page_size) {
+            that.setData({
+              loadingTip: '没有更多内容'
+            });
+          }
+        }
       }
-    }).then(res => {
-      // console.log(res)
-      const results = res.result.data;
-      that.setData({
-        jobList: that.data.jobList.concat(results),
-        oldJobList: JSON.parse(JSON.stringify(this.data.jobList)),
-        page_index: that.data.page_index + 1
-      });
-      if (results.length < page_size) {
-        that.setData({
-          loadingTip: '没有更多内容'
-        });
-      }
-    }).catch(err => {
-      console.log("failed")
-    })
+      )
 
 
   },
 
-  getAllJobList: function () {
-    // console.log(QueryParams)
+  loadNextPage: function (params) {
+    var that = this
+    const page_index = that.data.page_index
+    const page_size = that.data.page_size
+    const queryConditions = that.getQueryCondition(params)
 
-    var that = this;
-    wx.showToast({
-      title: "正在加载",
-      icon: 'loading',
-      duration: 800
-    });
-    db.collection('post').get({
-      success: function (res) {
-        // console.log(res)
+    db.collection('post')
+      .where(queryConditions)
+      .skip(page_index * page_size)
+      .limit(page_size)
+      .get({
+        success: function (res) {
+          console.log(res)
 
-        const results = res.data;
-        // console.log(results)
-        that.setData({
-          jobList: results,
-          oldJobList: results
-        });
+          const results = res.data;
+          that.setData({
+            jobList: that.data.jobList.concat(results),
+            page_index: that.data.page_index + 1
+          });
+          if (results.length < page_size) {
+            that.setData({
+              loadingTip: '没有更多内容'
+            });
+          }
+        }
       }
-    }
-    )
-  }
+      )
+
+
+  },
+
+
+
 });

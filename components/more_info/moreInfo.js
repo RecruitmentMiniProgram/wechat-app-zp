@@ -116,7 +116,7 @@ Component({
     // 这个重置会将“工作区域”“薪资范围”“更多”这三个使用此组件的全部数据都清空，而不是仅清空当前的
     // 解决方法是，每个写一个组件
     moreReset(e) {
-      console.log(e)
+      // console.log(e)
       this.setData({
         result: { region: [] },
         btnStyle: {}
