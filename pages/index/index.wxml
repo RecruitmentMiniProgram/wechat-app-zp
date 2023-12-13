@@ -19,24 +19,28 @@
     </view>
     <view class="nav-text">全部职位</view>
   </view>
-  <view class="nav-three-up nav-all" bindtap='bindViewCategory'>
+  <view class="nav-three-up nav-all" bindtap='bindViewCompany'>
     <view class="nav-three-up-img nav-all-img">
       <image src="../../images/xz.png" />
     </view>
-    <view class="nav-text">企业分类</view>
+    <view class="nav-text">推荐企业</view>
   </view>
-  <view class="nav-tow-up nav-all" bindtap='bindViewEmergency'>
-    <view class="nav-tow-up-img nav-all-img">
-      <image src="../../images/bt.png" />
+  <navigator url="../jobs_list/emergency/index?tabid=急聘">
+    <view class="nav-tow-up nav-all">
+      <view class="nav-tow-up-img nav-all-img">
+        <image src="../../images/bt.png" />
+      </view>
+      <view class="nav-text">急聘</view>
     </view>
-    <view class="nav-text">急聘</view>
-  </view>
-  <view class="nav-four-up nav-all" bindtap='bindViewPartTime'>
-    <view class="nav-four-up-img nav-all-img">
-      <image src="../../images/sgry.png" />
+  </navigator>
+  <navigator url="../jobs_list/emergency/index?tabid=兼职">
+    <view class="nav-four-up nav-all">
+      <view class="nav-four-up-img nav-all-img">
+        <image src="../../images/sgry.png" />
+      </view>
+      <view class="nav-text">兼职</view>
     </view>
-    <view class="nav-text">兼职</view>
-  </view>
+  </navigator>
   <view class="nav-all">
     <button class="conbtn" open-type="contact">
       <view class="nav-one-down-img nav-all-img">
@@ -54,9 +58,14 @@
   </navigator>
 </view>
 <view class="space-line"></view>
-<view>
-  <view class="tab-item">急聘职位</view>
+<view class="tab-item">急聘职位</view>
+<view class='infor-text' wx:if="{{isnull==1}}">
   <view>
-    <template is="jobList" data="{{jobList:jobList}}" />
+    <text>暂无招聘信息</text>
+  </view>
+</view>
+<view wx:else>
+  <view>
+    <template is="jobList" data="{{jobList:jobList,recommend:recommend}}" />
   </view>
 </view>

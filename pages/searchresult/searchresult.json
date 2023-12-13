@@ -1,6 +1,4 @@
 {
-  "usingComponents": {
-    "tabs": "../../components/tabs/tabs"
-  },
+  "usingComponents": {},
   "navigationBarTitleText": "搜索结果"
 }

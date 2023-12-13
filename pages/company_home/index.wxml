@@ -1,6 +1,4 @@
-<!-- <wxs src="../../utils/time.wxs" module="time" /> -->
 <import src="../../templates/jobList.wxml" />
-<!-- <import src="../../components/jobList/jobList.wxml" /> -->
 <!-- 公司介绍 -->
 <view class="com_wrap" url="/pages/company_home/index?comId={{jobObj.jobComId}}">
   <view class="com">
@@ -34,7 +32,12 @@
   </block>
   <!-- 另一个列表################################################################# -->
   <block wx:elif="{{tabs[1].isActive}}">
-    <view>
+    <view class='infor-text' wx:if="{{isnull==1}}">
+      <view>
+        <text>暂无符合条件的招聘信息</text>
+      </view>
+    </view>
+    <view wx:else>
       <template is="jobList" data="{{jobList:jobList}}" />
     </view>
   </block>

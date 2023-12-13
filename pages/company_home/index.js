@@ -1,17 +1,5 @@
-/*
-1 当页面被打开的时候 onShow
-    0 onshow 不同于onload 无法在形参上接受 options参数
-    0.5 判断缓存中有没有token
-        1 没有 直接跳转到授权页面
-        2 有 直接往下进行
-    1 获取url上的参数type
-    2 根据type来决定页面标题的数组元素 哪个被激活选中
-    2 根据type值发送请求获取订单数据
-    3 渲染页面
-2 点击不同数据 重新发送请求获取和渲染数据
-
-*/
 const db = wx.cloud.database();
+var app = getApp()
 Page({
 
   /**
@@ -20,10 +8,9 @@ Page({
   data: {
     loadingTip: "上拉加载更多",
     page_index: 0,
-    page_size: 10,
-    submit_stat: "收藏",
-    isCollect_com: false,
+    page_size: app.globalData.page_size,
     comObj: [],
+    isnull: 1,
     jobList: [],
     tabs: [{
       id: 0,
@@ -94,6 +81,11 @@ Page({
       }
     }).then(res => {
       const jobList = res.result.data;
+      if (jobList.length > 0) {
+        that.setData({
+          isnull: 0
+        })
+      }
       that.setData({
         jobList: that.data.jobList.concat(jobList),
         page_index: that.data.page_index + 1

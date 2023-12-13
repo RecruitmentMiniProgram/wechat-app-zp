@@ -1,6 +1,6 @@
 <!-- pages/searchinfor/searchresult.wxml -->
 <import src="../../templates/jobList.wxml" />
-<view class='infor-text' wx:if="{{isnull==0}}">
+<view class='infor-text' wx:if="{{isnull==1}}">
   <view>
     <text>暂无符合条件的招聘信息</text>
   </view>

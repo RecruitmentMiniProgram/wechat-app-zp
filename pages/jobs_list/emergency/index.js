@@ -1,4 +1,4 @@
-// import { request } from "../../requests/index.js";
+// pages/jobs_list/emergency/index.js
 const db = wx.cloud.database();
 var app = getApp();
 
@@ -14,6 +14,8 @@ Page({
     page_index: 0,
     page_size: app.globalData.page_size,
     loadingTip: "上拉加载更多",
+    kind: "不限",
+    recommend: 0,
     // 筛选条件
     filterParams: {
       region: [],
@@ -23,34 +25,39 @@ Page({
       welfare: [],
       experience: [],
       education: [],
-      scale: []
+      scale: [],
 
     },
     isnull: 1
   },
 
-
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    // console.log()
+  onLoad(options) {
+    console.log(options)
+
+    if (options.tabid === "兼职") {
+      this.setData({
+        kind: "兼职"
+      })
+      wx.setNavigationBarTitle({
+        title: "兼职职位"
+      });
+
+    }
+    else if (options.tabid === "急聘") {
+      this.setData({
+        recommend: 1
+      })
+      wx.setNavigationBarTitle({
+        title: "急聘职位"
+      });
+    }
     this.loadPage(this.data.filterParams)
 
+
   },
-
-
-
-  /**
- * 页面搜索事件的处理函数
- */
-  wxSearchTab: function () {
-    //console.log('wxSearchTab');
-    wx.navigateTo({
-      url: '../search/search'
-    })
-  },
-
 
   onReachBottom: function () {
 
@@ -84,13 +91,11 @@ Page({
     moreInfo.showFrame();
   },
 
-
   showCategoriesModal: function (event) {
     // console.log(event.currentTarget.dataset.index)
     const category = this.selectComponent('#category');
     category.showFrame();
   },
-
 
   showSalaryRangeModal: function (event) {
     // console.log(event.currentTarget.dataset.index)
@@ -110,7 +115,6 @@ Page({
     moreInfo.updateData(frameTitle, newTitle, newData)
     moreInfo.showFrame();
   },
-
 
 
   showMoreModal: function (event) {
@@ -155,7 +159,6 @@ Page({
     moreInfo.showFrame();
   },
 
-
   onCategoryConfirm(e) {
     // console.log("onCategoryConfirme", e.detail.result)
 
@@ -167,11 +170,10 @@ Page({
 
     this.setData({
       filterParams: params,
-      jobList: [],
       page_index: 0,
+      loadingTip: '上拉加载更多',
       isnull: 1,
-      loadingTip: '上拉加载更多'
-
+      jobList: [],
     })
 
     this.loadPage(params)
@@ -200,10 +202,11 @@ Page({
     params.scale = scale;
     this.setData({
       filterParams: params,
+      page_index: 0,
+      loadingTip: '上拉加载更多',
       jobList: [],
       isnull: 1,
-      page_index: 0,
-      loadingTip: '上拉加载更多'
+
 
     })
 
@@ -235,11 +238,15 @@ Page({
         }
         else {
           queryConditions[key] = db.command.in(filters[key]);
-
         }
-
       }
     });
+
+    if (this.data.kind === "兼职") {
+      queryConditions['kind'] = "兼职"
+    }
+
+
 
     const salaryRangesDict = [
       { label: "面议", min: -1, max: -1 },
@@ -292,24 +299,31 @@ Page({
   },
 
 
+
+
   loadPage: function (params) {
     var that = this
 
     const page_index = that.data.page_index
     const page_size = that.data.page_size
     const queryConditions = that.getQueryCondition(params)
+    const recommend = that.data.recommend
 
 
     console.log('queryConditions:', queryConditions)
+    let query = db.collection('post');
 
+    // 根据参数选择性地添加排序规则
+    if (recommend === 1) {
+      query = query.orderBy('recommend', 'desc').orderBy('timestamp', 'desc')
+    }
 
-    db.collection('post')
-      .where(queryConditions)
+    query.where(queryConditions)
       .skip(page_index * page_size)
       .limit(page_size)
       .get({
         success: function (res) {
-          console.log(res)
+          console.log(res.data)
 
           const results = res.data;
           if (results.length > 0) {
@@ -336,4 +350,4 @@ Page({
 
 
 
-});
+})

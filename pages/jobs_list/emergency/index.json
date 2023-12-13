@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "moreInfo": "../../../components/more_info/moreInfo",
+    "category": "../../../components/category/category"
+  },
+  "navigationBarTitleText": "搜索结果"
+}
