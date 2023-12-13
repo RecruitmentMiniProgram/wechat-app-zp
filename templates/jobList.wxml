@@ -23,6 +23,7 @@
               </view>
               <!-- 工资 发布时间 -->
               <view class="content_top_rgt">
+                <view wx:if="{{recommend==1 && item.recommend==1}}" style="color:red">推广</view>
                 <view class="job_ad">{{item.kind}}</view>
                 <!-- <view class="job_skill">{{item.min_salary}}-{{item.max_salary}}</view> -->
                 <!-- <view class="job_ad">{{time.formatDateString(item.time)}}</view> -->

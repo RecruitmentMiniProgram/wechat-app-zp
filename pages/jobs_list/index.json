@@ -1,10 +1,8 @@
 {
   "usingComponents": {
     "SearchInput": "../../components/SearchInput/SearchInput",
-    "tabs": "../../components/tabs/tabs",
     "moreInfo": "../../components/more_info/moreInfo",
-    "category": "../../components/category/category",
-    "multiSelector": "../../components/selector/multiSelector"
+    "category": "../../components/category/category"
   },
   "navigationBarTitleText": "职位列表"
 }

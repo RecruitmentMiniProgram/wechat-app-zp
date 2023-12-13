@@ -1,0 +1,38 @@
+<!-- pages/companys_list/index.wxml -->
+<view class='infor-text' wx:if="{{isnull==1}}">
+  <view>
+    <text>暂无推荐企业信息</text>
+  </view>
+</view>
+<view wx:else>
+  <view wx:for="{{comList}}" wx:key="comId" wx:for-item="item">
+    <view class="job_list_wrap">
+      <view class="job_list_raw">
+        <navigator class="" target="" url="/pages/company_home/index?comId={{item._id}}" hover-class="navigator-hover" open-type="navigate">
+          <view class="list-image">
+            <image src="{{item.logo}}" mode="aspectFit" />
+          </view>
+          <view class="content_top">
+            <view class="content_top_lft">
+              <view class="com_name">{{item.fullName}}</view>
+              <view class="description">{{item.region}}  |  {{item.industry}}</view>
+              <view class="details">
+                <view wx:for="{{item.jobs}}" wx:key="jobId" wx:for-item="item2" wx:for-index="index">
+                  <view class="jobs_name">{{item2.name}}</view>
+                </view>
+                <view wx:if="{{item.jobsLength > 2}}" class="dot">...</view>
+              </view>
+            </view>
+            <view class="content_top_rgt">
+              <view class="jobs_number">
+                <text>共有</text>
+                <text style="color: red;">{{item.jobsLength}}</text>
+                <text>个职位</text>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>

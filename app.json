@@ -8,24 +8,17 @@
     "pages/resume/index",
     "pages/join_group/index",
     "pages/category_job/index",
-
     "pages/user/resume/index",
-
     "pages/user/category_job/index",
-
-
     "pages/user/manage/index",
     "pages/user/index",
-
     "pages/jobs_list/index",
-
     "pages/award/award",
     "pages/search/search",
     "pages/searchresult/searchresult",
     "pages/user/view/view",
     "pages/register/register",
     "pages/login/login",
-
     "pages/all_resume/index",
     "pages/all_chat/index",
     "pages/show_resume/show_resume",
@@ -33,10 +26,11 @@
     "pages/chat/chat",
     "pages/user/resume/work/index",
     "pages/user/resume/intention/index",
-
     "pages/resume/work/index",
-    "pages/resume/intention/index"
-   ],
+    "pages/resume/intention/index",
+    "pages/companys_list/index",
+    "pages/jobs_list/emergency/index"
+  ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black",
@@ -54,16 +48,16 @@
         "text": "首页"
       },
       {
-        "selectedIconPath": "images/category_p.png",
-        "iconPath": "images/category.png",
-        "pagePath": "pages/category_job/index",
-        "text": "分类"
-      },
-      {
         "selectedIconPath": "images/list_p.png",
         "iconPath": "images/list.png",
         "pagePath": "pages/jobs_list/index",
-        "text": "职位"
+        "text": "全部职位"
+      },
+      {
+        "selectedIconPath": "images/city_p.png",
+        "iconPath": "images/city.png",
+        "pagePath": "pages/companys_list/index",
+        "text": "推荐企业"
       },
       {
         "selectedIconPath": "images/message_p.png",
@@ -87,7 +81,7 @@
   "plugins": {
     "materialPlugin": {
       "version": "1.0.5",
-          "provider": "wx4d2deeab3aed6e5a"
+      "provider": "wx4d2deeab3aed6e5a"
     }
-  }  
+  }
 }
