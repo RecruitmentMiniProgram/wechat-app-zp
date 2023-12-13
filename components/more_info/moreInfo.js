@@ -137,9 +137,9 @@ Component({
       this.setData({
         btnStyle: btnStyle
       })
-      console.log(this.data.titleData)
-      console.log(this.data.result)
-      console.log(this.data.btnStyle)
+      // console.log(this.data.titleData)
+      // console.log(this.data.result)
+      // console.log(this.data.btnStyle)
     },
 
     moreConfirm(e) {

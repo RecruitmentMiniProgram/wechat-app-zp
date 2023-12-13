@@ -1,0 +1,32 @@
+<!-- pages/jobs_list/emergency/index.wxml -->
+<import src="../../../templates/jobList.wxml" />
+<view class="cates">
+    <moreInfo frameTitle="更多" id="moreInfo" bindmoreConfirm="onMoreConfirm"></moreInfo>
+    <category id="category" bindmoreConfirm="onCategoryConfirm"></category>
+    <view class="tabs">
+        <view class="tab" bindtap="showRegionModal" data-index="0">
+            <text class="tab-text">工作区域</text>
+            <text class="triangle">▼</text>
+        </view>
+        <view class="tab" bindtap="showCategoriesModal" data-index="1">
+            <text class="tab-text">职位分类</text>
+            <text class="triangle">▼</text>
+        </view>
+        <view class="tab" bindtap="showSalaryRangeModal" data-index="2">
+            <text class="tab-text">薪资范围</text>
+            <text class="triangle">▼</text>
+        </view>
+        <view class="tab" bindtap="showMoreModal" data-index="3">
+            <text class="tab-text">更多</text>
+            <text class="triangle">▼</text>
+        </view>
+    </view>
+    <view class='infor-text' wx:if="{{isnull==1}}">
+        <view>
+            <text>暂无符合条件的招聘信息</text>
+        </view>
+    </view>
+    <view wx:else>
+        <template is="jobList" data="{{jobList:jobList,recommend:recommend}}" />
+    </view>
+</view>

@@ -4,7 +4,8 @@
 App({
   globalData:{
     tabid:0,
-    userInfo: null
+    userInfo: null,
+    page_size: 20
   },
   //用户信息
   userinfor:{
@@ -29,7 +30,7 @@ App({
 
     }
 
-    this.globalData = {}
+    // this.globalData = {}
 
     // 登录
     wx.login({

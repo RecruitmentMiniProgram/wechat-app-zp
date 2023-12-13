@@ -1,0 +1,114 @@
+/* pages/companys_list/index.wxss */
+page {
+    letter-spacing: 2rpx;
+}
+
+
+.cates {
+    height: 100%;
+}
+
+.job_list_wrap {
+    display: flex;
+    justify-content: center;
+    padding: 10rpx;
+    background-color: #fff;
+    height: 140rpx;
+
+    border-bottom: 5rpx solid #f3efef;
+}
+
+.job_list_wrap .job_list_raw {
+    width: 98%;
+    display: flex;
+}
+
+.job_list_wrap .job_list_raw navigator {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.job_list_wrap .job_list_raw navigator .content_top {
+    flex: 1;
+    margin-top: 7rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.job_list_wrap .job_list_raw navigator .list-image image {
+    width: 70px;
+    height: 70px;
+    margin-top: 7rpx;
+
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.description {
+    color: gray;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+
+.job_list_wrap .job_list_raw navigator .content_top .content_top_lft {
+    /* flex: 0.5; */
+    width: 60px;
+    /* margin-left: 5%; */
+}
+
+.job_list_wrap .job_list_raw navigator .content_top .content_top_lft .com_name {
+    font-size: 30rpx;
+    /* font-weight: bold; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.job_list_wrap .job_list_raw navigator .content_top .content_top_lft .details {
+    margin: 12rpx 0;
+    /* height: 8px; */
+    display: flex;
+    flex-direction: row;
+
+}
+
+.job_list_wrap .job_list_raw navigator .content_top .content_top_lft .details .jobs_name {
+    /* flex:0.5; */
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 27rpx;
+    padding: 4rpx 10rpx;
+    margin-right: 10rpx;
+    color: #645f5f;
+    background-color: #edece9;
+    /* border-radius: 14%; */
+}
+
+.job_list_wrap .job_list_raw navigator .content_top .content_top_lft .details .dot {
+    width: 80px;
+
+}
+
+.job_list_wrap .job_list_raw navigator .content_top .content_top_rgt {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.job_list_wrap .job_list_raw navigator .content_top .content_top_rgt .jobs_number {
+    white-space: nowrap;
+    text-align: right;
+    font-size: 20rpx;
+    /* color: red; */
+
+}
