@@ -109,6 +109,73 @@ Page({
     })
 
   },
+
+  login(){
+    wx.navigateTo({
+      url: '/pages/login/login'
+    });
+  },
+
+  
+  async judgeOrEditChatHistory(userId, postId) {
+    const db = wx.cloud.database()
+    let userResult = await db.collection('user').doc(userId).get()
+    var userName = userResult.data.name
+    let chatResult = await db.collection('chat_history').where({user_id: userId, company_id: this.data.comId, post_id: postId}).get()
+    var id = null
+    if(chatResult.data.length == 0) {
+      //如果没有则创建聊天项，初始化消息记录,再进入chat页面
+      var res = await  db.collection('chat_history').add({
+        // data 字段表示需新增的 JSON 数据
+        data: {
+          company_id: this.data.comId,
+          enter_name: this.data.comObj.fullName,
+          enter_red: false,
+          post_id: postId,
+          post_name: this.data.comObj.minName,
+          user_id: userId,
+          user_name: userName,
+          user_red: false,
+          data:[
+          {
+            msg:"查看简历",
+            role: 4,
+            time: (Date.now()/1000)
+          },
+          {
+            msg:"电话面试",
+            role: 5,
+            time: (Date.now()/1000)
+          }
+        ]
+        },
+      })
+
+      id = res._id
+    } else {
+      id = chatResult.data[0]._id
+    }
+    return id
+  },
+
+  async chatOnline(){
+      var userId = this.data.userId
+      //查看是否有聊天项
+      var id = await this.judgeOrEditChatHistory(userId, "virtualJob")
+      //如果有则直接跳转chat页面
+      
+      wx.navigateTo({
+      url: '/pages/chat/chat?type=' + 1 + '&id=' + id,
+    });
+  },
+
+  onShareAppMessage: function (res) {
+    console.log("click")
+    return {
+      title: '企业分享',
+      path: '/pages/company_home/index?comId=' + this.data.comId
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -117,6 +184,12 @@ Page({
     // console.log("onload:", options);
     this.getComDetail(options.comId);
     this.getComPostDetail(options.comId);
-
+    var status = wx.getStorageSync('status')
+    var userId = wx.getStorageSync('userId')
+    this.setData({
+      "status": status,
+      "comId": options.comId,
+      "userId": userId
+    })
   }
 })

@@ -114,7 +114,13 @@ Page({
     },
   
 
-   
+    onShareAppMessage: function (res) {
+      return {
+        title: '岗位分享',
+        path: '/pages/job_details/index?jobId=' + this.data.jobId
+      }
+    },
+
     // 获取职位详情数据
     async getJobDetail(jobId) {
       var that = this;
@@ -319,6 +325,7 @@ Page({
       }
       return id
     },
+    
     async goToChatPage(e) {
       var userId = this.data.userId
       //查看是否有聊天项

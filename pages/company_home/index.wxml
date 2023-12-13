@@ -18,7 +18,7 @@
       </view>
     </view>
   </view>
-</view>
+
 <tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
   <block wx:if="{{tabs[0].isActive}}">
     <view class="title com_intro">公司简介</view>
@@ -32,6 +32,9 @@
     <view class="title com_addr">公司地址</view>
     <view class="content">{{comObj.address}}</view>
   </block>
+
+
+
   <!-- 另一个列表################################################################# -->
   <block wx:elif="{{tabs[1].isActive}}">
     <view>
@@ -39,3 +42,22 @@
     </view>
   </block>
 </tabs>
+
+<view class="btm_tool">
+        <view wx:if="{{status != 2}}" class="bottom-bar">
+
+            <button wx:if="{{status == 1}}" class="chat-icon" style="  background-image: url('../../images/share.png');background-size: cover;" open-type="share"></button>
+
+            <button wx:if="{{status == 1}}" hover-class="btn-hover" bindtap="chatOnline" class="submit-resume-right">
+                在线聊天
+            </button>
+
+            <button wx:if="{{status == 0}}" hover-class="btn-hover" bindtap="login" class="submit-resume">
+                登录后聊天
+            </button>
+        </view>
+</view>
+
+</view>
+
+
