@@ -256,6 +256,7 @@ Page({
           createTime:new Date(),
           welfare:this.data.welfare,
           region:this.data.arrayRegion[this.data.region],
+          recommend:0,
         } 
         wx.showLoading({
           title: '更新中...',

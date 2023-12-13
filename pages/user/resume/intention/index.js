@@ -21,14 +21,38 @@ Page({
   /****************************************
    * ***** 职业选择器模板的相关方法*********
    * *********************************** */
+filter(data) {
+      var mySet=new Set(data)
+      var myArray = Array.from(mySet);
+      return myArray
+    },
   //使用职业分类页面进行选择
   industryChange(e){
     console.log("选择产业类型")
-    wx.navigateTo({
-      url: '/pages/user/category_job/index',
-    })
+    const category = this.selectComponent('#category');
+    category.showFrame();
+    // wx.navigateTo({
+      //   url: '/pages/user/category_job/index',
+    // })
   },
 
+onCategoryConfirm(e) {
+    // console.log("onCategoryConfirme", e.detail.result)
+
+    this.selectComponent('#category').hideFrame();
+    const category = e.detail.result
+    if(this.data.workNumSelector<5){
+        this.data.labelListSelector.push(category)
+        var temp=this.filter(this.data.labelListSelector)
+        this.setData({
+          labelListSelector:temp,
+          workNumSelector:temp.length
+        })
+    }
+    this.setData({
+      pickerDisabledSelector:this.data.workNumSelector==5?1:0
+    })
+  },
     // 长安删除图片
   // 长安删除兴趣爱好标签
   longtapDeleteLabel(e) {
@@ -60,7 +84,7 @@ Page({
    * @param {*} e 
    */
   formSubmit(e){
-    const customData = this.data.workList;
+    const customData = this.data.labelListSelector;
     console.log('自定义组件的数据：', customData);
     if(customData.length==0||this.data.workType===null||this.data.salary==null){
       wx.showModal({  
@@ -126,24 +150,12 @@ Page({
    */
   onReady() {
 
-  },
-
-  filter(data) {
-    var mySet=new Set(data)
-    var myArray = Array.from(mySet);
-    return myArray
-  },
+    },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    this.data.workList=this.filter(this.data.workList)
-    this.setData({
-      labelListSelector:this.data.workList,
-      workNumSelector:this.data.workList.length,
-      pickerDisabledSelector:this.data.workList.length==5
-    })
-  },
+      },
 
   /**
    * 生命周期函数--监听页面隐藏

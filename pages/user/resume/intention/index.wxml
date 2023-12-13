@@ -6,8 +6,25 @@
       <view class="title">求职意向<text class="required">*</text></view>
     </view>
     <!-- <i-selector id="salary" innerTitle="意向职位"></i-selector> -->
-    <import src="/templates/occupationSelector.wxml"/>
-    <template is="occupationSelector" data="{{workNum:workNumSelector,pickerDisabled:pickerDisabledSelector,labelList:labelListSelector}}"/>
+    <!-- <import src="/templates/occupationSelector.wxml"/>
+    <template is="occupationSelector" data="{{workNum:workNumSelector,pickerDisabled:pickerDisabledSelector,labelList:labelListSelector}}"/> -->
+    <category id="category" bindmoreConfirm="onCategoryConfirm"></category>
+    <view class="row">
+      <view>意向职位<text class="word-count-selector {{workNumSelector >= 5 ? 'red-selector' : ''}}">{{workNumSelector}}/5</text></view>
+      <view class="right" wx:if="{{!pickerDisabledSelector}}">
+          <view class="add-img" bindtap="industryChange">+</view>
+      </view>   
+      <view class="right" wx:else>
+        <input placeholder="最多选择5个职业" maxlength="30" disabled="true"/>
+      </view>
+    </view>
+    <view class="row wrap-box" >
+      <block wx:for="{{labelListSelector}}" wx:for-index="index" wx:for-item="item" wx:key="item">
+        <view bindtap="longtapDeleteLabel" data-index="{{index}}"  class="add-btn data-btn">{{item}}</view>
+      </block>
+    </view>
+
+
     <view class="row">
       <view>薪资</view>
         <picker class="right" value="{{salary}}"  bindchange="salaryChange" range="{{arraySalary}}">
