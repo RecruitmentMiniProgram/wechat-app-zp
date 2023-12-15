@@ -4,10 +4,10 @@ page {
 }
 
 .com_wrap {
-  padding-bottom: 150rpx;
+  /* padding-bottom: 150rpx; */
   padding-left: 10rpx;
   margin: 17rpx 0rpx;
- /* padding: 20rpx 10rpx;*/
+  /* padding: 20rpx 10rpx;*/
   border-top: 5rpx solid #f3efef;
 }
 
@@ -146,9 +146,10 @@ page {
   display: flex;
 }
 
-.chat-icon::after{
+.chat-icon::after {
   border: none;
 }
+
 .chat-icon {
   /* margin-top: 10rpx; */
   width: 50px;
