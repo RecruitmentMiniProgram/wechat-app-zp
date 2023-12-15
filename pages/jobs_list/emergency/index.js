@@ -233,7 +233,7 @@ Page({
     Object.keys(filters).forEach(key => {
       if (filters[key].length >= 1 &&
         (!(filters[key].includes('不限') || filters[key].includes('全部')))) {
-        if (filters[key].length = 1) {
+        if (filters[key].length === 1) {
           queryConditions[key] = filters[key][0]
         }
         else {

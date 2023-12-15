@@ -83,7 +83,7 @@ Component({
       const title = this.data.titleData[id]
       const name = event.currentTarget.dataset.name;
       var ischoose = true
-      var result = this.data.result
+      let result = this.data.result
       if (title in result) {
         var arr = result[title]
         for (let i = arr.length - 1; i >= 0; i--) {
@@ -116,23 +116,23 @@ Component({
     moreReset(e) {
       //清空当前result
       var result = this.data.result
-      for(var i = 0; i < this.data.titleData.length; ++ i) {
+      for (var i = 0; i < this.data.titleData.length; ++i) {
         result[this.data.titleData[i]] = []
       }
-      this.setData({result: result})
+      this.setData({ result: result })
 
       //清空当前按钮样式
       var btnStyle = this.data.btnStyle
       var moreData = this.data.moreData
-      for(var i = 0; i < moreData.length; ++ i) {
-          if(moreData[i].type == 0) continue
-          var id = moreData[i].id
-          for(var j = 0; j < moreData[i].text.length; ++ j) {
-            var name = id + moreData[i].text[j]
-            if(name in btnStyle) {
-              btnStyle[name] = false
-            }
+      for (var i = 0; i < moreData.length; ++i) {
+        if (moreData[i].type == 0) continue
+        var id = moreData[i].id
+        for (var j = 0; j < moreData[i].text.length; ++j) {
+          var name = id + moreData[i].text[j]
+          if (name in btnStyle) {
+            btnStyle[name] = false
           }
+        }
       }
       this.setData({
         btnStyle: btnStyle
@@ -143,7 +143,7 @@ Component({
     },
 
     moreConfirm(e) {
-      
+
       this.triggerEvent('moreConfirm', {
         "result": this.data.result
       });
