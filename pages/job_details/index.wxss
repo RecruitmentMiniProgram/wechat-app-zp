@@ -74,12 +74,21 @@ page {
   display: flex;
   flex-direction: column;
 }
-
 .com_wrap .com .content_btm_rgt .cbr_top {
   flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+.com_wrap .com .content_btm_rgt .cbr_top_lft {
+  flex: 0.5;
   font-size: 34rpx;
   font-weight: 540;
   color: #161616;
+}
+.com_wrap .com .content_btm_rgt .cbr_top_rgt{
+  flex: 0.5;
+
+  text-align: right;
 }
 
 .com_wrap .com .content_btm_rgt .cbr_btm {

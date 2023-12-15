@@ -79,6 +79,10 @@
   height: 75%;
 }
 
+.container scroll-view{
+  height: 100%;
+}
+
 .title-wrapper {
   justify-content: space-between;
   font-size: 4.9vw;

@@ -13,7 +13,7 @@ page {
     justify-content: center;
     padding: 10rpx;
     background-color: #fff;
-    height: 140rpx;
+    height: 160rpx;
 
     border-bottom: 5rpx solid #f3efef;
 }
@@ -48,7 +48,7 @@ page {
 
 .description {
     color: gray;
-    font-size: 14px;
+    font-size: 13px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -58,12 +58,12 @@ page {
 
 .job_list_wrap .job_list_raw navigator .content_top .content_top_lft {
     /* flex: 0.5; */
-    width: 60px;
+    width: 55px;
     /* margin-left: 5%; */
 }
 
 .job_list_wrap .job_list_raw navigator .content_top .content_top_lft .com_name {
-    font-size: 30rpx;
+    font-size: 15px;
     /* font-weight: bold; */
     overflow: hidden;
     text-overflow: ellipsis;
@@ -80,7 +80,7 @@ page {
 
 .job_list_wrap .job_list_raw navigator .content_top .content_top_lft .details .jobs_name {
     /* flex:0.5; */
-    width: 80px;
+    width: 65px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -108,7 +108,7 @@ page {
 .job_list_wrap .job_list_raw navigator .content_top .content_top_rgt .jobs_number {
     white-space: nowrap;
     text-align: right;
-    font-size: 20rpx;
+    font-size: 9px;
     /* color: red; */
 
 }

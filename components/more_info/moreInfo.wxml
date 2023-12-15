@@ -10,7 +10,7 @@
       </view>
       <!-- 滚动视图 -->
       <view class="container">
-        <scroll-view id="a" scroll-y="true" style="width: 100%; height: 700rpx;">
+        <scroll-view id="a" scroll-y="true" >
           <view wx:for="{{moreData}}" wx:key="idx" wx:for-item="line" style="margin-bottom: 50rpx;">
             <view class="intitle" wx:if="{{line.type == 0}}">{{line.text}}</view>
             <view class="incontent" wx:if="{{line.type == 1}}">

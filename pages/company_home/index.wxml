@@ -17,7 +17,9 @@
     </view>
   </view>
 
-<tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
+</view>
+<tabs tabs="{{tabs}}" count="{{jobList.length}}" bindtabsItemChange="handleTabsItemChange">
+
   <block wx:if="{{tabs[0].isActive}}">
     <view class="title com_intro">公司简介</view>
     <view class="content">{{comObj.introduction}}</view>
