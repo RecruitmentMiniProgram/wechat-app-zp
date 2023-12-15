@@ -87,6 +87,7 @@ Page({
     age:"18-55周岁",
     ageIndex:[0,0],
     arrayAge:[[],[]],
+    textDisabled:false
   },
     /**
      * 获取时间
@@ -144,10 +145,6 @@ Page({
       console.log("onLoad")
     },
     onShow(){
-      console.log(this.data.workList)
-      this.setData({
-        industry:this.data.workList.length==0?'':this.data.workList[this.data.workList.length-1]
-      })
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -215,10 +212,31 @@ Page({
           },
   industryChange(e){
     console.log("选择产业类型")
-    wx.navigateTo({
-      url: '/pages/user/category_job/index',
+    const category = this.selectComponent('#category');
+    console.log(category)
+    category.showFrame();
+    this.setData({
+      textDisabled:true
     })
   },
+  closeFrame(e){
+    console.log("关闭")
+    this.setData({
+      textDisabled:false
+    })
+  },
+
+  onCategoryConfirm(e) {
+    // console.log("onCategoryConfirme", e.detail.result)
+
+    this.selectComponent('#category').hideFrame();
+    const category = e.detail.result
+    this.setData({
+      industry:category,
+      textDisabled:false
+    })
+  },
+
   bindDistrictChange(e){
     this.setData({
       district:e.detail.value
@@ -286,7 +304,8 @@ Page({
           businessDistrict:this.data.arrayBusinessDistrict[this.data.district],
           age:this.data.age,
           welfare:this.data.welfare,
-          scale:this.data.scale
+          scale:this.data.scale,
+          recommend:0,
         } 
         wx.showLoading({
           title: '更新中...',
@@ -328,9 +347,10 @@ Page({
       const textLength = inputValue.length;
   
       this.setData({
-        responsibilityLength: textLength
+        responsibilityLength: textLength,
+        responsibility:e.detail.value
       })
-      this.data.responsibility=e.detail.value
+
     },
     /**
    * 岗位描述
@@ -341,9 +361,9 @@ Page({
       const textLength = inputValue.length;
   
       this.setData({
-        descriptionLength: textLength
+        descriptionLength: textLength,
+        description:e.detail.value
       })
-      this.data.description=e.detail.value
     },
 
     /**

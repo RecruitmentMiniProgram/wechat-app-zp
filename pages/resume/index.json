@@ -1,5 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+  },
   "navigationBarBackgroundColor": "#2979ff",
   "navigationBarTitleText": "个人简历"
 }

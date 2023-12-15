@@ -11,13 +11,13 @@
           </view>
           
               <view class="con" wx:elif="{{item.role == 3}}">
-                <image src ="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/check_post.png" class="chatPost" bindtap="onButtonClick" data-role="{{item.role}}"></image>
+                <image src ="../../images/check_post.png" class="chatPost" bindtap="onButtonClick" data-role="{{item.role}}"></image>
                 <text bindtap="onButtonClick" 
                 data-role="{{item.role}}" style="white-space: nowrap;" class="text">查看岗位</text>
             </view>
 
             <view class="conb" wx:elif="{{item.role == 4}}">
-              <image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/check_resume.png" class="chatResume" bindtap="onButtonClick" data-role="{{item.role}}"></image>
+              <image src="../../images/check_resume.png" class="chatResume" bindtap="onButtonClick" data-role="{{item.role}}"></image>
               <text data-role="{{item.role}}" bindtap="onButtonClick" style="white-space: nowrap;" class="text">查看我的简历</text>
             </view>
         </view>
@@ -34,17 +34,17 @@
         </view>
 
         <view class="con" wx:elif="{{item.role == 3}}">
-            <image src =cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/check_post.png" class="chatPost" bindtap="onButtonClick" data-role="{{item.role}}"></image>
+            <image src ="../../images/check_post.png" class="chatPost" bindtap="onButtonClick" data-role="{{item.role}}"></image>
             <text data-role="{{item.role}}" bindtap="onButtonClick" style="white-space: nowrap;" class="text">查看岗位</text>
         </view>
 
         <view class="conb" wx:elif="{{item.role == 4}}">
-          <image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/check_resume.png" class="chatResume" bindtap="onButtonClick" data-role="{{item.role}}"></image>
+          <image src="../../images/check_resume.png" class="chatResume" bindtap="onButtonClick" data-role="{{item.role}}"></image>
           <text data-role="{{item.role}}" bindtap="onButtonClick" style="white-space: nowrap;" class="text">查看他（她）的简历</text>
         </view>
 
         <view class="conbb" wx:elif="{{item.role == 5}}">
-          <image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/jobinter.jpg" class="interview" bindtap="interview" data-role="{{item.role}}"></image>
+          <image src="../../images/jobinter.jpg" class="interview" bindtap="interview" data-role="{{item.role}}"></image>
           <text data-role="{{item.role}}" bindtap="interview" style="white-space: nowrap;" class="text">电话面试</text>
         </view>
 

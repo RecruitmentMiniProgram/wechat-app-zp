@@ -12,7 +12,13 @@ page {
     bottom: 5px; 
     right: 5px;
   }
+  .word-count-selector {
+    color: #999;
+  }
   
+  .red-selector {
+    color: red;
+  }
   .red {
     color: red;
   }

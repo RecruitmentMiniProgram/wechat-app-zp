@@ -1,5 +1,6 @@
 <!-- 数据内容 -->
 <form catchsubmit="formSubmit" catchreset="formReset">
+  <category id="category" bindcloseFrame="closeFrame" bindmoreConfirm="onCategoryConfirm"></category>
   <view class="box">
     <view class="level nav">
       <view class="dot"></view>
@@ -8,14 +9,14 @@
     <view class="row end">
       <view>岗位名称<text class="required">*</text></view>
     </view>
-    <view class="row">
-      <textarea value="{{name}}" name="skill" bindinput="postNameChange" auto-height="true" class="address_text-area" maxlength="50" placeholder="例如：大数据开发工程师"></textarea>
+    <view class="row" >
+      <textarea wx:if="{{textDisabled==false}}" value="{{name}}" name="skill" bindinput="postNameChange" auto-height="true" class="address_text-area" maxlength="50" placeholder="例如：大数据开发工程师"></textarea>
     </view>
     <view class="row end">
       <view>工作时间<text class="required">*</text></view>
     </view>
-    <view class="row">
-        <textarea value="{{workTime}}" name="skill" bindinput="workTimeChange" auto-height="true" class="address_text-area" maxlength="35" placeholder="例如：5天/周,6个月以上"></textarea>
+    <view class="row" >
+        <textarea wx:if="{{textDisabled==false}}" value="{{workTime}}" name="skill" bindinput="workTimeChange" auto-height="true" class="address_text-area" maxlength="35" placeholder="例如：5天/周,6个月以上"></textarea>
     </view>
     <view class="row ">
       <view>学历要求<text class="required">*</text></view>
@@ -95,8 +96,8 @@
       <view class="dot"></view>
       <view class="title">岗位描述<text class="required">*</text></view>
     </view>
-    <view class="row">
-      <textarea value="{{description}}" name="skill" bindinput="descriptionChange" auto-height="true" class="text-area" placeholder="填写岗位要求" maxlength="2000"></textarea>
+    <view class="row" >
+      <textarea wx:if="{{textDisabled==false}}" value="{{description}}" name="skill" bindinput="descriptionChange" auto-height="true" class="text-area" placeholder="填写岗位要求" maxlength="2000"></textarea>
       <view class="word-count {{descriptionLength >= 2000 ? 'red' : ''}}">
         {{descriptionLength}}/2000</view>
     </view>
@@ -107,8 +108,8 @@
       <view class="dot"></view>
       <view class="title">任职要求<text class="required">*</text></view>
     </view>
-    <view class="row">
-      <textarea value="{{responsibility}}" name="skill" bindinput="responsibilityChange" auto-height="true" class="text-area" placeholder="填写岗位职责" maxlength="2000"></textarea>
+    <view class="row" >
+      <textarea wx:if="{{textDisabled==false}}" value="{{responsibility}}" name="skill" bindinput="responsibilityChange" auto-height="true" class="text-area" placeholder="填写岗位职责" maxlength="2000"></textarea>
       <view class="word-count {{responsibilityLength >= 2000 ? 'red' : ''}}">
         {{responsibilityLength}}/2000</view>
     </view>
@@ -136,6 +137,7 @@
 
   <!-- 其他信息 -->
   <view class="box">
+
     <view class="level nav">
       <view class="dot"></view>
       <view class="title">其他信息<text class="required">*</text></view>
@@ -143,7 +145,8 @@
     <view class="row" bindtap="industryChange">
       <view>产业类型<text class="required">*</text></view>
         <view class="right">
-          <input disabled='true' value="{{industry}}"  name="mail" placeholder="选择职业分类" maxlength="20" />
+          <text>{{industry==''?'请选择职业':industry}}</text>
+          <!-- <input disabled='true' value=""  name="mail" placeholder="选择职业分类" maxlength="20" /> -->
         </view>   
     </view>
 

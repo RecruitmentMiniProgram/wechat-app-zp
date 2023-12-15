@@ -275,6 +275,11 @@ Component({
 
     //关闭弹窗
     close(e) {
+      this.triggerEvent(
+        'closeFrame',{
+
+        }
+      ) 
       // console.log('click close button')
       this.hideFrame(e);
     }

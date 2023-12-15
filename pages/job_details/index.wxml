@@ -66,8 +66,10 @@
         <view class="loca_title">工作城市</view>
         <view class="loca_details">{{jobObj.position}}</view>
     </view>
+    
     <view class="btm_tool">
         <view wx:if="{{status != 2}}" class="bottom-bar">
+          <button wx:if="{{status == 1}}" class="chat-icon" style="  background-image: url('../../images/share.png');background-size: cover;" open-type="share"></button>
             <image wx:if="{{status == 1}}" class="chat-icon" src="../../images/talk.png" bindtap="goToChatPage"></image>
             <button wx:if="{{status == 1}}" hover-class="btn-hover" bindtap="submitResume" class="submit-resume-right">
                 立即投递
@@ -78,6 +80,8 @@
         </view>
     </view>
 </view>
+
+
 <view wx:elif="{{load}}">
     <text style="white-space: nowrap;" class="text">该岗位已被删除</text>
 </view>
