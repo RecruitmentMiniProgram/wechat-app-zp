@@ -34,7 +34,11 @@
                 <image class="" src="{{jobObj.company.logo}}" mode="aspectFit" />
             </view>
             <view class="content_btm_rgt">
-                <view class="cbr_top">{{jobObj.company.minName}}</view>
+              <view class="cbr_top">
+                <view class="cbr_top_lft">{{jobObj.company.minName}}</view>
+                <view class="cbr_top_rgt">▶</view>
+              </view>
+
                 <view class="cbr_btm">
                     <view class="cbr_btm_lft">
                         <text decode="{{true}}">
