@@ -1,7 +1,8 @@
 <view class="tabs">
     <view id="location_id" class="tabs_title {{curClass}}">
         <view wx:for="{{tabs}}" wx:key="id" class="title_item {{item.isActive?'active':''}}" bindtap="handleItemTap" data-index="{{index}}">
-            {{item.value}}
+            <view wx:if="{{item.value === '职位'}}">{{item.value}}({{count}})</view>
+            <view wx:else>{{item.value}}</view>
             <!-- <view class="title_item_below iconfont {{item.isActive?'icon-jiantouarrow492':'icon-jiantouarrow486'}}"></view> -->
         </view>
     </view>

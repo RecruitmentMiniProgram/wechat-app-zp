@@ -6,10 +6,14 @@ Component({
     properties: {
         // 父接受父亲传过来的数据
         tabs: {
-          type: Array,
-          value: []
-            
-        }
+            type: Array,
+            value: []
+
+        },
+        count: {
+            type: Number, // 数字类型
+            value: 0,
+        },
     },
 
     /**
