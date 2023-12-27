@@ -35,6 +35,8 @@ page {
 
 .avatar image {
   width: 80%;
+  /* width: 100rpx;
+  height: 100rpx; */
   border-radius: 15rpx;
 }
 

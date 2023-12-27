@@ -7,7 +7,8 @@
       <view class="name">{{nickName}}</view>
       <view class="tel">{{phone}}</view>
     </view>
-    <view bindtap="editClick">🖊</view>
+    <!-- <view bindtap="editClick">🖊</view> -->
+    <view class="avatar" bindtap="editClick"><image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/images/editor.png" mode="widthFix" /></view>
   </view>
 </view>
 <!-- 数据内容 -->
@@ -220,7 +221,7 @@
     <view class="row level">
       <view>头像</view>
       <view class="right" bindtap="selectImage" data-tag="0">
-        <image class="head-img" src="{{tempList.avatarTemp}}"></image>
+        <image class="head-img" src="{{tempList.avatarTemp}}" mode="aspectFill"></image>
       </view>
     </view>
     <view class="row">

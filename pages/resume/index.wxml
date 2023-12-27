@@ -7,7 +7,7 @@
       <view class="name">{{nickName}}</view>
       <view class="tel">{{phone}}</view>
     </view>
-    <view bindtap="editClick">🖊</view>
+    <view class="avatar" bindtap="editClick"><image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/images/editor.png" mode="widthFix" /></view>
   </view>
 </view>
 <!-- 数据内容 -->
@@ -178,7 +178,7 @@
     </view>
     <view class="attr-img">
       <block wx:for="{{attrImg}}" wx:for-index="index" wx:for-item="item" wx:key="item">
-        <image bindlongpress="longtapDeleteImg" data-index="{{index}}" bindtap="previewClick" data-url="{{item}}" class="img" src="{{item}}" mode="widthFix"></image>
+        <image bindlongpress="longtapDeleteImg" data-index="{{index}}" bindtap="previewClick" data-url="{{item}}" class="img" src="{{item}}" mode="aspectFill"></image>
       </block>
     </view>
   </view> -->
@@ -264,19 +264,19 @@
     <view class="row level">
       <view>头像</view>
       <view class="right" bindtap="selectImage" data-tag="0">
-        <image class="head-img" src="{{tempList.avatarTemp}}"></image>
+        <image class="head-img" src="{{tempList.avatarTemp}}" mode="aspectFill"></image>
       </view>
     </view>
     <view class="row">
       <view>姓名<text class="required">*</text></view>
       <view class="right">
-        <input placeholder="请输入姓名" bindinput="inputNick" value="{{tempList.nameTemp}}" maxlength="20" />
+        <input placeholder="请输入姓名" bindinput="inputNick" maxlength="20" />
       </view>
     </view>
     <view class="row">
       <view>电话<text class="required">*</text></view>
       <view class="right">
-        <input placeholder="请输入联系电话" bindinput="inputPhone" value="{{tempList.phoneTemp}}"  maxlength="11" />
+        <input placeholder="请输入联系电话" bindinput="inputPhone"   maxlength="11" />
       </view>
     </view>
   </block>
