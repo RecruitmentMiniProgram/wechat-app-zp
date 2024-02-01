@@ -232,14 +232,10 @@ page {
 }
 
 .tab-item {
-  
-  padding-top: 30rpx;
-  margin-left: 20rpx;
-  margin-top: 20rpx;
-  margin-bottom: 40rpx;
+  margin: 40rpx 30rpx;
   text-align: left;
-  /* font-weight: bold; */
-  font-size: large;
+  font-weight: bold;
+  font-size: 36rpx;
 }
 
 .tab-item.active {

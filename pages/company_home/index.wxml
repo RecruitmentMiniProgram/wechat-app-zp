@@ -1,4 +1,7 @@
 <import src="../../templates/jobList.wxml" />
+
+
+<scroll-view class="scroll-view-container" scroll-y="true">
 <!-- 公司介绍 -->
 <view class="com_wrap" url="/pages/company_home/index?comId={{jobObj.jobComId}}">
   <view class="com">
@@ -10,7 +13,8 @@
       <view class="cbr_btm">
         <view class="cbr_btm_lft">
           <view class="l1">
-            <text decode="{{true}}">{{comObj.industry}}&nbsp;|&nbsp;{{comObj.scale}}</text>
+            <text decode="{{true}}">{{comObj.industry}}</text>
+            <text>{{comObj.scale}}</text>
           </view>
         </view>
       </view>
@@ -19,9 +23,9 @@
 </view>
 <tabs tabs="{{tabs}}" count="{{jobList.length}}" bindtabsItemChange="handleTabsItemChange">
   <block wx:if="{{tabs[0].isActive}}">
-    <view class="title com_intro">公司简介</view>
+    <view class="title">公司简介</view>
     <view class="content">{{comObj.introduction}}</view>
-    <view class="title busi_info">工商信息</view>
+    <view class="title">工商信息</view>
     <view class="content">公司全称: {{comObj.fullName}}</view>
     <!-- <view class="content">法定代表人:{{comObj.comRepresentative}}</view> -->
     <!-- <view class="content">注册资本:{{comObj.AuthCapital}}</view> -->
@@ -42,6 +46,8 @@
     </view>
   </block>
 </tabs>
+</scroll-view>
+
 <view class="btm_tool">
   <view wx:if="{{status != 2}}" class="bottom-bar">
     <button wx:if="{{status == 1}}" class="chat-icon" style="  background-image: url('../../images/share.png');background-size: cover;" open-type="share"></button>

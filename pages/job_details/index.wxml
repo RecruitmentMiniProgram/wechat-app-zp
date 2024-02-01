@@ -1,5 +1,7 @@
 <wxs src="../../utils/time.wxs" module="time" />
+
 <view wx:if="{{notExist==false && load}}">
+    <scroll-view  class="scroll-view-container" scroll-y="true">
     <view class="head">
         <view class="job_up">
             <view class="job_name">{{jobObj.name}}</view>
@@ -49,24 +51,15 @@
             </view>
         </view>
     </navigator>
-    <view class="job_desc">
+    <view class="content">
         <view class="desc_title">岗位描述</view>
-        <view class="desc_details">
-            <!-- <rich-text nodes="{{jobObj.jobDesc1}}"></rich-text> -->
-            <text>{{jobObj.description}}</text>
-        </view>
-    </view>
-    <view class="job_desc">
+        <view class="desc_details">{{jobObj.description}}</view>
         <view class="desc_title">任职要求</view>
-        <view class="desc_details">
-            <rich-text nodes="{{jobObj.responsibility}}"></rich-text>
-        </view>
+        <view class="desc_details">{{jobObj.responsibility}}</view>
+        <view class="desc_title">工作城市</view>
+        <view class="desc_details">{{jobObj.position}}</view>
     </view>
-    <view class="Interview_loca">
-        <view class="loca_title">工作城市</view>
-        <view class="loca_details">{{jobObj.position}}</view>
-    </view>
-    
+    </scroll-view>
     <view class="btm_tool">
         <view wx:if="{{status != 2}}" class="bottom-bar">
           <button wx:if="{{status == 1}}" class="chat-icon" style="  background-image: url('../../images/share.png');background-size: cover;" open-type="share"></button>

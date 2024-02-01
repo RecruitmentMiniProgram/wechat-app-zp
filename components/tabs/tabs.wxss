@@ -1,5 +1,9 @@
 .tabs {
-    width: 100%;
+    /* width: 96%; */
+    margin:auto;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
 }
 
 .item_fix {
