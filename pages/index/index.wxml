@@ -53,7 +53,7 @@
 <view>
   <navigator url="/pages/join_group/index">
     <view class="group-container">
-      <image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/join_group.png" mode="widthFix" class="image"></image>
+      <image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/joingroup.png" mode="widthFix" class="image"></image>
     </view>
   </navigator>
 </view>

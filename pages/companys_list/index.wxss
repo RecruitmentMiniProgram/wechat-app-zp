@@ -11,9 +11,9 @@ page {
 .job_list_wrap {
     display: flex;
     justify-content: center;
-    padding: 10rpx;
+    /* padding: 10rpx; */
     background-color: #fff;
-    height: 160rpx;
+    height: 180rpx;
 
     border-bottom: 5rpx solid #f3efef;
 }
@@ -31,24 +31,25 @@ page {
 
 .job_list_wrap .job_list_raw navigator .content_top {
     flex: 1;
-    margin-top: 7rpx;
+    width: 30%;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 
 .job_list_wrap .job_list_raw navigator .list-image image {
     width: 70px;
     height: 70px;
-    margin-top: 7rpx;
 
-    border-radius: 5px;
-    margin-right: 10px;
+    border-radius: 10%;
+    margin-right: 20rpx;
 }
 
 .description {
     color: gray;
-    font-size: 13px;
+    flex:1;
+    font-size: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -56,31 +57,32 @@ page {
 }
 
 
-.job_list_wrap .job_list_raw navigator .content_top .content_top_lft {
-    /* flex: 0.5; */
-    width: 55px;
-    /* margin-left: 5%; */
+.content_top_lft {
+    /* flex: 0.5 !important; */
+    width: 90% !important;
 }
 
-.job_list_wrap .job_list_raw navigator .content_top .content_top_lft .com_name {
+.job_list_wrap .job_list_raw navigator .content_top .com_name {
     font-size: 15px;
+    flex:1;
     /* font-weight: bold; */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.job_list_wrap .job_list_raw navigator .content_top .content_top_lft .details {
-    margin: 12rpx 0;
+.job_list_wrap .job_list_raw navigator .content_top .details {
+    /* margin: 12rpx 0; */
     /* height: 8px; */
+    flex:1;
     display: flex;
     flex-direction: row;
 
 }
 
-.job_list_wrap .job_list_raw navigator .content_top .content_top_lft .details .jobs_name {
+.job_list_wrap .job_list_raw navigator .content_top .details .jobs_name {
     /* flex:0.5; */
-    width: 65px;
+    /* width: 65px; */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -92,23 +94,26 @@ page {
     /* border-radius: 14%; */
 }
 
-.job_list_wrap .job_list_raw navigator .content_top .content_top_lft .details .dot {
+.job_list_wrap .job_list_raw navigator .content_top .details .dot {
     width: 80px;
 
 }
 
-.job_list_wrap .job_list_raw navigator .content_top .content_top_rgt {
+.content_top_rgt_c {
     width: 30%;
     display: flex;
     justify-content: flex-end;
+    padding-left: 10rpx;
     align-items: flex-end;
     flex-direction: column;
 }
 
-.job_list_wrap .job_list_raw navigator .content_top .content_top_rgt .jobs_number {
+.jobs_number {
     white-space: nowrap;
+    margin-top: auto;
     text-align: right;
-    font-size: 9px;
+    font-size: 10px;
+    flex:1;
     /* color: red; */
 
 }

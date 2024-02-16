@@ -13,23 +13,32 @@
             <image src="{{item.logo}}" mode="aspectFit" />
           </view>
           <view class="content_top">
-            <view class="content_top_lft">
+            <!-- <view class="content_top_lft"> -->
               <view class="com_name">{{item.fullName}}</view>
               <view class="description">{{item.region}}  |  {{item.industry}}</view>
               <view class="details">
-                <view wx:for="{{item.jobs}}" wx:key="jobId" wx:for-item="item2" wx:for-index="index">
-                  <view class="jobs_name">{{item2.name}}</view>
+                <!-- <view wx:for="{{item.jobs}}" wx:key="jobId" wx:for-item="item2" wx:for-index="index">
+                  <view class="jobs_name" wx:if="{{index < 3}}">{{item2.name}}</view>
                 </view>
-                <view wx:if="{{item.jobsLength > 2}}" class="dot">...</view>
+                <view wx:if="{{item.jobsLength > 3}}" class="dot">...</view> -->
+                <view wx:for="{{item.welfare}}" wx:key="jobId" wx:for-item="item2" wx:for-index="index">
+                  <view class="jobs_name" wx:if="{{index < 3}}">{{item2}}</view>
+                </view>
+                <view wx:if="{{item.welfare.length > 3}}" class="dot">...</view>
               </view>
-            </view>
-            <view class="content_top_rgt">
               <view class="jobs_number">
                 <text>共有</text>
                 <text style="color: red;">{{item.jobsLength}}</text>
                 <text>个职位</text>
               </view>
-            </view>
+            <!-- </view> -->
+            <!-- <view class="content_top_rgt_c">
+              <view class="jobs_number">
+                <text>共有</text>
+                <text style="color: red;">{{item.jobsLength}}</text>
+                <text>个职位</text>
+              </view>
+            </view> -->
           </view>
         </navigator>
       </view>
