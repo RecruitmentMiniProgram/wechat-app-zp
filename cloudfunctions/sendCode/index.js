@@ -7,16 +7,31 @@ cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV }) // 使用当前云环境
 exports.main = async (event, context) => {
   console.log("发送手机短信验证码")
   try {
+    // const result = await cloud.openapi.cloudbase.sendSms({
+    //     "env": 'haianjiuye-9gwh0gp7bb2e3aa1',
+    //     "content": event.code,
+    //     "phoneNumberList": [
+    //       "+86"+event.phone
+    //     ]
+    //   })
     const result = await cloud.openapi.cloudbase.sendSms({
-        "env": 'haianjiuye-9gwh0gp7bb2e3aa1',
-        "content": '您的验证码是：'+event.code+'​​。请不要将验证码泄露给他人，有效期为10分钟。如非本人操作，请忽略本消息。',
-        // "path": '/index.html',
-        "phoneNumberList": [
-          "+86"+event.phone
-        ]
-      })
+
+      "env": "haianjiuye-9gwh0gp7bb2e3aa1", // 环境ID
+      
+      "phone_number_list":
+      
+      ["+86"+event.phone
+      ],
+      "sms_type": 'Notification',
+      "template_id": '10000022',
+      "template_param_list":
+      [event.code,'登录','5'
+      ]
+      });
+    console.log("Result:",result)
     return result
   } catch (err) {
+    console.log("Err:",err)
     return err
   }
 }
