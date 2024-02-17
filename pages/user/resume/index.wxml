@@ -1,4 +1,4 @@
-<view class="level top-box">
+<view class="level top-box" bindtap="editClick">
   <view class="avatar">
     <image src="{{avatar}}" mode="widthFix"></image>
   </view>
@@ -8,7 +8,7 @@
       <view class="tel">{{phone}}</view>
     </view>
     <!-- <view bindtap="editClick">🖊</view> -->
-    <view class="avatar" bindtap="editClick"><image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/images/editor.png" mode="widthFix" /></view>
+    <!-- <view class="avatar" bindtap="editClick"><image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/images/editor.png" mode="widthFix" /></view> -->
   </view>
 </view>
 <!-- 数据内容 -->
@@ -82,7 +82,7 @@
     <view class="row end">
       <view>专业</view>
       <view class="right">
-        <input value="{{major}}" bindchange="majorChange" name="major" placeholder="请输入所学专业" type="number" maxlength="50" />
+        <input value="{{major}}" bindchange="majorChange" name="major" placeholder="请输入所学专业"  maxlength="50" />
       </view>
     </view>
   </view>
@@ -233,7 +233,7 @@
     <view class="row">
       <view>电话<text class="required">*</text></view>
       <view class="right">
-        <input value="{{phone}}" placeholder="请输入联系电话" bindinput="inputPhone" value="{{tempList.phoneTemp}}"  maxlength="11" />
+        <input value="{{phone}}" placeholder="请输入联系电话" bindinput="inputPhone" value="{{tempList.phoneTemp}}"  type="number" maxlength="11" />
       </view>
     </view>
   </block>

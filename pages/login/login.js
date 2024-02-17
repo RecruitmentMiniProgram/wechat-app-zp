@@ -29,7 +29,8 @@ Page({
    */
   generateRandomString(length=6) {  
     var result = '';  
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';  
+    // var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var characters = '0123456789';   
     var charactersLength = characters.length;  
     for (var i = 0; i < length; i++) {  
         result += characters.charAt(Math.floor(Math.random() * charactersLength));  
@@ -81,7 +82,7 @@ Page({
   sendCode(){
     //手机号合法
     if(this.isValidPhoneNumber(this.data.phone)){
-      var code=this.generateRandomString(4)
+      var code=this.generateRandomString(6)
       //发送短信
       wx.cloud.callFunction({
         name:'sendCode',
@@ -91,6 +92,7 @@ Page({
         }
       }).then(res=>{
           console.log("短信发送成功:",res)
+          console.log("验证码:",code)
           //记录真实的手机和验证码
           this.setData(
             {
@@ -102,7 +104,7 @@ Page({
           // 10min后将realcode失效
           setTimeout(()=>{
             this.data.realCode='2'
-          },10*60*1000)
+          },5*60*1000)
       }).catch(err=>{
         console.log('短信发送失败:',err)
       })
@@ -128,7 +130,7 @@ Page({
    */
   login(){
     //验证码校验
-    if(1||(this.data.phone===this.data.realPhone)&&(this.data.code==this.data.realCode)
+    if((this.data.phone===this.data.realPhone)&&(this.data.code==this.data.realCode)
     &&(this.data.phone.length!=0&&this.data.code!=0)){
       wx.showLoading({
         title: '加载中...',
