@@ -3,6 +3,8 @@ const db=wx.cloud.database()
 const _=db.command
 Page({
     data: {
+      resumeShow:false,
+      chatShow:false,
       login:true,
       /**
        * 个人用户的信息
@@ -87,6 +89,11 @@ Page({
      * 加载企业用户信息 
      */
     getCompany(){
+      this.setData({
+        "resumeShow":false,
+        "chatShow":false
+      }
+      )
       var status=wx.getStorageSync('status')
       if(status==0){
         return
@@ -111,7 +118,16 @@ Page({
               this.setData({
                 companyCommunication:res.result.data.data.length
               })
-      
+              //是否有未读聊天记录
+              let chatData=res.result.data.data
+              for(var i=0;i<chatData.length;i++){
+                if(chatData[i]['enter_red']){
+                  this.setData({
+                    "chatShow":true
+                  })
+                  break;
+                }
+              }
             }).catch(err=>{
               console.log(err)
               console.log("查询失败")
@@ -133,13 +149,20 @@ Page({
               this.setData({
                 post:res.result.data.data.length
               })
-      
+              // 查询是否有未读简历
+              let resumeData= res.result.data.data
+             for(var i=0;i<resumeData.length;i++){
+                if(!resumeData[i].hasOwnProperty('userRead')){
+                  this.setData({
+                    "resumeShow":true
+                  })
+                  break;
+                }
+              }
             }).catch(err=>{
               console.log(err)
               console.log("查询失败")
             })
-
-
       db.collection("company").doc(id).get()
       .then((result) => {
         console.log("企业用户信息:",result)
@@ -170,7 +193,10 @@ Page({
       var id=wx.getStorageSync("userId")
       let that=this
       that.data.userId=id
-
+      this.setData({
+        "resumeShow":false,
+        "chatShow":false
+      })
       // 查询聊天记录
       wx.cloud.callFunction({
         name:"searchAll",
@@ -187,6 +213,15 @@ Page({
         this.setData({
           communication:res.result.data.data.length
         })
+        let chatData=res.result.data.data
+        for(var i=0;i<chatData.length;i++){
+          if(chatData[i]['user_red']){
+            this.setData({
+              "chatShow":true
+            })
+            break;
+          }
+        }
 
       }).catch(err=>{
         console.log(err)
@@ -477,7 +512,7 @@ Page({
         companyResume(){
           wx.navigateTo(
             {
-              url:"/pages/all_resume/index?id="+this.data.companyId
+              url:"/pages/job_user/job_user?companyId="+this.data.companyId
             }
           )
         },

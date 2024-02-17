@@ -8,7 +8,9 @@
       <image class='mine_banner' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/earth.png'></image>
       <view class='mine_info_head'>
         <view class='mine_head_left' bindtap='userCommunication'>
-          <view class='mine_head_leftPic'>{{communication}}</view>
+          <view class='mine_head_leftPic'>{{communication}}
+          <text wx:if="{{chatShow}}" class="red-dot"></text>
+          </view>
           <view class='mine_head_leftDes'>已沟通</view>
         </view>
         <view class='jiange'></view>
@@ -103,7 +105,9 @@
       <image class='mine_banner' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/earth.png'></image>
       <view class='mine_info_head'>
         <view class='mine_head_left' bindtap='companyCommunication'>
-          <view class='mine_head_leftPic'>{{companyCommunication}}</view>
+          <view class='mine_head_leftPic'>{{companyCommunication}}
+            <text wx:if="{{chatShow}}" class="red-dot"></text>
+          </view>
           <view class='mine_head_leftDes'>已沟通</view>
         </view>
         <view class='jiange'></view>
@@ -122,8 +126,11 @@
         </view>
         <view class='jiange'></view>
         <view class='mine_head_right' bindtap='companyResume'>
-          <view class='mine_head_rightPic'>{{post}}</view>
-          <view class='mine_head_rightDes'>简历数</view>
+          <view class='mine_head_rightPic'>{{post}}
+            <text wx:if="{{resumeShow}}" class="red-dot"></text>
+          </view>
+          <view class='mine_head_rightDes'>简历数
+          </view>
         </view>
       </view>
     </view>

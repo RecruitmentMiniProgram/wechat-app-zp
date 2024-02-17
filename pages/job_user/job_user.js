@@ -1,5 +1,7 @@
 
 // pages/job_user.js
+const db=wx.cloud.database()
+const _=db.command
 Page({
 
   /**
@@ -78,6 +80,18 @@ Page({
       if(list[i].user_id == uid && list[i].post_id == pid) {
         console.log()
         cid = list[i].chat_id
+        // 简历已经被阅读
+        const newData = {
+          "userRead":true
+        };
+        db.collection("resume").where({
+          "user_id":uid,
+          "post_id":pid
+        }).update({
+          data:{
+            "userRead":true
+          }
+        })
         break
       }
     }
