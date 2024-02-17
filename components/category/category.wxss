@@ -1,5 +1,5 @@
 /* components/category.wxss */
-/* @import "../more_info/moreInfo.wxss"; */
+/* @import "../more_info/.wxss"; */
 @import "../../pages/category_job/index.wxss";
 
 page {

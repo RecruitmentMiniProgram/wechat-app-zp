@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/job_user/job_user",
     "pages/user/post/index",
     "pages/user/edit/index",
     "pages/company_home/index",
     "pages/job_details/index",
-
     "pages/join_group/index",
     "pages/category_job/index",
     "pages/user/resume/index",
@@ -27,7 +27,6 @@
     "pages/user/resume/work/index",
     "pages/user/resume/intention/index",
     "pages/resume/work/index",
-
     "pages/resume/index",
     "pages/resume/intention/index",
     "pages/companys_list/index",

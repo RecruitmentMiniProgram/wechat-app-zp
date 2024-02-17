@@ -1,0 +1,44 @@
+<view class="job">
+  <view class = "cb">
+  <view class ="top-bar"  >
+    <text class="text" bindtap="onTextClick">分类</text>
+    <view class="triangle" bindtap="onTextClick"></view>
+  </view>
+  </view>
+
+  <view wx:if="{{curList.length > 0}}">
+    <block wx:for="{{curList}}" wx:for-item="item" wx:for-index="index">
+        <view bindtap="goToChat" data-index="{{item._id + '-' + item.postId}}" class="head">
+          <view class="con">
+
+            <view class="top-container">
+                <view class="left">
+                    <text class="name">{{item.name}}</text>
+                    <text decode="{{true}}" class="post">{{item.postName}}</text>
+          <text decode="{{true}}" class="intro">{{
+            item.sex + '&nbsp;&nbsp;|&nbsp;&nbsp;' + item.degree + "&nbsp;&nbsp;|&nbsp;&nbsp;" + item.intention.salary
+            }}</text>
+            <text decode="{{true}}" class="school">{{
+               item.education.school + '&nbsp;&nbsp;-&nbsp;&nbsp;' + item.education.major}}</text>
+                </view>
+
+                <view class="right">
+                  <image mode="aspectFit" class="icon" src="{{item.headUrl}}"></image>
+                </view>
+             </view>
+
+            <view class="bottom">
+            <text class="skill">{{item.experience}}</text>
+            </view>
+
+          </view>
+        </view>
+    </block>
+  </view>
+
+  <view wx:elif="{{load}}">
+    <image style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%)" src="../../images/no_msg.png"/>
+      <text style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%)" class="nomsg">暂无投递记录</text>
+  </view>
+  <moreInfo id="moreInfo" bindmoreConfirm="onMoreConfirm"></moreInfo>
+</view>

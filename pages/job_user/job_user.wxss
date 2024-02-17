@@ -1,0 +1,115 @@
+.job{
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: 	#EDEDED;
+}
+
+.cb{
+  background-color: #F8F8FF;
+}
+
+.top-bar{
+  margin: 0 auto;
+  height: 80rpx; /* 顶部区域高度，可以根据需要调整 */
+  background-color: #EDEDED;
+  border-top-left-radius: 20px; /* 左上角圆角半径，根据需要调整 */
+  border-top-right-radius: 20px; /* 右上角圆角半径，根据需要调整 */
+
+  display: flex;
+  align-items: center; /* 垂直居中 */
+  padding-left: 40rpx; /* 左边距，可根据实际需求调整 */
+}
+
+.text{
+  cursor: pointer;
+  color: #ffA500; /* 橙色，可根据实际需求调整 */
+  font-size: 30rpx; /* 字体大小，可根据实际需求调整 */
+  font-weight: bold; /* 加粗 */
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 8rpx solid transparent;
+  border-right: 8rpx solid transparent;
+  border-top: 12rpx solid #ffA500; /* 橙色，与文字颜色一致 */
+  margin-left: 10rpx; /* 调整三角形与文字之间的距离 */
+  border-radius: 15px; /* 添加了圆角效果，值可以根据需求调整 */
+}
+
+.head{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+}
+
+.con {
+  width: 86%;
+  background-color: white;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+}
+
+.top-container {
+  flex: 1; /* 上半部分占据剩余空间 */
+  display: flex;
+}
+
+.left {
+  flex: 8;
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  flex: 3;
+}
+
+.bottom {
+  flex: 1; /* 左、右、下部分平分空间 */
+}
+
+.name {
+  font-size: 36rpx; /* 设置字体大小 */
+  color: black; /* 设置字体颜色 */
+  font-weight: bold; /* 设置加粗 */
+}
+
+.intro {
+  margin-top: 25rpx;
+  font-size: 26rpx; /* 设置字体大小 */
+  color: 	#808080; /* 设置字体颜色 */
+}
+
+.school {
+  margin-top: 13rpx;
+  font-size: 26rpx; /* 设置字体大小 */
+  color: black; /* 设置字体颜色 */
+}
+
+.post {
+  margin-top: 13rpx;
+  font-size: 26rpx; /* 设置字体大小 */
+  color: black; /* 设置字体颜色 */
+}
+
+.skill {
+  margin-top: 25rpx;
+  font-size: 26rpx; /* 设置字体大小 */
+  color: 	#808080; /* 设置字体颜色 */
+}
+
+.icon {
+  margin-left: 70rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 30%;
+}

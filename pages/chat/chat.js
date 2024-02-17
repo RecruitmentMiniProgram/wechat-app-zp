@@ -130,6 +130,7 @@ Page({
     var that = this
     var type = options.type;
     var id = options.id;
+    console.log('in')
     //聊天类型 0-系统推送， 1-用户企业聊天
     this.setData({type: type})
     this.setData({id: id})
@@ -161,6 +162,7 @@ Page({
           toBView: 'msg-' + (postLists.length - 1)
         })
     } else {
+      
       var chatList = new Array();
       var index = 0;
  

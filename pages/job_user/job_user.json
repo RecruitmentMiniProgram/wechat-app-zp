@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "moreInfo": "../../components/more_info/moreInfo"
+  },
+  "navigationBarBackgroundColor": "#F8F8FF"
+}

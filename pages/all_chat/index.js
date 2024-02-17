@@ -78,7 +78,7 @@ Page({
       const db = wx.cloud.database()
       let chatListResult = await db.collection('chat_history').where({user_id: userId}).get()
       if(chatListResult.data.length == 0) return
-
+      
       var dbList = chatListResult.data
       var chatList = new Array()
       var index = 0
@@ -153,6 +153,7 @@ Page({
    */
   async onLoad(options) {
       this.setData({load: false})
+      
       wx.showLoading({
         title: '加载中...',
         mask: true, // 是否显示透明蒙层，防止触摸穿透
@@ -164,8 +165,9 @@ Page({
         status: status
       })
       await this.initChatList(id, this)
-      this.setData({load:true})
+      
       wx.hideLoading();
+      this.setData({load:true})
   },
 
   /**
