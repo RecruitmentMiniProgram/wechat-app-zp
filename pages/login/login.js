@@ -131,7 +131,7 @@ Page({
    */
   login(){
     //验证码校验
-    if(1||(this.data.phone===this.data.realPhone)&&(this.data.code==this.data.realCode)
+    if((this.data.phone===this.data.realPhone)&&(this.data.code==this.data.realCode)
     &&(this.data.phone.length!=0&&this.data.code!=0)){
       wx.showLoading({
         title: '加载中...',
