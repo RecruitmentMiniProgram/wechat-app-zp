@@ -120,7 +120,10 @@ Page({
       url: '../companys_list/index',
     })
   },
-
+  handleContact:function(e){
+    console.log(e.detail.path)
+    console.log(e.detail.query)
+  },
 
   //分页加载
   loadPage: function () {
