@@ -42,7 +42,7 @@
     </view>
   </navigator>
   <view class="nav-all">
-    <button class="conbtn" open-type="contact">
+    <button class="conbtn" open-type="contact" bindcontact="handleContact">
       <view class="nav-one-down-img nav-all-img">
         <image src="../../images/wx.png" />
       </view>
