@@ -54,7 +54,7 @@
 
         <!-- 底部功能栏 -->
         <view class='inputRoom' style='bottom: {{inputBottom}}'>
-          <input bindconfirm='sendClick' adjust-position='{{false}}' value='{{inputVal}}' confirm-type='send' bindfocus='focus' bindblur='blur' type="text"></input>
+          <input  bindconfirm='sendClick' adjust-position='{{false}}' value='{{inputVal}}' confirm-type='send' bindfocus='focus' bindblur='blur' type="text"></input>
       </view>
 </view>
 
