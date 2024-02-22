@@ -152,7 +152,7 @@ Page({
           if(res.result.data.data[0].userType==0){
             console.log("个人用户")
             db.collection("user").where({
-              phone:res.result.data.data[0].phone
+              idPhone:this.data.phone
             }).get().then(userRes=>{
                 console.log(userRes)
                 //设置登入状态
@@ -169,7 +169,8 @@ Page({
           }else{
             console.log("企业用户")
             db.collection("company").where({
-              tele:res.result.data.data[0].phone
+              // tele:res.result.data.data[0].phone
+              idPhone:this.data.phone
             }).get().then(userRes=>{
                 //设置登入状态
                 wx.setStorageSync('status', 2);
@@ -187,6 +188,7 @@ Page({
           //账号不存在跳转到注册页面
           //TODO
           console.log("账号不存在请进行注册")
+          wx.setStorageSync('phone', this.data.phone);
           wx.navigateTo({
             url: '../register/register',
           })

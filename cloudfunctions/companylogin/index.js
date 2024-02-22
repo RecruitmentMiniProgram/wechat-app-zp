@@ -16,7 +16,7 @@ exports.main = async (event, context) => {
   //插入到类型表中
   var userType=await db.collection('userType').add({
     data:{
-      phone:event.data.tele,
+      phone:event.phone,
       userType:1
     }
   })

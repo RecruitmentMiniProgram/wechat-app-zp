@@ -237,6 +237,7 @@ Page({
       }else{
         const myComponent = this.selectComponent('#welfare');
         this.data.welfare=myComponent.data.labelList
+        var phone=wx.getStorageSync('phone')
         //将企业的数据存到数据库中
         var companyData={
           minName:this.data.minName,
@@ -257,6 +258,7 @@ Page({
           welfare:this.data.welfare,
           region:this.data.arrayRegion[this.data.region],
           recommend:0,
+          idPhone:phone
         } 
         wx.showLoading({
           title: '更新中...',
@@ -264,10 +266,12 @@ Page({
 
         if(this.data.edit==0){
           //使用云函数直接插入数据库中
+
           wx.cloud.callFunction({
             name: 'companylogin',
             data: {
-              data:companyData
+              data:companyData,
+              phone:phone
             }
           }).then(res=>{
             //根据邀请码给予奖励
