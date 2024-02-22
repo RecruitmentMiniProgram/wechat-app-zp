@@ -185,7 +185,9 @@ Page({
         toView: 'msg-' + (chatData.data.length - 1),
         companyId: chatData.company_id,
         userId: chatData.user_id,
-        postId: chatData.post_id
+        postId: chatData.post_id,
+        scrollHeight: '84vh',
+        inputBottom: 0
       })
       
       intervalId = setInterval(async function() {
@@ -208,7 +210,7 @@ Page({
   focus: function(e) {
     var keyHeight = e.detail.height;
     this.setData({
-      scrollHeight: 100 * ((0.9 * windowHeight - keyHeight)/windowHeight) + 'vh'
+      scrollHeight: 100 * ((0.84 * windowHeight - keyHeight)/windowHeight) + 'vh'
     });
 
     this.setData({
@@ -220,7 +222,7 @@ Page({
   //失去聚焦(软键盘消失)
   blur: function(e) {
     this.setData({
-      scrollHeight: '88vh',
+      scrollHeight: '84vh',
       inputBottom: 0
     })
     this.setData({

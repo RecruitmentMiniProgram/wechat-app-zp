@@ -10,7 +10,7 @@ page{
 }
 .inputRoom {
   width: 100vw;
-  height: 16vw;
+  height: 20vw;
   border-top: 1px solid #cdcdcd;
   background-color: #f1f1f1;
   position: fixed;
@@ -28,6 +28,7 @@ input {
   padding: 0 3vw;
   font-size: 28rpx;
   color: #444;
+  margin-bottom: 6vw;
 }
 
 .index{

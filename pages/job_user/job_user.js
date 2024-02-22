@@ -155,16 +155,21 @@ Page({
       var userInfos = []
       var postList = postListResult.data
       for(let j = 0; j < postList.length; ++ j) {
-        var uid = postList[j].user_id
-        let userListResult = await db.collection('user').doc(uid).get()
-        if(userListResult.length == 0) {
+          try {
+          var uid = postList[j].user_id
+          let userListResult = await db.collection('user').doc(uid).get()
+          if(userListResult.length == 0) {
+            continue
+          }
+          userListResult.data.postId = postList[j].post_id
+          userListResult.data.postName = dbList[i].name
+          userInfos.push(userListResult.data)
+        } catch (e) {
           continue
         }
-        userListResult.data.postId = postList[j].post_id
-        userListResult.data.postName = dbList[i].name
-        userInfos.push(userListResult.data)
       }
       postUserMap.set(dbList[i].name, userInfos)
+  
     }
     this.setData({"postUser" : postUserMap})
 
