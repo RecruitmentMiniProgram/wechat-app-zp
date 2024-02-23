@@ -39,7 +39,7 @@ Page({
       sex:"男",
       age:"",
       experience:this.data.experience,
-      intention:this.data.realIntentionData,
+      intention:{},
       degree:this.data.arrayEducation[0],
       work:this.data.workList,
       education:{

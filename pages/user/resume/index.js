@@ -158,7 +158,6 @@ Page({
         this.data.phone=='请填写手机号'||
         this.data.education==''||
         this.data.intentionData==null||
-        this.data.date==''||
         this.data.experience.length==0)){
           // console.log(this.data.nickName=='请填写姓名')
           // console.log(this.data.phone=='请填写手机号')
@@ -246,7 +245,7 @@ Page({
               url: '../index',
             })
           }).catch(err=>{
-            console.log("在线简历更新失败")
+            console.log("在线简历更新失败",err)
           })
         }
       }
