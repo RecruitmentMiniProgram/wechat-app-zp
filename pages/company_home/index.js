@@ -101,6 +101,28 @@ Page({
     })
 
   },
+  goToTelephone(e) {
+    // console.log(e);
+    // console.log(this.data.comId);
+
+    const comId = this.data.comId
+    db.collection('company').doc(comId).get({
+      success: function (result) {
+        const tele = result.data.tele
+        wx.makePhoneCall({
+          phoneNumber: tele,
+          success: function () {
+            console.log("拨打电话成功！");
+          },
+          fail: function () {
+            console.log("拨打电话失败！");
+          }
+        });
+      }
+    })
+
+
+  },
 
   login(){
     wx.navigateTo({

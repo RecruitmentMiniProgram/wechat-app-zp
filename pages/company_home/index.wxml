@@ -54,6 +54,12 @@
         <text class="icon-text">分享</text>
       </button>
     </view>
+    <view wx:if="{{status == 1}}" class='bottom-icon'>
+        <button class="button-container" bindtap="goToTelephone">
+            <image class="icon" src="../../images/tele.png"></image>
+            <text class="icon-text">电话</text>
+        </button>
+    </view>
     <button wx:if="{{status == 1}}" hover-class="btn-hover" bindtap="chatOnline" class="submit-resume-right">
       在线聊天
     </button>
