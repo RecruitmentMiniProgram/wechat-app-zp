@@ -21,6 +21,7 @@ Page({
      let groupResult = await db.collection('join_group').get()
     
      if(groupResult.data.length == 0) return
+     console.log(groupResult.data)
      var data = groupResult.data[0]
      this.setData({data: data})
   },

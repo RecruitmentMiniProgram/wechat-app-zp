@@ -68,9 +68,23 @@ Page({
   },
   //轮播图的切换事件
   swiperChange: function (e) {
-    this.setData({
-      swiperCurrent: e.detail.current
-    })
+    let { current, source } = e.detail
+
+    // if (source == "touch") {      
+    //   //防止swiper控件卡死
+    //   if (this.data.current == 0 && this.data.preIndex>1 ) {//卡死时，重置current为正确索引
+    //     this.setData({ current: this.data.preIndex });
+    //   }
+    //   else {//正常轮转时，记录正确页码索引
+    //     this.setData({ preIndex: this.data.current });
+    //   }
+    // }
+    if (source === 'autoplay' || source == "touch") {
+      //根据官方 source 来进行判断swiper的change事件是通过什么来触发的，autoplay是自动轮播。touch是用户手动滑动。其他的就是未知问题。抖动问题主要由于未知问题引起的，所以做了限制，只有在自动轮播和用户主动触发才去改变current值，达到规避了抖动bug
+      this.setData({
+        swiperCurrent: current
+      })
+    }
   },
   showActionSheet: function () {
     wx.showActionSheet({
@@ -120,7 +134,7 @@ Page({
       url: '../companys_list/index',
     })
   },
-  handleContact:function(e){
+  handleContact: function (e) {
     console.log(e.detail.path)
     console.log(e.detail.query)
   },
