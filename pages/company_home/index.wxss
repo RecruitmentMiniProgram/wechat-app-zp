@@ -5,10 +5,12 @@ page {
   flex-direction: column;
   height: 89vh;
 }
+
 .scroll-view-container {
-  flex: 1; 
-  overflow-y: scroll;   
+  flex: 1;
+  overflow-y: scroll;
 }
+
 .com_wrap {
   /* padding-bottom: 150rpx; */
   padding-left: 10rpx;
@@ -184,4 +186,32 @@ page {
   border-radius: 70;
   background-color: #4a90e2;
   color: #ffff;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* height: 50px; */
+}
+
+
+.icon-text {
+  /* margin-top: 5px; */
+  font-size: 11px;
+  color: #333;
+  line-height: 17px;
+}
+
+.bottom-icon {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.icon {
+  /* margin-top: 10rpx; */
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
 }

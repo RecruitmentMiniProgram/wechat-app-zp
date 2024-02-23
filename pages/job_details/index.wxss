@@ -12,15 +12,15 @@ page {
 }
 
 .scroll-view-container {
-  flex: 1; 
-  overflow-y: scroll;   
+  flex: 1;
+  overflow-y: scroll;
   height: 89vh;
   overflow: hidden;
 }
 
-.content{
+.content {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -91,18 +91,21 @@ page {
   display: flex;
   flex-direction: column;
 }
+
 .com_wrap .com .content_btm_rgt .cbr_top {
   flex: 1;
   display: flex;
   flex-direction: row;
 }
+
 .com_wrap .com .content_btm_rgt .cbr_top_lft {
   flex: 0.5;
   font-size: 34rpx;
   font-weight: 540;
   color: #161616;
 }
-.com_wrap .com .content_btm_rgt .cbr_top_rgt{
+
+.com_wrap .com .content_btm_rgt .cbr_top_rgt {
   flex: 0.5;
 
   text-align: right;
@@ -568,12 +571,42 @@ page {
   display: flex;
 }
 
+.bottom-icon {
+  display: flex;
+  flex-direction: row;
 
-.chat-icon {
+}
+
+.bottom-bar .bottom-icon button {
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* opacity: 0; */
+  background-color: #fff;
+  border-radius: 0px;
+  box-sizing: border-box;
+  border: none;
+  /* display: block; */
+  /* color: #000; */
+  /* cursor: pointer;
+  font-size: 18px;
+  line-height: 2.55555556;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  padding-left: 14px;
+  padding-right: 14px;
+  position: relative;
+  text-align: center;
+  text-decoration: none; */
+}
+
+.icon {
   /* margin-top: 10rpx; */
-  width: 40px;
-  height: 40px;
-  margin-left: 20rpx;
+  width: 30px;
+  height: 30px;
   background-color: #fff;
 }
 
@@ -612,7 +645,7 @@ page {
   color: #ffff;
 }
 
-.chat-icon::after{
+.icon::after {
   border: none;
 }
 
@@ -637,4 +670,19 @@ page {
   border-radius: 5px;
   /* 圆角 */
   background-color: #4a90e2;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* height: 50px; */
+}
+
+
+.icon-text {
+  /* margin-top: 5px; */
+  font-size: 11px;
+  color: #333;
+  line-height: 17px;
 }

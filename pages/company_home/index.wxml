@@ -1,56 +1,59 @@
 <import src="../../templates/jobList.wxml" />
-
-
 <scroll-view class="scroll-view-container" scroll-y="true">
-<!-- 公司介绍 -->
-<view class="com_wrap" url="/pages/company_home/index?comId={{jobObj.jobComId}}">
-  <view class="com">
-    <view class="content_btm_lft">
-      <image class="" src="{{comObj.logo}}" mode="aspectFit" />
-    </view>
-    <view class="content_btm_rgt">
-      <view class="cbr_top">{{comObj.minName}}</view>
-      <view class="cbr_btm">
-        <view class="cbr_btm_lft">
-          <view class="l1">
-            <text decode="{{true}}">{{comObj.industry}}</text>
-            <text>{{comObj.scale}}</text>
+  <!-- 公司介绍 -->
+  <view class="com_wrap" url="/pages/company_home/index?comId={{jobObj.jobComId}}">
+    <view class="com">
+      <view class="content_btm_lft">
+        <image class="" src="{{comObj.logo}}" mode="aspectFit" />
+      </view>
+      <view class="content_btm_rgt">
+        <view class="cbr_top">{{comObj.minName}}</view>
+        <view class="cbr_btm">
+          <view class="cbr_btm_lft">
+            <view class="l1">
+              <text decode="{{true}}">{{comObj.industry}}</text>
+              <text>{{comObj.scale}}</text>
+            </view>
           </view>
         </view>
       </view>
     </view>
   </view>
-</view>
-<tabs tabs="{{tabs}}" count="{{jobList.length}}" bindtabsItemChange="handleTabsItemChange">
-  <block wx:if="{{tabs[0].isActive}}">
-    <view class="title">公司简介</view>
-    <view class="content">{{comObj.introduction}}</view>
-    <view class="title">工商信息</view>
-    <view class="content">公司全称: {{comObj.fullName}}</view>
-    <!-- <view class="content">法定代表人:{{comObj.comRepresentative}}</view> -->
-    <!-- <view class="content">注册资本:{{comObj.AuthCapital}}</view> -->
-    <view class="content">成立时间: {{comObj.incorporationDate}}</view>
-    <view class="content">企业官网：{{comObj.website}}</view>
-    <view class="title com_addr">公司地址</view>
-    <view class="content">{{comObj.address}}</view>
-  </block>
-  <!-- 另一个列表################################################################# -->
-  <block wx:elif="{{tabs[1].isActive}}">
-    <view class='infor-text' wx:if="{{isnull==1}}">
-      <view>
-        <text>暂无符合条件的招聘信息</text>
+  <tabs tabs="{{tabs}}" count="{{jobList.length}}" bindtabsItemChange="handleTabsItemChange">
+    <block wx:if="{{tabs[0].isActive}}">
+      <view class="title">公司简介</view>
+      <view class="content">{{comObj.introduction}}</view>
+      <view class="title">工商信息</view>
+      <view class="content">公司全称: {{comObj.fullName}}</view>
+      <!-- <view class="content">法定代表人:{{comObj.comRepresentative}}</view> -->
+      <!-- <view class="content">注册资本:{{comObj.AuthCapital}}</view> -->
+      <view class="content">成立时间: {{comObj.incorporationDate}}</view>
+      <view class="content">企业官网：{{comObj.website}}</view>
+      <view class="title com_addr">公司地址</view>
+      <view class="content">{{comObj.address}}</view>
+    </block>
+    <!-- 另一个列表################################################################# -->
+    <block wx:elif="{{tabs[1].isActive}}">
+      <view class='infor-text' wx:if="{{isnull==1}}">
+        <view>
+          <text>暂无符合条件的招聘信息</text>
+        </view>
       </view>
-    </view>
-    <view wx:else>
-      <template is="jobList" data="{{jobList:jobList}}" />
-    </view>
-  </block>
-</tabs>
+      <view wx:else>
+        <template is="jobList" data="{{jobList:jobList}}" />
+      </view>
+    </block>
+  </tabs>
 </scroll-view>
-
 <view class="btm_tool">
   <view wx:if="{{status != 2}}" class="bottom-bar">
-    <button wx:if="{{status == 1}}" class="chat-icon" style="  background-image: url('../../images/share.png');background-size: cover;" open-type="share"></button>
+    <!-- <button wx:if="{{status == 1}}" class="chat-icon" style="  background-image: url('../../images/share.png');background-size: cover;" open-type="share"></button> -->
+    <view wx:if="{{status == 1}}" class='bottom-icon'>
+      <button class="button-container" open-type="share">
+        <image class="icon" src="../../images/share.png"></image>
+        <text class="icon-text">分享</text>
+      </button>
+    </view>
     <button wx:if="{{status == 1}}" hover-class="btn-hover" bindtap="chatOnline" class="submit-resume-right">
       在线聊天
     </button>
