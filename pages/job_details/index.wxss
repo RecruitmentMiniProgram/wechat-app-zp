@@ -521,7 +521,7 @@ page {
   border-top: 1rpx solid #ccc;
   left: 0;
   display: flex;
-  margin-bottom: 10rpx;
+  margin-bottom: 20rpx;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -569,11 +569,14 @@ page {
   width: 100%;
   align-items: center;
   display: flex;
+  margin: 15rpx 0;
 }
 
 .bottom-icon {
   display: flex;
   flex-direction: row;
+  /* margin: 0 10rpx; */
+  /* border:none; */
 
 }
 
@@ -587,7 +590,7 @@ page {
   background-color: #fff;
   border-radius: 0px;
   box-sizing: border-box;
-  border: none;
+  /* border: none; */
   /* display: block; */
   /* color: #000; */
   /* cursor: pointer;
@@ -601,6 +604,15 @@ page {
   position: relative;
   text-align: center;
   text-decoration: none; */
+}
+
+
+
+.bottom-bar .bottom-icon button:after {
+  content: none;
+}
+.bottom-bar .bottom-icon button::after {
+  border: none;
 }
 
 .icon {
