@@ -39,7 +39,8 @@ Page({
     workList:[],
     intentionData:null,
     itemStyle: [],// 用于存储每个 item 的样式
-    invitation:''
+    invitation:'',
+    today:new Date().getFullYear+"-"+(new Date().getMonth+1)+"-"+new Date().getDate()
   },
 
         /**

@@ -10,7 +10,8 @@ Page({
     beginDate:'',
     work:null,
     experienceLength:0,
-    experience:null
+    experience:null,
+    today:new Date().getFullYear+"-"+(new Date().getMonth+1)+"-"+new Date().getDate(),
   },
   /**
    * 提交数据

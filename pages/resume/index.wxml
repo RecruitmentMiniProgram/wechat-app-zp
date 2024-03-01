@@ -28,7 +28,7 @@
     </view>
     <view class="row">
       <view>出生日期<text class="required">*</text></view>
-        <picker class="right" mode="date" value="{{date}}" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
+        <picker class="right" mode="date" value="{{date}}" start="1900-01-01" end="{{today}}" bindchange="bindDateChange">
         <text>{{date}}</text>
         <text class="triangle">▼</text>
         </picker>
@@ -68,14 +68,14 @@
     </view>
       <view class="row">
         <view>入学时间</view>
-        <picker class="right" mode="date" value="{{beginDate}}" start="1900-01-01" end="2100-01-01" bindchange="bindBeginDateChange">
+        <picker class="right" mode="date" value="{{beginDate}}" start="1900-01-01" end="{{today}}" bindchange="bindBeginDateChange">
         <text>{{beginDate}}</text>
         <text class="triangle">▼</text>
         </picker>
       </view>
       <view class="row">
       <view>毕业时间</view>
-        <picker class="right" mode="date" value="{{endDate}}" start="1900-01-01" end="2100-01-01" bindchange="bindEndDateChange">
+        <picker class="right" mode="date" value="{{endDate}}" start="1900-01-01" end="{{today}}" bindchange="bindEndDateChange">
         <text>{{endDate}}</text>
         <text class="triangle">▼</text>
         </picker>

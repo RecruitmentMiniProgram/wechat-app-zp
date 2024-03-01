@@ -54,7 +54,8 @@ Page({
     //邀请码，只有注册时才有效
     invitation:'',
     //判断是编辑页面 1 还是注册页面 0
-    edit:0
+    edit:0,
+    today:new Date().getFullYear+"-"+(new Date().getMonth+1)+"-"+new Date().getDate()
   },
 
     /**

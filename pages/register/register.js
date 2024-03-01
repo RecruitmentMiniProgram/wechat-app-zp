@@ -63,7 +63,6 @@ Page({
       createTime:new Date(),
       idPhone:phone
     }
-    
       //使用云函数直接插入数据库中
       // TODO
       wx.cloud.callFunction({

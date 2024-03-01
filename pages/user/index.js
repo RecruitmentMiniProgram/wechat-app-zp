@@ -510,6 +510,16 @@ Page({
          * 查看历史投递记录
          */
         companyResume(){
+          this.setData({
+            resumeShow:false
+          })
+          db.collection("resume").where({
+            "company_id":this.data.companyId
+          }).update({
+            data:{
+              "userRead":true
+            }
+          })
           wx.navigateTo(
             {
               url:"/pages/job_user/job_user?companyId="+this.data.companyId

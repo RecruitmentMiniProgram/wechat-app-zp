@@ -60,7 +60,7 @@
     </view>
       <view class="row">
         <view>注册时间</view>
-        <picker class="right" mode="date" value="{{beginDate}}" start="1000-01-01" end="2100-01-01" bindchange="bindBeginDateChange">
+        <picker class="right" mode="date" value="{{beginDate}}" start="1000-01-01" end="{{today}}" bindchange="bindBeginDateChange">
         <text>{{beginDate}}</text>
         <text class="triangle">▼</text>
         </picker>

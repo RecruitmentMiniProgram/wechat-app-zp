@@ -52,7 +52,7 @@ async function uploadToCloud(filePath, mode) {
      */
 async function readJson(filePath){
       const db=wx.cloud.database()
-      return await db.collection("jsonData").doc("80e3bed06561baff00eab60d28775799").get()
+      return await db.collection("jsonData").doc("63cb1eba65e15d7e0015efec0106f51d").get()
   }
 module.exports = {
   formatTime: formatTime,

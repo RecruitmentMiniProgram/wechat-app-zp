@@ -41,6 +41,7 @@ Page({
     intentionData:null,
     invitation:0,
     realIntentionData:null,
+    today:new Date().getFullYear+"-"+(new Date().getMonth+1)+"-"+new Date().getDate(),
     itemStyle: []// 用于存储每个 item 的样式
   },
     /**
