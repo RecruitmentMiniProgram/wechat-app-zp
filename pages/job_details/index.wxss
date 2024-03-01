@@ -14,7 +14,7 @@ page {
 .scroll-view-container {
   flex: 1;
   overflow-y: scroll;
-  height: 89vh;
+  height: 86vh;
   overflow: hidden;
 }
 
