@@ -106,13 +106,8 @@ Page({
    * @param {*} e 
    */
     formSubmit(e){
-      if(0||(this.data.nickName=='请填写姓名'||
-        this.data.phone=='请填写手机号'||
-        this.data.sex==''||
-        this.data.education==''||
-        this.data.date==''||
-        this.data.experience.length==0||
-        this.data.realIntentionData==null)){
+      if((this.data.nickName=='请填写姓名'||
+        this.data.phone=='请填写手机号')){
         wx.showModal({  
           title: '提示',  
           content: '请补充完整必填项',  
@@ -212,6 +207,10 @@ Page({
       }
     },
   onShow(){
+    var phone=wx.getStorageSync('phone')
+    this.setData({
+      nickName:phone
+    })
     //检查回传的数据
     if(this.data.intentionData!=null||this.data.intentionData!=undefined){
       this.setData({
