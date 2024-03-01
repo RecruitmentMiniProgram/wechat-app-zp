@@ -213,11 +213,25 @@ page{
   display: flex;
   justify-content: space-between
 }
+.list_right_v{
+  width: 84rpx;
+  height: 100%;
+  /* width: 84rpx; */
+  /* height: 28rpx; */
+  /* display: flex; */
+  justify-content: space-between
+}
 .check{
   font-size: 24rpx;
   line-height: 28rpx;
   color:#999999;
   margin-top: 30rpx;
+}
+.check_v{
+  font-size: 24rpx;
+  line-height: 28rpx;
+  color:#999999;
+  margin-top: 5rpx;
 }
 .signOut{
   width: 84%;

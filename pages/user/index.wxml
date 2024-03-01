@@ -87,8 +87,9 @@
           <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/share.png'></image>
           <view class='listName'>一键邀请</view>
         </view>
-        <view class='list_right'>
-          <view class='check'>复制</view>
+        <view class='list_right_v'>
+          <view class='check'>已邀请</view>
+          <view class="check_v">{{invitation}}人</view>
         </view>  
       </view>
       <button class='signOut' bindtap='signOut'>退出登录</button>
@@ -187,8 +188,9 @@
           <image class='listIcon' src='cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/share.png'></image>
           <view class='listName'>一键邀请</view>
         </view>
-        <view class='list_right'>
-          <view class='check'>复制</view>
+        <view class='list_right_v'>
+          <view class='check'>已邀请</view>
+          <view class="check_v">{{invitation}}人</view>
         </view>  
       </view>
       <button class='signOut' bindtap='signOut'>退出登录</button>

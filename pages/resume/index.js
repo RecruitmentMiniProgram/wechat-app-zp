@@ -106,7 +106,7 @@ Page({
    * @param {*} e 
    */
     formSubmit(e){
-      if((this.data.nickName=='请填写姓名'||
+      if(0||(this.data.nickName=='请填写姓名'||
         this.data.phone=='请填写手机号'||
         this.data.sex==''||
         this.data.education==''||
@@ -139,6 +139,7 @@ Page({
           })
         }else{
             //将用户的数据存到数据库中
+        var idPhone=wx.getStorageSync('phone')
         var userData={
           name:this.data.nickName,
           sex:this.data.arraySex[this.data.sex],
@@ -165,7 +166,8 @@ Page({
           self:this.data.self,
           email:this.data.email,
           invitation:0,
-          createTime:new Date()
+          createTime:new Date(),
+          idPhone:idPhone
         }
         
           //使用云函数直接插入数据库中

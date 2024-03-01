@@ -3,6 +3,7 @@ const db=wx.cloud.database()
 const _=db.command
 Page({
     data: {
+      invitation:0 ,
       resumeShow:false,
       chatShow:false,
       login:true,
@@ -168,6 +169,7 @@ Page({
         console.log("企业用户信息:",result)
         that.data.companyData=result.data
         that.setData({
+          invitation:result.data.invitation,
           logoUrl:result.data.logo,
           company:result.data.minName.length==0?"企业暂无简称":result.data.minName,
           fullName:result.data.fullName,
@@ -256,6 +258,7 @@ Page({
         console.log("个人用户信息:",result)
         that.data.userData=result.data
         that.setData({
+          invitation:result.data.invitation,
           headUrl:result.data.headUrl,
           name:result.data.name,
           pdfFile:(result.data.resume.length==0||result.data.resume==null)?null:result.data.resume
