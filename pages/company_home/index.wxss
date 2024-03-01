@@ -3,7 +3,7 @@ page {
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 89vh;
+  height: 86vh;
 }
 
 .scroll-view-container {

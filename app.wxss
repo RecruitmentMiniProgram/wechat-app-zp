@@ -46,7 +46,7 @@ page {
   background-color: #fff;
   height: 220rpx;
 
-  border-bottom: 1rpx solid #f3efef;
+  border-bottom: 7rpx solid #8180802c;
 }
 
 .job_list_wrap .job_list_raw {

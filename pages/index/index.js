@@ -104,9 +104,10 @@ Page({
   },
   //点击图片触发事件
   swipclick: function (e) {
-    console.log(this.data.swiperCurrent);
-    wx.switchTab({
-    })
+    console.log(e.currentTarget.dataset.index.comId);
+    const comId = e.currentTarget.dataset.index.comId
+    const url = "../company_home/index?comId="+comId
+    wx.navigateTo({url});
   },
 
 
