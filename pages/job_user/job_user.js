@@ -101,7 +101,8 @@ Page({
           "post_id":pid
         }).update({
           data:{
-            "read":true
+            "read":true,
+            "userRead": true
           }
         })
         break
