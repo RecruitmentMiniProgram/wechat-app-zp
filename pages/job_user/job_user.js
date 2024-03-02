@@ -76,20 +76,33 @@ Page({
     var list = this.data.resumeList
     console.log(list)
     var cid = ''
+    //获取岗位名字，找到对应用户记录，修改已读
+    var name = parts[2]
+    var userList = this.data.postUser.get(name)
+    var mp = this.data.postUser
+    for(let i = 0; i < userList.length; ++ i) {
+      if(userList[i]._id == uid) {
+         userList[i].read = true;
+         this.data.postUser.set(name, userList)
+         console.log(this.data)
+         this.setData({"postUser": mp})
+         this.setUserInfoByPostId(this.data.curId)
+         console.log(this.data)
+         break;
+      }
+    }
+
     for(let i = 0; i < list.length; ++ i) {
       if(list[i].user_id == uid && list[i].post_id == pid) {
-        console.log()
         cid = list[i].chat_id
         // 简历已经被阅读
-        const newData = {
-          "userRead":true
-        };
         db.collection("resume").where({
           "user_id":uid,
           "post_id":pid
         }).update({
           data:{
-            "userRead":true
+            "read":true,
+            "userRead": true
           }
         })
         break
@@ -118,6 +131,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+
   async onLoad(options) {
     wx.setNavigationBarTitle({
       title: '投递记录'
@@ -151,9 +165,11 @@ Page({
         continue
       }
       this.setData({"total": totalPost})
-
+      
       var userInfos = []
       var postList = postListResult.data
+      console.log(postList)
+      const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
       for(let j = 0; j < postList.length; ++ j) {
           try {
           var uid = postList[j].user_id
@@ -161,8 +177,11 @@ Page({
           if(userListResult.length == 0) {
             continue
           }
+
           userListResult.data.postId = postList[j].post_id
+          userListResult.data.read = postList[j].read
           userListResult.data.postName = dbList[i].name
+          userListResult.data.retime = postList[j].createTime.toLocaleDateString('zh-CN', options);
           userInfos.push(userListResult.data)
         } catch (e) {
           continue
@@ -180,6 +199,7 @@ Page({
   },
 
   setUserInfoByPostId(postIds) {
+    this.setData({"curId": postIds})
      var curUserInfo = []
      for(let i = 0; i < postIds.length; ++ i) {
        var users = this.data.postUser.get(postIds[i])
