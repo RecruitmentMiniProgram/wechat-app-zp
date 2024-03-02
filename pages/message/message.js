@@ -108,6 +108,7 @@ Page({
 
 
   async onLoad() {
+    var a = Date.now()
     this.setData({load: false})
     wx.showLoading({
       title: '加载中...',
@@ -137,6 +138,7 @@ Page({
       console.log('读取session发生错误' + e)
     }
     this.setData({loadBefore:false})
+    console.log("初始化时间" + (Date.now() - a))
     //如果登录，则初始化消息列表
     if(isLogin) {
       this.setData({loadBefore:true})
@@ -161,9 +163,11 @@ Page({
     }
     this.setData({load:true})
     wx.hideLoading();
+    console.log("总加载时间" + (Date.now() - a))
   },
   
   async initChatList(that) {
+   
     var status = that.data.status
     if(status == 1) {
       var userId = wx.getStorageSync('userId')
@@ -210,14 +214,14 @@ Page({
             var time = chatDetail.data[chatDetail.data.length - 1].time
             var red = chatDetail.user_red
             //根据企业ID读取企业头像
-            var companyId = chatDetail.company_id
+          /*  var companyId = chatDetail.company_id
             let companyResult = null
             try {
             companyResult =  await db.collection('company').doc(companyId).get()
             } catch(e) {
               continue
-            }
-            var url = companyResult.data.logo
+            }*/
+            var url = chatDetail.comUrl
             var chatData = new ChatData(id, type,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
             chatList[index] = chatData
             index = index + 1;
@@ -236,7 +240,7 @@ Page({
       const db = wx.cloud.database()
       let chatListResult = await db.collection('chat_list').where({user_id: userId}).get()
       if(chatListResult.data.length == 0) return
-
+     
       var dbList = chatListResult.data[0].data
       var chatList = new Array()
       var index = 0
@@ -246,7 +250,8 @@ Page({
           newTime: dbList[0].time
         })
       }
-
+     
+      
       for (let i = 0; i < dbList.length; i++) {
           var data = dbList[i]
           var id = data.id
@@ -254,7 +259,9 @@ Page({
           if(type == 0) continue
 
           //消息, 通过id读取消息记录
+          
           let chatResult = await db.collection('chat_history').doc(id).get()
+         
           var chatDetail = chatResult.data
           var lastData = chatDetail.data[chatDetail.data.length - 1]
           var time = lastData.time
@@ -262,21 +269,21 @@ Page({
           var name = chatDetail.user_name
           var red = chatDetail.enter_red
 
-           //根据用户ID读取企业头像
-           var userId = chatDetail.user_id
+           //根据用户ID读取用户头像
+         /*  var userId = chatDetail.user_id
            let userResult = null
            try{
            userResult = await db.collection('user').doc(userId).get()
            } catch(e) {
              continue
            }
-           var url = userResult.data.headUrl
-           
+           var url = userResult.data.headUrl*/
+           var url = chatDetail.userUrl
           var chatData = new ChatData(id, type, name, truncateString(lastMsg, 14), convertUnixTimestampToString(time), red, url)
           chatList[index] = chatData
           index = index + 1;
       }
-
+      
       that.setData({
         chatList: chatList
       })
