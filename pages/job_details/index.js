@@ -271,6 +271,7 @@ Page({
           post_id: this.data.jobId,
           user_id: uuid,
           chat_id: id,
+          read: false,
           createTime: new Date()
         },
       })

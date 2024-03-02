@@ -8,18 +8,26 @@
 
   <view wx:if="{{curList.length > 0}}">
     <block wx:for="{{curList}}" wx:for-item="item" wx:for-index="index">
-        <view bindtap="goToChat" data-index="{{item._id + '-' + item.postId}}" class="head">
+        <view bindtap="goToChat" data-index="{{item._id + '-' + item.postId + '-' + item.postName}}" class="head">
           <view class="con">
 
             <view class="top-container">
                 <view class="left">
-                    <text class="name">{{item.name}}</text>
-                    <text decode="{{true}}" class="post">{{item.postName}}</text>
-          <text decode="{{true}}" class="intro">{{
-            item.sex + '&nbsp;&nbsp;|&nbsp;&nbsp;' + item.degree + "&nbsp;&nbsp;|&nbsp;&nbsp;" + item.intention.salary
-            }}</text>
-            <text decode="{{true}}" class="school">{{
-               item.education.school + '&nbsp;&nbsp;-&nbsp;&nbsp;' + item.education.major}}</text>
+                    <view>
+                      <text class="name">{{item.name}}</text>
+                      <text wx:if="{{!item.read}}" class="red-dot"></text>
+                    </view>
+                      <text decode="{{true}}" class="post">{{item.postName}}</text>
+                      <text class="tpost">{{'投递时间：' + item.retime}}</text>
+                      <text decode="{{true}}" class="intro">{{
+                                    item.sex + '&nbsp;&nbsp;|&nbsp;&nbsp;' + item.degree +
+                                    (item.intention.salary ? "&nbsp;&nbsp;|&nbsp;&nbsp;" + item.intention.salary : '')
+                                }}</text>
+                <text decode="{{true}}" class="school">
+                  {{
+                    item.education.school && item.education.major? item.education.school + '&nbsp;&nbsp;-&nbsp;&nbsp;' + item.education.major: item.education.school? item.education.school: item.education.major? item.education.major: '未填写毕业院校'
+                  }}
+                </text>
                 </view>
 
                 <view class="right">

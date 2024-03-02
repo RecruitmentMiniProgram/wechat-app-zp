@@ -90,15 +90,15 @@
 }
 
 .school {
-  margin-top: 13rpx;
+  margin-top: -25rpx;
   font-size: 26rpx; /* 设置字体大小 */
   color: black; /* 设置字体颜色 */
 }
 
 .post {
-  margin-top: 13rpx;
+  margin-top: 20rpx;
   font-size: 26rpx; /* 设置字体大小 */
-  color: black; /* 设置字体颜色 */
+  color: #808080; /* 设置字体颜色 */
 }
 
 .skill {
@@ -112,4 +112,20 @@
   width: 100rpx;
   height: 100rpx;
   border-radius: 30%;
+}
+
+.red-dot {
+  width: 16rpx;
+  height: 16rpx;
+  background-color: red;
+  border-radius: 50%;
+  margin-bottom: 15rpx;
+  margin-left: 10rpx; /* 为了让红点与名字之间有一些间隔，你可以调整这个值 */
+  display: inline-block;
+}
+
+.tpost {
+  margin-top: 13rpx;
+  font-size: 26rpx; /* 设置字体大小 */
+  color: black; /* 设置字体颜色 */
 }
