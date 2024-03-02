@@ -8,7 +8,7 @@ Page({
 
     defaultUrl:'cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/male.png',
     avatar: 'cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/male.png',
-    nickName: '请填写姓名',
+    nickName: '请填写用户名',
     phone: '请填写手机号',
     // 编辑时临时数据
     tempList: {
@@ -106,8 +106,7 @@ Page({
    * @param {*} e 
    */
     formSubmit(e){
-      if((this.data.nickName=='请填写姓名'||
-        this.data.phone=='请填写手机号')){
+      if((this.data.phone=='请填写手机号')){
         wx.showModal({  
           title: '提示',  
           content: '请补充完整必填项',  
@@ -208,9 +207,6 @@ Page({
     },
   onShow(){
     var phone=wx.getStorageSync('phone')
-    this.setData({
-      nickName:phone
-    })
     //检查回传的数据
     if(this.data.intentionData!=null||this.data.intentionData!=undefined){
       this.setData({

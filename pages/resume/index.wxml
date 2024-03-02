@@ -4,7 +4,7 @@
   </view>
   <view class="level info" bindtap="editClick">
     <view>
-      <view class="name">{{nickName}}</view>
+      <view class="name">{{nickName==''?"请填写用户名":nickName}}</view>
       <view class="tel">{{phone}}</view>
     </view>
     <!-- <view class="avatar" bindtap="editClick">
@@ -33,19 +33,19 @@
         <text class="triangle">▼</text>
         </picker>
     </view>
-    <view class="row">
+    <!-- <view class="row">
       <view>邮箱</view>
       <view class="right">
         <input bindchange="emailChange" name="mail" placeholder="请输入邮箱信息" maxlength="20" />
       </view>
-    </view>
-    <view class="row">
+    </view> -->
+    <!-- <view class="row">
       <view>地址</view>
         <picker class="right"  mode="region" bindchange="bindRegionChange" value="{{region}}">
             <text>{{region}}</text>
             <text class="triangle">▼</text>
         </picker>
-    </view>
+    </view> -->
     <view class="row end">
       <view>最高学历<text class="required">*</text></view>
       <picker class="right" value="{{education}}" bindchange="bindEducationChange" range="{{arrayEducation}}">
@@ -55,7 +55,7 @@
     </view>
   </view>
 
-  <view class="box">
+  <!-- <view class="box">
     <view class="level nav">
       <view class="dot"></view>
       <view class="title">教育背景</view>
@@ -86,7 +86,7 @@
         <input bindchange="majorChange" name="major" placeholder="请输入所学专业"  maxlength="50" />
       </view>
     </view>
-  </view>
+  </view> -->
 
   <!-- 求职意向 -->
   <view class="box">
@@ -120,16 +120,16 @@
   </view>
 
   <!-- 工作经历 -->
-    <view class="box">
+  <!-- <view class="box">
     <view class="level nav">
       <view class="dot"></view>
       <view class="title">工作经历</view>
     </view>
-    <!-- 修改求职意向 -->
+
     <view class="row" bindtap="workChange">
       <input name="major" placeholder="编辑工作经历" type="number" maxlength="50" disabled="true" />
     </view>
-    <!-- 显示工作经历 -->
+
     <view wx:if="{{workList.length!=0}}">
         <view   wx:for="{{workList}}" wx:for-item="item" wx:for-index="index"  >
           <view class="companyCard" bindlongpress="longtapDeleteWork" data-index="{{index}}">
@@ -164,7 +164,7 @@
 
         </view>
     </view>
-  </view>
+  </view> -->
 
   <!-- 获奖证书 -->
   <!-- <view class="box">
@@ -185,7 +185,7 @@
     </view>
   </view> -->
   <!-- 经验方向 -->
-  <view class="box">
+  <!-- <view class="box">
     <view class="level nav">
       <view class="dot"></view>
       <view class="title">经验方向<text class="required">*</text></view>
@@ -195,9 +195,9 @@
       <view class="word-count {{experienceLength >= 300 ? 'red' : ''}}">
         {{experienceLength}}/300</view>
     </view>
-  </view>
+  </view> -->
   
-  <view class="box">
+  <!-- <view class="box">
     <view class="level nav">
       <view class="dot"></view>
       <view class="title">自我描述</view>
@@ -207,9 +207,9 @@
       <view class="word-count {{selfLength >= 300 ? 'red' : ''}}">
         {{selfLength}}/300</view>
     </view>
-  </view>
+  </view> -->
 
-  <view class="box">
+  <!-- <view class="box">
     <view class="level nav">
       <view class="dot"></view>
       <view class="title">个人技能</view>
@@ -219,7 +219,7 @@
       <view class="word-count {{skillLength >= 300 ? 'red' : ''}}">
         {{skillLength}}/300</view>
     </view>
-  </view>
+  </view> -->
 
     <!-- 注册邀请码 -->
   <view class="box">
@@ -272,13 +272,13 @@
     <view class="row">
       <view>姓名<text class="required">*</text></view>
       <view class="right">
-        <input placeholder="请输入姓名" bindinput="inputNick" maxlength="20" />
+        <input placeholder="{{nickName}}" bindinput="inputNick" maxlength="20" />
       </view>
     </view>
     <view class="row">
       <view>电话<text class="required">*</text></view>
       <view class="right">
-        <input placeholder="请输入联系电话" bindinput="inputPhone"  type="number" maxlength="11" />
+        <input placeholder="{{phone}}" bindinput="inputPhone"  type="number" maxlength="11" />
       </view>
     </view>
   </block>
