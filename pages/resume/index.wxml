@@ -4,8 +4,8 @@
   </view>
   <view class="level info" bindtap="editClick">
     <view>
-      <view class="name">{{nickName==''?"请填写用户名":nickName}}</view>
-      <view class="tel">{{phone}}</view>
+      <view class="name">{{nickName==''?"请填写用户名":nickName}}<text class="required" wx:if="{{nickName=='请填写用户名'}}">*</text></view>
+      <view class="name">{{phone}}<text class="required" wx:if="{{phone=='请填写手机号'}}">*</text></view>
     </view>
     <!-- <view class="avatar" bindtap="editClick">
     <image src="cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/images/editor.png" mode="widthFix" />

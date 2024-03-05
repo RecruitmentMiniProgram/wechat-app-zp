@@ -7,12 +7,12 @@ Page({
     hobby: false,
     defaultUrl:'cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/male.png',
     avatar: 'cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/male.png',
-    nickName: '请填写姓名',
+    nickName: '请填写用户名',
     phone: '请填写手机号',
     // 编辑时临时数据
     tempList: {
       avatarTemp: 'cloud://haianjiuye-9gwh0gp7bb2e3aa1.6861-haianjiuye-9gwh0gp7bb2e3aa1-1322761802/static/male.png',
-      nameTemp: '请填写姓名',
+      nameTemp: '请填写用户名',
       phoneTemp: '请填写手机号',
     },
     arraySex: ['女', '男'],
@@ -155,7 +155,7 @@ Page({
    * @param {*} e 
    */
     formSubmit(e){
-      if((this.data.nickName=='请填写姓名'||
+      if((this.data.nickName=='请填写用户名'||
         this.data.phone=='请填写手机号'||
         this.data.education==''||
         this.data.intentionData==null||

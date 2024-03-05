@@ -3,7 +3,7 @@
   <view class="level info">
     <view>
       <view class="name">{{nickName}}</view>
-      <view class="tel">{{phone}}</view>
+      <view class="name">{{phone}}</view>
     </view>
   </view>
 
