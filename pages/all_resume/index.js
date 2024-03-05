@@ -99,13 +99,13 @@ Page({
             var red = chatDetail.user_red
             //根据企业ID读取企业头像
             var companyId = chatDetail.company_id
-            let companyResult = null
+           /* let companyResult = null
             try {
             companyResult = await db.collection('company').doc(companyId).get()
             } catch(e) {
               continue
-            }
-            var url = companyResult.data.logo
+            }*/
+            var url = chatDetail.comUrl
             var chatData = new ChatData(chatDetail._id, 1,chatDetail.post_name, chatDetail.enter_name, convertUnixTimestampToString(time), red, url)
             chatList[index] = chatData
             index = index + 1;
@@ -143,13 +143,13 @@ Page({
 
            //根据用户ID读取企业头像
            var userId = chatDetail.user_id
-           let userResult = null
+          /* let userResult = null
            try{
            userResult = await db.collection('user').doc(userId).get()
            } catch(e) {
              continue
-           }
-           var url = userResult.data.headUrl
+           }*/
+           var url = chatDetail.userUrl
            
           var chatData = new ChatData(chatDetail._id, 1, name, chatDetail.post_name, convertUnixTimestampToString(time), red, url)
           chatList[index] = chatData

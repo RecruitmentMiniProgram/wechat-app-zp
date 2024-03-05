@@ -139,9 +139,28 @@ Page({
     var id = null
     if(chatResult.data.length == 0) {
       //如果没有则创建聊天项，初始化消息记录,再进入chat页面
+      //读取用户头像url和企业头像url
+      let userResult = null
+      try{
+      userResult = await db.collection('user').doc(userId).get()
+      } catch(e) {
+        
+      }
+      var userUrl = userResult.data.headUrl
+
+      let comResult = null
+      try{
+        comResult = await db.collection('company').doc(job.companyId).get()
+        } catch(e) {
+          
+        }
+        var comUrl = comResult.data.logo
+
       var res = await  db.collection('chat_history').add({
         // data 字段表示需新增的 JSON 数据
         data: {
+          userUrl : userUrl,
+          comUrl: comUrl,
           company_id: this.data.comId,
           enter_name: this.data.comObj.fullName,
           enter_red: false,
